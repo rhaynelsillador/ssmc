@@ -61,8 +61,8 @@
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="serviceType">
-					                          	<option value="CLINIC">Type 1</option>
-					                          	<option value="BUSINESS">Type 2</option>
+					                          	<option value="CLINIC">Clinic</option>
+					                          	<option value="BUSINESS">Business</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
@@ -81,6 +81,14 @@
 				                           <textarea class="form-control" rows="20" name="content" id="serviceContent">${sessionScope.service.content}</textarea>
 				                           <i class="form-group__bar"></i>
 				                       </div>
+				                       <br/>
+				                       <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                          	<input id="file-3" type="file" class="file" data-show-upload="true" multiple>
+					                           	<i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
 					               </div>
 									
 					           </div>
@@ -129,6 +137,10 @@
 	    	  		btn.removeAttr("disabled");
 	      		})	
 	    	});
+	    	
+	    	$("#file-3").fileinput({
+	    		'allowedFileExtensions': ['jpg', 'png', 'gif']
+	        });
 	    })
 	    
 	</script>

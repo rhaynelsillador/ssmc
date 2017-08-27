@@ -31,6 +31,18 @@ public class UtilityRestController {
 		return fileUploadUtility.fileUpload(multipartFiles);
 	}
 	
+	@RequestMapping(path="/fileInputUpload", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
+	public @ResponseBody Map<String, Object> fileInputUploads(@RequestParam("upload") MultipartFile multipartFiles) {
+		System.out.println(multipartFiles);
+		return fileUploadUtility.fileUpload(multipartFiles);
+	}
+	
+//	@RequestMapping(path="/ckEditorUpload", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
+//	public @ResponseBody Map<String, Object> uploadFile(@RequestParam MultipartFile multipartFiles) {
+//		System.out.println(multipartFiles);
+//		return fileUploadUtility.fileUpload(multipartFiles);
+//	}
+	
 	@RequestMapping(path="/sendEmail", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
 	public @ResponseBody Map<String, Object> sendEmail(@RequestBody Email email) {
 		return gmailUtility.sendEmail(email.getTo(), email.getSubject(), email.getContent());
