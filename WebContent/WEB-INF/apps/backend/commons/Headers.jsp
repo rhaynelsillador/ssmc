@@ -18,7 +18,9 @@
     <link href="assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <!-- Bootgrid -->
     
-    <link href="assets/vendors/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <!-- <link href="assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+    
+    <link href="assets/vendors/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="assets/vendors/bootstrap-fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
     
    <!--  <link href="assets/vendors/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" /> -->

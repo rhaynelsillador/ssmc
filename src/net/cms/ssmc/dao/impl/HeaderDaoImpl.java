@@ -19,9 +19,9 @@ public class HeaderDaoImpl implements HeaderDao {
 	private static final String FINDONE		= "SELECT * FROM HEADER WHERE id = ?";
 	private static final String FINDACTIVEONE = "SELECT * FROM HEADER WHERE type = ? AND status = ?";
 	private static final String SQLCOUNT 	= "SELECT COUNT(id) FROM HEADER ";
-	private static final String INSERT 		= "INSERT INTO HEADER (name, title, content, type, dateadded, dateupdated) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT 		= "INSERT INTO HEADER (name, title, content, type, dateadded, dateupdated, page) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETEBYID 	= "DELETE FROM HEADER WHERE id= ? ";
-	private static final String UPDATE	 	= "UPDATE HEADER SET name= ?, title = ?, content = ?, type=?, dateupdated = ? WHERE id= ? ";
+	private static final String UPDATE	 	= "UPDATE HEADER SET name= ?, title = ?, content = ?, type=?, dateupdated = ?, page=? WHERE id= ? ";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -40,6 +40,7 @@ public class HeaderDaoImpl implements HeaderDao {
 				header.getType().toString(),
 				new Timestamp(System.currentTimeMillis()),
 				new Timestamp(System.currentTimeMillis()),
+				header.getPage().toString()
 			});
 	}
 
@@ -51,6 +52,7 @@ public class HeaderDaoImpl implements HeaderDao {
 				header.getContent(),
 				header.getType().toString(),
 				new Timestamp(System.currentTimeMillis()),
+				header.getPage().toString(),
 				id
 			});
 	}

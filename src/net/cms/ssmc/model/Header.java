@@ -3,6 +3,7 @@ package net.cms.ssmc.model;
 import java.sql.Timestamp;
 
 import net.ssmc.enums.App;
+import net.ssmc.enums.Page;
 
 public class Header {
 
@@ -12,6 +13,7 @@ public class Header {
 	private String content;
 	private boolean status;
 	private App type;
+	private Page page;
 	private Timestamp dateAdded;
 	private Timestamp dateUpdated;
 	
@@ -62,6 +64,12 @@ public class Header {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
 	}	
 	
 }

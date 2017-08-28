@@ -31,6 +31,13 @@ public class FileUploadUtility {
 	
 	public Map<String, Object> fileUpload(MultipartFile multipartFile){
 		File file = new File(multipartFile.getOriginalFilename());
+		
+		try {
+			System.out.println(file+" || "+multipartFile.getBytes());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		String fileName = multipartFile.getOriginalFilename();
 		String fileNameComplete = properties.getUploadServer()+properties.getUpload()+fileName;

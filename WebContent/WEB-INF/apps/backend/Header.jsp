@@ -21,7 +21,7 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>About Us</h2>
+                    <h2>Headers</h2>
 
                     <div class="actions">
                         <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
@@ -40,9 +40,10 @@
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="name" data-order="asc">Name</th>
-                                        <th data-column-id="content">Content</th>
                                         <th data-column-id="title">Title</th>
+                                        <th data-column-id="content">Content</th>
                                         <th data-column-id="type" data-formatter="type">Type</th>
+                                        <th data-column-id="page" data-formatter="page">Page</th>
                                         <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>

@@ -81,11 +81,25 @@
 				                           <textarea class="form-control" rows="20" name="content" id="serviceContent">${sessionScope.service.content}</textarea>
 				                           <i class="form-group__bar"></i>
 				                       </div>
+				                      
+					               </div>
+									
+					           </div>
+					           
+					           <h4>Content2</h4>
+					
+					           <div class="row">
+					               <div class="col-sm-12">
+				                       <div class="form-group form-group--float">
+				                           <textarea class="form-control" rows="20" name="content2" id="serviceContent2">${sessionScope.service.content2}</textarea>
+				                           <i class="form-group__bar"></i>
+				                       </div>
 				                       <br/>
 				                       <div class="input-group">
-					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
-					                          	<input id="file-3" type="file" class="file" data-show-upload="true" multiple>
+					                          	<div class="form-group">
+										            <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
+										        </div>
 					                           	<i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
@@ -101,7 +115,7 @@
 				       <br/>
 				       
 				   </div>
-				
+					
 			</section>
 			
 		<%@ include file="commons/Footer.jsp"%>
@@ -114,8 +128,29 @@
 		$("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 	    $("#service_menu").addClass("navigation__active");
 	    CKEDITOR.replace('serviceContent');
+	    CKEDITOR.replace('serviceContent2');
 	    var serviceType = $('#serviceType');
+	    var existingImages = [];
+	    '<c:forEach items="${sessionScope.service.images}" var="images">'
+	   				existingImages.push('${ images.image }');
+	    '</c:forEach>'
 	    
+	    
+	    $("#file-1").fileinput({
+	        uploadUrl: 'fileInputUpload', // you must set a valid URL here else you will get an error
+	        allowedFileExtensions: ['jpg', 'png', 'gif'],
+	        overwriteInitial: false,
+	        maxFileSize: 1000,
+	        maxFilesNum: 10,
+	        //allowedFileTypes: ['image', 'video', 'flash'],
+	        slugCallback: function (filename) {
+	            return filename.replace('(', '_').replace(']', '_');
+	        },
+	        overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: existingImages
+
+	    });
 	    
 	    $(document).ready(function(){
 	    	serviceType.val('${sessionScope.service.type}');
@@ -124,8 +159,18 @@
 	      		console.log( $( this ).serialize() );
 	      		event.preventDefault();
 	      		  		
+	      		var tempImages = $(".file-input .kv-zoom-cache .kv-file-content img");
+	      		
+	      		
+	      		var images = [];
+	      		for (var i = 0; i < tempImages.length; i++) {
+					images.push({"image" : $(tempImages[i]).attr("src")});
+				}
+	      		
 	      		var form = objectifyForm($( this ).serializeArray());
 	      		form.content = CKEDITOR.instances.serviceContent.getData();
+	      		form.content2 = CKEDITOR.instances.serviceContent2.getData();
+	      		form.images = images;
 	      		
 	      		var btn = $("#serviceUpdateForm button");
 	      		btn.html("Updating...");
@@ -138,9 +183,26 @@
 	      		})	
 	    	});
 	    	
-	    	$("#file-3").fileinput({
-	    		'allowedFileExtensions': ['jpg', 'png', 'gif']
-	        });
+	    	 $("#test-upload").fileinput({
+	             'showPreview': false,
+	             'allowedFileExtensions': ['jpg', 'png', 'gif'],
+	             'elErrorContainer': '#errorBlock'
+	         });
+	    	 
+	         $("#kv-explorer").fileinput({
+	             'theme': 'explorer',
+	             'uploadUrl': '#',
+	             overwriteInitial: false,
+	             initialPreviewAsData: true,
+	             initialPreview: [
+	                 "http://lorempixel.com/1920/1080/nature/2",
+	                 "http://lorempixel.com/1920/1080/nature/3"
+	             ],
+	             initialPreviewConfig: [
+	                 {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
+	                 {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
+	             ]
+	         });
 	    })
 	    
 	</script>

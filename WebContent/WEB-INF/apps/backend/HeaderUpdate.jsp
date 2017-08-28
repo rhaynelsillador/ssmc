@@ -61,13 +61,24 @@
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="headerType">
-					                          	<option value="CLINIC">Type 1</option>
-					                          	<option value="BUSINESS">Type 2</option>
+					                          	<option value="CLINIC">Clinic</option>
+					                          	<option value="BUSINESS">Business</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
-					                   
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                          <select class="form-control" name="page" id="headerPage">
+					                          	<option value="Main">Main</option>
+					                          	<option value="Corporate">Corporate</option>
+					                          	<option value="Medical">Medical</option>
+					                          </select>
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
 					               </div>
 					           </div>
 					
@@ -107,10 +118,12 @@
 	    $("#header_menu").addClass("navigation__active");
 	    CKEDITOR.replace('headerContent');
 	    var aboutUsType = $('#headerType');
+	    var headerPage = $('#headerPage');
 	    
 	    
 	    $(document).ready(function(){
 	    	aboutUsType.val('${sessionScope.header.type}');
+	    	headerPage.val('${sessionScope.header.page}')
 	    	
 	    	$( "#headerUpdateForm" ).submit(function( event ) {
 	      		console.log( $( this ).serialize() );

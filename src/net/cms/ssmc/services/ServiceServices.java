@@ -8,11 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.cms.ssmc.dao.HeaderDao;
 import net.cms.ssmc.dao.ServiceDao;
-import net.cms.ssmc.model.AboutUs;
-import net.cms.ssmc.model.Faq;
-import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.ssmc.enums.App;
 import net.ssmc.enums.Module;
@@ -38,7 +34,9 @@ public class ServiceServices {
 	} 
 	
 	public Service getService(HttpSession session, int id){
-		return serviceDao.retrieve(id);
+		Service service = serviceDao.retrieve(id);
+		System.out.println(service);
+		return service;
 	}
 	
 	public Service getActiveService(HttpSession session, int id){
@@ -57,6 +55,8 @@ public class ServiceServices {
 			response.put(Helper.MESSAGE, "Service title is required!");
 		}else if(service.getContent() == null || service.getContent().isEmpty()){
 			response.put(Helper.MESSAGE, "Service content is required!");
+		}else if(service.getContent2() == null || service.getContent2().isEmpty()){
+			response.put(Helper.MESSAGE, "Service content2 is required!");
 		}else{
 			switch(transactionType){
 			case ADD:
@@ -76,6 +76,7 @@ public class ServiceServices {
 					
 					System.out.println(service2);
 					serviceDao.update(service, service2.getId());
+					serviceDao.addImages(service, service2.getId());
 					response.put(Helper.MESSAGE, "Service successfully updated");
 					response.put(Helper.STATUS, Status.SUCCESS);
 				} catch (Exception e) {

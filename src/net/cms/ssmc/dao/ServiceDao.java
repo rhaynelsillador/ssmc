@@ -17,4 +17,7 @@ public interface ServiceDao {
 	Service retrieveActiveService(App app);
 	void delete(int id);
 	
+	
+	void addImages(Service service, int id);
+	
 }

@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import net.cms.ssmc.dao.HeaderDao;
 import net.cms.ssmc.dao.ServiceDao;
-import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.ssmc.enums.App;
+import net.ssmc.model.Image;
 import net.ssmc.utils.DataTableHelper;
 
 public class ServiceDaoImpl implements ServiceDao {
@@ -21,9 +20,13 @@ public class ServiceDaoImpl implements ServiceDao {
 	private static final String FINDONE		= "SELECT * FROM SERVICE WHERE id = ?";
 	private static final String FINDACTIVEONE = "SELECT * FROM SERVICE WHERE type = ? AND status = ?";
 	private static final String SQLCOUNT 	= "SELECT COUNT(id) FROM SERVICE ";
-	private static final String INSERT 		= "INSERT INTO SERVICE (name, title, content, type, dateadded, dateupdated) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT 		= "INSERT INTO SERVICE (name, title, content, content2, type, dateadded, dateupdated) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETEBYID 	= "DELETE FROM SERVICE WHERE id= ? ";
-	private static final String UPDATE	 	= "UPDATE SERVICE SET name= ?, title = ?, content = ?, type=?, dateupdated = ? WHERE id= ? ";
+	private static final String UPDATE	 	= "UPDATE SERVICE SET name= ?, title = ?, content = ?, content2 = ?, type=?, dateupdated = ? WHERE id= ? ";
+	
+	private static final String DELETEBYSERVICEID 	= "DELETE FROM SERVICEIMAGES WHERE serviceid= ? ";
+	private static final String INSERTSERVICEIMAGES = "INSERT INTO SERVICEIMAGES (image, status, serviceid) VALUES (?, ?, ?)";
+	private static final String FINDIMAGES	= "SELECT * FROM SERVICEIMAGES WHERE serviceid = ?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -39,6 +42,7 @@ public class ServiceDaoImpl implements ServiceDao {
 				service.getName(),
 				service.getTitle(),
 				service.getContent(),
+				service.getContent2(),
 				service.getType().toString(),
 				new Timestamp(System.currentTimeMillis()),
 				new Timestamp(System.currentTimeMillis()),
@@ -51,6 +55,7 @@ public class ServiceDaoImpl implements ServiceDao {
 				service.getName(),
 				service.getTitle(),
 				service.getContent(),
+				service.getContent2(),
 				service.getType().toString(),
 				new Timestamp(System.currentTimeMillis()),
 				id
@@ -67,7 +72,10 @@ public class ServiceDaoImpl implements ServiceDao {
 
 	@Override
 	public Service retrieve(int id) {
-		return jdbcTemplate.queryForObject(FINDONE, new Object[]{id}, new BeanPropertyRowMapper<Service>(Service.class));
+		Service service = jdbcTemplate.queryForObject(FINDONE, new Object[]{id}, new BeanPropertyRowMapper<Service>(Service.class));
+		List<Image> images = jdbcTemplate.query(FINDIMAGES, new Object[]{id}, new BeanPropertyRowMapper<Image>(Image.class));
+		service.setImages(images);
+		return service;
 	}
 
 	@Override
@@ -78,6 +86,18 @@ public class ServiceDaoImpl implements ServiceDao {
 	@Override
 	public void delete(int id) {
 		jdbcTemplate.update(DELETEBYID, new Object[] {id});
+	}
+
+	@Override
+	public void addImages(Service service, int id) {
+		jdbcTemplate.update(DELETEBYSERVICEID, new Object[] {id});
+		for (Image image : service.getImages()) {
+			jdbcTemplate.update(INSERTSERVICEIMAGES, new Object[] {
+					image.getImage(),
+					1,
+					id
+				});
+		}
 	}
 
 	

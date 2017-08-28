@@ -32,7 +32,7 @@ public class UtilityRestController {
 	}
 	
 	@RequestMapping(path="/fileInputUpload", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
-	public @ResponseBody Map<String, Object> fileInputUploads(@RequestParam("upload") MultipartFile multipartFiles) {
+	public @ResponseBody Map<String, Object> fileInputUploads(@RequestParam("file_data") MultipartFile multipartFiles) {
 		System.out.println(multipartFiles);
 		return fileUploadUtility.fileUpload(multipartFiles);
 	}
