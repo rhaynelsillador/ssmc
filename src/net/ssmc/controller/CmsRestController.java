@@ -23,10 +23,12 @@ import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.ControlServices;
 import net.cms.ssmc.services.FaqServices;
 import net.cms.ssmc.services.HeaderServices;
+import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
+import net.ssmc.model.Image;
 import net.ssmc.model.User;
 
 @RestController
@@ -44,6 +46,8 @@ public class CmsRestController {
 	private HeaderServices headerServices;
 	@Autowired
 	private ServiceServices serviceServices;
+	@Autowired
+	private ImageServices imageServices;
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/FaqList", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
@@ -134,5 +138,26 @@ public class CmsRestController {
 	public @ResponseBody Map<String, Object> servicesAddUpdate(@RequestBody Service service){
 		HttpSession session = httpServletRequest.getSession(true);
 		return serviceServices.createUpdateService(session, service);
+	}
+	
+	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)
+	@RequestMapping(path="/ImageList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> imageList(@RequestParam Map<String, String> request){
+		HttpSession session = httpServletRequest.getSession(true);
+		return imageServices.getAllImages(session, request);
+	}
+	
+	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)
+	@RequestMapping(path="/DeleteImage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> deleteImage(@RequestBody Image image){
+		HttpSession session = httpServletRequest.getSession(true);
+		return imageServices.deleteImage(session, image);
+	}
+	
+	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)
+	@RequestMapping(path="/UpdateImage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> updateImage(@RequestBody Image image){
+		HttpSession session = httpServletRequest.getSession(true);
+		return imageServices.updateImage(session, image);
 	}
 }

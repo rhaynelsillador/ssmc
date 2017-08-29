@@ -35,7 +35,6 @@ public class ServiceServices {
 	
 	public Service getService(HttpSession session, int id){
 		Service service = serviceDao.retrieve(id);
-		System.out.println(service);
 		return service;
 	}
 	
@@ -90,5 +89,5 @@ public class ServiceServices {
 			}
 		}
 		return response;
-	}		
+	}
 }

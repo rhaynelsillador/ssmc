@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omg.CORBA.portable.ApplicationException;
@@ -21,12 +23,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.cms.ssmc.dao.ImageDao;
+import net.ssmc.enums.Module;
 import net.ssmc.enums.Status;
 
 public class FileUploadUtility {
 	
 	@Autowired
 	private Properties properties;
+	@Autowired
+	private ImageDao imageDao;
 	
 	
 	public Map<String, Object> fileUpload(MultipartFile multipartFile){
@@ -54,21 +60,16 @@ public class FileUploadUtility {
 		return map;
 	}
 	
-	public List<String> fileUploads(MultipartFile[] multipartFiles){
-		
-		System.out.println(multipartFiles);
-		
+	public List<String> fileUploads(HttpServletRequest httpServletRequest, MultipartFile[] multipartFiles){
+		HttpSession session = httpServletRequest.getSession();
+		int id = (int) session.getAttribute("moduleid");
+		Module module = (Module) session.getAttribute("module");
 		List<String> map = new ArrayList<>();
 		for (MultipartFile multipartFile : multipartFiles) {
-			
-			System.out.println(multipartFile);
-			
-			String fileName = properties.getUploadServer()+properties.getUpload()+getSaltString()+"."+FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+			String fileName = getSaltString()+"."+FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 			try {
-				
-//				scale(multipartFile.getBytes(), 100, 120);
-				
-				FileCopyUtils.copy(multipartFile.getBytes(), new File(properties.getUploadDir()+fileName));
+				FileCopyUtils.copy(multipartFile.getBytes(), new File(properties.getUploadDir()+"/"+fileName));
+				imageDao.addImages(id, module, properties.getUpload()+fileName);
 				map.add(fileName);
 			} catch (IOException e) {
 				map.add(Status.ERRORUPLOAD.toString());

@@ -32,7 +32,7 @@ public class AuditInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", userDao.login("czrnpaat11", "123456a"));
 		
-		
+		session.setAttribute("fileserver", "http://dev.ssmc.net/FileServer/");
 		try{
 			HandlerMethod hm=(HandlerMethod)handler; 
 			Method method=hm.getMethod();

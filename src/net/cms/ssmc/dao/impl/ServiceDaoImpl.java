@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import net.cms.ssmc.dao.ServiceDao;
 import net.cms.ssmc.model.Service;
 import net.ssmc.enums.App;
+import net.ssmc.enums.Module;
 import net.ssmc.model.Image;
 import net.ssmc.utils.DataTableHelper;
 
@@ -24,9 +25,10 @@ public class ServiceDaoImpl implements ServiceDao {
 	private static final String DELETEBYID 	= "DELETE FROM SERVICE WHERE id= ? ";
 	private static final String UPDATE	 	= "UPDATE SERVICE SET name= ?, title = ?, content = ?, content2 = ?, type=?, dateupdated = ? WHERE id= ? ";
 	
-	private static final String DELETEBYSERVICEID 	= "DELETE FROM SERVICEIMAGES WHERE serviceid= ? ";
-	private static final String INSERTSERVICEIMAGES = "INSERT INTO SERVICEIMAGES (image, status, serviceid) VALUES (?, ?, ?)";
-	private static final String FINDIMAGES	= "SELECT * FROM SERVICEIMAGES WHERE serviceid = ?";
+	private static final String DELETEBYSERVICEID 	= "DELETE FROM IMAGES WHERE serviceid= ? ";
+	private static final String INSERTSERVICEIMAGES = "INSERT INTO IMAGES (image, status, serviceid) VALUES (?, ?, ?)";
+	private static final String FINDIMAGES	= "SELECT * FROM IMAGES WHERE serviceid = ?";
+	private static final String FINDALLIMAGES	= "SELECT * FROM IMAGES WHERE serviceid = ? AND type = ?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -98,6 +100,11 @@ public class ServiceDaoImpl implements ServiceDao {
 					id
 				});
 		}
+	}
+
+	@Override
+	public List<Image> retrieveImage(int id, Module module) {
+		return jdbcTemplate.query(FINDALLIMAGES, new Object[]{id, module.toString()}, new BeanPropertyRowMapper<Image>(Image.class));
 	}
 
 	

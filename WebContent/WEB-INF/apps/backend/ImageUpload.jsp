@@ -20,37 +20,47 @@
             <%@ include file="commons/Menu.jsp"%>
 
             <section id="content">
-                <div class="content__header">
-                    <h2>About Us</h2>
-
-                    <div class="actions">
-                        <a href="ServicesAdd"><i class="zmdi zmdi-plus"></i></a>
-                    </div>
-                </div>
-
+               
                 <div class="card">
                     <div class="card__header">
-                        <h2>Data List</h2>
+                        <h2>${sessionScope.moduleName }</h2>
                     </div>
 
                     <div class="card__body">
-                        <div class="table-responsive">
-                            <table id="data-table-service" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
-                                        <th data-column-id="name" data-order="asc">Name</th>
-                                        <th data-column-id="content">Content</th>
-                                        <th data-column-id="title">Title</th>
-                                        <th data-column-id="type" data-formatter="type">Type</th>
-                                        <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
-                                        <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
-                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                    	<div class="row">
+			               <div class="col-sm-12">
+			               		<form id="uploadImageForm">
+			                   		<div class="input-group">
+			                    	
+									    <label>Select image to upload:</label>
+									    <input type="file" name="fileToUpload[]" multiple id="fileToUpload" class="form-control">
+									
+									</div>
+									<div class="input-group">
+									    <input type="submit" value="Upload Image" name="submit" class="btn btn-primary">
+									
+								</div>
+								</form>
+	                    	<br>
+	                    	<br>
+							</div>
+						<div class="row">
+			               <div class="col-sm-12">
+		                        <div class="table-responsive">
+		                            <table id="data-table-service" class="table table-striped">
+		                                <thead>
+		                                    <tr>
+		                                        <th data-column-id="image" data-formatter="image" data-sortable="false" data-order="asc">Image</th>
+		                                        <th data-column-id="status" data-formatter="status" data-sortable="false">Status</th>
+		                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
+		                                    </tr>
+		                                </thead>
+		                            </table>
+		                        </div>
+		                  	</div>
+		             	</div>
                     </div>
+                </div>
                 </div>
             </section>
 			
@@ -75,7 +85,7 @@
 	                    test: "test"
 	                };
 	            },
-	            url: "ServicesList",
+	            url: "ImageList",
 	            css: {
 	                icon: 'table-bootgrid__icon zmdi',
 	                iconSearch: 'zmdi-search',
@@ -101,15 +111,18 @@
 	            },
 	            formatters: {
 	                "commands": function(column, row) {
-	                	return 	"<a href=\"ServicesUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                			"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=SERVICE\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> "+
-	                			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
+	                	return 	"<button href=\"#\" class=\"btn btn-sm btn-primary command-update\" data-row-id=\"" + row.id + "\" data-row-status=\"" + row.status + "\">Update</button> "+
+	                			"<button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
 	            	},
-	            	"dateUpdated" : function(column, row){
-	            		return moment(row.dateUpdated).format("YYYY-MM-DD HH:mm:ss");
+	            	"image" : function(column, row){
+	            		return '<img src="${sessionScope.fileserver}'+row.image+'" style="width:300px"></img>';
 	            	},
-	            	"dateAdded" : function(column, row){
-	            		return moment(row.dateAdded).format("YYYY-MM-DD HH:mm:ss");
+	            	"status" : function(column, row){
+	            		console.log(row)
+	            		if(row.status == true)
+	            			return "Active";
+	            		else
+	            			return "Inactive";
 	            	} ,
 	            	"type" : function(column, row){
 	            		return "Type " + row.type;
@@ -120,18 +133,54 @@
 	        table.on("loaded.rs.jquery.bootgrid", function() {
 	        	table.find(".command-delete").on("click", function(e){        
 	        		var form = {
-		                	id: $(this).data("row-id")
+	                	id: $(this).data("row-id"),
+	                }
+	            	confirmDelete({
+	                	text : "Do you want to delete this image?",
+	                	url : "DeleteImage",
+	                	form : form,
+	                	bootGrid : serviceTable
+	                
+	                });
+	        	}).end().find(".command-update").on("click", function(e){
+	        		var form = {
+		                	id: $(this).data("row-id"),
+		                	status: $(this).data("row-status"),
 		                }
-		            	confirmDelete({
-		                	text : "Do you want to delete this about us?",
-		                	url : "AboutUsDelete",
+	        			confirmation({
+		                	text : "Do you want to update this image?",
+		                	url : "UpdateImage",
 		                	form : form,
 		                	bootGrid : serviceTable
 		                
 		                });
-	            });
+	  		    });
 	        });
 
+	        $(document).ready(function(){
+	        	$("#uploadImageForm").submit(function( event ) {
+		      		var myform = document.getElementById("uploadImageForm");
+		      	    var fd = new FormData(myform );
+		      	    $.ajax({
+		      	        url: "FormUploadFile",
+		      	        data: fd,
+		      	        cache: false,
+		      	        processData: false,
+		      	        contentType: false,
+		      	        type: 'POST',
+		      	        success: function (dataofconfirm) {
+		      	        	serviceTable.bootgrid('reload');
+		      	        	toastMessage({
+		      	        		"status":"SUCCESS",
+		      	        		"message" : "Upload success!"
+		      	        	})
+		      	        	$("#uploadImageForm")[0].reset();
+		      	        }
+		      	    });
+		      	  event.preventDefault();
+		        })
+	        })
+	        
 	        
         </script>
         

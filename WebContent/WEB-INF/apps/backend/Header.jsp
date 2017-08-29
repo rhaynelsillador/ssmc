@@ -103,6 +103,7 @@
 	            formatters: {
 	                "commands": function(column, row) {
 	                	return 	"<a href=\"HeaderUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	                			"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=HEADER\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> "+
 	                			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
 	            	},
 	            	"dateUpdated" : function(column, row){

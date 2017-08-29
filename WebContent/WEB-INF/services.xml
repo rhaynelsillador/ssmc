@@ -18,5 +18,6 @@
 	<bean id="controlServices" 		class="net.cms.ssmc.services.ControlServices" />
 	<bean id="headerServices" 		class="net.cms.ssmc.services.HeaderServices" />
 	<bean id="serviceServices" 		class="net.cms.ssmc.services.ServiceServices" />
+	<bean id="imageServices" 		class="net.cms.ssmc.services.ImageServices" />
 	
 </beans>

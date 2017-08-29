@@ -122,7 +122,7 @@
 	                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
 	            	},
 	            	"dateLastLogin" : function(column, row){
-	            		return moment(row.dateAdded).format("YYYY-MM-DD HH:mm:ss");
+	            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
 	            	} ,
 	            	"name" : function(column, row){
 	            		return row.lastName +", "+row.firstName;

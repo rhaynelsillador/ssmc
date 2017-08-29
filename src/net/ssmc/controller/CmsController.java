@@ -16,6 +16,7 @@ import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.FaqServices;
 import net.cms.ssmc.services.HeaderServices;
+import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.App;
@@ -36,6 +37,8 @@ public class CmsController {
 	private HeaderServices headerServices;
 	@Autowired
 	private ServiceServices serviceServices;
+	@Autowired
+	private ImageServices imageServices;
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/Faq", method = RequestMethod.GET)
@@ -129,6 +132,16 @@ public class CmsController {
 		System.out.println(service);
 		session.setAttribute("service", service);
 		return "backend/ServiceUpdate";
+	}
+	
+	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)
+	@RequestMapping(path="/ServicesUpload", method = RequestMethod.GET)
+	public String servicesUpload(ModelMap map, @RequestParam int id, @RequestParam String name, @RequestParam String module){
+		HttpSession session = httpServletRequest.getSession(true);
+		session.setAttribute("moduleid", id);
+		session.setAttribute("moduleName", name);
+		session.setAttribute("module", Module.valueOf(module));
+		return "backend/ImageUpload";
 	}
 	
 	@AppicationAudit(module = Module.SERVICE, access = Access.CREATE)

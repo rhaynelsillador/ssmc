@@ -6,6 +6,8 @@ import java.util.Map;
 import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.ssmc.enums.App;
+import net.ssmc.enums.Module;
+import net.ssmc.model.Image;
 
 public interface ServiceDao {
 
@@ -19,5 +21,6 @@ public interface ServiceDao {
 	
 	
 	void addImages(Service service, int id);
+	List<Image> retrieveImage(int id, Module module);
 	
 }
