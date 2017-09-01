@@ -45,6 +45,13 @@ public class SsmcBackendController {
 		return "backend/Dashboard";
 	}
 	
+	@AppicationAudit(module = Module.ALL, access = Access.ALL)
+	@RequestMapping(path="/NotFound", method = RequestMethod.GET, produces="text/html")
+	public String notFound(ModelMap map){
+		System.out.println("404 404");
+		return "errorpage/404";
+	}
+	
 	@AppicationAudit(module = Module.USER, access = Access.RETRIEVE)
 	@RequestMapping(path="/Accounts", method = RequestMethod.GET, produces="application/json")
 	public String accounts(ModelMap map){

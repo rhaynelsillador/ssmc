@@ -25,7 +25,7 @@
   	
   	<error-page>
         <error-code>404</error-code>
-        <location>/errorpage/404.jsp</location>
+        <location>/NotFound</location>
 	</error-page>
 	
 </web-app>
