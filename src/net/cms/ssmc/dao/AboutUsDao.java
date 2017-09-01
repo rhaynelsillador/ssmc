@@ -15,3 +15,5 @@ public interface AboutUsDao {
 	void delete(int id);
 	
 }
+
+
