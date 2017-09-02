@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.cms.ssmc.dao.FaqDao;
 import net.cms.ssmc.model.Faq;
+import net.ssmc.enums.Module;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
@@ -19,6 +21,8 @@ public class FaqServices {
 
 	@Autowired
 	private FaqDao faqDao;
+	@Autowired
+	private ControlServices controlServices;
 	
 	public Map<String, Object> createUpdateFaq(HttpSession session, Faq faq){
 		TransactionType transactionType = (TransactionType) session.getAttribute("TRANSACTION");
@@ -48,7 +52,8 @@ public class FaqServices {
 			}
 		}else if(transactionType == TransactionType.ADD){
 			try {
-				faqDao.create(faq);
+				long id = faqDao.create(faq);
+				controlServices.createControl(Module.FAQ, id);
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Faq successfully added!");
 			} catch (Exception e) {
@@ -70,7 +75,8 @@ public class FaqServices {
 		return data;
 	}
 
-	public Object getFaq(int id) {
+	public Faq getFaq(HttpServletRequest httpServletRequest, int id) {
+		controlServices.hasApproved(httpServletRequest, Module.ABOUTUS, id);
 		return faqDao.retrieve(id);
 	}
 

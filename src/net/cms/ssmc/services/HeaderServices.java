@@ -4,13 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.cms.ssmc.dao.HeaderDao;
-import net.cms.ssmc.model.AboutUs;
-import net.cms.ssmc.model.Faq;
 import net.cms.ssmc.model.Header;
 import net.ssmc.enums.App;
 import net.ssmc.enums.Module;
@@ -39,8 +38,8 @@ public class HeaderServices {
 		return headerDao.retrieve(id);
 	}
 	
-	public Header getActiveHeader(HttpSession session, int id){
-		if(controlServices.hasApproved(session, Module.HEADER, id)){
+	public Header getActiveHeader(HttpServletRequest httpServletRequest, int id){
+		if(controlServices.hasApproved(httpServletRequest, Module.HEADER, id)){
 			return headerDao.retrieveActive(App.BUSINESS);
 		}return null;
 	}

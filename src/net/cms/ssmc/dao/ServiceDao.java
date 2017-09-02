@@ -3,7 +3,6 @@ package net.cms.ssmc.dao;
 import java.util.List;
 import java.util.Map;
 
-import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.ssmc.enums.App;
 import net.ssmc.enums.Module;
@@ -12,7 +11,7 @@ import net.ssmc.model.Image;
 public interface ServiceDao {
 
 	long count();
-	int create(Service service);
+	long create(Service service);
 	void update(Service service, int id);
 	List<Service> retrieveAll(Map<String, String> request);
 	Service retrieve(int id);

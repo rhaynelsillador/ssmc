@@ -27,6 +27,7 @@
                 	
                     <li id="contact_us_menu"><a href="ContactUsMessages">Contact Us</a></li>
                     <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
+                    <li id="city_menu"><a href="City">City</a></li>
                     <li id="accounts_menu"><a href="Accounts">Accounts</a></li>
                     <li id="roles_menu"><a href="Role">Roles</a></li>
                     <li id="accounts_menu"><a href="Accounts">Etc</a></li>

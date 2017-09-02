@@ -8,7 +8,7 @@ import net.cms.ssmc.model.Faq;
 public interface FaqDao {
 	
 	long count();
-	void create(Faq faq);
+	long create(Faq faq);
 	Faq retrieve(int id);
 	List<Faq> retrieveAll(Map<String, String> request);
 	void update(Faq faq);

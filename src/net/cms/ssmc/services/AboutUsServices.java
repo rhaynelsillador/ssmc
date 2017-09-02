@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import net.cms.ssmc.model.AboutUs;
 import net.ssmc.enums.Module;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
-import net.ssmc.model.ContactUs;
 import net.ssmc.model.Helper;
 
 public class AboutUsServices {
@@ -33,9 +33,14 @@ public class AboutUsServices {
 		return data;
 	}
 	
-	public AboutUs getAboutUs(HttpSession session, int id){
-		controlServices.hasApproved(session, Module.ABOUTUS, id);
-		return aboutUsDao.retrieve(id);
+	public AboutUs getAboutUs(HttpServletRequest httpServletRequest, int id){
+		controlServices.hasApproved(httpServletRequest, Module.ABOUTUS, id);
+		try {
+			return aboutUsDao.retrieve(id);
+		} catch (Exception e) {
+			httpServletRequest.getSession().setAttribute("TRANSACTION", TransactionType.ADD);
+			return null;
+		}
 	}
 	
 	public Map<String, Object> addUpdateAboutUs(HttpSession session, AboutUs aboutUs) {
@@ -50,8 +55,7 @@ public class AboutUsServices {
 			switch (transactionType) {
 			case ADD:
 				try {
-					int id = aboutUsDao.create(aboutUs);
-					System.out.println("module id : "+id);
+					long id = aboutUsDao.create(aboutUs);
 					controlServices.createControl(Module.ABOUTUS, id);
 					response.put(Helper.MESSAGE, "About us successfully added");
 					response.put(Helper.STATUS, Status.SUCCESS);
@@ -83,6 +87,7 @@ public class AboutUsServices {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			aboutUsDao.delete(aboutUs.getId());
+			controlServices.deleteControl(Module.ABOUTUS, aboutUs.getId());
 			response.put(Helper.MESSAGE, "About us successfully deleted");
 			response.put(Helper.STATUS, Status.SUCCESS);
 		} catch (Exception e) {

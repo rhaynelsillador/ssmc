@@ -9,7 +9,7 @@ public class Control {
 	
 	private int id;
 	private Module module;
-	private int moduleId;
+	private long moduleId;
 	private List<User> users;
 	
 	public int getId() {
@@ -24,10 +24,10 @@ public class Control {
 	public void setModule(Module module) {
 		this.module = module;
 	}
-	public int getModuleId() {
+	public long getModuleId() {
 		return moduleId;
 	}
-	public void setModuleId(int moduleId) {
+	public void setModuleId(long moduleId) {
 		this.moduleId = moduleId;
 	}
 	public List<User> getUsers() {

@@ -52,7 +52,7 @@ public class CmsController {
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
 		session.setAttribute("FAQID", id);
-		map.addAttribute("faq", faqServices.getFaq(id));
+		map.addAttribute("faq", faqServices.getFaq(httpServletRequest, id));
 		return "backend/FaqUpdate";
 	}
 	
@@ -86,7 +86,7 @@ public class CmsController {
 	public String aboutUsUpdate(ModelMap map, @RequestParam int id){
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
-		AboutUs aboutUs = aboutUsServices.getAboutUs(session, id);
+		AboutUs aboutUs = aboutUsServices.getAboutUs(httpServletRequest, id);
 		session.setAttribute("aboutUs", aboutUs);
 		map.addAttribute("type", App.values());
 		return "backend/AboutUsUpdate";

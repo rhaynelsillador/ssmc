@@ -11,6 +11,8 @@
 	<bean id="gmailUtility" 		class="net.ssmc.utils.GmailUtility" init-method="init"/>
 	<bean id="roleServices" 		class="net.ssmc.services.RoleServices" />
 	<bean id="contactUsServices" 	class="net.ssmc.services.ContactUsServices" />
+	<bean id="dashboardServices" 	class="net.ssmc.services.DashboardServices" />
+	<bean id="cityServices" 		class="net.ssmc.services.CityServices" />
 	
 	<!-- CMS SERVICES -->
 	<bean id="faqServices" 			class="net.cms.ssmc.services.FaqServices" />

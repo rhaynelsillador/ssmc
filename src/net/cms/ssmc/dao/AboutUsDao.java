@@ -7,9 +7,9 @@ import net.cms.ssmc.model.AboutUs;
 
 public interface AboutUsDao {
 
-	int create(AboutUs aboutUs);
+	long create(AboutUs aboutUs);
 	List<AboutUs> retrieveAll(Map<String, String> request);
-	AboutUs retrieve(int id);
+	AboutUs retrieve(int id) throws Exception;
 	void update(AboutUs aboutUs, int id);
 	long count();
 	void delete(int id);

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class ServiceServices {
 		return service;
 	}
 	
-	public Service getActiveService(HttpSession session, int id){
-		if(controlServices.hasApproved(session, Module.SERVICE, id)){
+	public Service getActiveService(HttpServletRequest httpServletRequest, int id){
+		if(controlServices.hasApproved(httpServletRequest, Module.SERVICE, id)){
 			return serviceDao.retrieveActiveService(App.BUSINESS);
 		}return null;
 	}
@@ -60,7 +61,7 @@ public class ServiceServices {
 			switch(transactionType){
 			case ADD:
 				try {
-					int id = serviceDao.create(service);
+					long id = serviceDao.create(service);
 					controlServices.createControl(Module.SERVICE, id);
 					response.put(Helper.MESSAGE, "About us successfully added");
 					response.put(Helper.STATUS, Status.SUCCESS);

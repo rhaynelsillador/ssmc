@@ -1,5 +1,9 @@
 package net.cms.ssmc.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +11,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.AboutUsDao;
 import net.cms.ssmc.model.AboutUs;
@@ -30,14 +36,23 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	}
 	
 	@Override
-	public int create(AboutUs aboutUs) {
-		return jdbcTemplate.update(INSERT, new Object[] {
-				aboutUs.getName(),
-				aboutUs.getContent(),
-				new Timestamp(System.currentTimeMillis()),
-				new Timestamp(System.currentTimeMillis()),
-				aboutUs.getType().toString()
-			});
+	public long create(AboutUs aboutUs) {
+		GeneratedKeyHolder holder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+		    @Override
+		    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+		        PreparedStatement statement = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+		        statement.setString(1, aboutUs.getName());
+		        statement.setString(2, aboutUs.getContent());
+		        statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		        statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+		        statement.setString(5, aboutUs.getType().toString());
+		        return statement;
+		    }
+		}, holder);
+
+		long primaryKey = holder.getKey().longValue();
+		return primaryKey;
 	}
 
 	@Override
@@ -49,7 +64,7 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	}
 
 	@Override
-	public AboutUs retrieve(int id) {
+	public AboutUs retrieve(int id) throws Exception{
 		return jdbcTemplate.queryForObject(FINDONE, new Object[]{id}, new BeanPropertyRowMapper<AboutUs>(AboutUs.class));
 	}
 

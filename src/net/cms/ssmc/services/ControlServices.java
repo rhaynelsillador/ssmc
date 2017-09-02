@@ -1,6 +1,7 @@
 package net.cms.ssmc.services;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ public class ControlServices {
 	@Autowired
 	private UserDao userDao;
 	
-	public void createControl(Module module, int moduleId){
+	public void createControl(Module module, long id){
 		Control control = new Control();
 		control.setModule(module);
-		control.setModuleId(moduleId);
+		control.setModuleId(id);
 		controlDao.create(control);
 	}
 	
@@ -34,19 +35,22 @@ public class ControlServices {
 		controlDao.create(control);
 	}
 	
-	public void deleteApproved(int controlId){
-		controlDao.deleteApproved(controlId);
-	}
-	
-	public void deleteControl(int module, int moduleId){
+	public void deleteControl(Module module, int moduleId){
 		controlDao.deleteControl(module, moduleId);
 	}
 	
-	public boolean hasApproved(HttpSession session, Module module, int controlId){
+	/*public void deleteControl(int module, int moduleId){
+		controlDao.deleteControl(module, moduleId);
+	}*/
+	
+	public boolean hasApproved(HttpServletRequest httpServletRequest, Module module, int controlId){
+		HttpSession session = httpServletRequest.getSession();
 		User user = (User) session.getAttribute("user");
+		System.out.println("useruser :: "+user);
 		if(user.isApprover()){
-			boolean hasApproved = controlDao.hasApproved(module, controlId) != 0 ? true : false;
-			session.setAttribute("hasApproved", hasApproved);
+			boolean hasApproved = controlDao.hasApproved(module, controlId, user.getId()) != 0 ? true : false;
+			System.err.println(hasApproved+" :: "+module+" :: "+controlId);
+			httpServletRequest.setAttribute("hasApproved", hasApproved);
 			return hasApproved;
 		}
 		return false;

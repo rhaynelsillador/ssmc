@@ -70,6 +70,7 @@ public class ClinicServices {
 				data.put(Helper.STATUS, Status.SUCCESS);
 				data.put(Helper.MESSAGE, "Successfully updated clinic information.");
 			} catch (Exception e) {
+				e.printStackTrace();
 				data.put(Helper.STATUS, Status.ERROR);
 				data.put(Helper.MESSAGE, "Unsuccessfully updated clinic information.");
 			}

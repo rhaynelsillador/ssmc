@@ -23,6 +23,7 @@ import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.Clinic;
 import net.ssmc.model.Role;
 import net.ssmc.model.User;
+import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
@@ -38,6 +39,8 @@ public class SsmcBackendController {
 	private UserServices userServices;
 	@Autowired
 	private RoleServices roleServices;
+	@Autowired
+	private CityServices cityServices;
 	
 	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
 	@RequestMapping(path="/Dashboard", method = RequestMethod.GET, produces="application/json")
@@ -126,5 +129,31 @@ public class SsmcBackendController {
 	public String contactUsMessages(ModelMap map, @RequestParam Map<String, String> request) {
 		HttpSession session = httpServletRequest.getSession(true);
 		return "backend/ContactUs";
+	}
+	
+	@AppicationAudit(module = Module.CITY, access = Access.CREATE)
+	@RequestMapping(path="/City", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String city(ModelMap map) {
+		return "backend/City";
+	}
+	
+	@AppicationAudit(module = Module.CITY, access = Access.CREATE)
+	@RequestMapping(path="/CityAdd", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String cityAdd(ModelMap map, @RequestParam Map<String, String> request) {
+		HttpSession session = httpServletRequest.getSession();
+		session.setAttribute("cityname", request.get("name"));
+		session.setAttribute("TRANSACTION", TransactionType.ADD);
+		return "backend/CityUpdate";
+	}
+	
+	@AppicationAudit(module = Module.CITY, access = Access.UPDATE)
+	@RequestMapping(path="/CityUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String cityUpdate(ModelMap map, @RequestParam Map<String, String> request) {
+		HttpSession session = httpServletRequest.getSession();
+		net.ssmc.model.City city = cityServices.getCity(Integer.parseInt(request.get("id")));
+		session.setAttribute("cityname", request.get("name"));
+		session.setAttribute("city", city);
+		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
+		return "backend/CityUpdate";
 	}
 }

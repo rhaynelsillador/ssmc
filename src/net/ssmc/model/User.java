@@ -121,6 +121,14 @@ public class User {
 	public void setApprover(boolean approver) {
 		this.approver = approver;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", roleId=" + roleId
+				+ ", roleName=" + roleName + ", dateLastLogin=" + dateLastLogin + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", mobile=" + mobile + ", phone=" + phone + ", email=" + email
+				+ ", approver=" + approver + ", birthday=" + birthday + ", dateCreated=" + dateCreated + ", roles="
+				+ roles + ", address=" + address + "]";
+	}
 	
 	
 }

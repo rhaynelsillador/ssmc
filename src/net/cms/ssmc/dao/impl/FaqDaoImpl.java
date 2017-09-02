@@ -1,16 +1,21 @@
 package net.cms.ssmc.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.FaqDao;
 import net.cms.ssmc.model.Faq;
 import net.ssmc.dao.mapper.FaqMapper;
-import net.ssmc.dao.mapper.UserMapper;
 
 public class FaqDaoImpl implements FaqDao{
 
@@ -30,14 +35,23 @@ public class FaqDaoImpl implements FaqDao{
 	}
 	
 	@Override
-	public void create(Faq faq) {
-		jdbcTemplate.update(SQLCREATE, new Object[] {
-			faq.getQuestion(),
-			faq.getAnswer(),
-			new Timestamp(System.currentTimeMillis()),
-			new Timestamp(System.currentTimeMillis()),
-			true
-		});
+	public long create(Faq faq) {
+		GeneratedKeyHolder holder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+		    @Override
+		    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+		        PreparedStatement statement = con.prepareStatement(SQLCREATE, Statement.RETURN_GENERATED_KEYS);
+		        statement.setString(1, faq.getQuestion());
+		        statement.setString(2, faq.getAnswer());
+		        statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+		        statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+		        statement.setBoolean(5, true);
+		        return statement;
+		    }
+		}, holder);
+
+		long primaryKey = holder.getKey().longValue();
+		return primaryKey;
 	}
 
 	@Override

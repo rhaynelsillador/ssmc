@@ -160,4 +160,5 @@ public class CmsRestController {
 		HttpSession session = httpServletRequest.getSession(true);
 		return imageServices.updateImage(session, image);
 	}
+	
 }

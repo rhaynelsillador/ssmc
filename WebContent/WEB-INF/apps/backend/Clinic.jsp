@@ -101,7 +101,8 @@
 	            formatters: {
 	                "commands": function(column, row) {
 	                	console.log(row);
-	                	return "<a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
+	                	return 	" <a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	                			" <a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=CLINIC\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> ";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return moment(row.dateUpdated).format("YYYY-MM-DD HH:mm:ss");

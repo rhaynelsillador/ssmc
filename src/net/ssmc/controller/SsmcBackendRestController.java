@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
+import net.ssmc.model.City;
 import net.ssmc.model.ContactUs;
+import net.ssmc.model.PendingApproval;
 import net.ssmc.model.Role;
 import net.ssmc.model.RoleAccess;
 import net.ssmc.model.User;
+import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
+import net.ssmc.services.DashboardServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
 
@@ -42,6 +46,10 @@ public class SsmcBackendRestController {
 	private RoleServices roleServices;
 	@Autowired
 	private ContactUsServices contactUsServices;
+	@Autowired
+	private DashboardServices dashboardServices;
+	@Autowired
+	private CityServices cityServices;
 	
 	@RequestMapping(path="/AccountAuthentication", method = RequestMethod.POST, produces="application/json")
 	public @ResponseBody Map<String, Object> accountAuthentication(@RequestParam Map<String, String> request) {
@@ -119,7 +127,27 @@ public class SsmcBackendRestController {
 		return contactUsServices.deleteFaq(session, contactUs);
 	}
 	
+	@RequestMapping(path="/PendingApprovalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody List<PendingApproval> pendingApprovalList() {
+		return dashboardServices.getAllPendingApproval(httpServletRequest);
+	}
 	
+	@RequestMapping(path="/CityList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> city(@RequestParam Map<String, String> request){
+		HttpSession session = httpServletRequest.getSession(true);
+		return cityServices.retrieveClinics(session, request);
+	}
+	
+	@RequestMapping(path="/CityAddUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> cityAddUpdate(@RequestBody City city){
+		HttpSession session = httpServletRequest.getSession(true);
+		return cityServices.createCity(session, city);
+	}
+	
+	@RequestMapping(path="/CityDelete", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> cityDelete(@RequestBody City city){
+		return cityServices.deleteCity(httpServletRequest, city);
+	}
 	
 	
 	
