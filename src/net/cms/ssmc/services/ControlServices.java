@@ -39,18 +39,13 @@ public class ControlServices {
 		controlDao.deleteControl(module, moduleId);
 	}
 	
-	/*public void deleteControl(int module, int moduleId){
-		controlDao.deleteControl(module, moduleId);
-	}*/
-	
 	public boolean hasApproved(HttpServletRequest httpServletRequest, Module module, int controlId){
 		HttpSession session = httpServletRequest.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("useruser :: "+user);
 		if(user.isApprover()){
 			boolean hasApproved = controlDao.hasApproved(module, controlId, user.getId()) != 0 ? true : false;
-			System.err.println(hasApproved+" :: "+module+" :: "+controlId);
-			httpServletRequest.setAttribute("hasApproved", hasApproved);
+			session.setAttribute("hasApproved", hasApproved);
+			System.err.println("hasApprovedhasApproved :: "+hasApproved);
 			return hasApproved;
 		}
 		return false;

@@ -41,6 +41,9 @@
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="name" data-order="asc">Clinic Name</th>
                                         <th data-column-id="type">Type</th>
+                                        <th data-column-id="email">Email</th>
+                                        <th data-column-id="phone">Phone</th>
+                                        <th data-column-id="mobile">Mobile</th>
                                         <th data-column-id="dateUpdated" data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded" data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>

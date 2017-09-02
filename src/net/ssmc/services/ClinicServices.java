@@ -58,7 +58,7 @@ public class ClinicServices {
 		clinic.setAddress2(request.get("address2"));
 		clinic.setType(request.get("type"));
 		try {
-			clinic.setCity(City.valueOf(request.get("city")));
+			clinic.setCity(new net.ssmc.model.City(Long.parseLong(request.get("city"))));
 		} catch (Exception e) {
 		}
 		clinic.setMap(request.get("map"));
@@ -92,7 +92,7 @@ public class ClinicServices {
 	
 	public Clinic getClinic(HttpSession session, long id){
 		Clinic clinic = clinicDao.retrieve(id);
-		clinic.setClinicContacts(clinicContactDao.retrieveByClinic(id));
+//		clinic.setClinicContacts(clinicContactDao.retrieveByClinic(id));
 		return clinic;
 	}
 }

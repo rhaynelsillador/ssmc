@@ -1,5 +1,9 @@
 package net.cms.ssmc.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +11,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.HeaderDao;
 import net.cms.ssmc.model.Header;
@@ -32,16 +38,25 @@ public class HeaderDaoImpl implements HeaderDao {
 	}
 	
 	@Override
-	public int create(Header header) {
-		return jdbcTemplate.update(INSERT, new Object[] {
-				header.getName(),
-				header.getTitle(),
-				header.getContent(),
-				header.getType().toString(),
-				new Timestamp(System.currentTimeMillis()),
-				new Timestamp(System.currentTimeMillis()),
-				header.getPage().toString()
-			});
+	public long create(Header header) {
+		GeneratedKeyHolder holder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+		    @Override
+		    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+		        PreparedStatement statement = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+		        statement.setString(1, header.getName());
+		        statement.setString(2, header.getTitle());
+		        statement.setString(3, header.getContent());
+		        statement.setString(4, header.getType().toString());
+		        statement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+		        statement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+		        statement.setString(7, header.getPage().toString());
+		        return statement;
+		    }
+		}, holder);
+
+		long primaryKey = holder.getKey().longValue();
+		return primaryKey;
 	}
 
 	@Override

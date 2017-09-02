@@ -19,7 +19,7 @@ public class ControlDaoImpl implements ControlDao {
 	private static final String INSERTAPPROVED	= "INSERT INTO USERAPPROVE (userid, controlid) VALUES (?, ?)";
 	private static final String FINDONE			= "SELECT * FROM CONTROL WHERE id = ?";
 	private static final String FINDONEBYMODULE	= "SELECT * FROM CONTROL WHERE module = ? AND moduleid = ?";
-	private static final String DELETEBYID 		= "DELETE FROM USERAPPROVE WHERE module= ? AND module = ? ";
+	private static final String DELETEBYID 		= "DELETE FROM CONTROL WHERE module = ? AND moduleid = ? ";
 	private static final String COUNTAPPROVED 	= "SELECT COUNT(id) FROM USERAPPROVE WHERE controlid= ? ";
 	private static final String HASAPPROVED 	= "SELECT COUNT(C.id) FROM USERAPPROVE AS UP INNER JOIN CONTROL AS C ON C.id=UP.controlid WHERE module= ? AND moduleid = ? AND userid = ? LIMIT 1";
 	
@@ -51,15 +51,10 @@ public class ControlDaoImpl implements ControlDao {
 	public Control retrieve(Control control) {
 		return jdbcTemplate.queryForObject(FINDONE, new BeanPropertyRowMapper<Control>(Control.class));
 	}
-
-	/*@Override
-	public void deleteApproved(int controlId) {
-		jdbcTemplate.update(DELETEBYID, new Object[] {controlId});
-	}*/
-
+	
 	@Override
 	public void deleteControl(Module module, int moduleId) {
-		jdbcTemplate.update(DELETEBYID, new Object[] {module, moduleId});
+		jdbcTemplate.update(DELETEBYID, new Object[] {module.ordinal(), moduleId});
 	}
 
 	@Override

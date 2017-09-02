@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.ssmc.enums.Access;
-import net.ssmc.enums.City;
 import net.ssmc.enums.Module;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.interceptor.AppicationAudit;
@@ -115,12 +114,22 @@ public class SsmcBackendController {
 	public String addClinic(ModelMap map, @RequestParam Map<String, String> request) {
 		HttpSession session = httpServletRequest.getSession(true);
 		Clinic clinic = clinicServices.getClinic(session, Long.parseLong(request.get("id")));
+		
 		map.addAttribute("username", "rhaynel");
-		map.addAttribute("cities", City.cities());
+		map.addAttribute("cities", cityServices.retrieveCity());
 		map.addAttribute("clinic", clinic);
 		map.addAttribute("title", clinic.getName());
 		session.setAttribute("clinicId", request.get("id"));
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
+		return "backend/ClinicUpdate";
+	}
+	
+	@AppicationAudit(module = Module.CLINIC, access = Access.CREATE)
+	@RequestMapping(path="/ClinicAndHospitalAdd", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String ClinicAndHospitalAdd(ModelMap map, @RequestParam Map<String, String> request) {
+		HttpSession session = httpServletRequest.getSession(true);
+		map.addAttribute("cities", cityServices.retrieveCity());
+		session.setAttribute("TRANSACTION", TransactionType.ADD);
 		return "backend/ClinicUpdate";
 	}
 	

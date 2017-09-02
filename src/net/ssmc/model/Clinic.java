@@ -3,7 +3,6 @@ package net.ssmc.model;
 import java.sql.Timestamp;
 import java.util.List;
 
-import net.ssmc.enums.City;
 import net.ssmc.exception.EmptyStringException;
 
 public class Clinic {
@@ -17,7 +16,9 @@ public class Clinic {
 	private String address1;
 	private String address2;
 	private City city;
-	private List<ClinicContact> clinicContacts;
+	private String mobile;
+	private String phone;
+	private String email;
 	private String map;
 	private String type;
 	
@@ -63,13 +64,24 @@ public class Clinic {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public List<ClinicContact> getClinicContacts() {
-		return clinicContacts;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setClinicContacts(List<ClinicContact> clinicContacts) {
-		this.clinicContacts = clinicContacts;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
-	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getAddress1() {
 		return address1;
 	}

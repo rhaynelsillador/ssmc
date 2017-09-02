@@ -5,6 +5,20 @@ public class City {
 	private long id;
 	private String name;
 	private String citykey;
+	
+	public City() {
+	}
+	
+	public City(long id) {
+		this.id=id;
+	}
+	
+	public City(long id, String name, String citykey) {
+		this.id=id;
+		this.name = name;
+		this.citykey = citykey;
+	}
+	
 	public long getId() {
 		return id;
 	}

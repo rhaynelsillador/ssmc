@@ -34,9 +34,24 @@ public class ServiceServices {
 		return data;
 	} 
 	
-	public Service getService(HttpSession session, int id){
+	public Service getService(HttpServletRequest httpServletRequest, int id){
 		Service service = serviceDao.retrieve(id);
+		controlServices.hasApproved(httpServletRequest, Module.SERVICE, id);
 		return service;
+	}
+	
+	public Map<String, Object>  deleteService(HttpSession session, Service service){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			serviceDao.delete(service.getId());
+			controlServices.deleteControl(Module.SERVICE, service.getId());
+			response.put(Helper.STATUS, Status.SUCCESS);
+			response.put(Helper.MESSAGE, "Service successfully deleted.");
+		} catch (Exception e) {
+			response.put(Helper.STATUS, Status.ERROR);
+			response.put(Helper.MESSAGE, "Service unsuccessfully deleted!");
+		}
+		return response;
 	}
 	
 	public Service getActiveService(HttpServletRequest httpServletRequest, int id){

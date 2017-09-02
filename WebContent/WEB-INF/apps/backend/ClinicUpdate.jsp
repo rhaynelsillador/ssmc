@@ -83,7 +83,7 @@
 					           	    	<div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
 					                       <div class="form-group">
-					                           <input type="text" class="form-control" placeholder="Full Name" value="${requestScope.clinic.name}" name="name">
+					                           <input type="text" class="form-control" placeholder="Clinic Name" value="${requestScope.clinic.name}" name="name">
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
@@ -94,47 +94,39 @@
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="businessType">
-					                          	<option value="CLINIC">Clinic</option>
+					                          	<option value="CLINIC" selected="selected">Clinic</option>
 					                          	<option value="HOSPITAL">Hospital</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
 					                   <br/>
-										<c:forEach items="${requestScope.clinic.clinicContacts}" var="clinicContact">
-										    <c:choose>
-										        <c:when test="${clinicContact.type == 'M'}">
-										            <div class="input-group">
-								                       <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
-								                       <div class="form-group">
-								                           <input type="text" class="form-control" placeholder="Contact Number" value="${clinicContact.info}" name="mobile">
-								                           <i class="form-group__bar"></i>
-								                       </div>
-								                   </div>
-								                   <br/>
-										        </c:when>
-										        <c:when test="${clinicContact.type == 'P'}">
-										            <div class="input-group">
-								                       <span class="input-group-addon"><i class="zmdi zmdi-local-phone"></i></span>
-								                       <div class="form-group">
-								                           <input type="text" class="form-control" placeholder="Contact Number" value="${clinicContact.info}" name="phone">
-								                           <i class="form-group__bar"></i>
-								                       </div>
-								                   </div>
-								                   <br/>
-										        </c:when>
-										        <c:otherwise>
-										            <div class="input-group">
-								                       <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-								                       <div class="form-group">
-								                           <input type="text" class="form-control" placeholder="Email Address" value="${clinicContact.info}" name="email">
-								                           <i class="form-group__bar"></i>
-								                       </div>
-								                   </div>
-								                   <br/>
-										        </c:otherwise>
-										    </c:choose>
-										</c:forEach>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
+					                       <div class="form-group">
+					                           <input type="text" class="form-control" placeholder="Contact Number" value="${requestScope.clinic.mobile}" name="mobile">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-local-phone"></i></span>
+					                       <div class="form-group">
+					                           <input type="text" class="form-control" placeholder="Contact Number" value="${requestScope.clinic.phone}" name="phone">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+					                   
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+					                       <div class="form-group">
+					                           <input type="text" class="form-control" placeholder="Email Address" value="${requestScope.clinic.email}" name="email">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+										
 					               </div>
 					
 					               <div class="col-sm-5">
@@ -161,7 +153,7 @@
 								               		<select class="form-control select2" style="width: 100%" name="city">
 								               			<option value="">Select City</option>
 					                       				<c:forEach items="${requestScope.cities}" var="city">
-								                           	<option value="${city.key}" <c:if test="${requestScope.clinic.city == city.key}">selected</c:if>>${city.value}</option>
+								                           	<option value="${city.id}" <c:if test="${requestScope.clinic.city.id == city.id}">selected</c:if>>${city.name}</option>
 								                       	</c:forEach>
 								                 	</select>
 								             	</div>
@@ -170,7 +162,6 @@
 					                   </div>
 					               </div>					               
 					           </div>
-					
 					           <br/>
 					           <br/>
 					           <br/>

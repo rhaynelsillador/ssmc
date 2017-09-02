@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import net.ssmc.enums.City;
 import net.ssmc.exception.EmptyStringException;
+import net.ssmc.model.City;
 import net.ssmc.model.Clinic;
 
 public class ClinicMapper implements RowMapper<Clinic>{
@@ -32,9 +32,14 @@ public class ClinicMapper implements RowMapper<Clinic>{
 		clinic.setAddress2(rs.getString("address2"));
 		clinic.setType(rs.getString("type"));
 		try {
-			clinic.setCity(City.getCityByName(rs.getString("city")));
+			clinic.setCity(new City(rs.getLong("cityid"),
+					rs.getString("cityname"),
+					rs.getString("citykey")));
 		} catch (Exception e) {
 		}
+		clinic.setEmail(rs.getString("email"));
+		clinic.setPhone(rs.getString("email"));
+		clinic.setMobile(rs.getString("mobile"));
 		clinic.setMap(rs.getString("map"));
 		
 		return clinic;

@@ -26,6 +26,7 @@
 				
 				       <div class="actions">
 				           <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
+				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=HEADER"><i class="zmdi zmdi-upload"></i></a>
 				       </div>
 				   </div>
 				
@@ -75,6 +76,10 @@
 					                          	<option value="Main">Main</option>
 					                          	<option value="Corporate">Corporate</option>
 					                          	<option value="Medical">Medical</option>
+					                          	<option value="About">About</option>
+					                          	<option value="Service">Service</option>
+					                          	<option value="Faq">Faq</option>
+					                          	<option value="ContactUs">ContactUs</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>

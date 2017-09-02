@@ -1,12 +1,17 @@
 package net.cms.ssmc.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import net.ssmc.enums.App;
 import net.ssmc.enums.Page;
 
-public class Header {
+public class Header implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String title;

@@ -20,6 +20,10 @@ public class CityServices {
 	@Autowired
 	private CityDao cityDao;
 	
+	public List<City> retrieveCity(){
+		return cityDao.retrieveAll();
+	}
+	
 	public Map<String, Object> retrieveClinics(HttpSession session, Map<String, String> request){
 		Map<String, Object> data = new HashMap<>();
 		List<City> clinics = cityDao.retrieveAll(request);

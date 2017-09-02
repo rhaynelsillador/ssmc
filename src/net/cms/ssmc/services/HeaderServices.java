@@ -34,7 +34,8 @@ public class HeaderServices {
 		return data;
 	} 
 	
-	public Header getHeader(HttpSession session, int id){
+	public Header getHeader(HttpServletRequest httpServletRequest, int id){
+		controlServices.hasApproved(httpServletRequest, Module.HEADER, id);
 		return headerDao.retrieve(id);
 	}
 	
@@ -42,6 +43,20 @@ public class HeaderServices {
 		if(controlServices.hasApproved(httpServletRequest, Module.HEADER, id)){
 			return headerDao.retrieveActive(App.BUSINESS);
 		}return null;
+	}
+	
+	public Map<String, Object> deleteHeader(HttpSession session, Header header){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			headerDao.delete(header.getId());
+			controlServices.deleteControl(Module.HEADER, header.getId());
+			response.put(Helper.STATUS, Status.SUCCESS);
+			response.put(Helper.MESSAGE, "Header successfully delete!");
+		} catch (Exception e) {
+			response.put(Helper.STATUS, Status.ERROR);
+			response.put(Helper.MESSAGE, "Header unsuccessfully delete!");
+		}
+		return response;
 	}
 	
 	public Map<String, Object> createUpdateHeader(HttpSession session, Header header){
@@ -58,11 +73,12 @@ public class HeaderServices {
 			switch(transactionType){
 			case ADD:
 				try {
-					int id = headerDao.create(header);
+					long id = headerDao.create(header);
 					controlServices.createControl(Module.HEADER, id);
 					response.put(Helper.MESSAGE, "About us successfully added");
 					response.put(Helper.STATUS, Status.SUCCESS);
 				} catch (Exception e) {
+					e.printStackTrace();
 					response.put(Helper.MESSAGE, "About us unsuccessfully added");
 					response.put(Helper.STATUS, Status.ERROR);
 				}
@@ -70,8 +86,6 @@ public class HeaderServices {
 			case UPDATE:
 				try {
 					Header header2 = (Header) session.getAttribute("header");
-					
-					System.out.println(header2);
 					headerDao.update(header, header2.getId());
 					response.put(Helper.MESSAGE, "Header successfully updated");
 					response.put(Helper.STATUS, Status.SUCCESS);

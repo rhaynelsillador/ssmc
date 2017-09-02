@@ -32,7 +32,7 @@
 				   <div class="card">
 				       <div class="card__header">
 				           <h2>${sessionScope.TRANSACTION }</h2>
-				           <c:if test="${requestScope.hasApproved == false }">
+				           <c:if test="${sessionScope.hasApproved == false and sessionScope.TRANSACTION != 'ADD'}">
 				           		<button class="btn btn-primary pull-right approved-fn" data-module="3" data-moduleId="${requestScope.faq.id}">Approve</button>
 				       		</c:if>
 				       </div>

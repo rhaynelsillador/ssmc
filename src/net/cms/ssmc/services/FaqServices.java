@@ -76,7 +76,7 @@ public class FaqServices {
 	}
 
 	public Faq getFaq(HttpServletRequest httpServletRequest, int id) {
-		controlServices.hasApproved(httpServletRequest, Module.ABOUTUS, id);
+		controlServices.hasApproved(httpServletRequest, Module.FAQ, id);
 		return faqDao.retrieve(id);
 	}
 
@@ -97,6 +97,7 @@ public class FaqServices {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			faqDao.delete(faq.getId());
+			controlServices.deleteControl(Module.FAQ, faq.getId());
 			response.put(Helper.MESSAGE, "Faq status successfully deleted");
 			response.put(Helper.STATUS, Status.SUCCESS);
 		} catch (Exception e) {

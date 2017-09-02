@@ -1,11 +1,15 @@
 package net.ssmc.controller;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +25,7 @@ import net.cms.ssmc.services.ServiceServices;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.App;
 import net.ssmc.enums.Module;
+import net.ssmc.enums.Page;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.interceptor.AppicationAudit;
 
@@ -87,6 +92,7 @@ public class CmsController {
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
 		AboutUs aboutUs = aboutUsServices.getAboutUs(httpServletRequest, id);
+		System.out.println("aboutUsaboutUsaboutUs :: "+aboutUs);
 		session.setAttribute("aboutUs", aboutUs);
 		map.addAttribute("type", App.values());
 		return "backend/AboutUsUpdate";
@@ -103,8 +109,7 @@ public class CmsController {
 	public String headerUpdate(ModelMap map, @RequestParam int id){
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
-		Header header = headerServices.getHeader(session, id);
-		session.setAttribute("header", header);
+		session.setAttribute("header", headerServices.getHeader(httpServletRequest, id));
 		return "backend/HeaderUpdate";
 	}
 	
@@ -128,11 +133,11 @@ public class CmsController {
 	public String servicesUpdate(ModelMap map, @RequestParam int id){
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
-		Service service = serviceServices.getService(session, id);
-		System.out.println(service);
+		Service service = serviceServices.getService(httpServletRequest, id);
 		session.setAttribute("service", service);
 		return "backend/ServiceUpdate";
 	}
+	
 	
 	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)
 	@RequestMapping(path="/ServicesUpload", method = RequestMethod.GET)

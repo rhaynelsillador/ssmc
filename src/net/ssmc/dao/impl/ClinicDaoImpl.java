@@ -12,10 +12,10 @@ import net.ssmc.model.Clinic;
 
 public class ClinicDaoImpl implements ClinicDao{
 
-	private final String SQL 						= "SELECT * FROM CLINIC ";
+	private final String SQL 				= "SELECT CC.*, CY.name as cityname, CY.citykey as citykey FROM CLINIC AS CC INNER JOIN CITY AS CY ON CC.cityid = CY.id";
 	private static final String SQLCOUNT 	= "SELECT COUNT(id) FROM CLINIC ";
-	private static final String INSERT 		= "INSERT INTO CLINIC (name, dateadded, dateupdated, description, address1, address2, city, map, type=?) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE 		= "UPDATE CLINIC SET name=?, dateupdated=?, description=?, address1=?, address2=?, city=?, logo=?, map=?, type=? WHERE id=?";
+	private static final String INSERT 		= "INSERT INTO CLINIC (name, dateadded, dateupdated, description, address1, address2, city, map, type, email, phone, mobile) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE 		= "UPDATE CLINIC SET name=?, dateupdated=?, description=?, address1=?, address2=?, cityid=?, logo=?, map=?, type=? WHERE id=?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -34,9 +34,12 @@ public class ClinicDaoImpl implements ClinicDao{
 				clinic.getDescription(),
 				clinic.getAddress1(),
 				clinic.getAddress2(),
-				clinic.getCity(),
+				clinic.getCity().getId(),
 				clinic.getMap(),
-				clinic.getType()
+				clinic.getType(),
+				clinic.getEmail(),
+				clinic.getPhone(),
+				clinic.getMobile()
 		});
 	}
 
@@ -50,12 +53,14 @@ public class ClinicDaoImpl implements ClinicDao{
 		}else{
 			SQL = this.SQL + " LIMIT "+((start-1)*end)+", "+(end);
 		}
+		System.out.println(SQL);
+		
 		return jdbcTemplate.query(SQL, new ClinicMapper());
 	}
 
 	@Override
 	public Clinic retrieve(long id) {
-		final String SQL = this.SQL + " WHERE id = ?";
+		final String SQL = this.SQL + " WHERE CC.id = ?";
 		return jdbcTemplate.queryForObject(SQL, new Object[]{id}, new ClinicMapper());
 	}
 
@@ -69,7 +74,7 @@ public class ClinicDaoImpl implements ClinicDao{
 				clinic.getDescription(),
 				clinic.getAddress1(),
 				clinic.getAddress2(),
-				(clinic.getCity() != null) ? clinic.getCity().getName() : clinic.getCity(),
+				clinic.getCity().getId(),
 				clinic.getLogo(),
 				clinic.getMap(),
 				clinic.getType(),

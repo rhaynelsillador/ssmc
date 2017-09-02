@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,6 +128,13 @@ public class CmsRestController {
 		return headerServices.createUpdateHeader(session, header);
 	}
 	
+	@AppicationAudit(module = Module.HEADER, access = Access.UPDATE)
+	@RequestMapping(path="/HeaderDelete", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> headerDelete(@RequestBody Header header){
+		HttpSession session = httpServletRequest.getSession(true);
+		return headerServices.deleteHeader(session, header);
+	}
+	
 	@AppicationAudit(module = Module.SERVICE, access = Access.RETRIEVE)
 	@RequestMapping(path="/ServicesList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> servicesList(@RequestParam Map<String, String> request){
@@ -138,6 +146,13 @@ public class CmsRestController {
 	public @ResponseBody Map<String, Object> servicesAddUpdate(@RequestBody Service service){
 		HttpSession session = httpServletRequest.getSession(true);
 		return serviceServices.createUpdateService(session, service);
+	}
+	
+	@AppicationAudit(module = Module.SERVICE, access = Access.DELETE)
+	@RequestMapping(path="/ServicesDelete", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody Map<String, Object> dervicesDelete(@RequestBody Service service){
+		HttpSession session = httpServletRequest.getSession(true);
+		return serviceServices.deleteService(session, service);
 	}
 	
 	@AppicationAudit(module = Module.SERVICE, access = Access.UPDATE)

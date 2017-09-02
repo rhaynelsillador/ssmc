@@ -9,7 +9,7 @@ import net.ssmc.enums.App;
 public interface HeaderDao {
 
 	long count();
-	int create(Header header);
+	long create(Header header);
 	void update(Header header, int id);
 	List<Header> retrieveAll(Map<String, String> request);
 	Header retrieve(int id);

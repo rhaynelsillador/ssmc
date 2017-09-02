@@ -48,7 +48,6 @@ public class CityDaoImpl implements CityDao{
 
 	@Override
 	public List<City> retrieveAll(Map<String, String> request) {
-		System.out.println(request);
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
 		String SQL = "SELECT * FROM city "+ DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
@@ -65,6 +64,12 @@ public class CityDaoImpl implements CityDao{
 	public void delete(long id) {
 		String SQL = "DELETE FROM city WHERE id = ?";
 		jdbcTemplate.update(SQL, new Object[]{id});
+	}
+
+	@Override
+	public List<City> retrieveAll() {
+		String SQL = "SELECT * FROM city";
+		return jdbcTemplate.query(SQL, new Object[]{}, new BeanPropertyRowMapper<City>(City.class));
 	}
 
 	

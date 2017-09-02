@@ -11,7 +11,6 @@ public interface ControlDao {
 	void create(Control control);
 	void createApproved(int userId, int controlId);
 	Control retrieve(Control control);
-//	void deleteApproved(int controlId);
 	void deleteControl(Module module, int moduleId);
 	int countApproved(int controlId);
 	int hasApproved(Module module , int controlId, int userid);
