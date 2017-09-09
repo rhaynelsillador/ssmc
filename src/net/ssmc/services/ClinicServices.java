@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import net.ssmc.dao.ClinicContactDao;
 import net.ssmc.dao.ClinicDao;
-import net.ssmc.enums.City;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.exception.EmptyStringException;
@@ -57,11 +56,18 @@ public class ClinicServices {
 		clinic.setAddress1(request.get("address1"));
 		clinic.setAddress2(request.get("address2"));
 		clinic.setType(request.get("type"));
+		
+		clinic.setEmail(request.get("email"));
+		clinic.setPhone(request.get("phone"));
+		clinic.setMobile(request.get("mobile"));
+		
 		try {
 			clinic.setCity(new net.ssmc.model.City(Long.parseLong(request.get("city"))));
 		} catch (Exception e) {
 		}
 		clinic.setMap(request.get("map"));
+		
+		System.out.println(clinic);
 		
 		if(session.getAttribute("TRANSACTION") == TransactionType.UPDATE){
 			try {
@@ -74,12 +80,13 @@ public class ClinicServices {
 				data.put(Helper.STATUS, Status.ERROR);
 				data.put(Helper.MESSAGE, "Unsuccessfully updated clinic information.");
 			}
-		}else if(TransactionType.valueOf(request.get("transType")) == TransactionType.UPDATE){
+		}else if(session.getAttribute("TRANSACTION") == TransactionType.ADD){
 			try {
 				clinicDao.create(clinic);
 				data.put(Helper.STATUS, Status.SUCCESS);
 				data.put(Helper.MESSAGE, "Successfully added clinic information.");
 			} catch (Exception e) {
+				e.printStackTrace();
 				data.put(Helper.STATUS, Status.ERROR);
 				data.put(Helper.MESSAGE, "Unsuccessfully added clinic information.");
 			}

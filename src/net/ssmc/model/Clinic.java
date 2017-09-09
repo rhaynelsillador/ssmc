@@ -112,5 +112,14 @@ public class Clinic {
 	public void setType(String type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return "Clinic [id=" + id + ", name=" + name + ", dateUpdated=" + dateUpdated + ", dateAdded=" + dateAdded
+				+ ", description=" + description + ", logo=" + logo + ", address1=" + address1 + ", address2="
+				+ address2 + ", city=" + city + ", mobile=" + mobile + ", phone=" + phone + ", email=" + email
+				+ ", map=" + map + ", type=" + type + "]";
+	}
+	
+	
 	
 }

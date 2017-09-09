@@ -38,7 +38,7 @@ public class ClinicMapper implements RowMapper<Clinic>{
 		} catch (Exception e) {
 		}
 		clinic.setEmail(rs.getString("email"));
-		clinic.setPhone(rs.getString("email"));
+		clinic.setPhone(rs.getString("phone"));
 		clinic.setMobile(rs.getString("mobile"));
 		clinic.setMap(rs.getString("map"));
 		
