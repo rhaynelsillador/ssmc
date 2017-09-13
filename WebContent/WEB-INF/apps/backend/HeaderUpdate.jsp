@@ -78,6 +78,7 @@
 					                          	<option value="Medical">Medical</option>
 					                          	<option value="About">About</option>
 					                          	<option value="Service">Service</option>
+					                          	<option value="HospitalAndClinic">Hospital And Clinic</option>
 					                          	<option value="Faq">Faq</option>
 					                          	<option value="ContactUs">ContactUs</option>
 					                          </select>

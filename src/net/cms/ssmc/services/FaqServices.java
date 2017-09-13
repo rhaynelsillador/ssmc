@@ -29,7 +29,10 @@ public class FaqServices {
 		Map<String, Object> response = new HashMap<>();
 		response.put(Helper.STATUS, Status.ERROR);
 		
-		if(faq.getQuestion() == null || faq.getQuestion().isEmpty()){
+		if(faq.getTitle() == null || faq.getTitle().isEmpty()){
+			response.put(Helper.MESSAGE, "Faq title is required!");
+			return response;
+		}else if(faq.getQuestion() == null || faq.getQuestion().isEmpty()){
 			response.put(Helper.MESSAGE, "Faq question is required!");
 			return response;
 		}else if(faq.getAnswer() == null || faq.getAnswer().isEmpty()){

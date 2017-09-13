@@ -9,20 +9,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.FaqDao;
 import net.cms.ssmc.model.Faq;
-import net.ssmc.dao.mapper.FaqMapper;
 
 public class FaqDaoImpl implements FaqDao{
 
 	private final String SQL = "SELECT * FROM faq ";
 	private static final String DELETEBYID = "DELETE FROM faq WHERE id= ? ";
 	private static final String SQLCOUNT = "SELECT COUNT(id) FROM faq ";
-	private static final String SQLUPDATE = "UPDATE faq SET question=?, answer=?, dateupdated=? WHERE id= ? ";
+	private static final String SQLUPDATE = "UPDATE faq SET title =?, type=?, question=?, answer=?, dateupdated=? WHERE id= ? ";
 	private static final String SQLUPDATESTATUS = "UPDATE faq SET status=?, dateupdated=? WHERE id= ? ";
 	private static final String SQLCREATE = "INSERT INTO faq (question, answer, dateadded, dateupdated, status) VALUES (?,?,?,?,?)";
 	
@@ -56,19 +56,21 @@ public class FaqDaoImpl implements FaqDao{
 
 	@Override
 	public Faq retrieve(int id) {
-		return jdbcTemplate.queryForObject(SQL+" WHERE id = ?", new Object[]{id}, new FaqMapper());
+		return jdbcTemplate.queryForObject(SQL+" WHERE id = ?", new Object[]{id}, new BeanPropertyRowMapper<Faq>(Faq.class));
 	}
 
 	@Override
 	public List<Faq> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		return jdbcTemplate.query(SQL+" LIMIT "+((start-1)*end)+", "+(end), new FaqMapper());
+		return jdbcTemplate.query(SQL+" LIMIT "+((start-1)*end)+", "+(end), new BeanPropertyRowMapper<Faq>(Faq.class));
 	}
 
 	@Override
 	public void update(Faq faq) {
 		jdbcTemplate.update(SQLUPDATE, new Object[] {
+				faq.getTitle(),
+				faq.getType().toString(),
 				faq.getQuestion(),
 				faq.getAnswer(),
 				new Timestamp(System.currentTimeMillis()),

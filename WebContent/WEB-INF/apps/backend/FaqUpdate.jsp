@@ -44,17 +44,35 @@
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
-					                           <input type="text" class="form-control" placeholder="Question" value="${requestScope.faq.question}" name="question">
+					                           <input type="text" class="form-control" placeholder="Question" value="${requestScope.faq.title}" name="title">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                           <select class="form-control" name="type" id="faqType">
+					                          		<option value="BUSINESS">BUSINESS</option>
+					                          		<option value="CLINIC">CLINIC</option>
+					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
 					               </div>
 					           </div>
+								<br/>
+								<h4>Question</h4>
 					
-					           <br/>
-					           <br/>
-					           <br/>
-					
+					           <div class="row">
+					               <div class="col-sm-12">
+					                   <div class="form-group form-group--float">
+				                           <textarea class="form-control" rows="20" name="question" id="question">${requestScope.faq.question}</textarea>
+				                           <i class="form-group__bar"></i>
+				                       </div>
+					               </div>
+									
+					           </div>
 					           <h4>Answer</h4>
 					
 					           <div class="row">
@@ -85,6 +103,9 @@
         <!-- jQuery -->
 
 	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
+	<script type="text/javascript">
+		$("#faqType").val('${requestScope.faq.type}');
+	</script>
         
 </body>
 </html>
