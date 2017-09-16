@@ -27,9 +27,9 @@ public class ServiceDaoImpl implements ServiceDao {
 	private static final String FINDONE		= "SELECT * FROM SERVICE WHERE id = ?";
 	private static final String FINDACTIVEONE = "SELECT * FROM SERVICE WHERE type = ? AND status = ?";
 	private static final String SQLCOUNT 	= "SELECT COUNT(id) FROM SERVICE ";
-	private static final String INSERT 		= "INSERT INTO SERVICE (name, title, content, content2, type, dateadded, dateupdated) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT 		= "INSERT INTO SERVICE (name, title, content, content2, type, dateadded, dateupdated, num) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETEBYID 	= "DELETE FROM SERVICE WHERE id= ? ";
-	private static final String UPDATE	 	= "UPDATE SERVICE SET name= ?, title = ?, content = ?, content2 = ?, type=?, dateupdated = ? WHERE id= ? ";
+	private static final String UPDATE	 	= "UPDATE SERVICE SET name= ?, title = ?, content = ?, content2 = ?, type=?, dateupdated = ?, num = ? WHERE id= ? ";
 	
 	private static final String DELETEBYSERVICEID 	= "DELETE FROM IMAGES WHERE serviceid= ? ";
 	private static final String INSERTSERVICEIMAGES = "INSERT INTO IMAGES (image, status, serviceid) VALUES (?, ?, ?)";
@@ -58,6 +58,7 @@ public class ServiceDaoImpl implements ServiceDao {
 		        statement.setString(5, service.getType().toString());
 		        statement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 		        statement.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+		        statement.setInt(8, service.getNum());
 		        return statement;
 		    }
 		}, holder);
@@ -75,6 +76,7 @@ public class ServiceDaoImpl implements ServiceDao {
 				service.getContent2(),
 				service.getType().toString(),
 				new Timestamp(System.currentTimeMillis()),
+				service.getNum(),
 				id
 			});
 	}

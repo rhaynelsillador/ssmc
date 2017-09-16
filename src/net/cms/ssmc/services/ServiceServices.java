@@ -91,7 +91,6 @@ public class ServiceServices {
 					
 					System.out.println(service2);
 					serviceDao.update(service, service2.getId());
-					serviceDao.addImages(service, service2.getId());
 					response.put(Helper.MESSAGE, "Service successfully updated");
 					response.put(Helper.STATUS, Status.SUCCESS);
 				} catch (Exception e) {

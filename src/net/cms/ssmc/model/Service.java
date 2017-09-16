@@ -15,6 +15,7 @@ public class Service {
 	private String content2;
 	private boolean status;
 	private App type;
+	private int num;
 	private Timestamp dateAdded;
 	private Timestamp dateUpdated;
 	private List<Image> images;
@@ -79,12 +80,17 @@ public class Service {
 	public void setContent2(String content2) {
 		this.content2 = content2;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	@Override
 	public String toString() {
 		return "Service [id=" + id + ", name=" + name + ", title=" + title + ", content=" + content + ", content2="
-				+ content2 + ", status=" + status + ", type=" + type + ", dateAdded=" + dateAdded + ", dateUpdated="
-				+ dateUpdated + ", images=" + images + "]";
+				+ content2 + ", status=" + status + ", type=" + type + ", num=" + num + ", dateAdded=" + dateAdded
+				+ ", dateUpdated=" + dateUpdated + ", images=" + images + "]";
 	}
-	
 	
 }
