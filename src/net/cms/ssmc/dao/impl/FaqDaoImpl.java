@@ -24,7 +24,7 @@ public class FaqDaoImpl implements FaqDao{
 	private static final String SQLCOUNT = "SELECT COUNT(id) FROM faq ";
 	private static final String SQLUPDATE = "UPDATE faq SET title =?, type=?, question=?, answer=?, dateupdated=? WHERE id= ? ";
 	private static final String SQLUPDATESTATUS = "UPDATE faq SET status=?, dateupdated=? WHERE id= ? ";
-	private static final String SQLCREATE = "INSERT INTO faq (question, answer, dateadded, dateupdated, status) VALUES (?,?,?,?,?)";
+	private static final String SQLCREATE = "INSERT INTO faq (question, answer, dateadded, dateupdated, status, type, title) VALUES (?,?,?,?,?,?,?)";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -46,6 +46,8 @@ public class FaqDaoImpl implements FaqDao{
 		        statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 		        statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 		        statement.setBoolean(5, true);
+		        statement.setString(6, faq.getType().toString());
+		        statement.setString(7, faq.getTitle());
 		        return statement;
 		    }
 		}, holder);

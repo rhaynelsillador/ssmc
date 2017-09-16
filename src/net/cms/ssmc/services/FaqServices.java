@@ -39,10 +39,7 @@ public class FaqServices {
 			response.put(Helper.MESSAGE, "Faq answer is required!");
 			return response;
 		}
-		
-		
-		System.out.println("transactionType "+transactionType);
-		
+				
 		if(transactionType == TransactionType.UPDATE){
 			faq.setId(Integer.parseInt(session.getAttribute("FAQID").toString()));
 			try {

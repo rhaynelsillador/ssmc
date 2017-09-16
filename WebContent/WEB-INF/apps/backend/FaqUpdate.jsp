@@ -44,7 +44,7 @@
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
-					                           <input type="text" class="form-control" placeholder="Question" value="${requestScope.faq.title}" name="title">
+					                           <input type="text" class="form-control" placeholder="Title" value="${requestScope.faq.title}" name="title">
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
