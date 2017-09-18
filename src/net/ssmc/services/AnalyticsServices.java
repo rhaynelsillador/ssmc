@@ -34,7 +34,11 @@ public class AnalyticsServices {
 		Map<String, Object> data = new HashMap<>();
 		List<BrowseCount> browseCounts = analyticsDao.countCurrentOnlineHistory();
 		Collections.reverse(browseCounts);
-		data.put("count", analyticsDao.countCurrentOnline());
+		try {
+			data.put("count", analyticsDao.countCurrentOnline());
+		} catch (Exception e) {
+			data.put("count", 0);
+		}
 		data.put("history", browseCounts);
 		return data;
 	}

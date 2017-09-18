@@ -27,7 +27,7 @@ public class AnalyticsDaoImpl implements AnalyticsDao {
 	}
 
 	@Override
-	public long countCurrentOnline() {
+	public long countCurrentOnline() throws Exception{
 		Calendar cal = Calendar.getInstance();	
 		cal.setTime(new Date());
 		cal.add(Calendar.MINUTE, -10);

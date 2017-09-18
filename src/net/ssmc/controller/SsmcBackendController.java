@@ -24,6 +24,7 @@ import net.ssmc.model.Role;
 import net.ssmc.model.User;
 import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
+import net.ssmc.services.ContactUsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
 
@@ -40,6 +41,8 @@ public class SsmcBackendController {
 	private RoleServices roleServices;
 	@Autowired
 	private CityServices cityServices;
+	@Autowired
+	private ContactUsServices contactUsServices;
 	
 	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
 	@RequestMapping(path={"/", "/Dashboard"}, method = RequestMethod.GET, produces="application/json")
@@ -138,6 +141,14 @@ public class SsmcBackendController {
 	public String contactUsMessages(ModelMap map, @RequestParam Map<String, String> request) {
 		HttpSession session = httpServletRequest.getSession(true);
 		return "backend/ContactUs";
+	}
+	
+	@AppicationAudit(module = Module.CLINIC, access = Access.UPDATE)
+	@RequestMapping(path="/ViewContactUsMessages", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String viewContactUsMessages(ModelMap map, @RequestParam Map<String, String> request) {
+		System.out.println(request);
+		contactUsServices.readContactUs(httpServletRequest, request);
+		return "backend/ViewContactUs";
 	}
 	
 	@AppicationAudit(module = Module.CITY, access = Access.CREATE)

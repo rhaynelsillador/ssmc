@@ -2,18 +2,21 @@ package net.ssmc.model;
 
 import java.sql.Timestamp;
 
+import net.ssmc.enums.InquiryStatus;
+
 public class ContactUs {
 
-	private int id;
+	private long id;
 	private String email;
 	private String message;
 	private Timestamp dateAdded;
 	private String subject;
+	private InquiryStatus status;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getEmail() {
@@ -39,5 +42,16 @@ public class ContactUs {
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	public InquiryStatus getStatus() {
+		return status;
+	}
+	public void setStatus(InquiryStatus status) {
+		this.status = status;
+	}
+	@Override
+	public String toString() {
+		return "ContactUs [id=" + id + ", email=" + email + ", message=" + message + ", dateAdded=" + dateAdded
+				+ ", subject=" + subject + ", status=" + status + "]";
 	}
 }

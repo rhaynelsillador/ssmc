@@ -7,7 +7,7 @@ import net.ssmc.model.BrowseCount;
 public interface AnalyticsDao {
 
 	List<BrowseCount> findAll();
-	long countCurrentOnline();
+	long countCurrentOnline() throws Exception;
 	List<BrowseCount> countCurrentOnlineHistory();
 	
 }

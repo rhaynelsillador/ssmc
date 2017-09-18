@@ -121,10 +121,20 @@ public class SsmcBackendRestController {
 		return contactUsServices.getAllMessages(session, request);
 	}
 	
-	@RequestMapping(path="/DeleteContactUsMessage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody Map<String, Object> deleteContactUsMessage(@RequestBody ContactUs contactUs) {
+	@RequestMapping(path="/ContactUsMessage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> ContactUsMessage(@RequestParam Map<String, String> request) {
 		HttpSession session = httpServletRequest.getSession(true);
-		return contactUsServices.deleteFaq(session, contactUs);
+		return contactUsServices.getAllMessages();
+	}
+	
+	@RequestMapping(path="/UpdateContacUsMessageStatus", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public Map<String, Object> updateContacUsMessageStatus(@RequestBody ContactUs contactUs) {
+		return contactUsServices.updateContactUsStatus(httpServletRequest, contactUs.getId());
+	}
+	
+	@RequestMapping(path="/DeleteContactUsMessage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> deleteContactUsInquiry(@RequestBody ContactUs contactUs){
+		return contactUsServices.deleteContactUsInquiry(httpServletRequest, contactUs);
 	}
 	
 	@RequestMapping(path="/PendingApprovalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
@@ -148,7 +158,6 @@ public class SsmcBackendRestController {
 	public @ResponseBody Map<String, Object> cityDelete(@RequestBody City city){
 		return cityServices.deleteCity(httpServletRequest, city);
 	}
-	
 	
 	
 	/*@Autowired
