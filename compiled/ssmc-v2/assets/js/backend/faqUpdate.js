@@ -1,17 +1,15 @@
 CKEDITOR.replace( 'answer' );
-CKEDITOR.replace( 'question' );
 
 $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 $("#faq_menu").addClass("navigation__active");
 
 $(document).ready(function(){
 	$( "#faqUpdateForm" ).submit(function( event ) {
-		var $this = $( this );
-  		console.log($this.serialize() );
+  		console.log( $( this ).serialize() );
   		event.preventDefault();
   		  		
-  		var form = objectifyForm($this.serializeArray());
-  		form.question = CKEDITOR.instances.question.getData();
+  		var form = objectifyForm($( this ).serializeArray());
+  		form.logo = $('.fileinput-preview img').attr("src");
   		form.answer = CKEDITOR.instances.answer.getData();
   		
   		var btn = $( "#faqUpdateForm button");

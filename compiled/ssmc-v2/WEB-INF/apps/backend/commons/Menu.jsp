@@ -3,7 +3,7 @@
         <i class="zmdi zmdi-long-arrow-left" data-mae-action="block-close"></i>
     </div>
 
-    <!-- <div class="navigation__toggles">
+    <div class="navigation__toggles">
         <a href="" class="active" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__messages">
             <i class="zmdi zmdi-email"></i>
         </a>
@@ -13,7 +13,7 @@
         <a href=""  data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__tasks">
             <i class="zmdi zmdi-playlist-plus"></i>
         </a>
-    </div> -->
+    </div>
 
     <div class="navigation__menu c-overflow">
         <ul>
@@ -24,10 +24,7 @@
                 <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> Administration</a>
 
                 <ul>
-                	
-                    <li id="contact_us_menu"><a href="ContactUsMessages">Contact Us</a></li>
-                    <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
-                    <li id="city_menu"><a href="City">City</a></li>
+                    <li id="clinic_menu"><a href="Clinic">Clinic</a></li>
                     <li id="accounts_menu"><a href="Accounts">Accounts</a></li>
                     <li id="roles_menu"><a href="Role">Roles</a></li>
                     <li id="accounts_menu"><a href="Accounts">Etc</a></li>
@@ -39,9 +36,8 @@
 
                 <ul>
                     <li id="faq_menu"><a href="Faq">Faq</a></li>
-                    <li id="about_us_menu"><a href="AboutUs">About Us</a></li>
-                    <li id="header_menu"><a href="Header">Header</a></li>
-                    <li id="service_menu"><a href="Services">Services</a></li>
+                    <li id="contact_us_menu"><a href="Faq">About Us</a></li>
+                    <li id="contact_us_menu"><a href="Faq">Contact Us</a></li>
                     <li id="contact_us_menu"><a href="Faq">Etc</a></li>
                 </ul>
             </li>

@@ -21,11 +21,20 @@
 
 				<section id="content">
 				   <div class="content__header">
-				       <h2><c:if test = "${requestScope.users.username == null}">New Account</c:if><c:if test = "${requestScope.users.username != null}">${requestScope.users.username}</c:if></h2>
+				       <h2>${requestScope.users.username}</h2>
 				
 				       <div class="actions">
-                        <a href="AccountAdd"><i class="zmdi zmdi-plus"></i></a>
-                    	</div>
+				           <a href=""><i class="zmdi zmdi-check-all"></i></a>
+				           <a href=""><i class="zmdi zmdi-trending-up"></i></a>
+				           <div class="dropdown">
+				               <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+				               <ul class="dropdown-menu pull-right">
+				                   <li><a href="">Change Date Range</a></li>
+				                   <li><a href="">Change Graph Type</a></li>
+				                   <li><a href="">Other Settings</a></li>
+				               </ul>
+				           </div>
+				       </div>
 				   </div>
 				
 				   <div class="card">
@@ -125,13 +134,11 @@
 							                           <i class="form-group__bar"></i>
 							                       </div>
 							                   </div>
-							                   
-							           		</div>
-							           		<div class="col-md-12">
+							                   <br/>
 							                   <div class="input-group">
 							                       <span class="input-group-addon"><i class="zmdi zmdi-pin"></i></span>
 							                       <div class="form-group">
-							                           <input type="text" class="form-control" placeholder="Address" value="${requestScope.users.address}" name="address">
+							                           <input type="text" class="form-control" placeholder="Address" value="${requestScope.clinic.address}" name="address">
 							                           <i class="form-group__bar"></i>
 							                       </div>
 							                   </div>	
@@ -142,19 +149,25 @@
 							           <br/>
 										</div>
 										<div class="tab-pane fade in" id="roleAccess">
-					           				<div class="row">
-					           					<div class="col-sm-4">
-					           						<select class="form-control" id="roleName" id="roleName">
-					           							<c:forEach items="${requestScope.role}" var="role">
-					           								<option value="${role.id}">${role.name}</option>
-					           							</c:forEach>
-					           						</select>
-					           					</div>
-					           				</div>
-					           				
-					           				<div id="userDefaultRoles"></div>
-					           				
-						           			
+					           
+						           			<c:forEach items="${requestScope.userRoles}" var="roles">
+							           			<h4>${roles.module}</h4>
+							           			 <div class="row">
+									                   
+													<c:forEach items="${roles.roles}" var="role">
+														<div class="col-sm-4 col-md-3">	
+															<p>${role.access}</p>
+										                   <div class="form-group">
+										                       	<div class="toggle-switch">
+										                           	<input type="checkbox" class="toggle-switch__checkbox roles" data-id="${role.id}" data-module="${roles.module}" data-access="${role.access}" data-name="${role.name}"  <c:if test="${role.status}">checked</c:if>>
+										                          	<i class="toggle-switch__helper"></i>
+										                       	</div>
+										                   	</div>
+									               		</div>
+										     		</c:forEach>
+										     	
+								          		</div>
+									     	</c:forEach>
 					           
 					           
 								           <div class="row">
@@ -221,53 +234,7 @@
 			
 		})
 		
-		getDefaultRoleAccess()	
 		
-		$("#roleName").change(function(){
-			getDefaultRoleAccess();
-		})
-		
-		function getDefaultRoleAccess(){
-			var form = {
-				name : $("#roleName :selected").text(),
-				id:  $("#roleName :selected").val(),
-			}
-			POST("UserRoles", form, function(data){
-	  			var userDefaultRoles = "";
-	  			for (var i = 0; i < data.length; i++) {
-	  				userDefaultRoles += '<h4>'+data[i].module+'</h4><div class="row">';
-	  				for (var j = 0; j < data[i].roles.length; j++) {
-	  					userDefaultRoles += '<div class="col-sm-4 col-md-3"><p>'+data[i].roles[j].access+'</p>';
-	  					userDefaultRoles += '<div class="form-group">';
-	  					userDefaultRoles += '<div class="toggle-switch">';
-	  					userDefaultRoles += '<input type="checkbox" class="toggle-switch__checkbox roles" data-id="'+data[i].roles[j].id+'" data-module="'+data[i].module+'" data-access="'+data[i].roles[j].access+'" data-name="'+data[i].roles[j].name+'" '+(data[i].roles[j].status ? 'checked' : '')+'>';
-	  					userDefaultRoles += '<i class="toggle-switch__helper"></i>';
-	  					userDefaultRoles += '</div></div></div>';
-					}
-	  				userDefaultRoles += '</div>';
-				}
-	  			$("#userDefaultRoles").html(userDefaultRoles);
-	  		})	
-		}
-		
-		/* <c:forEach items="${requestScope.userRoles}" var="roles">
-			<h4>${roles.module}</h4>
-			 <div class="row">
-               
-			<c:forEach items="${roles.roles}" var="role">
-				<div class="col-sm-4 col-md-3">	
-					<p>${role.access}</p>
-                   <div class="form-group">
-                       	<div class="toggle-switch">
-                           	<input type="checkbox" class="toggle-switch__checkbox roles" data-id="${role.id}" data-module="${roles.module}" data-access="${role.access}" data-name="${role.name}"  <c:if test="${role.status}">checked</c:if>>
-                          	<i class="toggle-switch__helper"></i>
-                       	</div>
-                   	</div>
-           		</div>
-     		</c:forEach>
-     	
-  		</div>
- 	</c:forEach> */
 		
 	</script>
         

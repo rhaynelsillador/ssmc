@@ -21,16 +21,25 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>Clinic And Hospital</h2>
+                    <h2>Data Table</h2>
 
                     <div class="actions">
-                        <a href="ClinicAndHospitalAdd"><i class="zmdi zmdi-plus"></i></a>
+                        <a href=""><i class="zmdi zmdi-check-all"></i></a>
+                        <a href=""><i class="zmdi zmdi-trending-up"></i></a>
+                        <div class="dropdown">
+                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="">Change Date Range</a></li>
+                                <li><a href="">Change Graph Type</a></li>
+                                <li><a href="">Other Settings</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card__header">
-                        <h2>List</h2>
+                        <h2>Selection Example <small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small></h2>
                     </div>
 
                     <div class="card__body">
@@ -40,10 +49,6 @@
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="name" data-order="asc">Clinic Name</th>
-                                        <th data-column-id="type">Type</th>
-                                        <th data-column-id="email">Email</th>
-                                        <th data-column-id="phone">Phone</th>
-                                        <th data-column-id="mobile">Mobile</th>
                                         <th data-column-id="dateUpdated" data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded" data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
@@ -104,8 +109,7 @@
 	            formatters: {
 	                "commands": function(column, row) {
 	                	console.log(row);
-	                	return 	" <a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                			" <a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=CLINIC\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> ";
+	                	return "<a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return moment(row.dateUpdated).format("YYYY-MM-DD HH:mm:ss");

@@ -6,16 +6,16 @@ $("#clinic_menu").addClass("navigation__active");
 $("#input-id").fileinput({'showUpload':true, 'previewFileType':'any'});
 
 $(document).ready(function(){
+		
+	$("#input-id").fileinput();
+	
 	
 	$( "#clinicUpdateForm" ).submit(function( event ) {
-		
-		console.log();
-		
   		console.log( $( this ).serialize() );
   		event.preventDefault();
   		  		
   		var form = objectifyForm($( this ).serializeArray());
-  		form.logo = $("#clinicUpdateForm img").attr("src");
+  		form.logo = $('.fileinput-preview img').attr("src");
   		form.description = CKEDITOR.instances.description.getData();
   		
   		var btn = $( "#clinicUpdateForm button");
