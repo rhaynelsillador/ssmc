@@ -83,16 +83,16 @@
             		return datetimeformat(row.dateAdded);
             	},
             	"content1" : function(column, row){
-            		if(row.content.length > 100){
+            		if(row.content != undefined && row.content.length > 100){
             			return row.content.substring(0, 100)+" ...";
             		}
             		return row.content;
             	},
             	"content2" : function(column, row){
-            		if(row.content2.length > 100){
+            		if(row.content2 != undefined && row.content2.length > 100){
             			return row.content2.substring(0, 100)+" ...";
             		}
-            		return row.content2;
+            		return row.content2; 
             	},
             	"num" : function(column, row){
             		return "Service "+row.num;

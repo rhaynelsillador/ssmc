@@ -30,7 +30,6 @@
                     <li id="city_menu"><a href="City">City</a></li>
                     <li id="accounts_menu"><a href="Accounts">Accounts</a></li>
                     <li id="roles_menu"><a href="Role">Roles</a></li>
-                    <li id="accounts_menu"><a href="Accounts">Etc</a></li>
                 </ul>
             </li>
             
@@ -42,7 +41,6 @@
                     <li id="about_us_menu"><a href="AboutUs">About Us</a></li>
                     <li id="header_menu"><a href="Header">Header</a></li>
                     <li id="service_menu"><a href="Services">Services</a></li>
-                    <li id="contact_us_menu"><a href="Faq">Etc</a></li>
                 </ul>
             </li>
         </ul>

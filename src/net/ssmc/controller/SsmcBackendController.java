@@ -42,7 +42,7 @@ public class SsmcBackendController {
 	private CityServices cityServices;
 	
 	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
-	@RequestMapping(path="/Dashboard", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(path={"/", "/Dashboard"}, method = RequestMethod.GET, produces="application/json")
 	public String dashboard(ModelMap map){
 		return "backend/Dashboard";
 	}

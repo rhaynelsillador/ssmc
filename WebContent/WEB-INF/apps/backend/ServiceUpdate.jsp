@@ -23,7 +23,6 @@
 				<section id="content">
 				   <div class="content__header">
 				       <h2>Service</h2>
-				
 				       <div class="actions">
 				           <a href="ServicesAdd"><i class="zmdi zmdi-plus"></i></a>
 				       </div>
@@ -33,7 +32,7 @@
 				       <div class="card__header">
 				           	<h2>${sessionScope.TRANSACTION}</h2>
 				           	<c:if test="${sessionScope.hasApproved == false and sessionScope.TRANSACTION != 'ADD'}">
-				           		<button class="btn btn-primary pull-right approved-fn" data-module="9" data-moduleId="${sessionScope.service.id}">Approve</button>
+				           		<button class="btn btn-primary pull-right approved-fn hidden" data-module="9" data-moduleId="${sessionScope.service.id}">Approve</button>
 				       		</c:if>
 				       </div>
 				

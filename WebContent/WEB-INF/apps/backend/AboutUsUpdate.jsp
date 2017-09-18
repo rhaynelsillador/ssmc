@@ -33,7 +33,7 @@
 				       <div class="card__header">
 				           	<h2>${sessionScope.TRANSACTION}</h2>
 				           	<c:if test="${sessionScope.hasApproved == false and sessionScope.TRANSACTION != 'ADD'}">
-				           		<button class="btn btn-primary pull-right approved-fn" data-module="7" data-moduleId="${sessionScope.aboutUs.id}">Approve</button>
+				           		<button class="btn btn-primary pull-right approved-fn hidden" data-module="7" data-moduleId="${sessionScope.aboutUs.id}">Approve</button>
 				       		</c:if>
 				       </div>
 				

@@ -47,9 +47,9 @@
             <section id="content">
                 <div class="card">
                     <div class="card__header">
-                        <h2>Sales Statistics <small>Vestibulum purus quam scelerisque, mollis nonummy metus</small></h2>
+                        <h2>SSMC Website History<small>Browsing history for 1 hour!</small></h2>
 
-                        <div class="actions">
+                        <!-- <div class="actions">
                             <a href=""><i class="zmdi zmdi-check-all"></i></a>
                             <a href=""><i class="zmdi zmdi-trending-up"></i></a>
                             <div class="dropdown">
@@ -60,7 +60,7 @@
                                     <li><a href="">Other Settings</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="flot-chart-edge">
@@ -96,7 +96,7 @@
 
                     <div class="card widget-analytic">
                         <div class="card__header">
-                            <h2>Website Traffics <small>Nullam Adipiscing Pellentesque</small></h2>
+                            <h2>Website Traffics <small>Current active users.</small></h2>
                             <div class="actions">
                                 <div class="dropdown">
                                     <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
@@ -111,10 +111,10 @@
                         <div class="card__body">
                             <div class="widget-analytic__info">
                                 <i class="zmdi zmdi-caret-up-circle"></i>
-                                <h2>356,785K</h2>
+                                <h2 id="websiteTrafficCount">356,785K</h2>
                             </div>
                             <div class="widget-analytic__chart">
-                                <div class="chart-sparkline-line">2,4,6,5,6,4,5,3,7,3,6,5,9,6</div>
+                                <div class="chart-sparkline-line" id="websiteTrafficCountHistory">2,4,6,5,6,4,5,3,7,3,6,5,9,6</div>
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
 
                     <div class="card">
                         <div class="card__header">
-                            <h2>Recent Posts <small>Venenatis portauam Inceptos ameteiam</small></h2>
+                            <h2>Recent Posts <small>This items need your approval!</small></h2>
                             <div class="actions">
                                 <div class="dropdown">
                                     <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
@@ -368,43 +368,6 @@
                             <a href=""><div class="avatar-char">I</div></a>
                         </div>
                     </div>
-
-                    <div class="card widget-todo-lists">
-                        <div class="card__header card__header--highlight">
-                            <h2>Todo lists <small>Pending Approvals</small></h2>
-                        </div>
-
-                        <div class="list-group" id="pendingApprovalList"></div>
-                    </div>
-
-                    <div class="card widget-calendar">
-                        <div class="card__header card__header--highlight">
-                            <div class="widget-calendar__year"></div>
-                            <div class="widget-calendar__day"></div>
-
-                            <button class="btn btn--float"><i class="zmdi zmdi-plus"></i></button>
-                        </div>
-
-                        <div class="card__body--sm">
-                            <div id="widget-calendar__main"></div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header card__header--img" style="background-image: url(demo/img/note.png); height: 250px;"></div>
-                        <div class="card__header">
-                            <h2>
-                                Pellentesque Ligula Fringilla
-
-                                <small>by Malinda Hollaway on 19th June 2015 at 09:10 AM</small>
-                            </h2>
-                        </div>
-                        <div class="card__body">
-                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra </p>
-
-                            <a href="" class="view-more text-left"><i class="zmdi zmdi-long-arrow-right"></i> View Article...</a>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -448,11 +411,6 @@
 
         <!-- EasyPie Charts -->
         <script src="assets/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-
-        <!-- Placeholder for IE9 -->
-        <!--[if IE 9 ]>
-            <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
-        <![endif]-->
 
         <!-- Demo Only -->
         <script src="assets/demo/js/flot-charts/curved-line.js"></script>

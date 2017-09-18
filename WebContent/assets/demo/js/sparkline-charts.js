@@ -1,6 +1,43 @@
 'use strict';
 
 $(document).ready(function () {
+	
+	POST("CurrentOnline", {}, function(data){
+		console.log(data);
+		$("#websiteTrafficCount").html(data.count);
+		var hist = "";
+		$.each(data.history, function(index, value){
+			console.log(data.history.length , index);
+			if(data.history.length-1 == index){
+				hist += value.count;
+			}else{
+				hist += value.count+",";
+			}
+			console.log(value.count)
+		})
+		console.log(hist)
+		$("#websiteTrafficCountHistory").html(hist);
+		
+		//Sample Sparkline Line Chart
+	    if ($('.chart-sparkline-line')[0]) {
+	        sparklineLine(
+	            'chart-sparkline-line',
+	            '100%',
+	            50,
+	            'rgba(255, 255, 255, 0.2)',
+	            'rgba(0,0,0,0)', 1.5,
+	            '#b4bfc3',
+	            '#b4bfc3',
+	            '#b4bfc3',
+	            4,
+	            '#b4bfc3',
+	            '#b4bfc3'
+	        );
+	    }
+		
+	});
+	
+	
     // Function for Sparkline Line Chart
     function sparklineLine(id, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
         $('.'+id).sparkline('html', {
@@ -30,23 +67,9 @@ $(document).ready(function () {
         })
     }
 
-    //Sample Sparkline Line Chart
-    if ($('.chart-sparkline-line')[0]) {
-        sparklineLine(
-            'chart-sparkline-line',
-            '100%',
-            50,
-            'rgba(255, 255, 255, 0.2)',
-            'rgba(0,0,0,0)', 1.5,
-            '#b4bfc3',
-            '#b4bfc3',
-            '#b4bfc3',
-            4,
-            '#b4bfc3',
-            '#b4bfc3'
-        );
-    }
-
+    
+    
+    
     //Sample Sparkline Bar Chart
     if ($('.chart-sparkline-bar')[0]) {
         sparklineBar('chart-sparkline-bar', 40, 3, '#b4bfc3', 2);
