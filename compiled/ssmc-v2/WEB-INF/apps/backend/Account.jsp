@@ -25,6 +25,15 @@
 
                     <div class="actions">
                         <a href="AccountAdd"><i class="zmdi zmdi-plus"></i></a>
+                        <a href=""><i class="zmdi zmdi-trending-up"></i></a>
+                        <div class="dropdown">
+                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="">Change Date Range</a></li>
+                                <li><a href="">Change Graph Type</a></li>
+                                <li><a href="">Other Settings</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -40,13 +49,13 @@
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="username">Username</th>
-                                        <th data-column-id="name" data-formatter="name">Name</th>
+                                        <th data-column-id="firstName">First Name</th>
+                                        <th data-column-id="lastName">Last Name</th>
                                         <th data-column-id="mobile">Mobile</th>
                                         <th data-column-id="phone">Phone</th>
                                         <th data-column-id="email">Email</th>
                                         <th data-column-id="birthday">Birthday</th>
                                         <th data-column-id="dateLastLogin" data-order="desc" data-formatter="dateLastLogin">Last Login Date</th>
-                                        <th data-column-id="approver"  data-formatter="approver">Approver</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
                                     </tr>
                                 </thead>
@@ -83,8 +92,8 @@
         <script type="text/javascript">
 	        $("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
 			$("#accounts_menu").addClass("navigation__active");
-			var accountsTable = $("#accountsTable");
-			var grid = accountsTable.bootgrid({
+			
+			var grid = $("#accountsTable").bootgrid({
 	        	ajax: true,
 	            post: function ()
 	            {
@@ -119,35 +128,17 @@
 	            },
 	            formatters: {
 	                "commands": function(column, row) {
+	                	console.log(row);
 	                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
 	            	},
 	            	"dateLastLogin" : function(column, row){
-	            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
-	            	} ,
-	            	"name" : function(column, row){
-	            		return row.lastName +", "+row.firstName;
-	            	},
-	            	"approver" : function(column, row){
-	            		return (row.approver) ? '<span class="approver" data-approver="'+row.approver+'" data-row-id="' + row.id + '"><i class="zmdi zmdi-check-all"></i></span>' : '<span class="approver" data-approver="'+row.approver+'"  data-row-id="' + row.id + '"><i class="zmdi zmdi-close-circle-o"></i></span>';
+	            		console.log(row);
+	            		return moment(row.dateAdded).format("YYYY-MM-DD HH:mm:ss");
 	            	} 
 	        	}
 		    }).on("loaded.rs.jquery.bootgrid", function() {
-		    	grid.find(".approver").on("click", function(e){
-		    		var form = {
-	                	id: $(this).data("row-id"),
-	                	approver: $(this).data("approver")
-	                }
-		    		var text = "Do you want to add this account as approver?"
-		    		if($(this).data("approver") == true){
-		    			text = "Do you want to remove this account as approver?"
-		    		}
-		    		confirmation({
-	                	text : text,
-	                	url : "AccountApprover",
-	                	form : form,
-	                	bootGrid : accountsTable
-	                
-	                });
+		    	grid.find(".command-edit").on("click", function(e){
+	   		     	console.log("You pressed edit on row: " + $(this).data("row-id"));
 		    		        
 	  		    }).end().find(".command-delete").on("click", function(e){
 	  		    	console.log("You pressed delete on row: " + $(this).data("row-id"));

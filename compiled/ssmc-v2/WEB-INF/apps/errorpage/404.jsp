@@ -8,13 +8,13 @@
         <title>Material Admin</title>
             
         <!-- Site CSS -->
-        <link href="assets/css/app-1.min.css" rel="stylesheet">
+        <link href="css/app-1.min.css" rel="stylesheet">
     </head>
     
     <body>
         <div class="page-error">
             <div class="page-error__inner">
-                <h2>404!</h2>
+                <h2>SEX!</h2>
                 <p>Nah.. it's 404</p>
             </div>
         </div>
