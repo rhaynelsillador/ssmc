@@ -44,7 +44,6 @@ public class UserRoleAccessDaoImpl implements UserRoleAccessDao{
 				ps.setInt(2, role.getModule().ordinal());
 				ps.setInt(3, role.getAccess().ordinal());
 				
-				System.out.println(role);
 			}
 			@Override
 			public int getBatchSize() {

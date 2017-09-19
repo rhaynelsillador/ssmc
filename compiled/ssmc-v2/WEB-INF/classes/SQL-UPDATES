@@ -1,0 +1,2 @@
+ALTER TABLE header ADD CONSTRAINT header_unique_page_type UNIQUE (page, type);
+ALTER TABLE header ADD CONSTRAINT header_unique_name UNIQUE (name);

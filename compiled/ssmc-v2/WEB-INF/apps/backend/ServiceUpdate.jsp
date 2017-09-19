@@ -68,6 +68,18 @@
 					                       </div>
 					                   </div>
 					                   
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                          <select class="form-control" name="num" id="serviceNum">
+					                          	<option value="1">Service 1</option>
+					                          	<option value="2">Service 2</option>
+					                          </select>
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   
 					               </div>
 					           </div>
 					
@@ -95,14 +107,14 @@
 				                           <i class="form-group__bar"></i>
 				                       </div>
 				                       <br/>
-				                       <div class="input-group">
+				                       <!-- <div class="input-group">
 					                       <div class="form-group">
 					                          	<div class="form-group">
 										            <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
 										        </div>
 					                           	<i class="form-group__bar"></i>
 					                       </div>
-					                   </div>
+					                   </div> -->
 					               </div>
 									
 					           </div>
@@ -130,13 +142,14 @@
 	    CKEDITOR.replace('serviceContent');
 	    CKEDITOR.replace('serviceContent2');
 	    var serviceType = $('#serviceType');
+	    var serviceNum = $("#serviceNum");
 	    var existingImages = [];
 	    '<c:forEach items="${sessionScope.service.images}" var="images">'
 	   				existingImages.push('${ images.image }');
 	    '</c:forEach>'
 	    
 	    
-	    $("#file-1").fileinput({
+	    /* $("#file-1").fileinput({
 	        uploadUrl: 'fileInputUpload', // you must set a valid URL here else you will get an error
 	        allowedFileExtensions: ['jpg', 'png', 'gif'],
 	        overwriteInitial: false,
@@ -150,27 +163,28 @@
             initialPreviewAsData: true,
             initialPreview: existingImages
 
-	    });
+	    }); */
 	    
 	    $(document).ready(function(){
 	    	serviceType.val('${sessionScope.service.type}');
+	    	serviceNum.val('${sessionScope.service.num}');
 	    	
 	    	$( "#serviceUpdateForm" ).submit(function( event ) {
 	      		console.log( $( this ).serialize() );
 	      		event.preventDefault();
 	      		  		
-	      		var tempImages = $(".file-input .kv-zoom-cache .kv-file-content img");
+	      		/* var tempImages = $(".file-input .kv-zoom-cache .kv-file-content img");
 	      		
 	      		
 	      		var images = [];
 	      		for (var i = 0; i < tempImages.length; i++) {
 					images.push({"image" : $(tempImages[i]).attr("src")});
-				}
+				} */
 	      		
 	      		var form = objectifyForm($( this ).serializeArray());
 	      		form.content = CKEDITOR.instances.serviceContent.getData();
 	      		form.content2 = CKEDITOR.instances.serviceContent2.getData();
-	      		form.images = images;
+	      		//form.images = images;
 	      		
 	      		var btn = $("#serviceUpdateForm button");
 	      		btn.html("Updating...");
@@ -183,7 +197,7 @@
 	      		})	
 	    	});
 	    	
-	    	 $("#test-upload").fileinput({
+	    	 /* $("#test-upload").fileinput({
 	             'showPreview': false,
 	             'allowedFileExtensions': ['jpg', 'png', 'gif'],
 	             'elErrorContainer': '#errorBlock'
@@ -202,7 +216,7 @@
 	                 {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
 	                 {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
 	             ]
-	         });
+	         }); */
 	    })
 	    
 	</script>

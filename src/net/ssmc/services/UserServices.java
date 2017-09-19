@@ -103,6 +103,7 @@ public class UserServices {
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Update success");
 			} catch (Exception e) {
+				e.printStackTrace();
 				response.put(Helper.STATUS, Status.ERROR);
 				response.put(Helper.MESSAGE, "Update has an error.");
 			}

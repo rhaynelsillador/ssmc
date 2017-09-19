@@ -80,10 +80,7 @@
 	            	},
 	            	"dateAdded" : function(column, row){
 	            		return datetimeformat(row.dateAdded);
-	            	} ,
-	            	"type" : function(column, row){
-	            		return "Type " + row.type;
-	            	} 
+	            	}
 			}
 			
 	        var table = headerTable.bootgrid(tableConfig);

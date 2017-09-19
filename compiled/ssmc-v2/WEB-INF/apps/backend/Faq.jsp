@@ -39,8 +39,10 @@
                                 <thead>
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
-                                        <th data-column-id="question" data-order="asc">Question</th>
-                                        <th data-column-id="status">Status</th>
+                                        <th data-column-id="title" data-order="asc">Title</th>
+                                        <th data-column-id="question">Question</th>
+                                        <th data-column-id="status" data-formatter="status">Status</th>
+                                        <th data-column-id="type">Application Type</th>
                                         <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>

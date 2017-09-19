@@ -40,9 +40,11 @@
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="name" data-order="asc">Name</th>
-                                        <th data-column-id="content">Content</th>
                                         <th data-column-id="title">Title</th>
-                                        <th data-column-id="type" data-formatter="type">Type</th>
+                                        <th data-column-id="content" data-formatter="content1">Content 1</th>
+                                        <th data-column-id="content2" data-formatter="content2">Content 2</th>
+                                        <th data-column-id="num" data-formatter="num">Service Num</th>
+                                        <th data-column-id="type" data-formatter="type">Application Type</th>
                                         <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
@@ -79,10 +81,23 @@
             	},
             	"dateAdded" : function(column, row){
             		return datetimeformat(row.dateAdded);
-            	} ,
-            	"type" : function(column, row){
-            		return "Type " + row.type;
-            	} 
+            	},
+            	"content1" : function(column, row){
+            		if(row.content.length > 100){
+            			return row.content.substring(0, 100)+" ...";
+            		}
+            		return row.content;
+            	},
+            	"content2" : function(column, row){
+            		if(row.content2.length > 100){
+            			return row.content2.substring(0, 100)+" ...";
+            		}
+            		return row.content2;
+            	},
+            	"num" : function(column, row){
+            		return "Service "+row.num;
+            	},
+            	
 			}
 			
 	        var table = serviceTable.bootgrid(tableConfig).on("loaded.rs.jquery.bootgrid", function() {
