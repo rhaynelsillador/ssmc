@@ -21,25 +21,16 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>Data Table</h2>
+                    <h2>FAQ</h2>
 
                     <div class="actions">
                         <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
-                        <a href=""><i class="zmdi zmdi-trending-up"></i></a>
-                        <div class="dropdown">
-                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="">Change Date Range</a></li>
-                                <li><a href="">Change Graph Type</a></li>
-                                <li><a href="">Other Settings</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card__header">
-                        <h2>Selection Example <small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small></h2>
+                        <h2>List</h2>
                     </div>
 
                     <div class="card__body">
@@ -48,8 +39,10 @@
                                 <thead>
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
-                                        <th data-column-id="question" data-order="asc">Question</th>
-                                        <th data-column-id="status">Status</th>
+                                        <th data-column-id="title" data-order="asc">Title</th>
+                                        <th data-column-id="question">Question</th>
+                                        <th data-column-id="status" data-formatter="status">Status</th>
+                                        <th data-column-id="type">Application Type</th>
                                         <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>

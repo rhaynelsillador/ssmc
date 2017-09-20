@@ -21,25 +21,12 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>Data Table</h2>
-
-                    <div class="actions">
-                        <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
-                        <a href=""><i class="zmdi zmdi-trending-up"></i></a>
-                        <div class="dropdown">
-                            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="">Change Date Range</a></li>
-                                <li><a href="">Change Graph Type</a></li>
-                                <li><a href="">Other Settings</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h2>Role</h2>
                 </div>
 
                 <div class="card">
                     <div class="card__header">
-                        <h2>Selection Example <small>Ensure that the data attribute [data-identifier="true"] is set on one column header.</small></h2>
+                        <h2>List</h2>
                     </div>
 
                     <div class="card__body">

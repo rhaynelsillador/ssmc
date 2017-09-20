@@ -57,6 +57,7 @@ public class RoleServices {
 			response.put(Helper.STATUS, Status.SUCCESS);
 			response.put(Helper.MESSAGE, roleName + " successfully updated");
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.put(Helper.STATUS, Status.ERROR);
 			response.put(Helper.MESSAGE, roleName + " unsuccessfully updated");
 		}

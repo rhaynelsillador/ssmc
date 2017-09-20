@@ -22,25 +22,19 @@
 
 				<section id="content">
 				   <div class="content__header">
-				       <h2>Faq Update</h2>
+				       <h2>Faq</h2>
 				
 				       <div class="actions">
 				           <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
-				           <a href=""><i class="zmdi zmdi-trending-up"></i></a>
-				           <div class="dropdown">
-				               <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-				               <ul class="dropdown-menu pull-right">
-				                   <li><a href="">Change Date Range</a></li>
-				                   <li><a href="">Change Graph Type</a></li>
-				                   <li><a href="">Other Settings</a></li>
-				               </ul>
-				           </div>
 				       </div>
 				   </div>
 				
 				   <div class="card">
 				       <div class="card__header">
-				           <h2>Basic Information<small>Extend form controls by adding text or buttons before, after, or on both sides of any text-based inputs.</small></h2>
+				           <h2>${sessionScope.TRANSACTION }</h2>
+				           <c:if test="${sessionScope.hasApproved == false and sessionScope.TRANSACTION != 'ADD'}">
+				           		<button class="btn btn-primary pull-right approved-fn" data-module="3" data-moduleId="${requestScope.faq.id}">Approve</button>
+				       		</c:if>
 				       </div>
 				
 				       <div class="card__body">
@@ -50,17 +44,35 @@
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
-					                           <input type="text" class="form-control" placeholder="Question" value="${requestScope.faq.question}" name="question">
+					                           <input type="text" class="form-control" placeholder="Title" value="${requestScope.faq.title}" name="title">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                           <select class="form-control" name="type" id="faqType">
+					                          		<option value="BUSINESS">BUSINESS</option>
+					                          		<option value="CLINIC">CLINIC</option>
+					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
 					               </div>
 					           </div>
+								<br/>
+								<h4>Question</h4>
 					
-					           <br/>
-					           <br/>
-					           <br/>
-					
+					           <div class="row">
+					               <div class="col-sm-12">
+					                   <div class="form-group form-group--float">
+				                           <textarea class="form-control" rows="20" name="question" id="question">${requestScope.faq.question}</textarea>
+				                           <i class="form-group__bar"></i>
+				                       </div>
+					               </div>
+									
+					           </div>
 					           <h4>Answer</h4>
 					
 					           <div class="row">
@@ -91,6 +103,9 @@
         <!-- jQuery -->
 
 	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
+	<script type="text/javascript">
+		$("#faqType").val('${requestScope.faq.type}');
+	</script>
         
 </body>
 </html>
