@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import net.ssmc.dao.AnalyticsDao;
 import net.ssmc.model.BrowseCount;
+import oracle.net.aso.b;
 
 public class AnalyticsServices {
 
@@ -40,6 +41,7 @@ public class AnalyticsServices {
 			data.put("count", 0);
 		}
 		data.put("history", browseCounts);
+		analyticsDao.countLastMonth();
 		return data;
 	}
 }

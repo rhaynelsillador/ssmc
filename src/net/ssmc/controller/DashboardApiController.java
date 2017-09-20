@@ -13,12 +13,15 @@ import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.services.AnalyticsServices;
+import net.ssmc.services.DashboardServices;
 
 @RestController
 public class DashboardApiController {
 
 	@Autowired
 	private AnalyticsServices analyticsServices;
+	@Autowired
+	private DashboardServices dashboardServices;
 	
 	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
 	@RequestMapping(path="/BrowseCount", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
@@ -30,5 +33,11 @@ public class DashboardApiController {
 	@RequestMapping(path="/CurrentOnline", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
 	public @ResponseBody Map<String, Object> currentOnline() {
 		return analyticsServices.countCurrentOnline();
+	}
+	
+	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
+	@RequestMapping(path="/LastMonth", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
+	public @ResponseBody Map<String, Object> lastMonth() {
+		return dashboardServices.lastMonth();
 	}
 }

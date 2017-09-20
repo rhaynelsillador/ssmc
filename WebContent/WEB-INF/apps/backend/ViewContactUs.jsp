@@ -137,10 +137,8 @@
         				}
         				var isSame = "";
         				$.each(data.reply, function(index, value){
-        					
-        						contactUsMessagesContentList = value.message;
-        						contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content" data-id="'+value.id+'"><div class="pull-right"><img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt=""></div>'+
-    		                    '<div class="media-body"><div>'+contactUsMessagesContentList+'</div>'+
+        						contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content type-'+value.type.toLowerCase()+'" data-id="'+value.id+'"><div class="pull-right"><img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt=""></div>'+
+    		                    '<div class="media-body"><div>'+value.message+'</div>'+
     		                    '<small class="messages__date"><i class="zmdi zmdi-time"></i> '+moment(value.dateReplied).format("YYYY-MM-DD HH:mm:ss")+'</small>'+
     		                    '</div></div>';
         				

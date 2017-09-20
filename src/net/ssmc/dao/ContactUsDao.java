@@ -1,5 +1,6 @@
 package net.ssmc.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,9 @@ public interface ContactUsDao {
 	List<ContactUs> retrieveAll(int limit);
 	void delete(int id);
 	void update(InquiryStatus status, long id, long userId);
-	
+	long countLastMonth();
+	long countLastMonthPerDay(Date date);
+	List<ContactUs> countUniqueLastMonth();
+	List<ContactUs> countUniqueLastMonthPerDay(Date date);
 
 }

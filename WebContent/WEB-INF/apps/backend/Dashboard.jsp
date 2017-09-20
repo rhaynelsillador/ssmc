@@ -276,53 +276,53 @@
                         </div>
 
                         <div class="list-group list-group--striped">
-                            <div class="list-group-item">
+                            <div class="list-group-item"  id="analyticsCount">
                                 <div class="widget-past-days__chart hidden-sm">
-                                    <div class="chart-sparkline-bar">6,9,5,6,3,7,5,4,6,5,6,4,2,5,8,2,6,9</div>
+                                    <div class="chart-sparkline-bar"></div>
                                 </div>
 
                                 <div class="widget-past-days__info">
-                                    <small>Page Views</small>
+                                    <small>Total Page Views</small>
                                     <h3>47,896,536</h3>
                                 </div>
                             </div>
 
-                            <div class="list-group-item">
+                            <div class="list-group-item" id="analyticsCountUniquePerday">
                                 <div class="widget-past-days__chart hidden-sm">
                                     <div class="chart-sparkline-bar">5,7,2,5,2,8,6,7,6,5,3,1,9,3,5,8,2,4</div>
                                 </div>
 
                                 <div class="widget-past-days__info">
-                                    <small>Site Visitors</small>
+                                    <small>Total Site Visitors</small>
                                     <h3>24,456,799</h3>
                                 </div>
                             </div>
 
-                            <div class="list-group-item">
+                            <div class="list-group-item" id="emailCount">
                                 <div class="widget-past-days__chart hidden-sm">
                                     <div class="chart-sparkline-bar">5,7,2,5,2,8,6,7,6,5,3,1,9,3,5,8,2,4</div>
                                 </div>
 
                                 <div class="widget-past-days__info">
-                                    <small>Total Clicks</small>
+                                    <small>Total Inquiries</small>
                                     <h3>13,965</h3>
                                 </div>
                             </div>
 
-                            <div class="list-group-item">
+                            <div class="list-group-item" id="emailCountUniquePerday">
                                 <div class="widget-past-days__chart hidden-sm">
                                     <div class="chart-sparkline-bar">3,9,1,3,5,6,7,6,8,2,5,2,7,5,6,7,6,8</div>
                                 </div>
 
                                 <div class="widget-past-days__info">
-                                    <small>Total Returns</small>
+                                    <small>Total Inquirers</small>
                                     <h3>198</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card widget-recent-signups">
+                    <!-- <div class="card widget-recent-signups">
                         <div class="card__header card__header--highlight">
                             <h2>Most Recent Signups <small>Magna Cursus Malesuada</small></h2>
                             <div class="actions">
@@ -367,7 +367,7 @@
                             <a href=""><div class="avatar-char">O</div></a>
                             <a href=""><div class="avatar-char">I</div></a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </section>
 

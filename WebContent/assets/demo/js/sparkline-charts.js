@@ -71,9 +71,23 @@ $(document).ready(function () {
     
     
     //Sample Sparkline Bar Chart
-    if ($('.chart-sparkline-bar')[0]) {
-        sparklineBar('chart-sparkline-bar', 40, 3, '#b4bfc3', 2);
-    }
+    POST("LastMonth", {}, function(data){
+		console.log(data.analyticsCount.toString());
+		$("#analyticsCount .chart-sparkline-bar").html(data.analyticsCount.toString());
+		$("#analyticsCountUniquePerday .chart-sparkline-bar").html(data.analyticsCountUniquePerday.toString());
+		$("#emailCount .chart-sparkline-bar").html(data.emailCount.toString());
+		$("#emailCountUniquePerday .chart-sparkline-bar").html(data.emailCountUniquePerday.toString());
+		
+		$("#analyticsCount h3").html(data.analytics.toString());
+		$("#analyticsCountUniquePerday h3").html(data.analyticsCountUnique.toString());
+		$("#emailCount h3").html(data.email.toString());
+		$("#emailCountUniquePerday h3").html(data.emailCountUnique.toString());
+		
+		
+	    if ($('.chart-sparkline-bar')[0]) {
+	        sparklineBar('chart-sparkline-bar', 40, 3, '#b4bfc3', 2);
+	    }
+    });
 
     //Sample Sparkline Tristate Chart
     if ($('.chart-sparkline-tristate')[0]) {
