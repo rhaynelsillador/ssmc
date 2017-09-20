@@ -26,7 +26,7 @@
 				
 				       <div class="actions">
 				           <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
-				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=HEADER"><i class="zmdi zmdi-upload"></i></a>
+				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=CLINICSANDHOSPITALS"><i class="zmdi zmdi-upload"></i></a>
 				       </div>
 				   </div>
 				

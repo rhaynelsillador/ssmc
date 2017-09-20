@@ -43,6 +43,7 @@
 				
 				       <div class="actions">
 	                        <a href="ClinicAndHospitalAdd"><i class="zmdi zmdi-plus"></i></a>
+	                        <a href="ServicesUpload?id=${requestScope.clinic.id}&name=${requestScope.clinic.name }&module=CLINIC"><i class="zmdi zmdi-upload"></i></a>
 	                    </div>
 				   </div>
 				
@@ -54,32 +55,7 @@
 				       <div class="card__body">
 				     		<form role="form" id="clinicUpdateForm">
 					           	<div class="row">
-					           		<div class="col-md-2">
-					           			<input id="avatar-2" name="avatar-2" type="file" class="file-loading">
-					           			
-							          	<!-- <div class="fileinput fileinput-new" data-provides="fileinput">
-							               <div class="fileinput-preview" data-trigger="fileinput">
-							               </div>
-							
-							               <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-							               <span class="btn btn-default btn-file">
-							                   <span class="fileinput-new">Select Logo</span>
-							                   <span class="fileinput-exists">Change</span>
-							                   <input type="file" name="...">
-							               </span>
-							           </div> -->
-							           <%-- <div class="fileinput fileinput-new" data-provides="fileinput">
-										  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-										    <img data-src="${requestScope.clinic.logo}" src="${requestScope.clinic.logo}" alt="...">
-										  </div>
-										  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-										  <div>
-										    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-										    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-										  </div>
-										</div> --%>
-					           	    </div>
-					           	    <div class="col-sm-10">
+					           	    <div class="col-sm-12">
 					           	    	<div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
 					                       <div class="form-group">
