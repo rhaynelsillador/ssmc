@@ -24,6 +24,9 @@
         <!-- Site CSS -->
         <link href="assets/css/app-1.min.css" rel="stylesheet">
 
+        <!-- Custom CSS -->
+        <link href="assets/css/custom.css" rel="stylesheet">
+
         <!-- Page loader -->
         <script src="assets/js/page-loader.min.js"></script>
     </head>
@@ -372,10 +375,10 @@
             </section>
 
             <%@ include file="commons/Footer.jsp"%>
-            
+
         </section>
 
-       
+
 
         <!-- jQuery -->
         <script src="assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
@@ -423,15 +426,15 @@
         <!-- Site Functions & Actions -->
         <script src="assets/js/app.min.js"></script>
         <script src="assets/js/utils.js"></script>
-        
+
         <script type="text/javascript">
-        	
+
         $(document).ready(function(){
         	console.log("asdasdasd");
-        	
+
         	getPendingApprovalList()
-        	
-        	
+
+
         })
         function getPendingApprovalList(){
 	        	POST("PendingApprovalList", {}, function(data){
@@ -444,11 +447,11 @@
 			                        '<span class="widget-todo-lists__info">('+data[i].module+') '+data[i].name+'</span>'+
 			                    '</label>'+
 			                '</div>'+
-			
+
 			                '<div class="actions list-group__actions">'+
 			                    '<div class="dropdown">'+
 			                        '<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>'+
-			
+
 			                        '<ul class="dropdown-menu pull-right">'+
 			                            '<li><a href="javascript:void(0)" class="approved-fn" data-moduleid="'+data[i].moduleid+'" data-module="'+data[i].module+'" data-reload="true">Approve</a></li>'+
 			                            '<li><a href="'+data[i].updateUrl+'?id='+data[1].moduleid+'&name='+data[1].name+'">Edit</a></li>'+
@@ -461,6 +464,6 @@
 	        	})
         	}
         </script>
-        
+
     </body>
 </html>
