@@ -15,7 +15,7 @@ public class ClinicDaoImpl implements ClinicDao{
 	private final String SQL 				= "SELECT CC.*, CY.name as cityname, CY.citykey as citykey FROM CLINIC AS CC INNER JOIN CITY AS CY ON CC.cityid = CY.id";
 	private static final String SQLCOUNT 	= "SELECT COUNT(id) FROM CLINIC ";
 	private static final String INSERT 		= "INSERT INTO CLINIC (name, dateadded, dateupdated, description, address1, address2, cityid, map, type, email, phone, mobile) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE 		= "UPDATE CLINIC SET name=?, dateupdated=?, description=?, address1=?, address2=?, cityid=?, logo=?, map=?, type=?, email=?, phone=?, mobile=? WHERE id=?";
+	private static final String UPDATE 		= "UPDATE CLINIC SET name=?, dateupdated=?, description=?, address1=?, address2=?, cityid=?, map=?, type=?, email=?, phone=?, mobile=? WHERE id=?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -73,7 +73,6 @@ public class ClinicDaoImpl implements ClinicDao{
 				clinic.getAddress1(),
 				clinic.getAddress2(),
 				clinic.getCity().getId(),
-				clinic.getLogo(),
 				clinic.getMap(),
 				clinic.getType(),
 				clinic.getEmail(),

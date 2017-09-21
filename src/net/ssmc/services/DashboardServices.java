@@ -41,14 +41,12 @@ public class DashboardServices {
 		data.put("email", contactUsDao.countLastMonth());
 		data.put("emailCountUnique", contactUsDao.countUniqueLastMonth().size());
 		data.put("analyticsCountUnique", analyticsDao.countUniqueLastMonth().size());
-//		long[] emailCount = new long[30];
 		List<Long> emailCount = new ArrayList<>();
 		List<Long> analyticsCount = new ArrayList<>();
 		List<Long> emailCountUniquePerday = new ArrayList<>();
 		List<Long> analyticsCountUniquePerday = new ArrayList<>();
 		for (int i = 29; i >= 0; i--) {
 			Date date = LocalDate.now().minusDays( i ).toDate();
-			System.out.println(date);
 			emailCount.add(contactUsDao.countLastMonthPerDay(date));
 			analyticsCount.add(analyticsDao.countLastMonthPerDay(date));
 			emailCountUniquePerday.add((long) contactUsDao.countUniqueLastMonthPerDay(date).size());
@@ -61,4 +59,14 @@ public class DashboardServices {
 		return data;
 	}
 	
+	public  Map<String, Object> systemUtils(){
+		
+		Map<String, Object> data = new HashMap<>();
+		data.put("cpu", 100);
+		data.put("memory", SystemUtilization.physicalMemory());
+
+		SystemUtilization.cpuUtil();
+		
+		return data;
+	}
 }

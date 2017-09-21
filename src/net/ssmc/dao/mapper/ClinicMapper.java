@@ -27,7 +27,6 @@ public class ClinicMapper implements RowMapper<Clinic>{
 		}
 		clinic.setDateAdded(rs.getTimestamp("dateadded"));
 		clinic.setDateUpdated(rs.getTimestamp("dateupdated"));
-		clinic.setLogo(rs.getString("logo"));
 		clinic.setAddress1(rs.getString("address1"));
 		clinic.setAddress2(rs.getString("address2"));
 		clinic.setType(rs.getString("type"));

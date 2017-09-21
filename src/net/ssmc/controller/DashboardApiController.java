@@ -40,4 +40,10 @@ public class DashboardApiController {
 	public @ResponseBody Map<String, Object> lastMonth() {
 		return dashboardServices.lastMonth();
 	}
+	
+	@AppicationAudit(module = Module.DASHBOARD, access = Access.RETRIEVE)
+	@RequestMapping(path="/SystemUtils", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
+	public @ResponseBody Map<String, Object> systemUtils() {
+		return dashboardServices.systemUtils();
+	}
 }
