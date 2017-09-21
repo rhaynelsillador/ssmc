@@ -62,7 +62,7 @@ public class DashboardServices {
 	public  Map<String, Object> systemUtils(){
 		
 		Map<String, Object> data = new HashMap<>();
-		data.put("cpu", 100);
+		data.put("cpu", SystemUtilization.cpuUtil());
 		data.put("memory", SystemUtilization.printJavaUsage());
 
 		SystemUtilization.cpuUtil();

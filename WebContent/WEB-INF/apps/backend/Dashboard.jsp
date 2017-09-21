@@ -148,23 +148,23 @@
                     </div>
 
                     <div class="card widget-pie-grid">
-                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-                            <div class="chart-pie" data-percent="92" data-pie-size="80">
-                                <span class="chart-pie__value">92</span>
+                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item" id="serverProcessor">
+                            <div class="chart-pie" data-percent="0" data-pie-size="80">
+                                <span class="chart-pie__value">0</span>
                             </div>
-                            <div class="widget-pie-grid__title">Email<br> Scheduled</div>
+                            <div class="widget-pie-grid__title">Server<br>Processor</div>
                         </div>
-                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-                            <div class="chart-pie" data-percent="11" data-pie-size="80">
-                                <span class="chart-pie__value">11</span>
+                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item" id="serverFreeMemory">
+                            <div class="chart-pie" data-percent="0" data-pie-size="80">
+                                <span class="chart-pie__value">0</span>
                             </div>
-                            <div class="widget-pie-grid__title">Email<br> Bounced</div>
+                            <div class="widget-pie-grid__title">Server<br>Free Memory</div>
                         </div>
-                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-                            <div class="chart-pie" data-percent="52" data-pie-size="80">
-                                <span class="chart-pie__value">52</span>
+                        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item" id="serverUsedMemory">
+                            <div class="chart-pie" data-percent="0" data-pie-size="80">
+                                <span class="chart-pie__value">0</span>
                             </div>
-                            <div class="widget-pie-grid__title">Email<br> Opened</div>
+                            <div class="widget-pie-grid__title">Server<br>Free Memory</div>
                         </div>
                         <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
                             <div class="chart-pie" data-percent="44" data-pie-size="80">

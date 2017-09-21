@@ -46,16 +46,10 @@ public class SystemUtilization {
 	    total = runtime.totalMemory();
 	    free = runtime.freeMemory();
 	    used = total - free;
-	    System.out.println("\nTotal Memory: " + total / mb + "MB");
-	    System.out.println(" Memory Used: " + used / mb + "MB");
-	    System.out.println(" Memory Free: " + free / mb + "MB");
-	    System.out.println("Percent Used: " + ((int)used/(int)total)*100 + "%");
-	    System.out.println("Percent Free: " + ((int)free/(int)total)*100 + "%");
-	    
 	    
 	    Map<String, Object> data = new HashMap<>();
-	    data.put("used", ((double)used/(double)total)*100 + "%");
-	    data.put("free", ((double)free/(double)total)*100 + "%");
+	    data.put("used", (int)(((double)used/(double)total)*100));
+	    data.put("free", (int)(((double)free/(double)total)*100));
 	    data.put("total", total/mb);
 		return data;
 	}
@@ -92,7 +86,7 @@ public class SystemUtilization {
         runtime.gc();
 	}
 	
-	public static void cpuUtil(){
+	public static int cpuUtil(){
 		long start = System.nanoTime();
         // log(start);
         //number of available processors;
@@ -113,15 +107,8 @@ public class SystemUtilization {
             seed++;
 
         }
-         float cpuPercent = calcCPU(startCPUTime, start, cpuCount);
+        return calcCPU(startCPUTime, start, cpuCount);
          
-
-
-         try
-         {
-             Thread.sleep(1000);
-         }
-         catch (InterruptedException e) {}
 	}
 	static boolean isPrime(int n){
 	    if (n <= 2){
