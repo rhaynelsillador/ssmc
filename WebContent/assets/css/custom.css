@@ -4,18 +4,89 @@ body {
 }
 
 body::before {
-  background: #fff;
+  background: #0B1A35;
+  height: 200px;
 }
 
 .navigation__menu ul a{
   color: #333;
 }
 
+.navigation__menu ul a:hover{
+  color: #4975b3;
+}
+
+.logo .logo__trigger{
+  color: #333;
+  width: 22px;
+  line-height: 40px;
+}
+
+.card {
+  background: #D5E9F5;
+  color: #333;
+  box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.2);
+}
+
+.card h2{
+  color: #0b1a35;
+}
+
+.card__header h2 {
+  color: #0B1A35;
+}
+
+.card__header h2 small{
+  color: #333;
+}
+
+.chart-pie__value{
+  color: #f58435;
+}
+
+.actions>a>i, .actions>div>a>i{
+  color: #0B1A35;
+}
+
+.actions>a:hover, .actions>div>a:hover{
+  background: #0B1A35;
+}
+.actions>a:hover i, .actions>div>a:hover i{
+  color: #D5E9F5;
+}
+
+.widget-analytic__info>i{
+  color: #f58435;
+}
+
+.widget-past-days__info>h3 {
+  color: #f58435;
+}
+
+.list-group__text {
+  color: #333;
+}
+
+.list-group__heading {
+    color: #0b1a35;
+}
+
+.view-more{
+  color: #333;
+}
 
 #header .logo a img{
   width: 190px;
 }
 
-#footer {
+#mCSB_1_container{
+  margin-top: 55px;
+}
+
+#footer, #footer .footer__menu>li>a {
   color: #333;
+}
+
+#footer .footer__menu>li>a:hover, .view-more:focus, .view-more:focus i, .view-more:hover, .view-more:hover i{
+  color: #4975b3;
 }
