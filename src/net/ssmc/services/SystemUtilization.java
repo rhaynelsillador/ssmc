@@ -33,6 +33,33 @@ public class SystemUtilization {
        	return data;
 	}
 	
+	public static Map<String, Object> printJavaUsage(){
+		Runtime runtime;
+        byte[] bytes;
+        System.out.println("\n \n**MEMORY DETAILS  ** \n");
+        // Print initial memory usage.
+        runtime = Runtime.getRuntime();
+//        printUsage(runtime);
+	    long total, free, used;
+	    int mb = 1024*1024;
+	
+	    total = runtime.totalMemory();
+	    free = runtime.freeMemory();
+	    used = total - free;
+	    System.out.println("\nTotal Memory: " + total / mb + "MB");
+	    System.out.println(" Memory Used: " + used / mb + "MB");
+	    System.out.println(" Memory Free: " + free / mb + "MB");
+	    System.out.println("Percent Used: " + ((int)used/(int)total)*100 + "%");
+	    System.out.println("Percent Free: " + ((int)free/(int)total)*100 + "%");
+	    
+	    
+	    Map<String, Object> data = new HashMap<>();
+	    data.put("used", ((double)used/(double)total)*100 + "%");
+	    data.put("free", ((double)free/(double)total)*100 + "%");
+	    data.put("total", total/mb);
+		return data;
+	}
+	
 	public static void printUsage(){
 		com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean)
 				java.lang.management.ManagementFactory.getOperatingSystemMXBean();
@@ -58,8 +85,8 @@ public class SystemUtilization {
 	    System.out.println("\nTotal Memory: " + total / mb + "MB");
 	    System.out.println(" Memory Used: " + used / mb + "MB");
 	    System.out.println(" Memory Free: " + free / mb + "MB");
-	    System.out.println("Percent Used: " + ((double)used/(double)total)*100 + "%");
-	    System.out.println("Percent Free: " + ((double)free/(double)total)*100 + "%");
+	    System.out.println("Percent Used: " + ((int)used/(int)total)*100 + "%");
+	    System.out.println("Percent Free: " + ((int)free/(int)total)*100 + "%");
 	    bytes = null;
 	    
         runtime.gc();
