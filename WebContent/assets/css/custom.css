@@ -1,0 +1,21 @@
+body {
+    background-color: #efefef;
+    color: #333;
+}
+
+body::before {
+  background: #fff;
+}
+
+.navigation__menu ul a{
+  color: #333;
+}
+
+
+#header .logo a img{
+  width: 190px;
+}
+
+#footer {
+  color: #333;
+}
