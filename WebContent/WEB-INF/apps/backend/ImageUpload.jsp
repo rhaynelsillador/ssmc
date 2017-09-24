@@ -123,7 +123,7 @@
 	                			"<button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
 	            	},
 	            	"image" : function(column, row){
-	            		return '<img src="${sessionScope.fileserver}'+row.image+'" style="width:300px"></img>';
+	            		return '<img src="'+fileServer+row.image+'" style="width:300px"></img>';
 	            	},
 	            	"status" : function(column, row){
 	            		console.log(row)

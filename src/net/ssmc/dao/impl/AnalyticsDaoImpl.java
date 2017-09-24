@@ -15,14 +15,14 @@ import net.ssmc.utils.ApplicationUtils;
 
 public class AnalyticsDaoImpl implements AnalyticsDao {
 
-	private final static String QUERY = "SELECT count(id) as count, SUBSTRING(date, 1, 16) as date  FROM analitycs GROUP BY SUBSTRING(date, 1, 16) ORDER BY SUBSTRING(date, 1, 16) DESC LIMIT 60";
-	private final static String COUNTACTIVE = "SELECT count(id) FROM analitycs WHERE date > ? GROUP BY ip";
-	private final static String COUNTACTIVEHISTORY = "SELECT count(id) as count, CONCAT(SUBSTRING(date, 1, 10),' 00:00:00') as date FROM analitycs GROUP BY SUBSTRING(date, 1, 10) ORDER BY SUBSTRING(date, 1, 15) DESC LIMIT 30	";
-	private final static String COUNTLASMONTH = "SELECT COUNT(id) FROM analitycs WHERE date > ?";
-	private final static String SQLCOUNTLASTMONTHPERDAY = "SELECT COUNT(id) FROM analitycs WHERE date BETWEEN ? AND ?";
+	private final static String QUERY = "SELECT count(id) as count, SUBSTRING(date, 1, 16) as date  FROM analytics GROUP BY SUBSTRING(date, 1, 16) ORDER BY SUBSTRING(date, 1, 16) DESC LIMIT 60";
+	private final static String COUNTACTIVE = "SELECT count(id) FROM analytics WHERE date > ? GROUP BY ip";
+	private final static String COUNTACTIVEHISTORY = "SELECT count(id) as count, CONCAT(SUBSTRING(date, 1, 10),' 00:00:00') as date FROM analytics GROUP BY SUBSTRING(date, 1, 10) ORDER BY SUBSTRING(date, 1, 15) DESC LIMIT 30	";
+	private final static String COUNTLASMONTH = "SELECT COUNT(id) FROM analytics WHERE date > ?";
+	private final static String SQLCOUNTLASTMONTHPERDAY = "SELECT COUNT(id) FROM analytics WHERE date BETWEEN ? AND ?";
 	
-	private static final String SQLCOUNTUNIQUELASTMONTHPERDAYPERDAY = "SELECT COUNT(id) as count FROM analitycs WHERE date BETWEEN ? AND ? GROUP BY ip";
-	private static final String SQLCOUNTUNIQUELASTMONTH = "SELECT COUNT(id) as count FROM analitycs WHERE date >= ? GROUP BY ip";
+	private static final String SQLCOUNTUNIQUELASTMONTHPERDAYPERDAY = "SELECT COUNT(id) as count FROM analytics WHERE date BETWEEN ? AND ? GROUP BY ip";
+	private static final String SQLCOUNTUNIQUELASTMONTH = "SELECT COUNT(id) as count FROM analytics WHERE date >= ? GROUP BY ip";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

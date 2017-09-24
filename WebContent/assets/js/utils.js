@@ -1,3 +1,5 @@
+var fileServer = 'http://138.197.15.53:8080/FileServer/'
+
 function objectifyForm(formArray) {
   var returnArray = {};
   for (var i = 0; i < formArray.length; i++){
