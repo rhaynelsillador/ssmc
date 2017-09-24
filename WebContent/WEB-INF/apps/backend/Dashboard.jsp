@@ -25,7 +25,7 @@
         <link href="assets/css/app-1.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="assets/css/custom.css" rel="stylesheet">
+       <!--  <link href="assets/css/custom.css" rel="stylesheet"> -->
 
         <!-- Page loader -->
         <script src="assets/js/page-loader.min.js"></script>

@@ -28,4 +28,9 @@
         <location>/NotFound</location>
 	</error-page>
 	
+	<error-page>
+        <error-code>500</error-code>
+        <location>/NotFound</location>
+	</error-page>
+	
 </web-app>
