@@ -25,6 +25,7 @@
 				       <h2>Service</h2>
 				       <div class="actions">
 				           <a href="ServicesAdd"><i class="zmdi zmdi-plus"></i></a>
+				           <a href="ServicesUpload?id=${sessionScope.service.id }&name=${sessionScope.service.name }&module=SERVICE"><i class="zmdi zmdi-upload"></i></a>
 				       </div>
 				   </div>
 				
@@ -89,7 +90,7 @@
 					           <div class="row">
 					               <div class="col-sm-12">
 					                   <div class="form-group form-group--float">
-				                           <textarea class="form-control" rows="20" name="content" id="serviceContent">${sessionScope.service.content}</textarea>
+				                           <textarea class="form-control" rows="5" name="content" id="serviceContent">${sessionScope.service.content}</textarea>
 				                           <i class="form-group__bar"></i>
 				                       </div>
 				                      
@@ -138,50 +139,28 @@
 	<script type="text/javascript">
 		$("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 	    $("#service_menu").addClass("navigation__active");
-	    CKEDITOR.replace('serviceContent');
+	    
+	    var pathname = window.location.pathname;
+	    var contains = pathname.indexOf("ServicesAdd");
+	    
+	    if(contains > 0){
+	    	$(".content__header .zmdi-upload").parent().remove()
+	    }
+	    
+	    //CKEDITOR.replace('serviceContent');
 	    CKEDITOR.replace('serviceContent2');
 	    var serviceType = $('#serviceType');
 	    var serviceNum = $("#serviceNum");
-	    var existingImages = [];
-	    '<c:forEach items="${sessionScope.service.images}" var="images">'
-	   				existingImages.push('${ images.image }');
-	    '</c:forEach>'
-	    
-	    
-	    /* $("#file-1").fileinput({
-	        uploadUrl: 'fileInputUpload', // you must set a valid URL here else you will get an error
-	        allowedFileExtensions: ['jpg', 'png', 'gif'],
-	        overwriteInitial: false,
-	        maxFileSize: 1000,
-	        maxFilesNum: 10,
-	        //allowedFileTypes: ['image', 'video', 'flash'],
-	        slugCallback: function (filename) {
-	            return filename.replace('(', '_').replace(']', '_');
-	        },
-	        overwriteInitial: false,
-            initialPreviewAsData: true,
-            initialPreview: existingImages
-
-	    }); */
 	    
 	    $(document).ready(function(){
 	    	serviceType.val('${sessionScope.service.type}');
 	    	serviceNum.val('${sessionScope.service.num}');
 	    	
 	    	$( "#serviceUpdateForm" ).submit(function( event ) {
-	      		console.log( $( this ).serialize() );
 	      		event.preventDefault();
-	      		  		
-	      		/* var tempImages = $(".file-input .kv-zoom-cache .kv-file-content img");
-	      		
-	      		
-	      		var images = [];
-	      		for (var i = 0; i < tempImages.length; i++) {
-					images.push({"image" : $(tempImages[i]).attr("src")});
-				} */
-	      		
+	
 	      		var form = objectifyForm($( this ).serializeArray());
-	      		form.content = CKEDITOR.instances.serviceContent.getData();
+	      		//form.content = CKEDITOR.instances.serviceContent.getData();
 	      		form.content2 = CKEDITOR.instances.serviceContent2.getData();
 	      		//form.images = images;
 	      		

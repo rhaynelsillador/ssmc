@@ -17,7 +17,7 @@ public class AnalyticsDaoImpl implements AnalyticsDao {
 
 	private final static String QUERY = "SELECT count(id) as count, SUBSTRING(date, 1, 16) as date  FROM analytics GROUP BY SUBSTRING(date, 1, 16) ORDER BY SUBSTRING(date, 1, 16) DESC LIMIT 60";
 	private final static String COUNTACTIVE = "SELECT count(id) FROM analytics WHERE date > ? GROUP BY ip";
-	private final static String COUNTACTIVEHISTORY = "SELECT count(id) as count, CONCAT(SUBSTRING(date, 1, 10),' 00:00:00') as date FROM analytics GROUP BY SUBSTRING(date, 1, 10) ORDER BY SUBSTRING(date, 1, 15) DESC LIMIT 30	";
+	private final static String COUNTACTIVEHISTORY = "SELECT count(id) as count, CONCAT(SUBSTRING(date, 1, 10),' 00:00:00') as date FROM analytics GROUP BY SUBSTRING(date, 1, 10) ORDER BY SUBSTRING(date, 1, 15) DESC LIMIT 30";
 	private final static String COUNTLASMONTH = "SELECT COUNT(id) FROM analytics WHERE date > ?";
 	private final static String SQLCOUNTLASTMONTHPERDAY = "SELECT COUNT(id) FROM analytics WHERE date BETWEEN ? AND ?";
 	

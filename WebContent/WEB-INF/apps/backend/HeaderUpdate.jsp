@@ -26,7 +26,7 @@
 				
 				       <div class="actions">
 				           <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
-				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=CLINICSANDHOSPITALS"><i class="zmdi zmdi-upload"></i></a>
+				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=HEADER"><i class="zmdi zmdi-upload"></i></a>
 				       </div>
 				   </div>
 				
@@ -95,7 +95,7 @@
 					           <div class="row">
 					               <div class="col-sm-12">
 					                   <div class="form-group form-group--float">
-				                           <textarea class="form-control" rows="20" name="content" id="headerContent">${sessionScope.header.content}</textarea>
+				                           <textarea class="form-control" rows="10" name="content" id="headerContent">${sessionScope.header.content}</textarea>
 				                           <i class="form-group__bar"></i>
 				                       </div>
 					               </div>
@@ -122,9 +122,20 @@
 	<script type="text/javascript">
 		$("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 	    $("#header_menu").addClass("navigation__active");
-	    CKEDITOR.replace('headerContent');
+	    
+	    var pathname = window.location.pathname;
+	    var contains = pathname.indexOf("HeaderAdd");
+	    
+	    
+	    if(contains > 0){
+	    	$(".content__header .zmdi-upload").parent().remove()
+	    }
+	    
+	    //CKEDITOR.replace('headerContent');
+	    
 	    var aboutUsType = $('#headerType');
 	    var headerPage = $('#headerPage');
+	    
 	    
 	    
 	    $(document).ready(function(){
@@ -136,16 +147,20 @@
 	      		event.preventDefault();
 	      		  		
 	      		var form = objectifyForm($( this ).serializeArray());
-	      		form.content = CKEDITOR.instances.headerContent.getData();
+	      		//form.content = CKEDITOR.instances.headerContent.getData();
 	      		
 	      		var btn = $("#headerUpdateForm button");
 	      		btn.html("Updating...");
 	      		btn.attr("disabled", "disabled");
 	      		
 	      		POST("HeaderAddUpdate", form, function(data){
-	      			toastMessage(data);
-	      			btn.html("Save Update");
-	    	  		btn.removeAttr("disabled");
+	      			if(contains > 0 && data.status=="SUCCESS"){
+	      				window.location.href = "Header";
+	      			}else{
+	      				toastMessage(data);
+		      			btn.html("Save Update");
+		    	  		btn.removeAttr("disabled");
+	      			}
 	      		})
 	    	});
 	    })

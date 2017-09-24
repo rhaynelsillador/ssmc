@@ -1,4 +1,4 @@
-var fileServer = 'http://138.197.15.53:8080/FileServer/'
+var fileServer = 'http://localhost/FileServer/'
 
 function objectifyForm(formArray) {
   var returnArray = {};
@@ -122,6 +122,20 @@ var confirmation = function confirmation(data){
     	});
     });
 }
+
+var confirmationAndRedirect = function confirmation(data){
+	swal({
+        title: "Success",
+        text: data.text,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "rgb(13, 123, 46)",
+        confirmButtonText: "Confirm"
+    }).then(function(){
+    	window.location.href = "Header";
+    });
+}
+
 
 $(".roles").click(function(){
 	checkIfCheckedAll();
