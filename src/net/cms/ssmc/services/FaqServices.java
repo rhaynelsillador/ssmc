@@ -106,4 +106,7 @@ public class FaqServices {
 		}
 		return response;
 	}
+	
+	
+	
 }

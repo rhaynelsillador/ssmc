@@ -4,7 +4,7 @@ $("#faq_menu").addClass("navigation__active");
 tableConfig.url = "FaqList";
 tableConfig.formatters = {
 	"commands": function(column, row) {
-    	return 	"<a href=\"FaqUpdate?id="+row.id+"&question="+row.title+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
+    	return 	"<a href=\"FaqUpdate?id="+row.id+"&question="+row.title+"&faq=main\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
     			" <button class=\"btn btn-sm btn-warning command-status\" data-row-id=\"" + row.id + "\" data-row-status=\"" + row.status + "\">Status</button> "+
     			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
 	},

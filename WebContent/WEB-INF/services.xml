@@ -16,6 +16,7 @@
 	
 	<!-- CMS SERVICES -->
 	<bean id="faqServices" 			class="net.cms.ssmc.services.FaqServices" />
+	<bean id="faqTempServices" 		class="net.cms.ssmc.services.FaqTempServices" />
 	<bean id="aboutUsServices" 		class="net.cms.ssmc.services.AboutUsServices" />
 	<bean id="controlServices" 		class="net.cms.ssmc.services.ControlServices" />
 	<bean id="headerServices" 		class="net.cms.ssmc.services.HeaderServices" />

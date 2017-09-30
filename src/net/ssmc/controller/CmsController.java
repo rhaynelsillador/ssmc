@@ -19,6 +19,7 @@ import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.FaqServices;
+import net.cms.ssmc.services.FaqTempServices;
 import net.cms.ssmc.services.HeaderServices;
 import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
@@ -43,7 +44,8 @@ public class CmsController {
 	@Autowired
 	private ServiceServices serviceServices;
 	@Autowired
-	private ImageServices imageServices;
+	private FaqTempServices faqTempServices;
+	
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/Faq", method = RequestMethod.GET)
@@ -53,11 +55,16 @@ public class CmsController {
 
 	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)
 	@RequestMapping(path="/FaqUpdate", method = RequestMethod.GET)
-	public String faqUpdate(ModelMap map, @RequestParam int id){
+	public String faqUpdate(ModelMap map, @RequestParam int id, @RequestParam String faq){
 		HttpSession session = httpServletRequest.getSession(true);
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
 		session.setAttribute("FAQID", id);
-		map.addAttribute("faq", faqServices.getFaq(httpServletRequest, id));
+		session.setAttribute("faq", faq);
+		if(faq!=null && faq.equalsIgnoreCase("temp")){
+			map.addAttribute("faq", faqTempServices.getFaqTemp(httpServletRequest, id));
+		}else{
+			map.addAttribute("faq", faqServices.getFaq(httpServletRequest, id));
+		}
 		return "backend/FaqUpdate";
 	}
 	

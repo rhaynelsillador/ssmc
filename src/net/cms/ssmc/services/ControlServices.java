@@ -1,13 +1,17 @@
 package net.cms.ssmc.services;
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.cms.ssmc.dao.ControlDao;
+import net.cms.ssmc.dao.FaqTempDao;
 import net.cms.ssmc.model.Control;
+import net.cms.ssmc.model.FaqTemp;
 import net.ssmc.dao.UserDao;
 import net.ssmc.enums.Module;
 import net.ssmc.model.User;
@@ -18,6 +22,8 @@ public class ControlServices {
 	private ControlDao controlDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private FaqTempDao faqTempDao;
 	
 	public void createControl(Module module, long id){
 		Control control = new Control();
@@ -62,5 +68,20 @@ public class ControlServices {
 		}
 		
 		return true;
+	}
+	
+	
+	public void approvedFaqTemp(Map<String, String> request){
+		FaqTemp faqTemp = null;
+		try {
+			faqTemp = faqTempDao.findOne(Long.parseLong(request.get("id")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+//		isApproved(control);
+		
+		System.out.println(faqTemp);
 	}
 }

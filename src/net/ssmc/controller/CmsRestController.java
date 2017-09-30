@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import net.cms.ssmc.model.AboutUs;
 import net.cms.ssmc.model.Control;
 import net.cms.ssmc.model.Faq;
+import net.cms.ssmc.model.FaqTemp;
 import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.ControlServices;
 import net.cms.ssmc.services.FaqServices;
+import net.cms.ssmc.services.FaqTempServices;
 import net.cms.ssmc.services.HeaderServices;
 import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
@@ -49,6 +51,8 @@ public class CmsRestController {
 	private ServiceServices serviceServices;
 	@Autowired
 	private ImageServices imageServices;
+	@Autowired
+	private FaqTempServices faqTempServices;
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/FaqList", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
@@ -65,9 +69,14 @@ public class CmsRestController {
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/AddUpdateFaq", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody Map<String, Object> addUpdateUser(@RequestBody Faq faq) {
+	public @ResponseBody Map<String, Object> addUpdateUser(@RequestBody FaqTemp faq) {
 		HttpSession session = httpServletRequest.getSession(true);
-		Map<String, Object> map = faqServices.createUpdateFaq(session, faq);
+		Map<String, Object> map = new HashMap<>();
+//		if(session.getAttribute("faq").toString().equalsIgnoreCase("temp")){
+			map = faqTempServices.createUpdateFaq(session, faq);
+//		}else{
+//		map = faqServices.createUpdateFaq(session, faq);
+//		}
 		System.out.println(map);
 		return map;
 	}
@@ -176,4 +185,18 @@ public class CmsRestController {
 		return imageServices.updateImage(session, image);
 	}
 	
+	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)
+	@RequestMapping(path="/FaqTempList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> faqTempList(@RequestParam Map<String, String> request) {
+		HttpSession session = httpServletRequest.getSession(true);
+		Map<String, Object> map = faqTempServices.retrieveAllFaqTemp(session, request);
+		return map;
+	}
+	
+	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)
+	@RequestMapping(path="/FaqApproval", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> faqApproval(@RequestBody Map<String, String> request) {
+		controlServices.approvedFaqTemp(request);
+		return null;
+	}
 }

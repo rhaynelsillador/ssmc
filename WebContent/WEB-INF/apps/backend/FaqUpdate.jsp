@@ -31,9 +31,9 @@
 				
 				   <div class="card">
 				       <div class="card__header">
-				           <h2>${sessionScope.TRANSACTION }</h2>
-				           <c:if test="${sessionScope.hasApproved == false and sessionScope.TRANSACTION != 'ADD'}">
-				           		<button class="btn btn-primary pull-right approved-fn" data-module="3" data-moduleId="${requestScope.faq.id}">Approve</button>
+				           <h2>${sessionScope.TRANSACTION } ${sessionScope.faq}</h2>
+				           <c:if test="${sessionScope.faq=='temp'}">
+				           		<button class="btn btn-primary pull-right faq-approve-fn" data-module="3" data-moduleId="${requestScope.faq.id}">Approve</button>
 				       		</c:if>
 				       </div>
 				
@@ -105,6 +105,19 @@
 	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
 	<script type="text/javascript">
 		$("#faqType").val('${requestScope.faq.type}');
+		
+		$(".faq-approve-fn").click(function(e){
+			console.log(e);
+			var params = {
+				"type" : "TEMPFAQ",
+				"id" : ${requestScope.faq.id}
+			}
+			POST("FaqApproval", params, function(data){
+				
+			})
+			
+		});
+		
 	</script>
         
 </body>
