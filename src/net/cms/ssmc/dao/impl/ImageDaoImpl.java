@@ -1,6 +1,5 @@
 package net.cms.ssmc.dao.impl;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +7,13 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import net.cms.ssmc.dao.ImageDao;
-import net.cms.ssmc.model.Service;
 import net.ssmc.enums.Module;
 import net.ssmc.model.Image;
 
 public class ImageDaoImpl implements ImageDao {
 
 	private static final String INSERT	= 	"INSERT INTO IMAGES (image, status, serviceid, type) VALUES (?,?,?,?)";
-	private static final String FINDIMAGES	= "SELECT * FROM IMAGES WHERE serviceid = ?";
+//	private static final String FINDIMAGES	= "SELECT * FROM IMAGES WHERE serviceid = ?";
 	private static final String FINDALLIMAGES	= "SELECT * FROM IMAGES WHERE serviceid = ? AND type = ?";
 	private static final String DELETE	= "DELETE FROM IMAGES WHERE id = ?";
 	private static final String UPDATE	= "UPDATE IMAGES SET status = ? WHERE id = ?";

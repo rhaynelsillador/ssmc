@@ -25,7 +25,7 @@ public class FaqTempDaoImpl implements FaqTempDao{
 	private static final String FINDONEBYMAIN = "SELECT * FROM faq_temp WHERE mainid=?";
 	
 	private static final String SQLUPDATE = "UPDATE faq_temp SET title =?, type=?, question=?, answer=?, dateupdated=? WHERE id= ? ";
-	private static final String SQLUPDATESTATUS = "UPDATE faq_temp SET status=?, dateupdated=? WHERE id= ? ";
+//	private static final String SQLUPDATESTATUS = "UPDATE faq_temp SET status=?, dateupdated=? WHERE id= ? ";
 	private static final String SQLCREATE = "INSERT INTO faq_temp (question, answer, dateadded, dateupdated, status, type, title, mainid) VALUES (?,?,?,?,?,?,?,?)";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

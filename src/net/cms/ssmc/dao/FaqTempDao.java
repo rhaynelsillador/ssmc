@@ -3,7 +3,6 @@ package net.cms.ssmc.dao;
 import java.util.List;
 import java.util.Map;
 
-import net.cms.ssmc.model.Faq;
 import net.cms.ssmc.model.FaqTemp;
 
 public interface FaqTempDao {
