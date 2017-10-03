@@ -10,7 +10,7 @@ public class Control {
 	private int id;
 	private Module module;
 	private long moduleId;
-	private List<User> users;
+	private long userid;
 	
 	public int getId() {
 		return id;
@@ -30,11 +30,15 @@ public class Control {
 	public void setModuleId(long moduleId) {
 		this.moduleId = moduleId;
 	}
-	public List<User> getUsers() {
-		return users;
+	public long getUserid() {
+		return userid;
 	}
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
-
+	@Override
+	public String toString() {
+		return "Control [id=" + id + ", module=" + module + ", moduleId=" + moduleId + ", userid=" + userid + "]";
+	}
+	
 }

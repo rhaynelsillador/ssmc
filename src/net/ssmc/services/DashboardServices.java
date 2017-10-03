@@ -27,13 +27,11 @@ public class DashboardServices {
 	@Autowired
 	private ContactUsDao contactUsDao;
 	
-	
-	
-	public List<PendingApproval> getAllPendingApproval(HttpServletRequest httpServletRequest){
-		HttpSession session = httpServletRequest.getSession();
-		User user = (User) session.getAttribute("user");
-		return controlDao.retrieveAll(user.getId());
-	}
+//	public List<PendingApproval> getAllPendingApproval(HttpServletRequest httpServletRequest){
+//		HttpSession session = httpServletRequest.getSession();
+//		User user = (User) session.getAttribute("user");
+//		return controlDao.retrieveAll(user.getId());
+//	}
 	
 	public Map<String, Object> lastMonth(){
 		Map<String, Object> data = new HashMap<>();

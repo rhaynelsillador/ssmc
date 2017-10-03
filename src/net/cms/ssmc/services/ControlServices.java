@@ -1,6 +1,7 @@
 package net.cms.ssmc.services;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import net.cms.ssmc.model.Control;
 import net.cms.ssmc.model.FaqTemp;
 import net.ssmc.dao.UserDao;
 import net.ssmc.enums.Module;
+import net.ssmc.enums.Status;
+import net.ssmc.model.Helper;
 import net.ssmc.model.User;
 
 public class ControlServices {
@@ -32,11 +35,11 @@ public class ControlServices {
 		controlDao.create(control);
 	}
 	
-	public boolean isApproved(Control control){
-		int approved = controlDao.countApproved(control.getId());
-		return userDao.countApprover() == approved ? false : true;
-	}
-	
+//	public boolean isApproved(Control control){
+//		int approved = controlDao.countApproved(control.getId());
+//		return userDao.countApprover() == approved ? false : true;
+//	}
+//	
 	public void createControl(Control control){
 		controlDao.create(control);
 	}
@@ -62,7 +65,7 @@ public class ControlServices {
 		Control control2;
 		try {
 			control2 = controlDao.retrieveByModule(control);
-			controlDao.createApproved(user.getId(), control2.getId());
+//			controlDao.createApproved(user.getId(), control2.getId());
 		} catch (Exception e) {
 			return false;
 		}
@@ -71,17 +74,44 @@ public class ControlServices {
 	}
 	
 	
-	public void approvedFaqTemp(Map<String, String> request){
-		FaqTemp faqTemp = null;
+	public Map<String, Object> approvedFaqTemp(HttpServletRequest httpServletRequest, Map<String, String> request){
+		User user = (User) httpServletRequest.getSession().getAttribute("user");
+		Map<String, Object> map = new HashMap<>();
+		map.put(Helper.STATUS, Status.ERROR);
+		Module module = null;
+		long moduleId = 0;
 		try {
-			faqTemp = faqTempDao.findOne(Long.parseLong(request.get("id")));
+			module = Module.valueOf(request.get("module"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			map.put(Helper.MESSAGE, "Invalid module.");
+			return map;
+		}
+		try {
+			moduleId = Long.parseLong(request.get("id"));
+		} catch (Exception e) {
+			map.put(Helper.MESSAGE, "Invalid module id.");
+			return map;
+		}
+		
+		switch (module) {
+		case FAQ:
+			FaqTemp faqTemp = null;
+			try {
+				faqTemp = faqTempDao.findOne(Long.parseLong(request.get("id")));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(faqTemp);
+			userDao.countApprover();
+			controlDao.hasApproved(module, moduleId, user.getId());
+			break;
+
+		default:
+			break;
 		}
 		
 		
-//		isApproved(control);
-		
-		System.out.println(faqTemp);
+		return map;
 	}
 }

@@ -137,10 +137,10 @@ public class SsmcBackendRestController {
 		return contactUsServices.deleteContactUsInquiry(httpServletRequest, contactUs);
 	}
 	
-	@RequestMapping(path="/PendingApprovalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody List<PendingApproval> pendingApprovalList() {
-		return dashboardServices.getAllPendingApproval(httpServletRequest);
-	}
+//	@RequestMapping(path="/PendingApprovalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+//	public @ResponseBody List<PendingApproval> pendingApprovalList() {
+//		return dashboardServices.getAllPendingApproval(httpServletRequest);
+//	}
 	
 	@RequestMapping(path="/CityList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> city(@RequestParam Map<String, String> request){

@@ -9,12 +9,9 @@ import net.ssmc.model.PendingApproval;
 public interface ControlDao {
 	
 	void create(Control control);
-	void createApproved(int userId, int controlId);
 	Control retrieve(Control control);
 	void deleteControl(Module module, int moduleId);
-	int countApproved(int controlId);
-	int hasApproved(Module module , int controlId, int userid);
+	int hasApproved(Module module , long controlId, long userid);
 	Control retrieveByModule(Control control) throws Exception;
-	List<PendingApproval> retrieveAll(int userid);
-
+	
 }
