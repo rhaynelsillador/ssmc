@@ -3,3 +3,7 @@ ALTER TABLE header ADD CONSTRAINT header_unique_name UNIQUE (name);
 
 -- CREATE SEQUENCE analytics_id_seq;
 ALTER TABLE analytics ALTER id SET DEFAULT NEXTVAL('analytics_id_seq');
+
+
+###### 10-02-2017 ######
+ALTER TABLE control ADD UNIQUE (userid, moduleid, module)

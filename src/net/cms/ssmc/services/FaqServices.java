@@ -43,7 +43,7 @@ public class FaqServices {
 		if(transactionType == TransactionType.UPDATE){
 			faq.setId(Integer.parseInt(session.getAttribute("FAQID").toString()));
 			try {
-				faqDao.update(faq);
+				faqDao.update(null);
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Faq successfully updated!");
 			} catch (Exception e) {
@@ -52,7 +52,7 @@ public class FaqServices {
 			}
 		}else if(transactionType == TransactionType.ADD){
 			try {
-				long id = faqDao.create(faq);
+				long id = faqDao.create(null);
 				controlServices.createControl(Module.FAQ, id);
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Faq successfully added!");

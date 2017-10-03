@@ -117,13 +117,6 @@ public class CmsRestController {
 		return aboutUsServices.deleteAboutUs(session, aboutUs);
 	}
 	
-	@AppicationAudit(module = Module.ALL, access = Access.ALL)
-	@RequestMapping(path="/approved", method = {RequestMethod.GET, RequestMethod.POST})
-	public boolean approved(@RequestBody Control control){
-		HttpSession session = httpServletRequest.getSession(true);
-		return controlServices.approve(session, control);
-	}
-	
 	@AppicationAudit(module = Module.HEADER, access = Access.RETRIEVE)
 	@RequestMapping(path="/HeaderList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> headerList(@RequestParam Map<String, String> request){
@@ -191,6 +184,13 @@ public class CmsRestController {
 		HttpSession session = httpServletRequest.getSession(true);
 		Map<String, Object> map = faqTempServices.retrieveAllFaqTemp(session, request);
 		return map;
+	}
+	
+	@AppicationAudit(module = Module.ALL, access = Access.ALL)
+	@RequestMapping(path="/IsApproved", method = {RequestMethod.GET, RequestMethod.POST})
+	public Map<String, Object> approved(@RequestBody Control control){
+		HttpSession session = httpServletRequest.getSession(true);
+		return controlServices.approve(session, control);
 	}
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)

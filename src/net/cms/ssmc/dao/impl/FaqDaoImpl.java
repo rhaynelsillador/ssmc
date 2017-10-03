@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.FaqDao;
 import net.cms.ssmc.model.Faq;
+import net.cms.ssmc.model.FaqTemp;
 
 public class FaqDaoImpl implements FaqDao{
 
@@ -35,7 +36,7 @@ public class FaqDaoImpl implements FaqDao{
 	}
 	
 	@Override
-	public long create(Faq faq) {
+	public long create(FaqTemp faq) {
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 		    @Override
@@ -69,7 +70,7 @@ public class FaqDaoImpl implements FaqDao{
 	}
 
 	@Override
-	public void update(Faq faq) {
+	public void update(FaqTemp faq) {
 		jdbcTemplate.update(SQLUPDATE, new Object[] {
 				faq.getTitle(),
 				faq.getType().toString(),

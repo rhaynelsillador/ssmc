@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.cms.ssmc.dao.ControlDao;
+import net.cms.ssmc.dao.FaqDao;
 import net.cms.ssmc.dao.FaqTempDao;
 import net.cms.ssmc.model.Control;
 import net.cms.ssmc.model.FaqTemp;
@@ -27,6 +28,9 @@ public class ControlServices {
 	private UserDao userDao;
 	@Autowired
 	private FaqTempDao faqTempDao;
+	@Autowired
+	private FaqDao faqDao;
+	
 	
 	public void createControl(Module module, long id){
 		Control control = new Control();
@@ -60,17 +64,44 @@ public class ControlServices {
 		return false;
 	}
 	
-	public boolean approve(HttpSession session, Control control){
+	public Map<String, Object> approve(HttpSession session, Control control){
+		Map<String, Object> map = new HashMap<>();
+		map.put(Helper.STATUS, Status.ERROR);
 		User user = (User) session.getAttribute("user");
-		Control control2;
-		try {
-			control2 = controlDao.retrieveByModule(control);
-//			controlDao.createApproved(user.getId(), control2.getId());
-		} catch (Exception e) {
-			return false;
+		user = userDao.retrieve(user.getId());
+		control.setUserid(user.getId());
+		
+		switch (control.getModule()) {
+		case FAQ:
+			try {
+				faqTempDao.findOne(control.getModuleId());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				map.put(Helper.MESSAGE, "This is an invalid module id.");
+				return map;
+			}
+			break;
+
+		default:
+			break;
 		}
 		
-		return true;
+		if(user.isApprover()){
+			try {
+				controlDao.retrieveByModule(control);
+				map.put(Helper.MESSAGE, "You already approved this module.");
+			} catch (Exception e) {
+				map.put(Helper.STATUS, Status.SUCCESS);
+				map.put(Helper.MESSAGE, "Click approve button to published this module.");
+			}
+		}else{
+			map.put(Helper.MESSAGE, "You are not allowed to approve this module.");
+		}
+//		
+//		
+//		
+		
+		return map;
 	}
 	
 	
@@ -93,6 +124,12 @@ public class ControlServices {
 			return map;
 		}
 		
+		Control control = new Control();
+		control.setModuleId(moduleId);
+		control.setUserid(user.getId());
+		control.setModule(module);
+		
+		int totalApprover = userDao.countApprover();
 		switch (module) {
 		case FAQ:
 			FaqTemp faqTemp = null;
@@ -101,10 +138,31 @@ public class ControlServices {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println(faqTemp);
-			userDao.countApprover();
-			controlDao.hasApproved(module, moduleId, user.getId());
+			if(faqTemp == null){
+				map.put(Helper.MESSAGE, "This is an invalid FAQ.");
+				return map;
+			}
+			int totalApproved = controlDao.hasApproved(module, moduleId, user.getId());
+			if(totalApproved == totalApprover){
+				controlDao.deleteControl(module, moduleId);
+				faqTempDao.delete(moduleId);
+				if(faqTemp.getMainid() != 0){
+					faqDao.update(faqTemp);
+				}else{
+					faqDao.create(faqTemp);
+				}
+				map.put(Helper.STATUS, Status.SUCCESS);
+				map.put(Helper.MESSAGE, "FAQ approved successfully and already published!");
+			}else{
+				try {
+					controlDao.create(control);
+				} catch (Exception e) {
+					map.put(Helper.MESSAGE, "You already approved this "+ module.toString()+".");
+					return map;
+				}
+				map.put(Helper.STATUS, Status.SUCCESS);
+				map.put(Helper.MESSAGE, "FAQ approved successfully!");
+			}
 			break;
 
 		default:

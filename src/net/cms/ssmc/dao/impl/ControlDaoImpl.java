@@ -13,9 +13,11 @@ public class ControlDaoImpl implements ControlDao {
 
 	private static final String INSERT 			= "INSERT INTO CONTROL (module, moduleid, userid) VALUES (?,?,?)";
 	private static final String FINDONE			= "SELECT * FROM CONTROL WHERE id = ?";
-	private static final String FINDONEBYMODULE	= "SELECT * FROM CONTROL WHERE module = ? AND moduleid = ?";
+	private static final String FINDONEBYMODULE	= "SELECT * FROM CONTROL WHERE module = ? AND moduleid = ? AND userid=?";
 	private static final String DELETEBYID 		= "DELETE FROM CONTROL WHERE module = ? AND moduleid = ? ";
 	private static final String HASAPPROVED 	= "SELECT COUNT(id) FROM CONTROL WHERE MODULE = ? AND MODULEID= ?";
+	
+	
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -31,7 +33,7 @@ public class ControlDaoImpl implements ControlDao {
 	@Override
 	public Control retrieveByModule(Control control) throws Exception{
 		System.out.println(control.getModuleId()+" " + control.getModule().ordinal());
-		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{control.getModule().ordinal(), control.getModuleId()}, new ControlMapper());
+		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{control.getModule().ordinal(), control.getModuleId(), control.getUserid()}, new BeanPropertyRowMapper<Control>(Control.class));
 	}
 	
 	@Override
@@ -40,13 +42,12 @@ public class ControlDaoImpl implements ControlDao {
 	}
 	
 	@Override
-	public void deleteControl(Module module, int moduleId) {
+	public void deleteControl(Module module, long moduleId) {
 		jdbcTemplate.update(DELETEBYID, new Object[] {module.ordinal(), moduleId});
 	}
 
 	@Override
 	public int hasApproved(Module module , long controlId, long userid) {
-		
 		return jdbcTemplate.queryForObject(HASAPPROVED, new Object[]{module.ordinal(), controlId}, Integer.class);
 	}
 }
