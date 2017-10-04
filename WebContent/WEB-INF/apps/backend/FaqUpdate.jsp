@@ -104,7 +104,7 @@
 		<%@ include file="commons/JsFiles.jsp"%>
         <!-- jQuery -->
 
-	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script> -->
 	<script type="text/javascript">
 		$("#faqType").val('${requestScope.faq.type}');
 		var faqApproveFn = $(".faq-approve-fn");

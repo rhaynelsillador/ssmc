@@ -32,12 +32,12 @@
                        <ul class="tab-nav tab-nav--justified tab-nav--icon">
 	                        <li class="active">
 	                            <a class="col-sx-4" href="#publishedFaq" data-toggle="tab" aria-expanded="true">
-	                               <i class="zmdi zmdi-check-all"></i> Published FAQ
+	                               Published FAQ
 	                            </a>
 	                        </li>
 	                        <li class="">
 	                            <a class="col-xs-4" href="#unpublishedFaq" data-toggle="tab" aria-expanded="false">
-	                               <i class="zmdi zmdi-close"></i> Unpublished FAQ
+	                               Unpublished FAQ
 	                            </a>
 	                        </li>
 	                    </ul>
