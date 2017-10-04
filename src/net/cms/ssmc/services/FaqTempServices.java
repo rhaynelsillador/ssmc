@@ -16,6 +16,7 @@ import net.ssmc.enums.Module;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
+import net.ssmc.model.User;
 
 public class FaqTempServices {
 
@@ -42,6 +43,7 @@ public class FaqTempServices {
 	}
 	
 	public Map<String, Object> createUpdateFaq(HttpSession session, FaqTemp faq){
+		User user = (User) session.getAttribute("user");
 		TransactionType transactionType = (TransactionType) session.getAttribute("TRANSACTION");
 		Map<String, Object> response = new HashMap<>();
 		response.put(Helper.STATUS, Status.ERROR);
@@ -73,7 +75,7 @@ public class FaqTempServices {
 					if(temp!=null){
 						faqTempDao.update(faq);
 					}else{
-						faqTempDao.create(faq, faqOld);
+						faqTempDao.create(faq, faqOld, user.getId());
 					}
 						
 				}else if(session.getAttribute("faq").toString().equalsIgnoreCase("temp")){
@@ -90,7 +92,7 @@ public class FaqTempServices {
 			}
 		}else if(transactionType == TransactionType.ADD){
 			try {
-				long id = faqTempDao.create(faq, 0);
+				long id = faqTempDao.create(faq, 0, user.getId());
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Faq successfully added!");
 			} catch (Exception e) {

@@ -195,8 +195,8 @@ public class CmsRestController {
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)
 	@RequestMapping(path="/FaqApproval", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody Map<String, Object> faqApproval(@RequestParam Map<String, String> request) {
-		
-		return controlServices.approvedFaqTemp(httpServletRequest, request);
+	public @ResponseBody Map<String, Object> faqApproval(@RequestBody Control control) {
+		System.out.println(control);
+		return controlServices.approvedFaqTemp(httpServletRequest, control);
 	}
 }

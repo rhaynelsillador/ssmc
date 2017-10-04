@@ -25,7 +25,7 @@ public class FaqTempDaoImpl implements FaqTempDao{
 	private static final String FINDONEBYMAIN = "SELECT * FROM faq_temp WHERE mainid=?";
 	
 	private static final String SQLUPDATE = "UPDATE faq_temp SET title =?, type=?, question=?, answer=?, dateupdated=? WHERE id= ? ";
-	private static final String SQLCREATE = "INSERT INTO faq_temp (question, answer, dateadded, dateupdated, status, type, title, mainid) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String SQLCREATE = "INSERT INTO faq_temp (question, answer, dateadded, dateupdated, status, type, title, mainid, author) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String SQLDELETE = "DELETE FROM FAQ_TEMP WHERE ID = ?";
 	
 	@Autowired
@@ -43,6 +43,7 @@ public class FaqTempDaoImpl implements FaqTempDao{
 	}
 	@Override
 	public FaqTemp findOne(long id) throws Exception{
+		System.out.println(id);
 		return jdbcTemplate.queryForObject(FINDONE, new Object[]{id}, new BeanPropertyRowMapper<FaqTemp>(FaqTemp.class));
 	}
 	
@@ -67,7 +68,7 @@ public class FaqTempDaoImpl implements FaqTempDao{
 	}
 	
 	@Override
-	public long create(FaqTemp faqTemp, long mainId) {
+	public long create(FaqTemp faqTemp, long mainId, long userId) {
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 		    @Override
@@ -81,6 +82,7 @@ public class FaqTempDaoImpl implements FaqTempDao{
 		        statement.setString(6, faqTemp.getType().toString());
 		        statement.setString(7, faqTemp.getTitle());
 		        statement.setLong(8, mainId);
+		        statement.setLong(9, userId);
 		        return statement;
 		    }
 		}, holder);

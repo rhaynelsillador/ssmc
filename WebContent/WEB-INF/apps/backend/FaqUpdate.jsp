@@ -86,7 +86,9 @@
 					           </div>
 					
 					           <br/>
+					           <c:if test="${requestScope.faq.author == sessionScope.user.id}">
 					           <button type="submit" class="btn btn-default">Save Update</button>
+					           </c:if>
 					   		</form>
 				       </div>
 				
@@ -105,15 +107,36 @@
 	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
 	<script type="text/javascript">
 		$("#faqType").val('${requestScope.faq.type}');
+		var faqApproveFn = $(".faq-approve-fn");
+		var approver =  ${sessionScope.user.approver};
+		console.log("approver :: ", approver);
+		if(!approver){
+			console.log("remove button");
+			faqApproveFn.remove();
+		}
 		
-		$(".faq-approve-fn").click(function(e){
-			console.log(e);
-			var params = {
-				"type" : "TEMPFAQ",
+		var params = {
+				"module" : "FAQ",
 				"id" : ${requestScope.faq.id}
 			}
+		
+		POST("IsApproved", params, function(data){
+			if(data.status == "ERROR"){
+				faqApproveFn.remove();
+			}
+			toastMessage(data);
+		})
+		
+		faqApproveFn.click(function(e){
+			console.log(e);			
 			POST("FaqApproval", params, function(data){
-				
+				if(data.code == 2){
+					location.href="Faq";
+				}else{
+					toastMessage(data);
+				}
+				faqApproveFn.remove();
+				console.log(data);
 			})
 			
 		});

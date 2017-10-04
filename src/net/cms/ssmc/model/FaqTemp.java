@@ -14,6 +14,7 @@ public class FaqTemp{
 	private Timestamp dateAdded;
 	private Timestamp dateUpdated;
 	private App type;
+	private long author;
 
 	public int getMainid() {
 		return mainid;
@@ -79,11 +80,19 @@ public class FaqTemp{
 		this.type = type;
 	}
 
+	public long getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(long author) {
+		this.author = author;
+	}
+
 	@Override
 	public String toString() {
 		return "FaqTemp [mainid=" + mainid + ", id=" + id + ", title=" + title + ", question=" + question + ", answer="
-				+ answer + ", dateAdded=" + dateAdded + ", dateUpdated=" + dateUpdated + ", type=" + type + "]";
+				+ answer + ", dateAdded=" + dateAdded + ", dateUpdated=" + dateUpdated + ", type=" + type + ", author="
+				+ author + "]";
 	}
 
-	
 }

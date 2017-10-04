@@ -36,7 +36,12 @@ public class ControlServices {
 		Control control = new Control();
 		control.setModule(module);
 		control.setModuleId(id);
-		controlDao.create(control);
+		try {
+			controlDao.create(control);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 //	public boolean isApproved(Control control){
@@ -45,7 +50,12 @@ public class ControlServices {
 //	}
 //	
 	public void createControl(Control control){
-		controlDao.create(control);
+		try {
+			controlDao.create(control);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void deleteControl(Module module, int moduleId){
@@ -74,7 +84,7 @@ public class ControlServices {
 		switch (control.getModule()) {
 		case FAQ:
 			try {
-				faqTempDao.findOne(control.getModuleId());
+				faqTempDao.findOne(control.getId());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				map.put(Helper.MESSAGE, "This is an invalid module id.");
@@ -88,53 +98,45 @@ public class ControlServices {
 		
 		if(user.isApprover()){
 			try {
+				System.out.println(control);
 				controlDao.retrieveByModule(control);
-				map.put(Helper.MESSAGE, "You already approved this module.");
+				map.put(Helper.MESSAGE, "You already approved this FAQ.");
 			} catch (Exception e) {
+				e.printStackTrace();
 				map.put(Helper.STATUS, Status.SUCCESS);
-				map.put(Helper.MESSAGE, "Click approve button to published this module.");
+				map.put(Helper.MESSAGE, "Click approve button to published this FAQ.");
 			}
 		}else{
-			map.put(Helper.MESSAGE, "You are not allowed to approve this module.");
-		}
-//		
-//		
-//		
-		
+			map.put(Helper.MESSAGE, "You are not allowed to approve this FAQ.");
+		}		
 		return map;
 	}
 	
 	
-	public Map<String, Object> approvedFaqTemp(HttpServletRequest httpServletRequest, Map<String, String> request){
+	public Map<String, Object> approvedFaqTemp(HttpServletRequest httpServletRequest, Control control){
 		User user = (User) httpServletRequest.getSession().getAttribute("user");
 		Map<String, Object> map = new HashMap<>();
 		map.put(Helper.STATUS, Status.ERROR);
-		Module module = null;
-		long moduleId = 0;
-		try {
-			module = Module.valueOf(request.get("module"));
-		} catch (Exception e) {
+		map.put(Helper.CODE, 1);
+//		Module module = null;
+//		long moduleId = 0;
+		
+		if(control.getModule() == null){
 			map.put(Helper.MESSAGE, "Invalid module.");
 			return map;
 		}
-		try {
-			moduleId = Long.parseLong(request.get("id"));
-		} catch (Exception e) {
+		if(control.getId() == 0){
 			map.put(Helper.MESSAGE, "Invalid module id.");
 			return map;
 		}
-		
-		Control control = new Control();
-		control.setModuleId(moduleId);
 		control.setUserid(user.getId());
-		control.setModule(module);
 		
 		int totalApprover = userDao.countApprover();
-		switch (module) {
+		switch (control.getModule()) {
 		case FAQ:
 			FaqTemp faqTemp = null;
 			try {
-				faqTemp = faqTempDao.findOne(Long.parseLong(request.get("id")));
+				faqTemp = faqTempDao.findOne(control.getId());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -142,29 +144,33 @@ public class ControlServices {
 				map.put(Helper.MESSAGE, "This is an invalid FAQ.");
 				return map;
 			}
-			int totalApproved = controlDao.hasApproved(module, moduleId, user.getId());
+			try {
+				controlDao.create(control);
+			} catch (Exception e) {
+				e.printStackTrace();
+				map.put(Helper.MESSAGE, "You already approved this "+ control.getModule().toString()+".");
+				return map;
+			}
+			int totalApproved = controlDao.hasApproved(control.getModule(), control.getId(), user.getId());
 			if(totalApproved == totalApprover){
-				controlDao.deleteControl(module, moduleId);
-				faqTempDao.delete(moduleId);
+				controlDao.deleteControl(control.getModule(), control.getId());
+				faqTempDao.delete(control.getId());
 				if(faqTemp.getMainid() != 0){
 					faqDao.update(faqTemp);
+					System.out.println("UPDATE MADE");
 				}else{
 					faqDao.create(faqTemp);
+					System.out.println("CREATE MADE");
 				}
 				map.put(Helper.STATUS, Status.SUCCESS);
 				map.put(Helper.MESSAGE, "FAQ approved successfully and already published!");
+				map.put(Helper.CODE, 2);
 			}else{
-				try {
-					controlDao.create(control);
-				} catch (Exception e) {
-					map.put(Helper.MESSAGE, "You already approved this "+ module.toString()+".");
-					return map;
-				}
 				map.put(Helper.STATUS, Status.SUCCESS);
 				map.put(Helper.MESSAGE, "FAQ approved successfully!");
 			}
 			break;
-
+			
 		default:
 			break;
 		}

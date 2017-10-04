@@ -23,22 +23,23 @@ public class ControlDaoImpl implements ControlDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public void create(Control control) {
+	public void create(Control control) throws Exception{
+		System.out.println(control);
 		jdbcTemplate.update(INSERT, new Object[] {
 			control.getModule().ordinal(),
-			control.getModuleId(),
+			control.getId(),
 			control.getUserid()
 		});
 	}
 	@Override
 	public Control retrieveByModule(Control control) throws Exception{
-		System.out.println(control.getModuleId()+" " + control.getModule().ordinal());
-		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{control.getModule().ordinal(), control.getModuleId(), control.getUserid()}, new BeanPropertyRowMapper<Control>(Control.class));
+		System.out.println(control.getId()+" " + control.getModule().ordinal()+" : "+ control.getUserid());
+		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{3, 48, control.getUserid()}, new ControlMapper());
 	}
 	
 	@Override
 	public Control retrieve(Control control) {
-		return jdbcTemplate.queryForObject(FINDONE, new BeanPropertyRowMapper<Control>(Control.class));
+		return jdbcTemplate.queryForObject(FINDONE, new ControlMapper());
 	}
 	
 	@Override

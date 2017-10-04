@@ -77,7 +77,7 @@ public class FaqDaoImpl implements FaqDao{
 				faq.getQuestion(),
 				faq.getAnswer(),
 				new Timestamp(System.currentTimeMillis()),
-				faq.getId()
+				faq.getMainid()
 		});
 	}
 

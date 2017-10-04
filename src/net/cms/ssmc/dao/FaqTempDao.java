@@ -12,6 +12,6 @@ public interface FaqTempDao {
 	FaqTemp findOne(long id) throws Exception;
 	FaqTemp findOneByMain(long id) throws Exception;
 	void update(FaqTemp faqTemp);
-	long create(FaqTemp faqTemp, long mainId);
+	long create(FaqTemp faqTemp, long mainId, long userid);
 	void delete(long id);
 }

@@ -4,6 +4,9 @@ CKEDITOR.replace( 'question' );
 $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 $("#faq_menu").addClass("navigation__active");
 
+console.log( window.location.pathname);
+var pathname = window.location.pathname;
+
 $(document).ready(function(){
 	$( "#faqUpdateForm" ).submit(function( event ) {
 		var $this = $( this );
@@ -19,10 +22,7 @@ $(document).ready(function(){
   		btn.attr("disabled", "disabled");
   		
   		POST("AddUpdateFaq", form, function(data){
-  			toastMessage(data);
-  			btn.html("Save Update");
-	  		btn.removeAttr("disabled");
-	  		checkIfCheckedAll();
+  			location.href="Faq";
   		})
   		
 	});
