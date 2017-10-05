@@ -98,7 +98,6 @@ public class ControlServices {
 		
 		if(user.isApprover()){
 			try {
-				System.out.println(control);
 				controlDao.retrieveByModule(control);
 				map.put(Helper.MESSAGE, "You already approved this FAQ.");
 			} catch (Exception e) {

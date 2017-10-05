@@ -20,6 +20,12 @@ tableConfig.formatters = {
 	} 
 }
 
+if(window.location.hash) {
+
+	console.log(window.location.hash);
+	$("a[href="+window.location.hash+"]").click()
+}
+
 var tableFaq = $("#data-table-clinc").bootgrid(tableConfig);
 tableFaq.on("loaded.rs.jquery.bootgrid", function() {
 	tableFaq.find(".command-status").on("click", function(e){        

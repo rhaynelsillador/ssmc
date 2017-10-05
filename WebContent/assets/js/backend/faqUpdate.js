@@ -22,7 +22,7 @@ $(document).ready(function(){
   		btn.attr("disabled", "disabled");
   		
   		POST("AddUpdateFaq", form, function(data){
-  			location.href="Faq";
+  			location.href="Faq#unpublishedFaq";
   		})
   		
 	});

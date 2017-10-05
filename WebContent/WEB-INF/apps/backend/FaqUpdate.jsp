@@ -3,7 +3,6 @@
 <html lang="en">
 	<%@ include file="commons/Headers.jsp"%>
     <body>
-        <!-- Page Loader -->
         <div id="page-loader">
             <div class="preloader preloader--xl preloader--light">
                 <svg viewBox="25 25 50 50">
@@ -86,9 +85,9 @@
 					           </div>
 					
 					           <br/>
-					           <c:if test="${requestScope.faq.author == sessionScope.user.id}">
-					           <button type="submit" class="btn btn-default">Save Update</button>
-					           </c:if>
+					           
+					           	<button type="submit" class="btn btn-default" id="saveUpdateFunction">Save Update</button>
+					           
 					   		</form>
 				       </div>
 				
@@ -104,25 +103,33 @@
 		<%@ include file="commons/JsFiles.jsp"%>
         <!-- jQuery -->
 
-	<!-- <script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script> -->
+	<script type="text/javascript" src="assets/js/backend/faqUpdate.js"></script>
 	<script type="text/javascript">
 		$("#faqType").val('${requestScope.faq.type}');
 		var faqApproveFn = $(".faq-approve-fn");
+		var saveUpdateFunction = $("#saveUpdateFunction");
 		var approver =  ${sessionScope.user.approver};
-		console.log("approver :: ", approver);
-		if(!approver){
+		var faq = getUrlParameter('faq');
+		var author = '${requestScope.faq.author}';
+		var userId = ${sessionScope.user.id};
+
+		
+	
+		console.log("approver :: ", faq, userId , author);
+		if(!approver && faq != 'main' && userId != author){
 			console.log("remove button");
-			faqApproveFn.remove();
+			saveUpdateFunction.remove();
 		}
 		
 		var params = {
 				"module" : "FAQ",
-				"id" : ${requestScope.faq.id}
+				"id" : '${requestScope.faq.id}'
 			}
 		
 		POST("IsApproved", params, function(data){
 			if(data.status == "ERROR"){
 				faqApproveFn.remove();
+				saveUpdateFunction.remove();
 			}
 			toastMessage(data);
 		})
@@ -131,11 +138,12 @@
 			console.log(e);			
 			POST("FaqApproval", params, function(data){
 				if(data.code == 2){
-					location.href="Faq";
+					location.href="Faq#unpublishedFaq";
 				}else{
 					toastMessage(data);
 				}
 				faqApproveFn.remove();
+				saveUpdateFunction.remove();
 				console.log(data);
 			})
 			

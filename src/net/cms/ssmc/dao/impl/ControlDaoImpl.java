@@ -34,7 +34,7 @@ public class ControlDaoImpl implements ControlDao {
 	@Override
 	public Control retrieveByModule(Control control) throws Exception{
 		System.out.println(control.getId()+" " + control.getModule().ordinal()+" : "+ control.getUserid());
-		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{3, 48, control.getUserid()}, new ControlMapper());
+		return jdbcTemplate.queryForObject(FINDONEBYMODULE, new Object[]{control.getModule().ordinal(), control.getId(), control.getUserid()}, new ControlMapper());
 	}
 	
 	@Override
