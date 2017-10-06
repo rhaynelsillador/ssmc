@@ -176,4 +176,10 @@ public class SsmcBackendController {
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
 		return "backend/CityUpdate";
 	}
+	
+	@AppicationAudit(module = Module.REGISTEREDACCOUNTS, access = Access.RETRIEVE)
+	@RequestMapping(path="/RegisteredAccounts", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String registeredAccounts(ModelMap map) {
+		return "backend/RegisteredAccounts";
+	}
 }

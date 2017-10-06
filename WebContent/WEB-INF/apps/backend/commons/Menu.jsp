@@ -29,6 +29,7 @@
                     <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
                     <li id="city_menu"><a href="City">City</a></li>
                     <li id="accounts_menu"><a href="Accounts">Accounts</a></li>
+                    <li id="registered_accounts_menu"><a href="RegisteredAccounts">Registered Accounts</a></li>
                     <li id="roles_menu"><a href="Role">Roles</a></li>
                 </ul>
             </li>

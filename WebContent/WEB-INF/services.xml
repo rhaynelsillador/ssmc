@@ -24,4 +24,6 @@
 	<bean id="imageServices" 		class="net.cms.ssmc.services.ImageServices" />
 	
 	<bean id="analyticsServices" 	class="net.ssmc.services.AnalyticsServices" />
+	
+	<bean id="registeredAccountsServices" 	class="net.ssmc.services.RegisteredAccountsServices" />
 </beans>

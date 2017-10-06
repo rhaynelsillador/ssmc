@@ -23,6 +23,8 @@
 <script src="assets/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- <script src="assets/vendors/fileinput/fileinput.min.js"></script> -->
 
+<script type="text/javascript" src="assets/vendors/DataTables/datatables.min.js"></script>
+
 <script src="assets/vendors/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
  <script src="assets/vendors/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
  <script src="assets/vendors/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
@@ -37,15 +39,4 @@
 <!-- Site Functions & Actions -->
 <script src="assets/js/app.min.js"></script>
 
-<!-- <script type="text/javascript">
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	
-	ga('create', 'UA-104902289-1', 'auto');
-	ga('send', 'pageview');
-</script> -->
-
-<!-- Page loader -->
     

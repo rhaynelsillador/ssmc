@@ -23,6 +23,8 @@
     <link href="assets/vendors/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="assets/vendors/bootstrap-fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
     
+    <link href="assets/vendors/DataTables/datatables.min.css" media="all" rel="stylesheet" type="text/css"/>
+    
    <!--  <link href="assets/vendors/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" /> -->
     <link href="assets/vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.min.css" rel="stylesheet">
 	<!-- Farbtastic Color Picker-->

@@ -22,6 +22,7 @@ import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.City;
 import net.ssmc.model.ContactUs;
 import net.ssmc.model.PendingApproval;
+import net.ssmc.model.RegisteredAccount;
 import net.ssmc.model.Role;
 import net.ssmc.model.RoleAccess;
 import net.ssmc.model.User;
@@ -29,6 +30,7 @@ import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
 import net.ssmc.services.DashboardServices;
+import net.ssmc.services.RegisteredAccountsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
 
@@ -47,7 +49,7 @@ public class SsmcBackendRestController {
 	@Autowired
 	private ContactUsServices contactUsServices;
 	@Autowired
-	private DashboardServices dashboardServices;
+	private RegisteredAccountsServices registeredAccountsServices;
 	@Autowired
 	private CityServices cityServices;
 	
@@ -159,12 +161,8 @@ public class SsmcBackendRestController {
 		return cityServices.deleteCity(httpServletRequest, city);
 	}
 	
-	
-	/*@Autowired
-	private FileUploadUtility fileUploadUtility;
-	
-	@RequestMapping(path="/upload", method = RequestMethod.POST, produces="application/json")
-	public @ResponseBody List<String> uploadFile(@RequestParam("files") MultipartFile[] multipartFiles) {
-		return fileUploadUtility.fileUpload(multipartFiles);
-	}*/
+	@RequestMapping(path="/RegisteredAccountsList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, List<RegisteredAccount>> registeredAccountsList(@RequestParam Map<String, String> request){
+		return registeredAccountsServices.getAllRegisteredAccounts(request);
+	}
 }
