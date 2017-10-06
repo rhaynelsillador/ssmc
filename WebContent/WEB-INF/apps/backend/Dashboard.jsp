@@ -51,19 +51,6 @@
                 <div class="card">
                     <div class="card__header">
                         <h2>SSMC Website History<small>Browsing history for 1 hour!</small></h2>
-
-                        <!-- <div class="actions">
-                            <a href=""><i class="zmdi zmdi-check-all"></i></a>
-                            <a href=""><i class="zmdi zmdi-trending-up"></i></a>
-                            <div class="dropdown">
-                                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="">Change Date Range</a></li>
-                                    <li><a href="">Change Graph Type</a></li>
-                                    <li><a href="">Other Settings</a></li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
 
                     <div class="flot-chart-edge">
@@ -189,89 +176,14 @@
                     <div class="card">
                         <div class="card__header">
                             <h2>Recent Posts <small>This items need your approval!</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="list-group">
-                            <a href="" class="list-group-item media">
-                                <div class="pull-left">
-                                    <img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt="">
-                                </div>
-
-                                <div class="media-body">
-                                    <div class="list-group__heading">David Villa Jacobs</div>
-                                    <small class="list-group__text">Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mattis lobortis sapien non posuere</small>
-                                </div>
-                            </a>
-
-                            <a href="" class="list-group-item media">
-                                <div class="pull-left">
-                                    <img class="avatar-img" src="demo/img/profile-pics/5.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="list-group__heading">Candice Barnes</div>
-                                    <small class="list-group__text">Quisque non tortor ultricies, posuere elit id, lacinia purus curabitur.</small>
-                                </div>
-                            </a>
-
-                            <a href="" class="list-group-item media">
-                                <div class="pull-left">
-                                    <img class="avatar-img" src="demo/img/profile-pics/3.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="list-group__heading">Jeannette Lawson</div>
-                                    <small class="list-group__text">Donec congue tempus ligula, varius hendrerit mi hendrerit sit amet. Duis ac quam sit amet leo feugiat iaculis</small>
-                                </div>
-                            </a>
-
-                            <a href="" class="list-group-item media">
-                                <div class="pull-left">
-                                    <img class="avatar-img" src="demo/img/profile-pics/4.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="list-group__heading">Darla Mckinney</div>
-                                    <small class="list-group__text">Duis tincidunt augue nec sem dignissim scelerisque. Vestibulum rhoncus sapien sed nulla aliquam lacinia</small>
-                                </div>
-                            </a>
-
-                            <a href="" class="list-group-item media">
-                                <div class="pull-left">
-                                    <img class="avatar-img" src="demo/img/profile-pics/2.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="list-group__heading">Rudolph Perez</div>
-                                    <small class="list-group__text">Phasellus a ullamcorper lectus, sit amet viverra quam. In luctus tortor vel nulla pharetra bibendum</small>
-                                </div>
-                            </a>
-
-                            <a href="" class="view-more">
-                                <i class="zmdi zmdi-long-arrow-right"></i> View all
-                            </a>
-                        </div>
+                        <div class="list-group" id="needApprovalItems"></div>
                     </div>
 
                     <div class="card widget-past-days">
                         <div class="card__header">
                             <h2>For the past 30 days <small>Pellentesque ornare sem lacinia quam</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="flot-chart-edge">
@@ -324,53 +236,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="card widget-recent-signups">
-                        <div class="card__header card__header--highlight">
-                            <h2>Most Recent Signups <small>Magna Cursus Malesuada</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="chart-sparkline-line m-t-20">9,4,6,5,6,4,5,7,9,3,6,5,9</div>
-                        </div>
-
-                        <div class="card__body widget-recent-signups__list">
-                            <a href=""><div class="avatar-char">B</div></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/5.jpg" alt=""></a>
-                            <a href=""><div class="avatar-char">L</div></a>
-                            <a href=""><div class="avatar-char">A</div></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/4.jpg" alt=""></a>
-                            <a href=""><div class="avatar-char">Z</div></a>
-                            <a href=""><div class="avatar-char">I</div></a>
-                            <a href=""><div class="avatar-char">S</div></a>
-                            <a href=""><div class="avatar-char">C</div></a>
-                            <a href=""><div class="avatar-char">W</div></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/3.jpg" alt=""></a>
-                            <a href=""><div class="avatar-char">A</div></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/9.jpg" alt=""></a>
-                            <a href=""><div class="avatar-char">N</div></a>
-                            <a href=""><div class="avatar-char">X</div></a>
-                            <a href=""><div class="avatar-char">V</div></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/7.jpg" alt=""></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/6.jpg" alt=""></a>
-                            <a href=""><img class="avatar-img" src="demo/img/profile-pics/8.jpg" alt=""></a>
-                            <a href=""><div class="avatar-char">F</div></a>
-                            <a href=""><div class="avatar-char">E</div></a>
-                            <a href=""><div class="avatar-char">A</div></a>
-                            <a href=""><div class="avatar-char">A</div></a>
-                            <a href=""><div class="avatar-char">M</div></a>
-                            <a href=""><div class="avatar-char">O</div></a>
-                            <a href=""><div class="avatar-char">I</div></a>
-                        </div>
-                    </div> -->
+	
                 </div>
             </section>
 
@@ -421,7 +287,7 @@
         <script src="assets/demo/js/easy-pie-charts.js"></script>
         <script src="assets/demo/js/misc.js"></script>
         <script src="assets/demo/js/sparkline-charts.js"></script>
-        <script src="assets/demo/js/calendar.js"></script>
+       <!--  <script src="assets/demo/js/calendar.js"></script> -->
 
         <!-- Site Functions & Actions -->
         <script src="assets/js/app.min.js"></script>
@@ -429,40 +295,8 @@
 
         <script type="text/javascript">
 
-        $(document).ready(function(){
-        	console.log("asdasdasd");
-
-        	getPendingApprovalList()
-
-
-        })
-        function getPendingApprovalList(){
-	        	POST("PendingApprovalList", {}, function(data){
-	        		console.log(data);
-	        		var html = "";
-	        		for (var i = 0; i < data.length; i++) {
-						html += '<div class="list-group-item">'+
-			                '<div class="checkbox checkbox--char">'+
-			                    '<label>'+
-			                        '<span class="widget-todo-lists__info">('+data[i].module+') '+data[i].name+'</span>'+
-			                    '</label>'+
-			                '</div>'+
-
-			                '<div class="actions list-group__actions">'+
-			                    '<div class="dropdown">'+
-			                        '<a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>'+
-
-			                        '<ul class="dropdown-menu pull-right">'+
-			                            '<li><a href="javascript:void(0)" class="approved-fn" data-moduleid="'+data[i].moduleid+'" data-module="'+data[i].module+'" data-reload="true">Approve</a></li>'+
-			                            '<li><a href="'+data[i].updateUrl+'?id='+data[1].moduleid+'&name='+data[1].name+'">Edit</a></li>'+
-			                        '</ul>'+
-			                    '</div>'+
-			                '</div>'+
-			            '</div>';
-					}
-	        		$("#pendingApprovalList").html(html);
-	        	})
-        	}
+		
+        
         </script>
 
     </body>

@@ -15,6 +15,7 @@ public class ControlMapper implements RowMapper<Control>{
 		control.setId(rs.getInt("id"));
 		control.setModule(Module.values()[rs.getInt("module")]);
 		control.setModuleId(rs.getInt("moduleid"));
+		control.setUserid(rs.getLong("userid"));
 		return control;
 	}
 

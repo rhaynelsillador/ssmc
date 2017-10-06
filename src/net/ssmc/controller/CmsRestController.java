@@ -199,4 +199,10 @@ public class CmsRestController {
 		System.out.println(control);
 		return controlServices.approvedFaqTemp(httpServletRequest, control);
 	}
+	
+	@AppicationAudit(module = Module.FAQ, access = Access.UPDATE)
+	@RequestMapping(path="/getAllUnApproved", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> getAllUnApproved() {
+		return controlServices.getAllUnApproved(httpServletRequest);
+	}
 }

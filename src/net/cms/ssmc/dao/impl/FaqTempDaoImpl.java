@@ -94,5 +94,9 @@ public class FaqTempDaoImpl implements FaqTempDao{
 	public void delete(long id) {
 		jdbcTemplate.update(SQLDELETE, new Object[] {id});
 	}
+	@Override
+	public List<FaqTemp> findAll() {
+		return jdbcTemplate.query(FINDALL, new Object[]{}, new BeanPropertyRowMapper<FaqTemp>(FaqTemp.class));
+	}
 
 }

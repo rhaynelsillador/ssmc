@@ -1,5 +1,7 @@
 package net.cms.ssmc.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +15,7 @@ public class ControlDaoImpl implements ControlDao {
 
 	private static final String INSERT 			= "INSERT INTO CONTROL (module, moduleid, userid) VALUES (?,?,?)";
 	private static final String FINDONE			= "SELECT * FROM CONTROL WHERE id = ?";
+	private static final String FINDBYUSER		= "SELECT * FROM CONTROL WHERE userid = ?";
 	private static final String FINDONEBYMODULE	= "SELECT * FROM CONTROL WHERE module = ? AND moduleid = ? AND userid=?";
 	private static final String DELETEBYID 		= "DELETE FROM CONTROL WHERE module = ? AND moduleid = ? ";
 	private static final String HASAPPROVED 	= "SELECT COUNT(id) FROM CONTROL WHERE MODULE = ? AND MODULEID= ?";
@@ -50,5 +53,9 @@ public class ControlDaoImpl implements ControlDao {
 	@Override
 	public int hasApproved(Module module , long controlId, long userid) {
 		return jdbcTemplate.queryForObject(HASAPPROVED, new Object[]{module.ordinal(), controlId}, Integer.class);
+	}
+	@Override
+	public List<Control> findAllByUser(long userId) {
+		return jdbcTemplate.query(FINDBYUSER, new Object[]{userId}, new ControlMapper());
 	}
 }

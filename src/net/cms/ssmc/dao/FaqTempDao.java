@@ -9,6 +9,7 @@ public interface FaqTempDao {
 
 	long count();
 	List<FaqTemp> findAll(Map<String, String> request);
+	List<FaqTemp> findAll();
 	FaqTemp findOne(long id) throws Exception;
 	FaqTemp findOneByMain(long id) throws Exception;
 	void update(FaqTemp faqTemp);

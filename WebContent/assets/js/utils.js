@@ -76,7 +76,6 @@ var POST = function POST(url, form, cb){
       	url: url,
       	data: JSON.stringify(form),
       	success: function( data ) {
-      		console.log("data :: ", data)
       		cb(data);
       	}
 	});
@@ -206,3 +205,36 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+$(document).ready(function(e){
+	POST("getAllUnApproved", {}, function(data){
+		console.log(data)
+		var faq = data.faq;
+		
+		console.log()
+		if(faq.length > 0){
+			$("#faq_menu > a > span").html(faq.length)
+			$("#cmsNotifCounter").html(faq.length);
+		}else{
+			$("#faq_menu > a > span").remove();
+			$("#cmsNotifCounter").remove();
+		}
+		
+		
+		
+		var needApprovalItemsHtml = "";
+		$.each(faq, function(index, value){
+			needApprovalItemsHtml += '<a href="FaqUpdate?id='+value.id+'&question='+value.title+'&faq=temp" class="list-group-item media">'+
+		                '<div class="pull-left">'+
+				            '<img class="avatar-img" src="assets/demo/img/profile-pics/1.jpg" alt="">'+
+				        '</div>'+
+				
+				        '<div class="media-body">'+
+				            '<div class="list-group__heading">'+value.title+'</div>'+
+				            '<small class="list-group__text">'+value.question.substring(0, 100)+' ...</small>'+
+				        '</div>'+
+				    '</a>';
+		})
+		$("#needApprovalItems").html(needApprovalItemsHtml);
+	})
+})

@@ -18,7 +18,7 @@
     <div class="navigation__menu c-overflow">
         <ul>
             <li id="dashboard">
-                <a href="Dashboard"><i class="zmdi zmdi-home"></i> Home</a>
+                <a href="Dashboard"><i class="zmdi zmdi-home"></i> Dashboard</a>
             </li>
             <li class="navigation__sub" id="administration_menus">
                 <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> Administration</a>
@@ -34,12 +34,12 @@
             </li>
             
             <li class="navigation__sub" id="cms_menus">
-                <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> CMS</a>
+                <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> CMS <span class="badge badge-error" id="cmsNotifCounter"></span></a>
 
                 <ul>
-                    <li id="faq_menu"><a href="Faq">Faq</a></li>
+                    <li id="faq_menu"><a href="Faq">Faq <span class="badge badge-error"></span></a></li>
                     <li id="about_us_menu"><a href="AboutUs">About Us</a></li>
-                    <li id="header_menu"><a href="Header">Header</a></li>
+                    <li id="header_menu"><a href="Header">Header</a></li>  
                     <li id="service_menu"><a href="Services">Services</a></li>
                 </ul>
             </li>

@@ -10,6 +10,7 @@ public interface ControlDao {
 	
 	void create(Control control) throws Exception;
 	Control retrieve(Control control);
+	List<Control> findAllByUser(long userId);
 	void deleteControl(Module module, long moduleId);
 	int hasApproved(Module module , long controlId, long userid);
 	Control retrieveByModule(Control control) throws Exception;

@@ -1,7 +1,9 @@
 package net.cms.ssmc.services;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,21 +41,15 @@ public class ControlServices {
 		try {
 			controlDao.create(control);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-//	public boolean isApproved(Control control){
-//		int approved = controlDao.countApproved(control.getId());
-//		return userDao.countApprover() == approved ? false : true;
-//	}
 //	
 	public void createControl(Control control){
 		try {
 			controlDao.create(control);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -117,8 +113,6 @@ public class ControlServices {
 		Map<String, Object> map = new HashMap<>();
 		map.put(Helper.STATUS, Status.ERROR);
 		map.put(Helper.CODE, 1);
-//		Module module = null;
-//		long moduleId = 0;
 		
 		if(control.getModule() == null){
 			map.put(Helper.MESSAGE, "Invalid module.");
@@ -173,7 +167,33 @@ public class ControlServices {
 		default:
 			break;
 		}
+		return map;
+	}
+	
+	public Map<String, Object> getAllUnApproved(HttpServletRequest httpServletRequest){
+		Map<String, Object> map = new HashMap<>();
+		User user = (User) httpServletRequest.getSession().getAttribute("user");
+		List<FaqTemp> faqTemp = faqTempDao.findAll();
 		
+		List<Control> controls = controlDao.findAllByUser(user.getId());
+		List<FaqTemp> faqTemps = new ArrayList<>();
+
+		System.out.println(controls.size());
+		
+		for (FaqTemp faqTmp : faqTemp) {
+			boolean isApproved = false;
+			for (Control ctrl : controls) {
+				if(ctrl.getModuleId() == faqTmp.getId() && ctrl.getModule().equals(Module.FAQ)){
+					isApproved = true;
+				}
+			}
+			if(!isApproved){
+				faqTemps.add(faqTmp);
+				System.out.println(faqTmp.getId());
+			}
+		}
+		
+		map.put("faq", faqTemps);
 		
 		return map;
 	}
