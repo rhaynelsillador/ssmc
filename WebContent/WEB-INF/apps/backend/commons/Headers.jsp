@@ -16,6 +16,9 @@
 
     <!-- Bootstrap Date/Time picker -->
     <link href="assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    
+    
     <!-- Bootgrid -->
     
     <!-- <link href="assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css"> -->

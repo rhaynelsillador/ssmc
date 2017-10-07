@@ -26,4 +26,11 @@
 	<bean id="analyticsServices" 	class="net.ssmc.services.AnalyticsServices" />
 	
 	<bean id="registeredAccountsServices" 	class="net.ssmc.services.RegisteredAccountsServices" />
+	
+	
+	<bean id="dtable" class="java.util.HashMap">
+		<constructor-arg>
+        <map key-type="java.lang.Integer" value-type="java.lang.Object"></map>
+    </constructor-arg>
+	</bean>
 </beans>

@@ -10,8 +10,9 @@ public class RegisteredAccount {
 	private String firstName;
 	private String lastName;
 	private String middleName;
+	private long number;
 	private boolean status;
-	private Timestamp dateAdded;
+	private Timestamp dateCreated;
 	private Timestamp dateLastLogin;
 	
 	public long getId() {
@@ -57,11 +58,12 @@ public class RegisteredAccount {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public Timestamp getDateAdded() {
-		return dateAdded;
+	
+	public Timestamp getDateCreated() {
+		return dateCreated;
 	}
-	public void setDateAdded(Timestamp dateAdded) {
-		this.dateAdded = dateAdded;
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	public Timestamp getDateLastLogin() {
 		return dateLastLogin;
@@ -69,12 +71,17 @@ public class RegisteredAccount {
 	public void setDateLastLogin(Timestamp dateLastLogin) {
 		this.dateLastLogin = dateLastLogin;
 	}
+	public long getNumber() {
+		return number;
+	}
+	public void setNumber(long number) {
+		this.number = number;
+	}
 	@Override
 	public String toString() {
 		return "RegisteredAccount [id=" + id + ", email=" + email + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", middleName=" + middleName + ", dateAdded=" + dateAdded
-				+ ", dateLastLogin=" + dateLastLogin + "]";
+				+ firstName + ", lastName=" + lastName + ", middleName=" + middleName + ", number=" + number
+				+ ", status=" + status + ", dateCreated=" + dateCreated + ", dateLastLogin=" + dateLastLogin + "]";
 	}
-	
 	
 }

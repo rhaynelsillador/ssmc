@@ -7,7 +7,10 @@ import net.ssmc.model.RegisteredAccount;
 
 public interface RegisteredAccountDao {
 
-	void create(RegisteredAccount account);
+	void create(List<RegisteredAccount> registeredAccounts);
+	
+	long count(Map<String, String> request);
+	long create(RegisteredAccount account);
 	RegisteredAccount findOne(long id);
 	List<RegisteredAccount> findAll(Map<String, String> request);
 	

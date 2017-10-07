@@ -1,5 +1,6 @@
 package net.ssmc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.ssmc.dao.RegisteredAccountDao;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
@@ -52,6 +54,10 @@ public class SsmcBackendRestController {
 	private RegisteredAccountsServices registeredAccountsServices;
 	@Autowired
 	private CityServices cityServices;
+	@Autowired
+	private RegisteredAccountDao registeredAccountDao;
+	
+	private static long random = System.currentTimeMillis();
 	
 	@RequestMapping(path="/AccountAuthentication", method = RequestMethod.POST, produces="application/json")
 	public @ResponseBody Map<String, Object> accountAuthentication(@RequestParam Map<String, String> request) {
@@ -162,7 +168,40 @@ public class SsmcBackendRestController {
 	}
 	
 	@RequestMapping(path="/RegisteredAccountsList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody Map<String, List<RegisteredAccount>> registeredAccountsList(@RequestParam Map<String, String> request){
+	public @ResponseBody Map<String, Object> registeredAccountsList(@RequestParam Map<String, String> request){
 		return registeredAccountsServices.getAllRegisteredAccounts(request);
 	}
+	
+	@RequestMapping(path="/LoadUserData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody String loadUserData(){
+		new Thread(new Runnable() {
+		
+		@Override
+		public void run() {
+			List<RegisteredAccount> registeredAccounts = new ArrayList<>();
+			for (int i = 0; i < 100000; i++) {
+				random++;
+				RegisteredAccount account = new RegisteredAccount();
+				account.setEmail("Rhaynel-"+random);
+				account.setFirstName("Sillador"+random);
+				account.setLastName("Silaldor"+random);
+				account.setMiddleName("M");
+				account.setStatus(true);
+				account.setPassword("PASSWORD"+random);
+				account.setNumber(1111);
+				
+				System.out.println(i + " :: " + random);
+				registeredAccounts.add(account);
+			}
+			System.out.println("INSERTING...");
+			registeredAccountDao.create(registeredAccounts);
+			System.out.println("DONE...");
+		}
+		
+			
+		}).start();
+		return "LOADING...";
+	}
+	
+	
 }

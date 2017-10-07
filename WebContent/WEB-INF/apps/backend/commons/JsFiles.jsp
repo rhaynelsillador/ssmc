@@ -24,6 +24,9 @@
 <!-- <script src="assets/vendors/fileinput/fileinput.min.js"></script> -->
 
 <script type="text/javascript" src="assets/vendors/DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="assets/vendors/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+
 
 <script src="assets/vendors/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
  <script src="assets/vendors/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>

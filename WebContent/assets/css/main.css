@@ -53,3 +53,11 @@
 .badge-inverse:hover {
   background-color: #1a1a1a;
 }
+
+#registerEmailDiv{
+	width: 194px;
+}
+#registerFirstNameDiv{
+    padding-left: 40px;
+    width: 290px;
+}

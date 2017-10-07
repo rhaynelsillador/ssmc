@@ -30,7 +30,12 @@ public class AuditInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("user", userDao.login("alexie", "tVGOKZDczLUctwYsTPWQxA=="));
+		try {
+			session.setAttribute("user", userDao.login("alexie", "tVGOKZDczLUctwYsTPWQxA=="));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 		session.setAttribute("fileserver", "http://dev.ssmc.net/FileServer/");
 		try{
