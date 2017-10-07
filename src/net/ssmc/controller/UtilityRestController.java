@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.cms.ssmc.db.utils.DBUpdates;
 import net.ssmc.model.Email;
 import net.ssmc.model.User;
 import net.ssmc.utils.FileUploadUtility;
@@ -28,6 +29,8 @@ public class UtilityRestController {
 	private FileUploadUtility fileUploadUtility;
 	@Autowired
 	private GmailUtility gmailUtility;
+	@Autowired
+	private DBUpdates DBUpdates;
 	
 	@RequestMapping(path="/ckEditorUpload", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
 	public @ResponseBody Map<String, Object> uploadFile(@RequestParam("upload") MultipartFile multipartFiles) {
@@ -56,6 +59,13 @@ public class UtilityRestController {
 	public @ResponseBody Map<String, Object> sendEmail(@RequestBody Email email) {
 		return gmailUtility.sendEmail(email.getTo(), email.getSubject(), email.getContent());
 	}
+	
+	@RequestMapping(path="/DBUpdates", method = {RequestMethod.POST, RequestMethod.GET}, produces="application/json")
+	public @ResponseBody String dBUpdates() {
+		DBUpdates.createRegisteredAccountTable();
+		return "{\"status\":\"OK\"}";
+	}
+	
 	
 	
 }

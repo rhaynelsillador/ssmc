@@ -76,13 +76,16 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 	
 	
 	private String queryFilter(Map<String, String> request){
+		System.out.println(request);
 		StringBuilder builder = new StringBuilder();
 		String email = request.get(RegisterAccounts.EMAIL.toString().toLowerCase()).trim();
 		String firstName = request.get(RegisterAccounts.FIRSTNAME.toString().toLowerCase()).trim();
 		String lastName = request.get(RegisterAccounts.LASTNAME.toString().toLowerCase()).trim();
 		String status = request.get(RegisterAccounts.STATUS.toString().toLowerCase()).trim();
-		String dateCreated = request.get(RegisterAccounts.DATECREATED.toString().toLowerCase()).trim();
-		String dateLastLogin = request.get(RegisterAccounts.DATELASTLOGIN.toString().toLowerCase()).trim();
+		String dateCreatedFrom = request.get(RegisterAccounts.DATECREATEDFROM.toString().toLowerCase()).trim();
+		String dateCreatedTo = request.get(RegisterAccounts.DATECREATEDTO.toString().toLowerCase()).trim();
+		String dateLastLoginFrom = request.get(RegisterAccounts.DATELASTLOGINFROM.toString().toLowerCase()).trim();
+		String dateLastLoginTo = request.get(RegisterAccounts.DATELASTLOGINTO.toString().toLowerCase()).trim();
 		
 		if(!email.isEmpty()){
 			builder.append("EMAIL LIKE '%"+email+"%' AND ");
@@ -96,11 +99,20 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 		if(!status.isEmpty()){
 			builder.append("STATUS = "+status+" AND ");
 		}
-		if(!dateCreated.isEmpty()){
-			builder.append("DATECREATED LIKE '%"+dateCreated+"%' AND ");
+		if(!dateCreatedFrom.isEmpty() && !dateCreatedFrom.isEmpty()){
+			builder.append("DATECREATED BETWEEN '"+dateCreatedFrom+"' AND '"+dateCreatedTo+"' AND ");
+		}else if(!dateCreatedFrom.isEmpty()){
+			builder.append("DATECREATED > "+dateCreatedFrom+" ");
+		}else if(!dateCreatedTo.isEmpty()){
+			builder.append("DATECREATED < "+dateCreatedTo+" ");
 		}
-		if(!dateLastLogin.isEmpty()){
-			builder.append("DATELASTLOGIN LIKE '%"+dateLastLogin+"%' AND ");
+		
+		if(!dateLastLoginFrom.isEmpty() && !dateLastLoginTo.isEmpty()){
+			builder.append("DATELASTLOGIN BETWEEN '"+dateLastLoginFrom+"' AND '"+dateLastLoginTo+"' AND ");
+		}else if(!dateLastLoginFrom.isEmpty()){
+			builder.append("DATELASTLOGIN BETWEEN > '"+dateCreatedFrom+"' AND ");
+		}else if(!dateLastLoginFrom.isEmpty()){
+			builder.append("DATELASTLOGIN BETWEEN < '"+dateCreatedFrom+"' AND ");
 		}
 		if(!builder.toString().isEmpty()){
 			return "WHERE "+(builder.toString().substring(0, builder.toString().length()-4)); 

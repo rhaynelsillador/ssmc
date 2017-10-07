@@ -33,7 +33,6 @@ public class AuditInterceptor implements HandlerInterceptor {
 		try {
 			session.setAttribute("user", userDao.login("alexie", "tVGOKZDczLUctwYsTPWQxA=="));
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		
 		

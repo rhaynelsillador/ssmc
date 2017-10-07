@@ -181,8 +181,10 @@
 	                        d.firstname = $.trim($("#registerFirstName").val());
 	                        d.lastname = $.trim($("#registerLastName").val());
 	                        d.status = $.trim($("#registerStatus").val());
-	                        d.datecreated = $.trim($("#registerDateCreated").val());
-	                        d.datelastlogin = $.trim($("#registerDateLastLogin").val());
+	                        d.datecreatedfrom = $.trim($("#registerDateCreatedFrom").val());
+	                        d.datecreatedto = $.trim($("#registerDateCreatedTo").val());
+	                        d.datelastloginfrom = $.trim($("#registerDateLastLoginFrom").val());
+	                        d.datelastloginto = $.trim($("#registerDateLastLoginTo").val());
 	                    }
 	                },
 	                "columns": [

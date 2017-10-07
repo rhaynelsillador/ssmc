@@ -29,6 +29,7 @@
 	<import resource="datasource.xml"/>	
 	<import resource="services.xml"/>
 	<import resource="dao.xml"/>
+	<import resource="db-updates.xml"/>
 	<!-- <import resource="spring-security.xml"/> -->
 	<!-- <import resource="couch-db-context.xml"/> -->
 	
