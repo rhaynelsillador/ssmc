@@ -7,10 +7,8 @@ public enum RegisterAccounts {
 	FIRSTNAME("First Name"),
 	LASTNAME("Last Name"),
 	STATUS("Status"),
-	DATECREATEDFROM("Date Added From"),
-	DATECREATEDTO("Date Added To"),
-	DATELASTLOGINFROM("Date Last Login From"),
-	DATELASTLOGINTO("Date Last Login To");
+	DATECREATED("Date Added From"),
+	DATELASTLOGIN("Date Last Login From");
 	
 	private String display;
 	

@@ -19,8 +19,6 @@ import net.ssmc.dao.RegisteredAccountDao;
 import net.ssmc.enums.dtable.DTableParam;
 import net.ssmc.enums.dtable.RegisterAccounts;
 import net.ssmc.model.RegisteredAccount;
-import net.ssmc.model.Role;
-import oracle.net.aso.b;
 
 public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 
@@ -82,10 +80,10 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 		String firstName = request.get(RegisterAccounts.FIRSTNAME.toString().toLowerCase()).trim();
 		String lastName = request.get(RegisterAccounts.LASTNAME.toString().toLowerCase()).trim();
 		String status = request.get(RegisterAccounts.STATUS.toString().toLowerCase()).trim();
-		String dateCreatedFrom = request.get(RegisterAccounts.DATECREATEDFROM.toString().toLowerCase()).trim();
-		String dateCreatedTo = request.get(RegisterAccounts.DATECREATEDTO.toString().toLowerCase()).trim();
-		String dateLastLoginFrom = request.get(RegisterAccounts.DATELASTLOGINFROM.toString().toLowerCase()).trim();
-		String dateLastLoginTo = request.get(RegisterAccounts.DATELASTLOGINTO.toString().toLowerCase()).trim();
+		String dateCreatedFrom = request.get("DATECREATEDFROM".toLowerCase()).trim();
+		String dateCreatedTo = request.get("DATECREATEDTO".toLowerCase()).trim();
+		String dateLastLoginFrom = request.get("DATELASTLOGINFROM".toLowerCase()).trim();
+		String dateLastLoginTo = request.get("DATELASTLOGINTO".toLowerCase()).trim();
 		
 		if(!email.isEmpty()){
 			builder.append("EMAIL LIKE '%"+email+"%' AND ");
