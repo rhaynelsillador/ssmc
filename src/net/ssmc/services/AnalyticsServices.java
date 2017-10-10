@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.ssmc.dao.AnalyticsDao;
+import net.ssmc.dao.RegisteredAccountDao;
 import net.ssmc.model.BrowseCount;
 import oracle.net.aso.b;
 
@@ -16,6 +17,8 @@ public class AnalyticsServices {
 
 	@Autowired
 	private AnalyticsDao analyticsDao;
+	@Autowired
+	private RegisteredAccountDao registeredAccountDao;
 	
 	public List<int[]> retrieveAll(){
 		List<BrowseCount> browseCounts = analyticsDao.findAll();
@@ -40,6 +43,9 @@ public class AnalyticsServices {
 		} catch (Exception e) {
 			data.put("count", 0);
 		}
+		
+		data.put("totalRegistered", registeredAccountDao.totalRegisterThisMonth());
+		data.put("totalLogin", registeredAccountDao.totalLoginThisMonth());
 		data.put("history", browseCounts);
 		analyticsDao.countLastMonth();
 		return data;

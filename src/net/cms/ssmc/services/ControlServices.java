@@ -97,7 +97,6 @@ public class ControlServices {
 				controlDao.retrieveByModule(control);
 				map.put(Helper.MESSAGE, "You already approved this FAQ.");
 			} catch (Exception e) {
-				e.printStackTrace();
 				map.put(Helper.STATUS, Status.SUCCESS);
 				map.put(Helper.MESSAGE, "Click approve button to published this FAQ.");
 			}

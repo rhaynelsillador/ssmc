@@ -1,10 +1,12 @@
 package net.ssmc.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +36,7 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 
 	@Override
 	public long create(RegisteredAccount account) {
-		final String INSERT = "INSERT INTO registered_account (email, password, number, firstname, lastname, datecreated, middlename, status) VALUES (?,?,?,?,?,?,?,?)";
+		final String INSERT = "INSERT INTO registered_account (email, password, number, firstname, lastname, datecreated, middlename, status, date) VALUES (?,?,?,?,?,?,?,?,?)";
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 		    @Override
@@ -48,6 +50,7 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 		        statement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 		        statement.setString(7, account.getMiddleName());
 		        statement.setBoolean(8, account.isStatus());
+		        statement.setDate(9, new Date(System.currentTimeMillis()));
 		        return statement;
 		    }
 		}, holder);
@@ -141,6 +144,40 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 			}
 		  });
 	}
-	
+
+	@Override
+	public List<Long> totalRegisterThisMonth() {
+		Calendar cal = Calendar.getInstance();	
+		cal.setTime(new java.util.Date());
+		cal.add(Calendar.MONTH, -1);
+		final String FINDALL = "SELECT COUNT(ID) FROM registered_account WHERE date >= ? GROUP BY date "; 
+		return jdbcTemplate.queryForList(FINDALL, new Object[]{new Date(cal.getTimeInMillis())}, Long.class);
+	}
+
+	@Override
+	public List<Long> totalLoginThisMonth() {
+		Calendar cal = Calendar.getInstance();	
+		cal.setTime(new java.util.Date());
+		cal.add(Calendar.MONTH, -1);
+		final String FINDALL = "SELECT COUNT(ID) FROM registered_account WHERE datelastlogin >= ? GROUP BY SUBSTRING(datelastlogin, 1, 10) "; 
+		System.out.println(FINDALL + " :: " + cal.getTimeInMillis());
+		return jdbcTemplate.queryForList(FINDALL, new Object[]{cal.getTimeInMillis()}, Long.class);
+	}
+
+//	@Override
+//	public long totalRegisterPerdayThisMonth() {
+//		Calendar cal = Calendar.getInstance();	
+//		cal.setTime(new java.util.Date());
+//		cal.add(Calendar.MONTH, -1);
+//		final String FINDALL = "SELECT COUNT(ID) FROM registered_account WHERE datelastlogin >= ?"; 
+//		return jdbcTemplate.queryForObject(FINDALL, new Object[]{new Date(cal.getTimeInMillis())}, Long.class);
+//	}
+//
+//	@Override
+//	public long totalLoginPerdayThisMonth() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//	
 	
 }

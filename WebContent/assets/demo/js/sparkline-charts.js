@@ -4,19 +4,47 @@ $(document).ready(function () {
 	
 	POST("CurrentOnline", {}, function(data){
 		console.log(data);
-		$("#websiteTrafficCount").html(data.count);
+		
 		var hist = "";
 		$.each(data.history, function(index, value){
-			console.log(data.history.length , index);
 			if(data.history.length-1 == index){
 				hist += value.count;
 			}else{
 				hist += value.count+",";
 			}
-			console.log(value.count)
+			
 		})
-		console.log(hist)
 		$("#websiteTrafficCountHistory").html(hist);
+		$("#websiteTrafficCount").html(data.count);
+		
+		var totalRegistered = "";
+		var totalRegisteredCount = 0;
+		$.each(data.totalRegistered, function(index, value){
+			if(data.totalRegistered.length-1 == index){
+				totalRegistered += value;
+			}else{
+				totalRegistered += value+",";
+			}
+			totalRegisteredCount += value;
+		})
+		$("#totalRegisteredCountHistory").html(totalRegistered);
+		$("#totalRegisteredCount").html(totalRegisteredCount);
+		
+		var totalLogin = "";
+		var totalLoginCount = 0;
+		$.each(data.totalLogin, function(index, value){
+			if(data.totalLogin.length-1 == index){
+				totalLogin += value;
+			}else{
+				totalLogin += value+",";
+			}
+			totalLoginCount += value;
+		})
+		console.log("hist : ", hist, "totalLogin : ", totalLogin, "totalLoginCount : ", totalLoginCount)
+		
+		$("#totalLoginCountHistory").html(totalLogin);
+		$("#totalLoginCount").html(totalLoginCount);
+		
 		
 		//Sample Sparkline Line Chart
 	    if ($('.chart-sparkline-line')[0]) {

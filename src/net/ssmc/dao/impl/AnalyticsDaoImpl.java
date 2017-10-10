@@ -38,8 +38,6 @@ public class AnalyticsDaoImpl implements AnalyticsDao {
 		cal.setTime(new Date());
 		cal.add(Calendar.MINUTE, -10);
 		long fiveMnsBack = cal.getTimeInMillis();
-		System.out.println(new Timestamp(System.currentTimeMillis()));
-		System.out.println(new Timestamp(fiveMnsBack));
 		return jdbcTemplate.queryForObject(COUNTACTIVE, new Object[]{new Timestamp(fiveMnsBack)}, Long.class);
 	}
 	

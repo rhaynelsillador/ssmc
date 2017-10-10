@@ -19,19 +19,11 @@ import net.ssmc.model.PendingApproval;
 import net.ssmc.model.User;
 
 public class DashboardServices {
-
-	@Autowired
-	private ControlDao controlDao;
+	
 	@Autowired
 	private AnalyticsDao analyticsDao;
 	@Autowired
 	private ContactUsDao contactUsDao;
-	
-//	public List<PendingApproval> getAllPendingApproval(HttpServletRequest httpServletRequest){
-//		HttpSession session = httpServletRequest.getSession();
-//		User user = (User) session.getAttribute("user");
-//		return controlDao.retrieveAll(user.getId());
-//	}
 	
 	public Map<String, Object> lastMonth(){
 		Map<String, Object> data = new HashMap<>();
@@ -57,7 +49,7 @@ public class DashboardServices {
 		return data;
 	}
 	
-	public  Map<String, Object> systemUtils(){
+	public Map<String, Object> systemUtils(){
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("cpu", SystemUtilization.cpuUtil());
@@ -67,4 +59,5 @@ public class DashboardServices {
 		
 		return data;
 	}
+	
 }

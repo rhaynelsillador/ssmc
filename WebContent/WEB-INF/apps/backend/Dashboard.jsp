@@ -59,44 +59,11 @@
                 </div>
 
                 <div id="content__grid" data-columns>
-                    <div class="card widget-analytic">
-                        <div class="card__header">
-                            <h2>Website Impressions <small>Consectetur Ultricies Porta Fringilla</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card__body">
-                            <div class="widget-analytic__info">
-                                <i class="zmdi zmdi-caret-up-circle"></i>
-                                <h2>987,453</h2>
-                            </div>
-                            <div class="widget-analytic__chart">
-                                <div class="chart-sparkline-line">9,5,6,3,9,7,5,4,6,5,6,4,9</div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="card widget-analytic">
                         <div class="card__header">
                             <h2>Website Traffics <small>Current active users.</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <div class="card__body">
                             <div class="widget-analytic__info">
@@ -109,27 +76,32 @@
                         </div>
                     </div>
 
-                    <div class="card widget-analytic">
+                    <div class="card widget-analytic1">
                         <div class="card__header">
-                            <h2>Total Sales <small>Purus Malesuada Consectetur</small></h2>
-                            <div class="actions">
-                                <div class="dropdown">
-                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="">Refresh</a></li>
-                                        <li><a href="">Manage</a></li>
-                                        <li><a href="">Settings</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <h2>Total Regsitered <small>Last 30 days ago</small></h2>
                         </div>
                         <div class="card__body">
                             <div class="widget-analytic__info">
-                                <i class="zmdi zmdi-caret-down-circle"></i>
-                                <h2>$458,778</h2>
+                                <i class="zmdi zmdi-caret-up-circle"></i>
+                                <h2 id="totalRegisteredCount"></h2>
                             </div>
                             <div class="widget-analytic__chart">
-                                <div class="chart-sparkline-line">9,4,6,5,6,4,5,7,9,3,6,5,9</div>
+                                <div class="chart-sparkline-line" id="totalRegisteredCountHistory"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card widget-analytic">
+                        <div class="card__header">
+                            <h2>Total Login <small>Last 30 days ago</small></h2>
+                        </div>
+                        <div class="card__body">
+                            <div class="widget-analytic__info">
+                                <i class="zmdi zmdi-caret-up-circle"></i>
+                                <h2 id="totalLoginCount"></h2>
+                            </div>
+                            <div class="widget-analytic__chart">
+                                <div class="chart-sparkline-line" id="totalLoginCountHistory">9,5,6,3,9,7,5,4,6,5,6,4,9</div>
                             </div>
                         </div>
                     </div>
