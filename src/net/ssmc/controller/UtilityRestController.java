@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.cms.ssmc.db.utils.DBUpdates;
 import net.ssmc.model.Email;
-import net.ssmc.model.User;
 import net.ssmc.utils.FileUploadUtility;
 import net.ssmc.utils.GmailUtility;
 

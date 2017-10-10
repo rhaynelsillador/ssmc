@@ -18,7 +18,7 @@
             
 			<%@ include file="commons/MenuAside.jsp"%>
             <%@ include file="commons/Menu.jsp"%>
-
+		
             <section id="content">
                 <div class="content__header">
                     <h2>Accounts</h2>
@@ -27,7 +27,106 @@
                         <a href="AccountAdd"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
+				<div class="card">
+                    <div class="card__header">
+                        <h2>Form Filter <small></small></h2>
+                    </div>
 
+                    <div class="card__body">
+                        <div class="row">
+                        	<form id="accountFilterForm">
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Username</label>
+	                                    <input type="text" class="form-control" id="accountUsername" name="username" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>First Name</label>
+	                                    <input type="text" class="form-control" id="accountFirstName" name="firstName" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Last Name</label>
+	                                    <input type="text" class="form-control" id="accountLastName" name="lastName" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Mobile</label>
+	                                    <input type="text" class="form-control" id="accountMobile" name="mobile" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Phone</label>
+	                                    <input type="text" class="form-control" id="accountPhone" name="phone" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Email</label>
+	                                    <input type="text" class="form-control" id="accountEmail" name="email" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Birthday</label>
+	                                    <input type="text" class="form-control" id="accountBirthday" name="birthday" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Last Login Date From</label>
+	                                    <input type="text" class="form-control" id="accountLastLoginDateFrom" name="lastLoginDateFrom" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Last Login Date From</label>
+	                                    <input type="text" class="form-control" id="accountLastLoginDateTo" name="lastLoginDateTo" placeholder="">
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	
+	                            <div class="col-sm-2">
+	                                <div class="form-group">
+	                                    <label>Approver</label>
+	                                    <select class="form-control" id="registerStatus">
+	                                        	<option value="">All</option>
+	                                        	<option value="true">Approver</option>
+	                                        	<option value="false">Not Approver</option>
+	                                        </select>
+	                                    <i class="form-group__bar"></i>
+	                                </div>
+	                            </div>
+	
+	                            <div class="col-sm-12">
+	                               <button class="btn btn-danger" value="Search" type="button" id="accountFilterFormBtnReset">Reset</button>
+	                               <button class="btn btn-primary" value="Search" id="accountSearch">Search</button>
+	                            </div>
+	                      	</form>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card__header">
                         <h2>User Details</h2>
@@ -84,75 +183,101 @@
 	        $("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
 			$("#accounts_menu").addClass("navigation__active");
 			var accountsTable = $("#accountsTable");
-			var grid = accountsTable.bootgrid({
-	        	ajax: true,
-	            post: function ()
-	            {
-	                return {
-	                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed",
-	                    test: "test"
-	                };
-	            },
-	            url: "AccountList",
-	            css: {
-	                icon: 'table-bootgrid__icon zmdi',
-	                iconSearch: 'zmdi-search',
-	                iconColumns: 'zmdi-view-column',
-	                iconDown: 'zmdi-sort-amount-desc',
-	                iconRefresh: 'zmdi-refresh',
-	                iconUp: 'zmdi-sort-amount-asc',
-	                dropDownMenu: 'dropdown form-group--select',
-	                search: 'table-bootgrid__search',
-	                actions: 'table-bootgrid__actions',
-	                header: 'table-bootgrid__header',
-	                footer: 'table-bootgrid__footer',
-	                dropDownItem: 'table-bootgrid__label',
-	                table: 'table table-bootgrid',
-	                pagination: 'pagination table-bootgrid__pagination'
-	            },
-	            templates: {
-	                actionDropDown: "<span class=\"{{css.dropDownMenu}}\">" + "<a href='' data-toggle=\"dropdown\">{{ctx.content}}</a><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></span>",
-	                search: "<div class=\"{{css.search}} form-group\"><span class=\"{{css.icon}} {{css.iconSearch}}\"></span><input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"{{lbl.search}}\" /><i class='form-group__bar'></i></div>",
-	                header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div>",
-	                actionDropDownCheckboxItem: "<li><div class='tabe-bootgrid__checkbox checkbox checkbox--dark'><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}<i class='input-helper'></i></label></div></li>",
-	                footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-6\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 table-bootgrid__showing hidden-xs\"><p class=\"{{css.infos}}\"></p></div></div></div>"
-	            },
-	            formatters: {
-	                "commands": function(column, row) {
-	                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
-	            	},
-	            	"dateLastLogin" : function(column, row){
-	            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
-	            	} ,
-	            	"name" : function(column, row){
-	            		return row.lastName +", "+row.firstName;
-	            	},
-	            	"approver" : function(column, row){
-	            		return (row.approver) ? '<span class="approver" data-approver="'+row.approver+'" data-row-id="' + row.id + '"><i class="zmdi zmdi-check-all"></i></span>' : '<span class="approver" data-approver="'+row.approver+'"  data-row-id="' + row.id + '"><i class="zmdi zmdi-close-circle-o"></i></span>';
-	            	} 
-	        	}
-		    }).on("loaded.rs.jquery.bootgrid", function() {
-		    	grid.find(".approver").on("click", function(e){
-		    		var form = {
-	                	id: $(this).data("row-id"),
-	                	approver: $(this).data("approver")
-	                }
-		    		var text = "Do you want to add this account as approver?"
-		    		if($(this).data("approver") == true){
-		    			text = "Do you want to remove this account as approver?"
-		    		}
-		    		confirmation({
-	                	text : text,
-	                	url : "AccountApprover",
-	                	form : form,
-	                	bootGrid : accountsTable
-	                
-	                });
-		    		        
-	  		    }).end().find(".command-delete").on("click", function(e){
-	  		    	console.log("You pressed delete on row: " + $(this).data("row-id"));
-	  		    });
-		    });
+			var accountFormFilter = $("#accountFilterForm");
+			var form = objectifyForm(accountFormFilter.serializeArray());
+			var accountSearch = $("#accountSearch");
+			var accountFilterFormBtnReset = $("#accountFilterFormBtnReset");
+			
+			accountSearch.click(function(e){
+				accountsTable.bootgrid('reload');
+				e.preventDefault();
+			})
+			
+			accountFilterFormBtnReset.click(function(e){
+				console.log(e);
+				accountFormFilter[0].reset();
+				accountsTable.bootgrid('reload');
+				
+			})
+			
+			initAccountTable();
+			setTimeout(function() {
+				$("#accountsTable-header").css("display", "none");
+			}, 100)
+			
+			
+			
+			function initAccountTable(){
+				var grid = accountsTable.bootgrid({
+		        	ajax: true,
+		            post: function ()
+		            {
+		                return {
+		                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed",
+		                    form:  JSON.stringify(objectifyForm(accountFormFilter.serializeArray()))
+		                };
+		            },
+		            url: "AccountList",
+		            css: {
+		                icon: 'table-bootgrid__icon zmdi',
+		                iconSearch: 'zmdi-search',
+		                iconColumns: 'zmdi-view-column',
+		                iconDown: 'zmdi-sort-amount-desc',
+		                iconRefresh: 'zmdi-refresh',
+		                iconUp: 'zmdi-sort-amount-asc',
+		                dropDownMenu: 'dropdown form-group--select',
+		                search: 'table-bootgrid__search',
+		                actions: 'table-bootgrid__actions',
+		                header: 'table-bootgrid__header',
+		                footer: 'table-bootgrid__footer',
+		                dropDownItem: 'table-bootgrid__label',
+		                table: 'table table-bootgrid',
+		                pagination: 'pagination table-bootgrid__pagination'
+		            },
+		            templates: {
+		                actionDropDown: "<span class=\"{{css.dropDownMenu}}\">" + "<a href='' data-toggle=\"dropdown\">{{ctx.content}}</a><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></span>",
+		                search: "<div class=\"{{css.search}} form-group\"><span class=\"{{css.icon}} {{css.iconSearch}}\"></span><input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"{{lbl.search}}\" /><i class='form-group__bar'></i></div>",
+		                header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div>",
+		                actionDropDownCheckboxItem: "<li><div class='tabe-bootgrid__checkbox checkbox checkbox--dark'><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}<i class='input-helper'></i></label></div></li>",
+		                footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-6\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-6 table-bootgrid__showing hidden-xs\"><p class=\"{{css.infos}}\"></p></div></div></div>"
+		            },
+		            formatters: {
+		                "commands": function(column, row) {
+		                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
+		            	},
+		            	"dateLastLogin" : function(column, row){
+		            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
+		            	} ,
+		            	"name" : function(column, row){
+		            		return row.lastName +", "+row.firstName;
+		            	},
+		            	"approver" : function(column, row){
+		            		return (row.approver) ? '<span class="approver" data-approver="'+row.approver+'" data-row-id="' + row.id + '"><i class="zmdi zmdi-check-all"></i></span>' : '<span class="approver" data-approver="'+row.approver+'"  data-row-id="' + row.id + '"><i class="zmdi zmdi-close-circle-o"></i></span>';
+		            	} 
+		        	}
+			    }).on("loaded.rs.jquery.bootgrid", function() {
+			    	grid.find(".approver").on("click", function(e){
+			    		var form = {
+		                	id: $(this).data("row-id"),
+		                	approver: $(this).data("approver")
+		                }
+			    		var text = "Do you want to add this account as approver?"
+			    		if($(this).data("approver") == true){
+			    			text = "Do you want to remove this account as approver?"
+			    		}
+			    		confirmation({
+		                	text : text,
+		                	url : "AccountApprover",
+		                	form : form,
+		                	bootGrid : accountsTable
+		                
+		                });
+			    		        
+		  		    }).end().find(".command-delete").on("click", function(e){
+		  		    	console.log("You pressed delete on row: " + $(this).data("row-id"));
+		  		    });
+			    });
+			}
 			
         </script>
     </body>

@@ -27,6 +27,7 @@
 	
 	<bean id="registeredAccountsServices" 	class="net.ssmc.services.RegisteredAccountsServices" />
 	
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
 	
 	<bean id="dtable" class="java.util.HashMap">
 		<constructor-arg>

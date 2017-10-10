@@ -1,5 +1,6 @@
 package net.ssmc.dao.impl;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.ssmc.dao.UserDao;
 import net.ssmc.dao.mapper.UserMapper;
 import net.ssmc.model.User;
+import net.ssmc.model.form.UserForm;
 import net.ssmc.utils.AES;
 import net.ssmc.utils.Settings;
 
@@ -23,6 +29,8 @@ public class UserDaoImpl implements UserDao{
 	private static final String UPDATEAPPROVER = "UPDATE USER SET approver =? WHERE id=?";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private ObjectMapper objectMapper;
 	
 	@Override
 	public long count() {
@@ -65,7 +73,10 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public List<User> retrieveAll(Map<String, String> request) {
+	public List<User> retrieveAll(Map<String, String> request) throws JsonParseException, JsonMappingException, IOException {
+		System.out.println(request.get("form"));
+		System.out.println(objectMapper.readValue(request.get("form"), UserForm.class));
+		
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
 		final String SQL = this.sql +" as U INNER JOIN role as R on R.id=U.roleid LIMIT "+((start-1)*end)+", "+(end);

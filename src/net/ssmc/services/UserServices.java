@@ -1,5 +1,6 @@
 package net.ssmc.services;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,12 @@ public class UserServices {
 	
 	public Map<String, Object> retrieveAllUsers(HttpSession session, @RequestParam Map<String, String> request){
 		Map<String, Object> data = new HashMap<>();
-		List<User> users = userDao.retrieveAll(request);
+		List<User> users = null;
+		try {
+			users = userDao.retrieveAll(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		data.put("rows", users);
 		data.put("current", request.get("current"));
 		data.put("rowCount", request.get("rowCount"));

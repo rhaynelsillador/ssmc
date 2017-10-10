@@ -23,7 +23,6 @@ import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.City;
 import net.ssmc.model.ContactUs;
-import net.ssmc.model.PendingApproval;
 import net.ssmc.model.RegisteredAccount;
 import net.ssmc.model.Role;
 import net.ssmc.model.RoleAccess;
@@ -31,7 +30,6 @@ import net.ssmc.model.User;
 import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
-import net.ssmc.services.DashboardServices;
 import net.ssmc.services.RegisteredAccountsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
@@ -131,7 +129,6 @@ public class SsmcBackendRestController {
 	
 	@RequestMapping(path="/ContactUsMessage", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> ContactUsMessage(@RequestParam Map<String, String> request) {
-		HttpSession session = httpServletRequest.getSession(true);
 		return contactUsServices.getAllMessages();
 	}
 	

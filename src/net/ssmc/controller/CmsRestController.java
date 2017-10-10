@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +31,6 @@ import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.Image;
-import net.ssmc.model.User;
 
 @RestController
 public class CmsRestController {
