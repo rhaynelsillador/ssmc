@@ -10,7 +10,7 @@
            <div class="list-group">
                <a href="" class="list-group-item media">
                    <div class="pull-left">
-                       <img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt="">
+                       <img class="avatar-img" src="assets/demo/img/profile-pics/1.jpg" alt="">
                    </div>
 
                    <div class="media-body">
@@ -21,7 +21,7 @@
 
                <a href="" class="list-group-item media">
                    <div class="pull-left">
-                       <img class="avatar-img" src="demo/img/profile-pics/5.jpg" alt="">
+                       <img class="avatar-img" src="assets/demo/img/profile-pics/5.jpg" alt="">
                    </div>
                    <div class="media-body">
                        <div class="list-group__heading">Candice Barnes</div>
@@ -69,7 +69,7 @@
            <div class="list-group">
                <a href="" class="list-group-item media">
                    <div class="pull-right">
-                       <img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt="">
+                       <img class="avatar-img" src="assets/demo/img/profile-pics/1.jpg" alt="">
                    </div>
 
                    <div class="media-body">
@@ -90,7 +90,7 @@
 
                <a href="" class="list-group-item media">
                    <div class="pull-right">
-                       <img class="avatar-img" src="demo/img/profile-pics/4.jpg" alt="">
+                       <img class="avatar-img" src="assets/demo/img/profile-pics/4.jpg" alt="">
                    </div>
                    <div class="media-body">
                        <div class="list-group__heading">Darla Mckinney</div>
@@ -100,7 +100,7 @@
 
                <a href="" class="list-group-item media">
                    <div class="pull-right">
-                       <img class="avatar-img" src="demo/img/profile-pics/2.jpg" alt="">
+                       <img class="avatar-img" src="assets/demo/img/profile-pics/2.jpg" alt="">
                    </div>
                    <div class="media-body">
                        <div class="list-group__heading">Rudolph Perez</div>

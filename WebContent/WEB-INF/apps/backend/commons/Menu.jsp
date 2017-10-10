@@ -3,18 +3,6 @@
         <i class="zmdi zmdi-long-arrow-left" data-mae-action="block-close"></i>
     </div>
 
-    <!-- <div class="navigation__toggles">
-        <a href="" class="active" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__messages">
-            <i class="zmdi zmdi-email"></i>
-        </a>
-        <a href="" data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__updates">
-            <i class="zmdi zmdi-notifications"></i>
-        </a>
-        <a href=""  data-mae-action="block-open" data-mae-target="#notifications" data-toggle="tab" data-target="#notifications__tasks">
-            <i class="zmdi zmdi-playlist-plus"></i>
-        </a>
-    </div> -->
-
     <div class="navigation__menu c-overflow">
         <ul>
             <li id="dashboard">
