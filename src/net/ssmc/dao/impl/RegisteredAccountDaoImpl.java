@@ -88,6 +88,8 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 		String dateLastLoginFrom = request.get("DATELASTLOGINFROM".toLowerCase()).trim();
 		String dateLastLoginTo = request.get("DATELASTLOGINTO".toLowerCase()).trim();
 		
+		System.out.println(dateCreatedFrom);
+		
 		if(!email.isEmpty()){
 			builder.append("EMAIL LIKE '%"+email+"%' AND ");
 		}
@@ -100,20 +102,20 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 		if(!status.isEmpty()){
 			builder.append("STATUS = "+status+" AND ");
 		}
-		if(!dateCreatedFrom.isEmpty() && !dateCreatedFrom.isEmpty()){
+		if(!dateCreatedFrom.isEmpty() && !dateCreatedTo.isEmpty()){
 			builder.append("DATECREATED BETWEEN '"+dateCreatedFrom+"' AND '"+dateCreatedTo+"' AND ");
 		}else if(!dateCreatedFrom.isEmpty()){
-			builder.append("DATECREATED > "+dateCreatedFrom+" ");
+			builder.append("DATECREATED > '"+dateCreatedFrom+"' AND ");
 		}else if(!dateCreatedTo.isEmpty()){
-			builder.append("DATECREATED < "+dateCreatedTo+" ");
+			builder.append("DATECREATED < '"+dateCreatedTo+"' AND ");
 		}
 		
 		if(!dateLastLoginFrom.isEmpty() && !dateLastLoginTo.isEmpty()){
 			builder.append("DATELASTLOGIN BETWEEN '"+dateLastLoginFrom+"' AND '"+dateLastLoginTo+"' AND ");
 		}else if(!dateLastLoginFrom.isEmpty()){
-			builder.append("DATELASTLOGIN BETWEEN > '"+dateCreatedFrom+"' AND ");
+			builder.append("DATELASTLOGIN > '"+dateCreatedFrom+"' AND ");
 		}else if(!dateLastLoginFrom.isEmpty()){
-			builder.append("DATELASTLOGIN BETWEEN < '"+dateCreatedFrom+"' AND ");
+			builder.append("DATELASTLOGIN < '"+dateCreatedFrom+"' AND ");
 		}
 		if(!builder.toString().isEmpty()){
 			return "WHERE "+(builder.toString().substring(0, builder.toString().length()-4)); 

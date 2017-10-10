@@ -31,7 +31,7 @@
 	                            <div class="col-sm-3">
 	                                <div class="form-group">
 	                                    <label>Email</label>
-	                                    <input type="text" class="form-control" id="registerEmail" name="email" placeholder="Email">
+	                                    <input type="text" class="form-control" id="registerEmail" name="email" placeholder="">
 	                                    <i class="form-group__bar"></i>
 	                                </div>
 	                            </div>
@@ -39,7 +39,7 @@
 	                            <div class="col-sm-3">
 	                                <div class="form-group">
 	                                    <label>First Name</label>
-	                                    <input type="text" class="form-control" id="registerFirstName" name="firstName" placeholder="First Name">
+	                                    <input type="text" class="form-control" id="registerFirstName" name="firstName" placeholder="">
 	                                    <i class="form-group__bar"></i>
 	                                </div>
 	                            </div>
@@ -47,7 +47,7 @@
 	                            <div class="col-sm-3">
 	                                <div class="form-group">
 	                                    <label>Last Name</label>
-	                                    <input type="text" class="form-control" id="registerLastName" name="lastName" placeholder="Last Name">
+	                                    <input type="text" class="form-control" id="registerLastName" name="lastName" placeholder="">
 	                                    <i class="form-group__bar"></i>
 	                                </div>
 	                            </div>
@@ -167,6 +167,7 @@
                     format: 'YYYY-MM-DD HH:mm:ss'
                 });
                	
+	        	$('#registerDateCreatedFrom, #registerDateLastLoginFrom, #registerDateCreatedTo, #registerDateLastLoginTo').val("")
 
 	
 	        	var dTable = tableData.DataTable( {
@@ -221,8 +222,6 @@
 	        	
 	        	registeredAccountFilterFormBtnReset.click(function(e){
 	        		$("#registeredAccountFilterForm")[0].reset();
-	        		$('#registerDateCreatedFrom, #registerDateLastLoginFrom').val(currentDate + " 00:00:00");
-		        	$('#registerDateCreatedTo, #registerDateLastLoginTo').val(currentDate + " 23:59:59");
 	        	})
 
 	        })

@@ -11,7 +11,7 @@ import net.ssmc.model.User;
 
 public interface UserDao {
 	
-	long count();
+	long count(Map<String, String> request) throws JsonParseException, JsonMappingException, IOException;
 	void create(User user);
 	User retrieve(int id);
 	List<User> retrieveAll(Map<String, String> request) throws JsonParseException, JsonMappingException, IOException;

@@ -106,19 +106,7 @@
 	                                    <i class="form-group__bar"></i>
 	                                </div>
 	                            </div>
-	
-	                            <div class="col-sm-2">
-	                                <div class="form-group">
-	                                    <label>Approver</label>
-	                                    <select class="form-control" id="registerStatus">
-	                                        	<option value="">All</option>
-	                                        	<option value="true">Approver</option>
-	                                        	<option value="false">Not Approver</option>
-	                                        </select>
-	                                    <i class="form-group__bar"></i>
-	                                </div>
-	                            </div>
-	
+								
 	                            <div class="col-sm-12">
 	                               <button class="btn btn-danger" value="Search" type="button" id="accountFilterFormBtnReset">Reset</button>
 	                               <button class="btn btn-primary" value="Search" id="accountSearch">Search</button>
@@ -187,7 +175,27 @@
 			var form = objectifyForm(accountFormFilter.serializeArray());
 			var accountSearch = $("#accountSearch");
 			var accountFilterFormBtnReset = $("#accountFilterFormBtnReset");
+			var currentDate = moment(new Date()).format("YYYY-MM-DD");
 			
+			$('#accountLastLoginDateFrom').datetimepicker({
+                maxDate : currentDate + " 00:00:00",
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
+        	
+        	$('#accountLastLoginDateTo').datetimepicker({
+                defaultDate: currentDate + " 23:59:59",
+                maxDate : currentDate + " 23:59:59",
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
+			
+        	$('#accountBirthday').datetimepicker({
+                defaultDate: currentDate,
+                maxDate : currentDate,
+                format: 'YYYY-MM-DD'
+            });
+        	
+        	$('#accountLastLoginDateFrom, #accountLastLoginDateTo, #accountBirthday').val("")
+        	
 			accountSearch.click(function(e){
 				accountsTable.bootgrid('reload');
 				e.preventDefault();

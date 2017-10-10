@@ -19,4 +19,9 @@ public class UserForm extends User{
 	public void setLastLoginDateTo(String lastLoginDateTo) {
 		this.lastLoginDateTo = lastLoginDateTo;
 	}
+	@Override
+	public String toString() {
+		return "UserForm [lastLoginDateFrom=" + lastLoginDateFrom + ", lastLoginDateTo=" + lastLoginDateTo + "]";
+	}
+	
 }

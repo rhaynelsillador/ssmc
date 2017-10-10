@@ -1,11 +1,11 @@
 <footer id="footer">
-    Copyright &copy; 2015 Material Admin
+    Copyright &copy; 2015 SSMC Group Admin
 
-    <ul class="footer__menu">
+    <!-- <ul class="footer__menu">
         <li><a href="">Home</a></li>
         <li><a href="">Dashboard</a></li>
         <li><a href="">Reports</a></li>
         <li><a href="">Support</a></li>
         <li><a href="">Contact</a></li>
-    </ul>
+    </ul> -->
 </footer>

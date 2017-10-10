@@ -1,8 +1,8 @@
 <header id="header">
     <div class="logo">
         <a href="index.html" class="hidden-xs">
-            SSMC Health, Inc.
-            <small>admin</small>
+            SSMC GROUP
+            <small>ADMIN</small>
             <!-- <img src="assets/img/logo.png" alt=""> -->
         </a>
         <i class="logo__trigger zmdi zmdi-menu" data-mae-action="block-open" data-mae-target="#navigation"></i>

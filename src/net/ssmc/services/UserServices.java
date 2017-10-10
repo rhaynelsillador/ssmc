@@ -1,6 +1,7 @@
 package net.ssmc.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,13 +51,22 @@ public class UserServices {
 		List<User> users = null;
 		try {
 			users = userDao.retrieveAll(request);
+			if(users == null){
+				users = new ArrayList<>();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		long total = 0;
+		try {
+			total = userDao.count(request);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		data.put("rows", users);
 		data.put("current", request.get("current"));
 		data.put("rowCount", request.get("rowCount"));
-		data.put("total", userDao.count());
+		data.put("total", total);
 		return data;
 	}
 	

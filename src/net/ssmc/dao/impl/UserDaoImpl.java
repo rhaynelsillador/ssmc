@@ -33,8 +33,9 @@ public class UserDaoImpl implements UserDao{
 	private ObjectMapper objectMapper;
 	
 	@Override
-	public long count() {
-        return jdbcTemplate.queryForObject(SQLCOUNT, Long.class);
+	public long count(Map<String, String> request) throws JsonParseException, JsonMappingException, IOException {
+		UserForm userForm = objectMapper.readValue(request.get("form"), UserForm.class);
+        return jdbcTemplate.queryForObject(SQLCOUNT + filterGenerator(userForm), Long.class);
 	}
 	
 	@Override
@@ -74,12 +75,10 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public List<User> retrieveAll(Map<String, String> request) throws JsonParseException, JsonMappingException, IOException {
-		System.out.println(request.get("form"));
-		System.out.println(objectMapper.readValue(request.get("form"), UserForm.class));
-		
+		UserForm userForm = objectMapper.readValue(request.get("form"), UserForm.class);
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		final String SQL = this.sql +" as U INNER JOIN role as R on R.id=U.roleid LIMIT "+((start-1)*end)+", "+(end);
+		final String SQL = this.sql +" as U INNER JOIN role as R on R.id=U.roleid "+filterGenerator(userForm)+" LIMIT "+((start-1)*end)+", "+(end);
 		System.out.println(SQL);
 		return jdbcTemplate.query(SQL, new UserMapper());
 	}
@@ -109,6 +108,45 @@ public class UserDaoImpl implements UserDao{
 			user.getId()
 		});
 	}
+	
+	private String filterGenerator(UserForm userForm){
+		String filter = "";
 
+		if(!userForm.getUsername().isEmpty()){
+			filter += " USERNAME LIKE '%"+userForm.getUsername()+"%' AND ";
+		}
+
+		if(!userForm.getFirstName().isEmpty()){
+			filter += " FIRSTNAME LIKE '%"+userForm.getFirstName()+"%' AND ";
+		}
+		if(!userForm.getLastName().isEmpty()){
+			filter += " LASTNAME LIKE '%"+userForm.getLastName()+"%' AND ";
+		}
+		if(!userForm.getMobile().isEmpty()){
+			filter += " MOBILE LIKE '%"+userForm.getMobile()+"%' AND ";
+		}
+		if(!userForm.getPhone().isEmpty()){
+			filter += " PHONE LIKE '%"+userForm.getPhone()+"%' AND ";
+		}
+		if(!userForm.getEmail().isEmpty()){
+			filter += " EMAIL LIKE '%"+userForm.getEmail()+"%' AND ";
+		}
+		if(userForm.getBirthday() != null){
+			filter += " BIRTHDAY = '"+userForm.getBirthday()+"' AND ";
+		}
+		if(!userForm.getLastLoginDateFrom().isEmpty() && !userForm.getLastLoginDateTo().isEmpty()){
+			filter += " DATELASTLOGIN BETWEEN '"+userForm.getLastLoginDateFrom()+"' AND '"+userForm.getLastLoginDateTo()+"' AND ";
+		}else if(!userForm.getLastLoginDateFrom().isEmpty()){
+			filter += " DATELASTLOGIN = '"+userForm.getLastLoginDateFrom()+"' AND ";
+		}else if(!userForm.getLastLoginDateTo().isEmpty()){
+			filter += " DATELASTLOGIN = '"+userForm.getLastLoginDateTo()+"' AND ";
+		}
+		
+		if(!filter.isEmpty()){
+			filter = " WHERE " + filter.substring(0, filter.length()-4);
+		}
+		
+		return filter;
+	}
 	
 }
