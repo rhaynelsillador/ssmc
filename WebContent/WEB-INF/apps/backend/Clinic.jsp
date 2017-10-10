@@ -63,7 +63,7 @@
         
         <script type="text/javascript">
         	
-	        $("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
+	        $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 			$("#clinic_menu").addClass("navigation__active");
         	
 			

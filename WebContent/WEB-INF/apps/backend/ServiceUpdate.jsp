@@ -169,32 +169,15 @@
 	      		btn.attr("disabled", "disabled");
 	      		
 	      		POST("ServicesAddUpdate", form, function(data){
-	      			toastMessage(data);
-	      			btn.html("Save Update");
-	    	  		btn.removeAttr("disabled");
+	      			if(contains > 0 && data.status=="SUCCESS"){
+	      				window.location.href = "Services";
+	      			}else{
+		      			toastMessage(data);
+		      			btn.html("Save Update");
+		    	  		btn.removeAttr("disabled");
+	      			}
 	      		})	
 	    	});
-	    	
-	    	 /* $("#test-upload").fileinput({
-	             'showPreview': false,
-	             'allowedFileExtensions': ['jpg', 'png', 'gif'],
-	             'elErrorContainer': '#errorBlock'
-	         });
-	    	 
-	         $("#kv-explorer").fileinput({
-	             'theme': 'explorer',
-	             'uploadUrl': '#',
-	             overwriteInitial: false,
-	             initialPreviewAsData: true,
-	             initialPreview: [
-	                 "http://lorempixel.com/1920/1080/nature/2",
-	                 "http://lorempixel.com/1920/1080/nature/3"
-	             ],
-	             initialPreviewConfig: [
-	                 {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
-	                 {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
-	             ]
-	         }); */
 	    })
 	    
 	</script>

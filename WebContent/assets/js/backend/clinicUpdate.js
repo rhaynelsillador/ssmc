@@ -1,8 +1,5 @@
 CKEDITOR.replace( 'description' );
 
-$("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
-$("#clinic_menu").addClass("navigation__active");
-
 $("#input-id").fileinput({'showUpload':true, 'previewFileType':'any'});
 
 $(document).ready(function(){

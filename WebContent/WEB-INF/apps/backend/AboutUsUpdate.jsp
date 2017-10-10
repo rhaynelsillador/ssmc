@@ -100,7 +100,7 @@
 	    $("#about_us_menu").addClass("navigation__active");
 	    CKEDITOR.replace('aboutUsContent');
 	    var aboutUsType = $('#aboutUsType');
-	    
+	    var contains = pathname.indexOf("AboutUsAdd");
 	    
 	    $(document).ready(function(){
 	    	aboutUsType.val('${sessionScope.aboutUs.type}');
@@ -117,9 +117,14 @@
 	      		btn.attr("disabled", "disabled");
 	      		
 	      		POST("AboutUsUpdate", form, function(data){
-	      			toastMessage(data);
-	      			btn.html("Save Update");
-	    	  		btn.removeAttr("disabled");
+	      			if(contains > 0 && data.status=="SUCCESS"){
+	      				location.href="AboutUs";
+	      			}else{
+	      				toastMessage(data);
+		      			btn.html("Save Update");
+		    	  		btn.removeAttr("disabled");
+	      			}
+	      			
 	      		})
 	    	});
 	    })

@@ -195,8 +195,12 @@
 	<script type="text/javascript" src="assets/js/backend/clinicUpdate.js"></script>
     	
     <script type="text/javascript">
+    
+	    $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
+		$("#clinic_menu").addClass("navigation__active");
 		
     	$("#businessType").val('${requestScope.clinic.type}');
+    	
     	var btnCust = '';
     	var params = {
    			"module":"FAQ",

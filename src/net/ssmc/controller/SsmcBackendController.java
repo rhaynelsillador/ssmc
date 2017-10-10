@@ -19,11 +19,9 @@ import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.interceptor.AppicationAudit;
-import net.ssmc.model.Clinic;
 import net.ssmc.model.Role;
 import net.ssmc.model.User;
 import net.ssmc.services.CityServices;
-import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
@@ -33,8 +31,6 @@ public class SsmcBackendController {
 	
 	@Autowired
 	private HttpServletRequest httpServletRequest;
-	@Autowired
-	private ClinicServices clinicServices;
 	@Autowired 
 	private UserServices userServices;
 	@Autowired
@@ -55,6 +51,12 @@ public class SsmcBackendController {
 	public String notFound(ModelMap map){
 		System.out.println("404 404");
 		return "errorpage/404";
+	}
+	
+	@AppicationAudit(module = Module.ALL, access = Access.ALL)
+	@RequestMapping(path="/InternalServerError", method = RequestMethod.GET, produces="text/html")
+	public String internalServerError(ModelMap map){
+		return "errorpage/500";
 	}
 	
 	@AppicationAudit(module = Module.USER, access = Access.RETRIEVE)
@@ -78,6 +80,7 @@ public class SsmcBackendController {
 		return "backend/AccountUpdate";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@AppicationAudit(module = Module.USER, access = Access.CREATE)
 	@RequestMapping(path="/AccountAdd", method = RequestMethod.GET, produces="application/json")
 	public String accountAdd(ModelMap map){
@@ -91,7 +94,6 @@ public class SsmcBackendController {
 	@AppicationAudit(module = Module.ROLE, access = Access.RETRIEVE)
 	@RequestMapping(path="/Role", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public String role(ModelMap map, @RequestParam Map<String, String> request){
-		HttpSession session = httpServletRequest.getSession(true);
 		return "backend/Role";
 	}
 	
@@ -105,27 +107,6 @@ public class SsmcBackendController {
 		return "backend/RoleUpdate";
 	}
 	
-	@AppicationAudit(module = Module.CLINIC, access = Access.RETRIEVE)
-	@RequestMapping(path="/Clinic", method = RequestMethod.GET, produces="application/json")
-	public String clinic(ModelMap map){
-		map.addAttribute("username", "rhaynel");
-		return "backend/Clinic";
-	}
-	
-	@AppicationAudit(module = Module.CLINIC, access = Access.UPDATE)
-	@RequestMapping(path="/ClinicUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public String addClinic(ModelMap map, @RequestParam Map<String, String> request) {
-		HttpSession session = httpServletRequest.getSession(true);
-		Clinic clinic = clinicServices.getClinic(session, Long.parseLong(request.get("id")));
-		
-		map.addAttribute("username", "rhaynel");
-		map.addAttribute("cities", cityServices.retrieveCity());
-		map.addAttribute("clinic", clinic);
-		map.addAttribute("title", clinic.getName());
-		session.setAttribute("clinicId", request.get("id"));
-		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
-		return "backend/ClinicUpdate";
-	}
 	
 	@AppicationAudit(module = Module.CLINIC, access = Access.CREATE)
 	@RequestMapping(path="/ClinicAndHospitalAdd", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
@@ -139,7 +120,6 @@ public class SsmcBackendController {
 	@AppicationAudit(module = Module.CLINIC, access = Access.UPDATE)
 	@RequestMapping(path="/ContactUsMessages", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public String contactUsMessages(ModelMap map, @RequestParam Map<String, String> request) {
-		HttpSession session = httpServletRequest.getSession(true);
 		return "backend/ContactUs";
 	}
 	

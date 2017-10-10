@@ -22,11 +22,8 @@
             </li>
             <li class="navigation__sub" id="administration_menus">
                 <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> Administration</a>
-
                 <ul>
-                	
                     <li id="contact_us_menu"><a href="ContactUsMessages">Contact Us</a></li>
-                    <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
                     <li id="city_menu"><a href="City">City</a></li>
                     <li id="accounts_menu"><a href="Accounts">Accounts</a></li>
                     <li id="registered_accounts_menu"><a href="RegisteredAccounts">Registered Accounts</a></li>
@@ -36,8 +33,8 @@
             
             <li class="navigation__sub" id="cms_menus">
                 <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> CMS <span class="badge badge-error" id="cmsNotifCounter"></span></a>
-
                 <ul>
+                    <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
                     <li id="faq_menu"><a href="Faq">Faq <span class="badge badge-error"></span></a></li>
                     <li id="about_us_menu"><a href="AboutUs">About Us</a></li>
                     <li id="header_menu"><a href="Header">Header</a></li>  

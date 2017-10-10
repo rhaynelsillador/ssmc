@@ -1,7 +1,6 @@
 package net.ssmc.controller;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,26 +8,25 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.cms.ssmc.model.AboutUs;
-import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.FaqServices;
 import net.cms.ssmc.services.FaqTempServices;
 import net.cms.ssmc.services.HeaderServices;
-import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.App;
 import net.ssmc.enums.Module;
-import net.ssmc.enums.Page;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.interceptor.AppicationAudit;
+import net.ssmc.model.Clinic;
+import net.ssmc.services.CityServices;
+import net.ssmc.services.ClinicServices;
 
 @Controller
 public class CmsController {
@@ -45,7 +43,32 @@ public class CmsController {
 	private ServiceServices serviceServices;
 	@Autowired
 	private FaqTempServices faqTempServices;
+	@Autowired
+	private ClinicServices clinicServices;
+	@Autowired
+	private CityServices cityServices;
 	
+	@AppicationAudit(module = Module.CLINIC, access = Access.RETRIEVE)
+	@RequestMapping(path="/Clinic", method = RequestMethod.GET, produces="application/json")
+	public String clinic(ModelMap map){
+		map.addAttribute("username", "rhaynel");
+		return "backend/Clinic";
+	}
+	
+	@AppicationAudit(module = Module.CLINIC, access = Access.UPDATE)
+	@RequestMapping(path="/ClinicUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public String addClinic(ModelMap map, @RequestParam Map<String, String> request) {
+		HttpSession session = httpServletRequest.getSession(true);
+		Clinic clinic = clinicServices.getClinic(session, Long.parseLong(request.get("id")));
+		
+		map.addAttribute("username", "rhaynel");
+		map.addAttribute("cities", cityServices.retrieveCity());
+		map.addAttribute("clinic", clinic);
+		map.addAttribute("title", clinic.getName());
+		session.setAttribute("clinicId", request.get("id"));
+		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
+		return "backend/ClinicUpdate";
+	}
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/Faq", method = RequestMethod.GET)
