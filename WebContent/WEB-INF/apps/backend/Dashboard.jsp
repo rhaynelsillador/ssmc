@@ -25,7 +25,7 @@
         <link href="assets/css/app-1.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-       <!--  <link href="assets/css/custom.css" rel="stylesheet"> -->
+        <link href="assets/css/custom.css" rel="stylesheet">
 
         <!-- Page loader -->
         <script src="assets/js/page-loader.min.js"></script>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div id="content__grid" data-columns>
-                    
+
 
                     <div class="card widget-analytic">
                         <div class="card__header">
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card widget-analytic">
                         <div class="card__header">
                             <h2>Total Login <small>Last 30 days ago</small></h2>
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                     </div>
-	
+
                 </div>
             </section>
 
@@ -267,8 +267,8 @@
 
         <script type="text/javascript">
 
-		
-        
+
+
         </script>
 
     </body>

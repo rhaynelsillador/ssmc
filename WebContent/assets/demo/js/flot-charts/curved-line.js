@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready(function(){
-    
+
 	var options = {
         series: {
             shadowSize: 0,
@@ -21,23 +21,23 @@ $(document).ready(function(){
             hoverable: true,
             clickable: true,
             mouseActiveRadius:6
-            
+
         },
         xaxis: {
             tickDecimals: 0,
             ticks: false
         },
-        
+
         yaxis: {
             tickDecimals: 0,
             ticks: false
         },
-        
+
         legend: {
             show: false
         }
     };
-	
+
 	POST("BrowseCount", {}, function(data){
 		if ($("#chart-curved-line")[0]) {
 	        $.plot($("#chart-curved-line"), [
@@ -49,15 +49,15 @@ $(document).ready(function(){
 	                },
 	                label: 'Browser Count ',
 	                stack: true,
-	                color: '#edeff0'
+	                color: '#f58435'
 	            },
 	        ], options);
 	    }
 	})
-	
-	
-	
-	
+
+
+
+
     // Make some random data for the Chart
 //    var d1 = [];
 //    for (var i = 0; i <= 10; i += 1) {
@@ -66,20 +66,20 @@ $(document).ready(function(){
 //    var d2 = [];
 //    for (var i = 0; i <= 25; i += 4) {
 //        d2.push([i, parseInt(Math.random() * 30)]);
-//    }    
+//    }
 //    var d3 = [];
 //    for (var i = 0; i <= 10; i += 1) {
 //        d3.push([i, parseInt(Math.random() * 30)]);
 //    }
-//    
+//
 //    console.log(">>>>>>>>>>> :;; ", d1, d2, d3);
-    
+
     // Chart Options
-    
-    
+
+
     // Let's create the chart
-    
-    
+
+
    /* if ($("#chart-past-days")[0]) {
         $.plot($("#chart-past-days"), [{
             data: d2,
@@ -92,7 +92,7 @@ $(document).ready(function(){
             color: '#35424b'
         }], options);
     }*/
-    
+
     // Tooltips for Flot Charts
 //    if ($('.flot-chart')[0]) {
 //        $('.flot-chart').bind('plothover', function (event, pos, item) {
@@ -105,7 +105,7 @@ $(document).ready(function(){
 //                $('.flot-tooltip').hide();
 //            }
 //        });
-//        
+//
 //        $('<div class="flot-tooltip"></div>').appendTo('body');
 //    }
 });
