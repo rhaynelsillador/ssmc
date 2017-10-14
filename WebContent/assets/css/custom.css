@@ -4,8 +4,9 @@ body {
 }
 
 body::before {
-  background: #0B1A35;
+  background: linear-gradient(to bottom, #75c0cd 0%, #2c66b1 100%);
   height: 200px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .navigation__menu ul a{
@@ -22,10 +23,15 @@ body::before {
   line-height: 40px;
 }
 
+.logo a small{
+  color: #fff;
+}
+
 .card {
-  background: #D5E9F5;
+  /*background: #D5E9F5;*/
+  background: #ffffff;
   color: #333;
-  box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2)
 }
 
 .card h2{
@@ -41,7 +47,7 @@ body::before {
 }
 
 .chart-pie__value{
-  color: #f58435;
+  color: #0b1a35;
 }
 
 .actions>a>i, .actions>div>a>i{
@@ -60,7 +66,7 @@ body::before {
 }
 
 .widget-past-days__info>h3 {
-  color: #f58435;
+  color: #333;
 }
 
 .list-group__text {
@@ -89,4 +95,17 @@ body::before {
 
 #footer .footer__menu>li>a:hover, .view-more:focus, .view-more:focus i, .view-more:hover, .view-more:hover i{
   color: #4975b3;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.navigation__menu ul>li.navigation__active>a{
+  color: #4975b3;
+}
+
+.table-bootgrid>thead>tr>th>a, .table-bootgrid>thead>tr>th>a:focus, .table-bootgrid>thead>tr>th>a:hover {
+    color: #333333;
 }

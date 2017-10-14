@@ -12,7 +12,7 @@
     <link href="assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="assets/vendors/font-awesome-4.7.0/css/font-awesome.min.css">
-   	
+
     <link href="assets/vendors/DataTables/datatables.min.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="assets/vendors/bower_components/jquery.bootgrid/dist/jquery.bootgrid.min.css" rel="stylesheet">
     <link href="assets/vendors/farbtastic/farbtastic.css" rel="stylesheet">
@@ -20,5 +20,6 @@
     <link href="assets/vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet">
     <link href="assets/css/app-1.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
+      <link href="assets/css/custom.css" rel="stylesheet">
     <script src="assets/js/page-loader.min.js"></script>
 </head>
