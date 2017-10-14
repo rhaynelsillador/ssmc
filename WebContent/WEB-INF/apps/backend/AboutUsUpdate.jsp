@@ -100,7 +100,7 @@
 	    $("#about_us_menu").addClass("navigation__active");
 	    CKEDITOR.replace('aboutUsContent');
 	    var aboutUsType = $('#aboutUsType');
-	    var contains = pathname.indexOf("AboutUsAdd");
+	    var contains = location.pathname.indexOf("AboutUsAdd");
 	    
 	    $(document).ready(function(){
 	    	aboutUsType.val('${sessionScope.aboutUs.type}');

@@ -56,7 +56,7 @@ public class ServiceServices {
 	
 	public Service getActiveService(HttpServletRequest httpServletRequest, int id){
 		if(controlServices.hasApproved(httpServletRequest, Module.SERVICE, id)){
-			return serviceDao.retrieveActiveService(App.BUSINESS);
+			return serviceDao.retrieveActiveService(App.HOSPITALS);
 		}return null;
 	}
 	

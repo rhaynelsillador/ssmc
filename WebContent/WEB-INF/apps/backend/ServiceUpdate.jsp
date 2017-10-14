@@ -62,7 +62,7 @@
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="serviceType">
 					                          	<option value="CLINIC">Clinic</option>
-					                          	<option value="BUSINESS">Business</option>
+					                          	<option value="HOSPITALS">Hospital</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>

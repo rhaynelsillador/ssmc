@@ -115,7 +115,7 @@
 
                 <div class="card">
                     <div class="card__header">
-                    	<h2>Reegistered Account Result<small>Click Email to display more information...</small></h2>
+                    	<h2>Registered Account Result<small>Click Email to display more information...</small></h2>
                     </div>
                     <div class="card__body">
                         <div class="table-responsive">

@@ -41,7 +41,7 @@ public class HeaderServices {
 	
 	public Header getActiveHeader(HttpServletRequest httpServletRequest, int id){
 		if(controlServices.hasApproved(httpServletRequest, Module.HEADER, id)){
-			return headerDao.retrieveActive(App.BUSINESS);
+			return headerDao.retrieveActive(App.HOSPITALS);
 		}return null;
 	}
 	

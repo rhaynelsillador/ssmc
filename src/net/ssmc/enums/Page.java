@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public enum Page {
 
 	Main,
-	Corporate,
+	Hospital,
 	Medical,
 	About,
 	Service,
