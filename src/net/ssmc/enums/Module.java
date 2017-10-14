@@ -13,7 +13,8 @@ public enum Module {
 	HEADER("HeaderUpdate"), 
 	SERVICE("ServicesUpdate"),
 	CITY(""),
-	REGISTEREDACCOUNTS("");
+	REGISTEREDACCOUNTS(""), 
+	CONTACTINFORMATION("");
 	
 	private String updateUrl;
 	

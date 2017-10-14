@@ -15,6 +15,7 @@ public class DBUtils {
 		createContactUs();
 		createControl();
 		createFAQ();
+		createContactInformationTable();
 	}
 	
 	private void createTables(){
@@ -248,6 +249,21 @@ public class DBUtils {
 		  " INDEX `userid`(`userid`) USING BTREE, "+
 		  " CONSTRAINT `userid` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE "+
 		  " ) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;";
+		try {
+			jdbcTemplate.execute(SQL);
+		} catch (Exception e) {
+		}
+	}
+	
+	private void createContactInformationTable(){
+		final String SQL = "CREATE TABLE `contact_information` ("+
+		  "`id` bigint(20) NOT NULL AUTO_INCREMENT,"+
+		  "`name` varchar(15) NOT NULL,"+
+		  "`value` varchar(75) NOT NULL,"+
+		  "`timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',"+
+		  "PRIMARY KEY (`id`)"+
+		") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+		
 		try {
 			jdbcTemplate.execute(SQL);
 		} catch (Exception e) {

@@ -158,8 +158,14 @@ public class SsmcBackendController {
 	}
 	
 	@AppicationAudit(module = Module.REGISTEREDACCOUNTS, access = Access.RETRIEVE)
-	@RequestMapping(path="/RegisteredAccounts", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	@RequestMapping(path="/RegisteredAccounts", method = {RequestMethod.GET, RequestMethod.POST})
 	public String registeredAccounts(ModelMap map) {
 		return "backend/RegisteredAccounts";
+	}
+	
+	@AppicationAudit(module = Module.CONTACTINFORMATION, access = Access.RETRIEVE)
+	@RequestMapping(path="/ContactInformation", method = {RequestMethod.GET})
+	public String contactInformation(ModelMap map) {
+		return "backend/ContactInformation";
 	}
 }

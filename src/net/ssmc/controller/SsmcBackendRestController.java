@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import net.cms.ssmc.model.ContactInformation;
+import net.cms.ssmc.services.ContactInformationServices;
 import net.ssmc.dao.RegisteredAccountDao;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
@@ -54,6 +59,8 @@ public class SsmcBackendRestController {
 	private CityServices cityServices;
 	@Autowired
 	private RegisteredAccountDao registeredAccountDao;
+	@Autowired
+	private ContactInformationServices contactInformationServices;
 	
 	private static long random = System.currentTimeMillis();
 	
@@ -168,6 +175,18 @@ public class SsmcBackendRestController {
 	public @ResponseBody Map<String, Object> registeredAccountsList(@RequestParam Map<String, String> request){
 		return registeredAccountsServices.getAllRegisteredAccounts(request);
 	}
+	
+	@RequestMapping(path="/ContactInformationUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode contactInformationUpdate(@RequestBody List<ContactInformation> contactInformations){
+		return contactInformationServices.updateContactInformation(contactInformations);
+	}
+	
+	@RequestMapping(path="/ContactInformationList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody List<ContactInformation> contactInformationList(){
+		return contactInformationServices.getAllContactInformation();
+	}
+	
+	
 	
 	@RequestMapping(path="/LoadUserData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody String loadUserData(){
