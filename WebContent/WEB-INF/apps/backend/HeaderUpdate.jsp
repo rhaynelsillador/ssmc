@@ -74,7 +74,7 @@
 					                       <div class="form-group">
 					                          <select class="form-control" name="page" id="headerPage">
 					                          	<option value="Main">Main</option>
-					                          	<option value="Corporate">Corporate</option>
+					                          	<option value="Hospital">Hospital</option>
 					                          	<option value="Medical">Medical</option>
 					                          	<option value="About">About</option>
 					                          	<option value="Service">Service</option>
