@@ -18,8 +18,8 @@ public class ContactInformationDaoImpl implements ContactInformationDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private final static String INSERT = "INSERT INTO contact_information (name, value, timestamp) VALUE (?,?,?)";
-	private final static String FINDALL = "SELECT * FROM contact_information";
+	private final static String INSERT = 	"UPDATE contact_information set value=?, timestamp = ? WHERE name = ?";
+	private final static String FINDALL = 	"SELECT * FROM contact_information";
 	
 	@Override
 	public void create(List<ContactInformation> contactInformations) {
@@ -27,9 +27,9 @@ public class ContactInformationDaoImpl implements ContactInformationDao {
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
 				ContactInformation contactInformation = contactInformations.get(i);
-				ps.setString(1, contactInformation.getName());
-				ps.setString(2, contactInformation.getValue());
-				ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+				ps.setString(1, contactInformation.getValue());
+				ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+				ps.setString(3, contactInformation.getName());
 			}
 			@Override
 			public int getBatchSize() {
