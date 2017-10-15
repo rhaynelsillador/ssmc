@@ -187,7 +187,7 @@ public class CmsController {
 		session.removeAttribute("service");
 		return "backend/ServiceUpdate";
 	}
-	@AppicationAudit(module = Module.ADVERTISEMENT, access = Access.CREATE)
+	@AppicationAudit(module = Module.ADVERTISEMENT, access = Access.RETRIEVE)
 	@RequestMapping(path="/Advertisement", method = RequestMethod.GET)
 	public String advertisement(ModelMap map){
 		HttpSession session = httpServletRequest.getSession(true);

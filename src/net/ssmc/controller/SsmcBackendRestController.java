@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import net.cms.ssmc.model.ContactInformation;
@@ -175,6 +174,12 @@ public class SsmcBackendRestController {
 	public @ResponseBody Map<String, Object> registeredAccountsList(@RequestParam Map<String, String> request){
 		return registeredAccountsServices.getAllRegisteredAccounts(request);
 	}
+	
+	@RequestMapping(path="/RegisteredAccountInfoData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody RegisteredAccount registeredAccountInfoData(@RequestBody RegisteredAccount registeredAccount){
+		return registeredAccountsServices.getAccountInformation(registeredAccount.getId());
+	}
+
 	
 	@RequestMapping(path="/ContactInformationUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody ObjectNode contactInformationUpdate(@RequestBody List<ContactInformation> contactInformations){

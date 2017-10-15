@@ -15,7 +15,8 @@ public enum Module {
 	CITY(""),
 	REGISTEREDACCOUNTS(""), 
 	CONTACTINFORMATION(""), 
-	ADVERTISEMENT("");
+	ADVERTISEMENT(""), 
+	EXAMINATIONRESULT("");
 	
 	private String updateUrl;
 	

@@ -17,8 +17,6 @@ public class RegisteredAccountsServices {
 	private RegisteredAccountDao registeredAccountDao;
 	
 	public Map<String, Object> getAllRegisteredAccounts(Map<String, String> request){
-		System.out.println(request);
-		
 		Map<String, Object> dtable = new HashMap<>();
 		List<RegisteredAccount> registeredAccounts = registeredAccountDao.findAll(request);
 		long recordsTotal = registeredAccountDao.count(request);
@@ -27,6 +25,14 @@ public class RegisteredAccountsServices {
 		dtable.put(DTableResponse.RECORDFILTERED.getName(), recordsTotal);
 		dtable.put(DTableResponse.RECORDSTOTAL.getName(), recordsTotal);
 		return dtable;
+	}
+	
+	public RegisteredAccount getAccountInformation(long id){
+		try {
+			return registeredAccountDao.findOne(id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 }

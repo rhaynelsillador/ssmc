@@ -13,6 +13,9 @@
 	<bean id="contactUsServices" 	class="net.ssmc.services.ContactUsServices" />
 	<bean id="dashboardServices" 	class="net.ssmc.services.DashboardServices" />
 	<bean id="cityServices" 		class="net.ssmc.services.CityServices" />
+	<bean id="examResultServices" 	class="net.ssmc.services.ExamResultServices" />
+	
+	
 	
 	<!-- CMS SERVICES -->
 	<bean id="faqServices" 			class="net.cms.ssmc.services.FaqServices" />

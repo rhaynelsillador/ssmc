@@ -11,7 +11,7 @@ public interface RegisteredAccountDao {
 	
 	long count(Map<String, String> request);
 	long create(RegisteredAccount account);
-	RegisteredAccount findOne(long id);
+	RegisteredAccount findOne(long id) throws Exception;
 	List<RegisteredAccount> findAll(Map<String, String> request);
 	
 	List<Long> totalRegisterThisMonth();

@@ -59,7 +59,7 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 	}
 
 	@Override
-	public RegisteredAccount findOne(long id) {
+	public RegisteredAccount findOne(long id) throws Exception{
 		final String FINDONE = "SELECT * FROM registered_account WHERE ID=?";
 		return jdbcTemplate.queryForObject(FINDONE, new Object[]{id}, new BeanPropertyRowMapper<RegisteredAccount>(RegisteredAccount.class));
 	}

@@ -206,7 +206,7 @@
 	        				return moment(data).format("YYYY-MM-DD HH:mm:ss");
 	        			}},
 	                    { "data": "status" , render : function(data, type, full, meta){
-	                    	return '<button class="btn btn-success btn-sm updateBrand" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">Update</button> ';
+	                    	return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
 	                    }},
 	        	     ],
 	            } );
