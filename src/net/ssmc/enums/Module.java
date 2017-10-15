@@ -14,7 +14,8 @@ public enum Module {
 	SERVICE("ServicesUpdate"),
 	CITY(""),
 	REGISTEREDACCOUNTS(""), 
-	CONTACTINFORMATION("");
+	CONTACTINFORMATION(""), 
+	ADVERTISEMENT("");
 	
 	private String updateUrl;
 	

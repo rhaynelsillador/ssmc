@@ -16,6 +16,7 @@ public class DBUtils {
 		createControl();
 		createFAQ();
 		createContactInformationTable();
+		createAdvertisementTable();
 	}
 	
 	private void createTables(){
@@ -264,6 +265,20 @@ public class DBUtils {
 		  "PRIMARY KEY (`id`)"+
 		") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		
+		try {
+			jdbcTemplate.execute(SQL);
+		} catch (Exception e) {
+		}
+	}
+	
+	private void createAdvertisementTable(){
+		final String SQL = "CREATE TABLE `advertisement` ("+
+		  "`id` bigint(20) NOT NULL AUTO_INCREMENT,"+
+		  "`name` varchar(75) NOT NULL,"+
+		  "`status` tinyint(1) NOT NULL,"+
+		  "`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,"+
+		  "PRIMARY KEY (`id`)"+
+		") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		try {
 			jdbcTemplate.execute(SQL);
 		} catch (Exception e) {

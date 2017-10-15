@@ -22,6 +22,7 @@
             <li class="navigation__sub" id="cms_menus">
                 <a href="" data-mae-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> CMS <span class="badge badge-error" id="cmsNotifCounter"></span></a>
                 <ul>
+                	<li id="advertisement_menu"><a href="Advertisement">Advertisement</a></li>
                 	<li id="contact_info_menu"><a href="ContactInformation">Contact Information</a></li>
                     <li id="clinic_menu"><a href="Clinic">Clinic And Hospital</a></li>
                     <li id="faq_menu"><a href="Faq">Faq <span class="badge badge-error"></span></a></li>

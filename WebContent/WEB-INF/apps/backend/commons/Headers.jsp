@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"/>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SSMC Imtegrated System</title>
     <link href="assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">

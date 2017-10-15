@@ -33,6 +33,7 @@ public class ImageDaoImpl implements ImageDao {
 
 	@Override
 	public List<Image> retrieveImage(int id, Module module) {
+		System.out.println(module.toString() +  " :: " +id);
 		return jdbcTemplate.query(FINDALLIMAGES, new Object[]{id, module.toString()}, new BeanPropertyRowMapper<Image>(Image.class));
 	}
 

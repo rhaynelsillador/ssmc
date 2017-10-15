@@ -32,7 +32,12 @@ public class ImageServices {
 	}
 	
 	public Map<String, Object> getAllImages(HttpSession session, Map<String, String> request){
-		int id = (int) session.getAttribute("moduleid");
+		int id = 0;
+		try {
+			id = (int) session.getAttribute("moduleid");
+		} catch (Exception e) {
+		}
+		
 		Module module = (Module) session.getAttribute("module");
 		Map<String, Object> data = new HashMap<>();
 		List<Image> images = imageDao.retrieveImage(id, module);
