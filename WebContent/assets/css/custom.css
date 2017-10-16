@@ -109,3 +109,54 @@ body::before {
 .table-bootgrid>thead>tr>th>a, .table-bootgrid>thead>tr>th>a:focus, .table-bootgrid>thead>tr>th>a:hover {
     color: #333333;
 }
+
+.table-bootgrid__actions>.dropdown [data-toggle]{
+  color: #333;
+}
+
+.form-control{
+  color: #333;
+}
+
+.form-control::placeholder{
+  color: #666;
+}
+
+.form-control{
+  color: #333;
+}
+
+.action-header:not(.action-header--dark):not(.action-header--card),.messages__user{
+  background: white;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.messages__body .list-group-item:nth-child(odd) .messages__item {
+  background: linear-gradient( to bottom, #71bccc 0%, #316db3 100%);
+  color: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.messages__date {
+  color: #333;
+}
+
+.actions>a>i, .actions>div>a>i {
+  color: #ffffff;
+}
+
+.actions>a:hover, .actions>div>a:hover {
+  background: #f58435;
+  color: #fff;
+}
+
+/*.btn-default {
+    background: #f58435;
+    border: 1px solid #f58435;
+    color: #fff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}*/
+
+.table>thead>tr>th {
+    color: #333;
+}
