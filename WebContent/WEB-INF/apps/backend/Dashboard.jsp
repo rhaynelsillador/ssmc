@@ -1,36 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--[if IE 9 ]><html class="ie9"><![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Material Admin</title>
-
-        <!-- Vendors -->
-
-        <!-- Animate CSS -->
-        <link href="assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
-
-        <!-- Material Design Icons -->
-        <link href="assets/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
-
-        <!-- Malihu Scrollbar -->
-        <link href="assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
-
-        <!-- Full Calendar -->
-        <link href="assets/vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-
-        <!-- Site CSS -->
-        <link href="assets/css/app-1.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="assets/css/custom.css" rel="stylesheet">
-
-        <!-- Page loader -->
-        <script src="assets/js/page-loader.min.js"></script>
-    </head>
-
+	<%@ include file="commons/Headers.jsp"%>
     <body>
         <!-- Page Loader -->
         <div id="page-loader">
@@ -217,59 +187,17 @@
         </section>
 
 
-
-        <!-- jQuery -->
-        <script src="assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-
-        <!-- Bootstrap -->
-        <script src="assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-        <!-- Malihu ScrollBar -->
-        <script src="assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-
-        <!-- Bootstrap Notify -->
-        <script src="assets/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
-
-        <!-- Moment -->
-        <script src="assets/vendors/bower_components/moment/min/moment.min.js"></script>
-
-        <!-- FullCalendar -->
-        <script src="assets/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-
-        <!-- Simple Weather -->
+		<%@ include file="commons/JsFiles.jsp"%>
         <script src="assets/vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
-
-        <!-- Salvattore -->
         <script src="assets/vendors/bower_components/salvattore/dist/salvattore.min.js"></script>
-
-        <!-- Flot Charts -->
         <script src="assets/vendors/bower_components/flot/jquery.flot.js"></script>
         <script src="assets/vendors/bower_components/flot/jquery.flot.resize.js"></script>
         <script src="assets/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
-
-        <!-- Sparkline Charts -->
         <script src="assets/vendors/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-        <!-- EasyPie Charts -->
         <script src="assets/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-
-        <!-- Demo Only -->
         <script src="assets/demo/js/flot-charts/curved-line.js"></script>
         <script src="assets/demo/js/flot-charts/line.js"></script>
         <script src="assets/demo/js/easy-pie-charts.js"></script>
-        <script src="assets/demo/js/misc.js"></script>
         <script src="assets/demo/js/sparkline-charts.js"></script>
-       <!--  <script src="assets/demo/js/calendar.js"></script> -->
-
-        <!-- Site Functions & Actions -->
-        <script src="assets/js/app.min.js"></script>
-        <script src="assets/js/utils.js"></script>
-
-        <script type="text/javascript">
-
-
-
-        </script>
-
     </body>
 </html>

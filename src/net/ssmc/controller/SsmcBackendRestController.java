@@ -83,16 +83,12 @@ public class SsmcBackendRestController {
 	
 	@RequestMapping(path="/AccountApprover", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> accountApprover(@RequestBody User user) {
-		HttpSession session = httpServletRequest.getSession(true);
-		System.out.println(user);
-		return userServices.accountApprover(session, user);
+		return userServices.accountApprover(user);
 	}
 	
 	@RequestMapping(path="/AddUpdateUser", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> addUpdateUser(@RequestBody User user) {
-		HttpSession session = httpServletRequest.getSession(true);
-		System.out.println(user);
-		return userServices.createUpdateUser(session, user);
+		return userServices.createUpdateUser(user);
 	}
 	
 	@AppicationAudit(module = Module.ROLE, access = Access.RETRIEVE)
@@ -103,14 +99,15 @@ public class SsmcBackendRestController {
 	
 	@AppicationAudit(module = Module.USER, access = Access.CREATE)
 	@RequestMapping(path="/UserRoles", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody List<RoleAccess> userRoles(@RequestBody Role role){
-		return roleServices.userRolesAdd(role);
+	public @ResponseBody List<RoleAccess> userRoles(@RequestBody User user){
+		return roleServices.userRolesAdd(user);
 	}
 	
 	@AppicationAudit(module = Module.ROLE, access = Access.UPDATE)
 	@RequestMapping(path="/RoleSaveUpdates", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> roleSaveUpdates(@RequestBody List<Role> roles){
 		HttpSession session = httpServletRequest.getSession(true);
+		System.out.println("roles ::  "+roles);
 		return roleServices.saveRoleUpdates(session, roles);
 	}
 	

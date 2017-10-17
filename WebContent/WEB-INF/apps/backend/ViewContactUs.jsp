@@ -39,7 +39,7 @@
                     <div class="card messages">
                         <div class="messages__sidebar c-overflow">
                             <div class="messages__user">
-                                <img src="demo/img/profile-pics/1.jpg" alt="">
+                                <img src="assets/demo/img/profile-pics/1.jpg" alt="">
                                 <div>Signed in as <br/> ${sessionScope.user.username }</div>
                             </div>
 
@@ -130,14 +130,14 @@
         				var contactUsMessagesContentList = "";
         				
         				if(data.message != undefined){
-        					contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content" data-id="'+data.message.id+'"><div class="pull-right"><img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt=""></div>'+
+        					contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content" data-id="'+data.message.id+'"><div class="pull-right"><img class="avatar-img" src="assets/demo/img/profile-pics/1.jpg" alt=""></div>'+
 		                    '<div class="media-body"><div><div class="messages__item">'+data.message.message+'</div></div>'+
 		                    '<small class="messages__date"><i class="zmdi zmdi-time"></i> '+moment(data.message.dateAdded).format("YYYY-MM-DD HH:mm:ss")+'</small>'+
 		                    '</div></div>';
         				}
         				var isSame = "";
         				$.each(data.reply, function(index, value){
-        						contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content type-'+value.type.toLowerCase()+'" data-id="'+value.id+'"><div class="pull-right"><img class="avatar-img" src="demo/img/profile-pics/1.jpg" alt=""></div>'+
+        						contactUsMessagesContent += '<div class="list-group-item media contact-us-message-content type-'+value.type.toLowerCase()+'" data-id="'+value.id+'"><div class="pull-right"><img class="avatar-img" src="assets/demo/img/profile-pics/1.jpg" alt=""></div>'+
     		                    '<div class="media-body"><div>'+value.message+'</div>'+
     		                    '<small class="messages__date"><i class="zmdi zmdi-time"></i> '+moment(value.dateReplied).format("YYYY-MM-DD HH:mm:ss")+'</small>'+
     		                    '</div></div>';

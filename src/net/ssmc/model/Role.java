@@ -1,10 +1,16 @@
 package net.ssmc.model;
 
+import java.io.Serializable;
+
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
 
-public class Role {
+public class Role implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private Module module;
@@ -16,6 +22,10 @@ public class Role {
 	public Role(int id, String name) {
 		this.id=id;
 		this.name=name;
+	}
+	public Role(Module module, Access access) {
+		this.access=access;
+		this.module=module;
 	}
 	public int getId() {
 		return id;
@@ -53,7 +63,6 @@ public class Role {
 		int result = 1;
 		result = prime * result + ((access == null) ? 0 : access.hashCode());
 		result = prime * result + ((module == null) ? 0 : module.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 	@Override
@@ -69,13 +78,12 @@ public class Role {
 			return false;
 		if (module != other.module)
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		return true;
 	}
-	
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + ", module=" + module + ", access=" + access + ", status=" + status
+				+ "]";
+	}
 	
 }

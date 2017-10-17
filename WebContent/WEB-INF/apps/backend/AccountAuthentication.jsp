@@ -14,7 +14,10 @@
         <link href="assets/css/app-1.min.css" rel="stylesheet">
         
         <script type="text/javascript" src="assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="assets/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
         <script type="text/javascript" src="assets/js/app.min.js"></script>
+        <script src="assets/js/utils.js"></script>
         
     </head>
     
@@ -29,7 +32,7 @@
                 </div>
 
                 <div class="login__block__body">
-                	<form name="loginForm" method="POST">
+                	<form name="loginForm" method="POST" id="loginForm">
 	                    <div class="form-group form-group--float form-group--centered form-group--centered">
 	                        <input type="text" class="form-control" name="username" id="loginUsername">
 	                        <label>Username</label>
@@ -42,7 +45,7 @@
 	                        <i class="form-group__bar"></i>
 	                    </div>
 						<input type='hidden' name='${_csrf.parameterName}' value="${_csrf.token}" />
-	                    <button class="btn btn--light btn--icon m-t-15 submit-login-form" type="button"><i class="zmdi zmdi-long-arrow-right"></i></button>
+	                    <button class="btn btn--light btn--icon m-t-15 submit-login-form" type="submit"><i class="zmdi zmdi-long-arrow-right"></i></button>
 	             	</form>
                 </div>
        		</div>
@@ -53,20 +56,19 @@
     
     <script type="text/javascript">
     	
-    	$(".submit-login-form").click(function(e){
+    	$("#loginForm").submit(function(e){
     		var data = {
     				username : $("#loginUsername").val(),
     				password : $("#loginPassword").val()
     		}
-    		
     		$.post("AccountAuthentication", data, function(data){
-    			console.log(data);
     			if(data.status == "OK"){
-    				window.location = "Accounts";
+    				window.location = "Dashboard";
+    			}else{
+    				toastMessage(data);
     			}
     		})
     		e.preventDefault();
-    		console.log("asdsadsadsa", data);
     	})
     	
     </script>

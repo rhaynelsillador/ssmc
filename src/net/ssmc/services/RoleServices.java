@@ -64,9 +64,12 @@ public class RoleServices {
 		return response;
 	}
 
-	public List<RoleAccess> userRolesAdd(Role role){
-		List<Role> roleAcces = roleAccessDao.retrieveByRole(role.getId(), role.getName());
-		return roleAccess(roleAcces, role.getName(), role.getId());
+	public List<RoleAccess> userRolesAdd(User user){
+		System.out.println("params :: "+user);
+		//List<Role> roleAcces = roleAccessDao.retrieveByRole(user.getId(), user.getRoleName());
+		List<Role> roleAcces = userRoleAccessDao.retrieve(user.getId(), user.getRoleName());
+		System.out.println(roleAcces.size()+" :: COUNT");
+		return roleAccess(roleAcces, user.getRoleName(), user.getId());
 	}
 	
 	public List<RoleAccess> userRolesUpdate(HttpSession session){
@@ -76,6 +79,7 @@ public class RoleServices {
 	}
 	
 	private List<RoleAccess> roleAccess(List<Role> roleAcces, String roleName, int roleId){
+		System.out.println("roleAcces : "+roleAcces);
 		List<RoleAccess> roleAccesses = new ArrayList<RoleAccess>();
 		List<Module> modules = Arrays.asList(Module.values());
 		for (Module module : modules) {
@@ -89,13 +93,22 @@ public class RoleServices {
 						role.setModule(module);
 						role.setName(roleName);
 						role.setId(roleId);
-						role.setStatus(roleAcces.contains(role));
+						boolean isAllowed = false;
+						for (Role role1 : roleAcces) {
+							if(role1.getModule().equals(role.getModule()) && role1.getAccess().equals(role.getAccess())){
+								isAllowed = true;
+								System.out.println("roleAcces ::: "+role1.isStatus());
+							}
+						}
+						System.out.println("isAllowed::"+isAllowed);
+						role.setStatus(isAllowed);
 						roles.add(role);
 					}
 				}
 				roleAccesses.add(new RoleAccess(module, roles));
 			}
 		}
+		System.out.println("AFTER :: "+roleAccesses);
 		return roleAccesses;
 	}
 }

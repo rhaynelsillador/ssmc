@@ -229,10 +229,13 @@
 		
 		function getDefaultRoleAccess(){
 			var form = {
-				name : $("#roleName :selected").text(),
-				id:  $("#roleName :selected").val(),
+				roleName : $("#roleName :selected").text(),
+				id:  "${requestScope.users.id}",
 			}
 			POST("UserRoles", form, function(data){
+				
+				console.log(data);
+				
 	  			var userDefaultRoles = "";
 	  			for (var i = 0; i < data.length; i++) {
 	  				userDefaultRoles += '<h4>'+data[i].module+'</h4><div class="row">';

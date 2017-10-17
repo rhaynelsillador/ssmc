@@ -73,7 +73,6 @@ public class SsmcBackendController {
 		session.setAttribute("TRANSACTION", TransactionType.UPDATE);
 		User user = userServices.getUser(id);
 		map.addAttribute("users", user);
-		map.addAttribute("userRoles", roleServices.userRolesUpdate(session));
 		List<Role> roles = new ArrayList<>();
 		roles.add(new Role(user.getRoleId(), user.getRoleName()));
 		map.addAttribute("role", roles);

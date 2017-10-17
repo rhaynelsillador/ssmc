@@ -3,7 +3,6 @@ package net.ssmc.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -12,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import net.ssmc.dao.UserRoleAccessDao;
 import net.ssmc.dao.mapper.RoleMapper;
 import net.ssmc.model.Role;
+import net.ssmc.model.User;
 
 public class UserRoleAccessDaoImpl implements UserRoleAccessDao{
 
@@ -34,20 +34,22 @@ public class UserRoleAccessDaoImpl implements UserRoleAccessDao{
 	}
 
 	@Override
-	public void create(List<Role> roles) {
+	public void create(User user) {
 		jdbcTemplate.batchUpdate(INSERT, new BatchPreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
 				
-				Role role = roles.get(i);
-				ps.setInt(1, role.getId());
+				Role role = user.getRoles().get(i);
+				System.out.println(role);
+				
+				ps.setInt(1, user.getId());
 				ps.setInt(2, role.getModule().ordinal());
 				ps.setInt(3, role.getAccess().ordinal());
 				
 			}
 			@Override
 			public int getBatchSize() {
-				return roles.size();
+				return user.getRoles().size();
 			}
 		  });
 	}

@@ -31,17 +31,27 @@ public class AuditInterceptor implements HandlerInterceptor {
 				final Module module = method.getAnnotation(AppicationAudit.class).module();
 				final Access access = method.getAnnotation(AppicationAudit.class).access();
 				User user = (User) session.getAttribute("user");
+				
+				
 				if (user != null && module != Module.ALL) {
+					System.out.println(module+"::"+access);
+					
 					boolean isAllowed = false;
 					List<Role> roleAccess = (List<Role>) session.getAttribute("roleAccess");
+					System.out.println("INTERCEP : "+roleAccess);
+					
 					if(roleAccess != null){
 						for (Role role : roleAccess) {
 							if(role.getModule() == module && role.getAccess() == access || module == Module.ALL){
 								isAllowed = true;
+								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 							}
 						}
 					}
-					if(!isAllowed){
+					if(!isAllowed && !user.getRoleName().equalsIgnoreCase("ADMIN")){
 						response.sendRedirect("403");
 					}
 				}else if(user != null && user.getRoleName().equalsIgnoreCase("ADMIN")){
@@ -68,5 +78,7 @@ public class AuditInterceptor implements HandlerInterceptor {
 //			System.out.println(method.getAnnotation(AppicationAudit.class).value()); 
 //			System.out.println("Total Took:"+((Long)request.getAttribute("ENDTIME")-(Long)request.getAttribute("STARTTIME")));  
 //		}  
+		System.out.println(request.getSession().getAttribute("roleAccessJson"));
+		request.setAttribute("roleAccessJson", request.getSession().getAttribute("roleAccessJson"));
 	 } 
 }

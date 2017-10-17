@@ -6,16 +6,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.ssmc.dao.UserRoleAccessDao;
+import com.google.gson.Gson;
+
 import net.ssmc.dao.UserDao;
+import net.ssmc.dao.UserRoleAccessDao;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
+import net.ssmc.model.Role;
 import net.ssmc.model.User;
 import net.ssmc.utils.AES;
 
@@ -25,6 +29,10 @@ public class UserServices {
 	private UserDao userDao;
 	@Autowired
 	private UserRoleAccessDao userRoleAccessDao;
+	@Autowired
+	private HttpServletRequest httpServletRequest;
+	@Autowired
+	private Gson gson;
 	
 	public Map<String, Object> login(HttpSession session, Map<String, String> request){
 		Map<String, Object> response = new HashMap<>();
@@ -32,6 +40,10 @@ public class UserServices {
 		
 		try {
 			user = userDao.login(request.get("username"), AES.encrypt(request.get("password")));
+			List<Role> roles = userRoleAccessDao.retrieve(user.getId(), user.getRoleName());
+			session.setAttribute("roleAccess", roles);
+			System.out.println(gson.toJson(roles));
+			session.setAttribute("roleAccessJson", gson.toJson(roles));
 		} catch (Exception e) {
 		}
 		
@@ -39,7 +51,7 @@ public class UserServices {
 			response.put(Helper.STATUS, Status.ERROR);
 			response.put(Helper.MESSAGE, "Invalid username and password!");
 		}else{
-			session.setAttribute("roleAccess", userRoleAccessDao.retrieve(user.getId(), user.getRoleName()));
+			
 			session.setAttribute("user", user);
 			
 			response.put(Helper.STATUS, Status.OK);
@@ -76,8 +88,8 @@ public class UserServices {
 		return userDao.retrieve(id);
 	}
 
-	public Map<String, Object> createUpdateUser(HttpSession session, User user) {
-		TransactionType transactionType = (TransactionType) session.getAttribute("TRANSACTION");
+	public Map<String, Object> createUpdateUser(User user) {
+		TransactionType transactionType = (TransactionType) httpServletRequest.getSession().getAttribute("TRANSACTION");
 		Map<String, Object> response = new HashMap<>();
 		response.put(Helper.STATUS, Status.ERROR);
 		
@@ -104,7 +116,7 @@ public class UserServices {
 		if(transactionType == TransactionType.ADD){
 			try {
 				userDao.create(user);
-				userRoleAccessDao.create(user.getRoles());
+				userRoleAccessDao.create(user);
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Add success");
 			} catch (Exception e) {
@@ -117,7 +129,7 @@ public class UserServices {
 			try {
 				userDao.update(user);
 				userRoleAccessDao.deleteByUserId(user.getId());
-				userRoleAccessDao.create(user.getRoles());
+				userRoleAccessDao.create(user);
 				response.put(Helper.STATUS, Status.SUCCESS);
 				response.put(Helper.MESSAGE, "Update success");
 			} catch (Exception e) {
@@ -133,7 +145,8 @@ public class UserServices {
 		return response;
 	}
 
-	public Map<String, Object> accountApprover(HttpSession session, User user) {
+	public Map<String, Object> accountApprover(User user) {
+		
 		Map<String, Object> response = new HashMap<>();
 		if(user.isApprover())
 			user.setApprover(false);
