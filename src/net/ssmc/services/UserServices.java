@@ -17,6 +17,7 @@ import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
 import net.ssmc.model.User;
+import net.ssmc.utils.AES;
 
 public class UserServices {
 
@@ -28,8 +29,9 @@ public class UserServices {
 	public Map<String, Object> login(HttpSession session, Map<String, String> request){
 		Map<String, Object> response = new HashMap<>();
 		User user = null;
+		
 		try {
-			user = userDao.login(request.get("username"), request.get("password"));
+			user = userDao.login(request.get("username"), AES.encrypt(request.get("password")));
 		} catch (Exception e) {
 		}
 		

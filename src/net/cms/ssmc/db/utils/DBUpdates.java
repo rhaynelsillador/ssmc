@@ -38,7 +38,6 @@ public class DBUpdates {
 			jdbcTemplate.execute(registeredAccount);
 			System.out.println("DONE CREATING TABLE REGISTERED ACCOUNT");
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	

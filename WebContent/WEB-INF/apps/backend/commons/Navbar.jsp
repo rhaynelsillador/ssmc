@@ -1,6 +1,6 @@
 <header id="header">
     <div class="logo">
-        <a href="index.html" class="hidden-xs">
+        <a href="Dashboard" class="hidden-xs">
             SSMC GROUP
             <small>ADMIN</small>
             <!-- <img src="assets/img/logo.png" alt=""> -->

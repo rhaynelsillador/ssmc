@@ -174,11 +174,10 @@ public class ControlServices {
 		User user = (User) httpServletRequest.getSession().getAttribute("user");
 		List<FaqTemp> faqTemp = faqTempDao.findAll();
 		
+		System.out.println("faqTempDao :: "+user);
+		
 		List<Control> controls = controlDao.findAllByUser(user.getId());
 		List<FaqTemp> faqTemps = new ArrayList<>();
-
-		System.out.println(controls.size());
-		
 		for (FaqTemp faqTmp : faqTemp) {
 			boolean isApproved = false;
 			for (Control ctrl : controls) {
@@ -188,7 +187,6 @@ public class ControlServices {
 			}
 			if(!isApproved){
 				faqTemps.add(faqTmp);
-				System.out.println(faqTmp.getId());
 			}
 		}
 		
