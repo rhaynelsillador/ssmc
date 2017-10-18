@@ -23,7 +23,7 @@
                 <div class="content__header">
                     <h2>Headers</h2>
 
-                    <div class="actions">
+                    <div class="actions hidden">
                         <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                         <th data-column-id="page" data-formatter="page">Page</th>
                                         <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
-                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
+                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px" data-visible="false">Commands</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -67,13 +67,37 @@
 	        $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 	        $("#header_menu").addClass("navigation__active");
 			var headerTable = $("#data-table-header");
+			var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="HEADER" && access.access=="UPDATE" || access.module=="HEADER" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="HEADER" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="HEADER" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="HEADER" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+				
+			}
+			
+			console.log(isUserRoleAdmin, isUpdate, isCreate, isDelete);
+			
 			
 			tableConfig.url = "HeaderList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"HeaderUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                			"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=HEADER\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> "+
-	                			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
+	                	return 	"<a href=\"HeaderUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	                			"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=HEADER\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Upload</a> "+
+	                			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\">Delete</button>";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return datetimeformat(row.dateUpdated);
