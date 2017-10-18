@@ -37,8 +37,11 @@
                             <h2 id="accountName"></h2>
 
                             <ul class="icon-list">
+                                <li id="account-gender"><i class="zmdi zmdi-male-female"></i></li>
+                                <li id="account-birthday"><i class="zmdi zmdi-calendar-alt"></i></li>
                                 <li id="account-number"><i class="zmdi zmdi-phone"></i></li>
                                 <li id="account-email"><i class="zmdi zmdi-email"></i></li>
+                                <li id="account-address"><i class="zmdi zmdi-gps-dot"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -55,13 +58,13 @@
                         <div class="card__body">
                         	<div class="card__sub" id="uploadResult">
                                 <h4>Upload Results</h4>
-                                <form role="form" id="headerUpdateForm">
+                                <form role="form" id="uploadResultForm">
 						           	<div class="row">
 						               <div class="col-sm-12">
 						                   <div class="input-group">
 						                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 						                       <div class="form-group">
-						                           <input type="text" class="form-control" placeholder="Name" value="" name="name">
+						                           <input type="text" class="form-control" placeholder="Name" value="" name="name" id="result-name">
 						                           <i class="form-group__bar"></i>
 						                       </div>
 						                   </div>
@@ -69,7 +72,15 @@
 						                   <div class="input-group">
 						                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 						                       <div class="form-group">
-						                           <textarea class="form-control" rows="10" name="content" id="headerContent"></textarea>
+						                           <input type="text" class="form-control" placeholder="Date Examined" value="" name="dateExamined" id="result-dateExamined">
+						                           <i class="form-group__bar"></i>
+						                       </div>
+						                   </div>
+						                   <br/>
+						                   <div class="input-group">
+						                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+						                       <div class="form-group">
+						                           <textarea class="form-control" rows="10" name="description" id="result-description"></textarea>
 						                           <i class="form-group__bar"></i>
 						                       </div>
 						                   </div>
@@ -77,13 +88,14 @@
 						                  	<div class="input-group">
 						                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 						                       <div class="form-group">
-						                           <input type="file" name="fileToUpload[]" multiple="" id="fileToUpload" class="form-control">
+						                           <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
 						                           <i class="form-group__bar"></i>
 						                       </div>
 						                   </div>
-						                    <div class="input-group">
-						                    	<button class="btn btn-primary" type="submit"></button>
-						                    </div>
+						                   <br/>
+						                   <div class="input-group">
+						                    	<button class="btn btn-primary" type="submit">Upload</button>
+						                   </div>
 						           		</div>
 					           		</div>
 				           		</form>
@@ -157,7 +169,17 @@
 		
 		var id = getUrlParameter("id");
 		
+		
+		
 	    $(document).ready(function(){
+	    	
+	    	var currentDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+        	
+        	$('#result-dateExamined').datetimepicker({
+                defaultDate: currentDate,
+                maxDate : currentDate,
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
 	    	
 	    	POST("RegisteredAccountInfoData", {"id":id}, function(data){
       			$("#accountName").html(data.lastName+", "+data.firstName + " " + data.middleName);
@@ -184,27 +206,34 @@
       		})
       		
       		
-	    	$( "#headerUpdateForm" ).submit(function( event ) {
-	      		console.log( $( this ).serialize() );
-	      		event.preventDefault();
-	      		  		
-	      		var form = objectifyForm($( this ).serializeArray());
-	      		//form.content = CKEDITOR.instances.headerContent.getData();
-	      		
-	      		var btn = $("#headerUpdateForm button");
-	      		btn.html("Updating...");
+      		$("#uploadResultForm").submit(function( event ) {
+      			
+      			var btn = $("#uploadResultForm button");
+	      		btn.html("Uploading...");
 	      		btn.attr("disabled", "disabled");
-	      		
-	      		POST("HeaderAddUpdate", form, function(data){
-	      			if(contains > 0 && data.status=="SUCCESS"){
-	      				window.location.href = "Header";
-	      			}else{
-	      				toastMessage(data);
-		      			btn.html("Save Update");
-		    	  		btn.removeAttr("disabled");
-	      			}
-	      		})
-	    	});
+      			
+	      		var myform = document.getElementById("uploadResultForm");
+	      	    var fd = new FormData(myform );
+	      	  	fd.append("accountId", id);
+	      	    $.ajax({
+	      	        url: "UploadTestResult",
+	      	        data: fd,
+	      	        cache: false,
+	      	        processData: false,
+	      	        contentType: false,
+	      	        type: 'POST',
+	      	        success: function (data) {
+	      	        	toastMessage(data);
+	      	        	if(data.status == "SUCCESS"){
+	      	        		$("#uploadResultForm")[0].reset()
+	      	        	}
+	      	        	btn.html("Upload");
+	    	      		btn.removeAttr("disabled");
+	      	        }
+	      	    });
+	      	  event.preventDefault();
+	        })
+      		
 	    })
 	    
 	    var getExaminationResults = function(){
@@ -219,12 +248,27 @@
 		                    '</td>'+
 		                    '<td>'+moment(value.dateexamined).format("YYYY-MM-DD HH:mm:ss")+'</td>'+
 		                    '<td>'+moment(value.dateencoded).format("YYYY-MM-DD HH:mm:ss")+'</td>'+
-		                    '<td><i class="zmdi zmdi-download"></i> download<br/><i class="zmdi zmdi-download"></i> download<br/><i class="zmdi zmdi-download"></i> download all</td>'+
+		                    '<td> <a href="javascript:void(0)" class="btn btn-primary delete-test-result" data-id="'+value.id+'" data-name="'+value.name+'"> <i class="zmdi zmdi-minus-circle"></i> delete </a> '+
+		                    	'<a href="'+fileServer+"upload/"+value.result+'" class="btn btn-primary" target="_blank"><i class="zmdi zmdi-download"></i> download</a></td>'+
 		                '</tr>';
 	    		})
 	    		examResultTable.html(html);
 	    	})
 	    } 
+	    
+	    $(document).on("click",".delete-test-result", function(){
+	    	var data = $(this).data();
+	    	console.log(data);
+	    	
+	    	confirmationWithoutTable({
+            	text : "Do you want to delete "+data.name+" result?",
+            	url : "DeleteTestResult",
+            	form : data,
+            	fn : getExaminationResults
+            });
+	    	
+	    })
+	    
 	    
 	</script>
         

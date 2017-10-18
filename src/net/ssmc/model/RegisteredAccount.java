@@ -1,12 +1,21 @@
 package net.ssmc.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
-public class RegisteredAccount {
+import net.ssmc.enums.Gender;
 
+public class RegisteredAccount implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String email;
 	private String password;
+	private String password1;
 	private String firstName;
 	private String lastName;
 	private String middleName;
@@ -14,6 +23,9 @@ public class RegisteredAccount {
 	private boolean status;
 	private Timestamp dateCreated;
 	private Timestamp dateLastLogin;
+	private String birthday;
+	private Gender gender;
+	private String address;
 	
 	public long getId() {
 		return id;
@@ -77,11 +89,36 @@ public class RegisteredAccount {
 	public void setNumber(long number) {
 		this.number = number;
 	}
-	@Override
-	public String toString() {
-		return "RegisteredAccount [id=" + id + ", email=" + email + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", middleName=" + middleName + ", number=" + number
-				+ ", status=" + status + ", dateCreated=" + dateCreated + ", dateLastLogin=" + dateLastLogin + "]";
+	public String getPassword1() {
+		return password1;
+	}
+	public void setPassword1(String password1) {
+		this.password1 = password1;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 	
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	@Override
+	public String toString() {
+		return "RegisteredAccount [id=" + id + ", email=" + email + ", password=" + password + ", password1="
+				+ password1 + ", firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
+				+ ", number=" + number + ", status=" + status + ", dateCreated=" + dateCreated + ", dateLastLogin="
+				+ dateLastLogin + ", birthday=" + birthday + ", gender=" + gender + ", address=" + address + "]";
+	}
 }

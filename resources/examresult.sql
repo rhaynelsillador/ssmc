@@ -27,6 +27,7 @@ CREATE TABLE `examresult` (
   `encodedby` int(25) NOT NULL,
   `accountid` bigint(25) NOT NULL,
   `status` varchar(25) NOT NULL,
+  `result` varchar(75) NOT NULL,
   `description` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `encodedby` (`encodedby`),

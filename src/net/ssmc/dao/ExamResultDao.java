@@ -8,5 +8,6 @@ public interface ExamResultDao {
 
 	void create(ExamResult examResult);
 	List<ExamResult> findByAccount(long accountId);
+	void delete(long id);
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -27,6 +28,7 @@ import net.ssmc.enums.Module;
 import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.City;
 import net.ssmc.model.ContactUs;
+import net.ssmc.model.ExamResult;
 import net.ssmc.model.RegisteredAccount;
 import net.ssmc.model.Role;
 import net.ssmc.model.RoleAccess;
@@ -34,6 +36,7 @@ import net.ssmc.model.User;
 import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
+import net.ssmc.services.ExamResultServices;
 import net.ssmc.services.RegisteredAccountsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
@@ -60,6 +63,8 @@ public class SsmcBackendRestController {
 	private RegisteredAccountDao registeredAccountDao;
 	@Autowired
 	private ContactInformationServices contactInformationServices;
+	@Autowired
+	private ExamResultServices examResultServices;
 	
 	private static long random = System.currentTimeMillis();
 	
@@ -188,6 +193,18 @@ public class SsmcBackendRestController {
 		return contactInformationServices.getAllContactInformation();
 	}
 	
+	@RequestMapping(path="/UploadTestResult", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode uploadTestResult(@RequestParam("name") String name, @RequestParam("dateExamined") String dateExamined, 
+			@RequestParam("description") String description, @RequestParam("accountId") long accountId, @RequestParam("fileToUpload") MultipartFile fileToUpload){
+		System.out.println(examResultServices);
+		return examResultServices.saveUploadTestResult(name, dateExamined, description, accountId, fileToUpload);
+	}
+	
+	@RequestMapping(path="/DeleteTestResult", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode deleteTestResult(@RequestBody ExamResult examResult){
+		System.out.println(examResultServices);
+		return examResultServices.deleteTestResult(examResult.getId());
+	}
 	
 	
 	@RequestMapping(path="/LoadUserData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")

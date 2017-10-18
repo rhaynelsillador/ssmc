@@ -1,4 +1,4 @@
-var fileServer = 'http://ssmcgroup.ph/FileServer/'
+var fileServer = 'http://localhost/FileServer/'
 
 function objectifyForm(formArray) {
   var returnArray = {};
@@ -118,6 +118,27 @@ var confirmation = function confirmation(data){
     	POST(data.url, data.form, function(result){
     		toastMessage(result);
     		data.bootGrid.bootgrid('reload');
+    	});
+    });
+}
+
+var confirmationWithoutTable = function(data){
+	console.log(data);
+	swal({
+        title: "Are you sure?",
+        text: data.text,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "rgb(13, 123, 46)",
+        confirmButtonText: "Confirm"
+    }).then(function(){
+    	POST(data.url, data.form, function(result){
+    		toastMessage(result);
+    		try {
+    			data.fn();
+			} catch (e) {
+			}
+    		
     	});
     });
 }

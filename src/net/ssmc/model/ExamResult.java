@@ -1,7 +1,6 @@
 package net.ssmc.model;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import net.ssmc.enums.ExaminStatus;
 
@@ -15,7 +14,7 @@ public class ExamResult {
 	private long encodedBy;
 	private long accountId;
 	private ExaminStatus status;
-	private List<Result> results;
+	private String result;
 	private int resultCount;
 	
 	public long getId() {
@@ -66,11 +65,12 @@ public class ExamResult {
 	public void setStatus(ExaminStatus status) {
 		this.status = status;
 	}
-	public List<Result> getResults() {
-		return results;
+	
+	public String getResult() {
+		return result;
 	}
-	public void setResults(List<Result> results) {
-		this.results = results;
+	public void setResult(String result) {
+		this.result = result;
 	}
 	public int getResultCount() {
 		return resultCount;
@@ -83,6 +83,6 @@ public class ExamResult {
 	public String toString() {
 		return "ExamResult [id=" + id + ", name=" + name + ", description=" + description + ", dateExamined="
 				+ dateExamined + ", dateEncoded=" + dateEncoded + ", encodedBy=" + encodedBy + ", accountId="
-				+ accountId + ", status=" + status + ", results=" + results + ", resultCount=" + resultCount + "]";
+				+ accountId + ", status=" + status + ", result=" + result + ", resultCount=" + resultCount + "]";
 	}
 }
