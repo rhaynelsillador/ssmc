@@ -123,6 +123,7 @@
 	            });
 	        });
 
+	        $("#data-table-header-header").remove();
 	        
         </script>
         

@@ -24,7 +24,7 @@
 				   <div class="content__header">
 				       <h2>About Us</h2>
 				
-				       <div class="actions">
+				       <div class="actions hidden">
 				           <a href="AboutUsAdd"><i class="zmdi zmdi-plus"></i></a>
 				       </div>
 				   </div>
@@ -101,6 +101,27 @@
 	    CKEDITOR.replace('aboutUsContent');
 	    var aboutUsType = $('#aboutUsType');
 	    var contains = location.pathname.indexOf("AboutUsAdd");
+	    
+	    var isDelete = "hidden";
+		var isCreate = "hidden";
+		var isUpdate = "hidden";
+		for (var access of roleAccess) {
+			if(access.module=="ABOUTUS" && access.access=="UPDATE" || access.module=="ABOUTUS" && access.access=="DELETE" || isUserRoleAdmin){
+				$("th[data-column-id='commands']").removeAttr("data-visible");
+			}
+			if(access.module=="ABOUTUS" && access.access=="DELETE"  || isUserRoleAdmin){
+				isDelete = "";
+				console.log(access);
+			}
+			if(access.module=="ABOUTUS" && access.access=="CREATE"  || isUserRoleAdmin){
+				$(".actions").removeClass("hidden");
+				console.log(access);
+			}
+			if(access.module=="ABOUTUS" && access.access=="UPDATE"  || isUserRoleAdmin){
+				isUpdate = "";
+				console.log(access);
+			}
+		}
 	    
 	    $(document).ready(function(){
 	    	aboutUsType.val('${sessionScope.aboutUs.type}');

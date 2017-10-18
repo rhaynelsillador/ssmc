@@ -23,7 +23,7 @@
                 <div class="content__header">
                     <h2>Clinic And Hospital</h2>
 
-                    <div class="actions">
+                    <div class="actions hidden">
                         <a href="ClinicAndHospitalAdd"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                         <th data-column-id="mobile">Mobile</th>
                                         <th data-column-id="dateUpdated" data-formatter="dateUpdated">Date Updated</th>
                                         <th data-column-id="dateAdded" data-formatter="dateAdded">Date Added</th>
-                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
+                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px" data-visible="false">Commands</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -65,7 +65,26 @@
         	
 	        $("#cms_menus").addClass("navigation__sub--active navigation__sub--toggled");
 			$("#clinic_menu").addClass("navigation__active");
-        	
+			var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="CLINIC" && access.access=="UPDATE" || access.module=="CLINIC" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="CLINIC" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="CLINIC" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="CLINIC" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+			}
 			
 			
 	        var grid = $("#data-table-clinc").bootgrid({
@@ -104,8 +123,8 @@
 	            formatters: {
 	                "commands": function(column, row) {
 	                	console.log(row);
-	                	return 	" <a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                			" <a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=CLINIC\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Upload</a> ";
+	                	return 	" <a href=\"ClinicUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	                			" <a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=CLINIC\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Upload</a> ";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return moment(row.dateUpdated).format("YYYY-MM-DD HH:mm:ss");
@@ -123,7 +142,7 @@
 	  		    });
 		    });
 	        
-	       
+	       $("#data-table-clinc-header").remove();
 	        
         </script>
         

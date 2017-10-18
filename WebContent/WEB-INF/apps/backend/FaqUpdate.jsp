@@ -23,7 +23,7 @@
 				   <div class="content__header">
 				       <h2>Faq</h2>
 				
-				       <div class="actions">
+				       <div class="actions hidden">
 				           <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
 				       </div>
 				   </div>
@@ -108,31 +108,56 @@
 		$("#faqType").val('${requestScope.faq.type}');
 		var faqApproveFn = $(".faq-approve-fn");
 		var saveUpdateFunction = $("#saveUpdateFunction");
-		var approver =  ${sessionScope.user.approver};
+		var approver =  '${sessionScope.user.approver}';
 		var faq = getUrlParameter('faq');
 		var author = '${requestScope.faq.author}';
 		var userId = ${sessionScope.user.id};
-
+		var contains = location.pathname.indexOf("FaqUpdate");
+		
+		var isDelete = "hidden";
+		var isCreate = "hidden";
+		var isUpdate = "hidden";
+		for (var access of roleAccess) {
+			if(access.module=="FAQ" && access.access=="UPDATE" || access.module=="FAQ" && access.access=="DELETE" || isUserRoleAdmin){
+				$("th[data-column-id='commands']").removeAttr("data-visible");
+			}
+			if(access.module=="FAQ" && access.access=="DELETE"  || isUserRoleAdmin){
+				isDelete = "";
+				console.log(access);
+			}
+			if(access.module=="FAQ" && access.access=="CREATE"  || isUserRoleAdmin){
+				$(".actions").removeClass("hidden");
+				console.log(access);
+			}
+			if(access.module=="FAQ" && access.access=="UPDATE"  || isUserRoleAdmin){
+				isUpdate = "";
+				console.log(access);
+			}
+		}
 		
 	
-		console.log("approver :: ", faq, userId , author);
+		console.log("approver :: ", faq, userId , author, contains);
 		if(!approver && faq != 'main' && userId != author){
 			console.log("remove button");
 			saveUpdateFunction.remove();
 		}
 		
-		var params = {
+		
+		if(contains >= 0){
+			var params = {
 				"module" : "FAQ",
 				"id" : '${requestScope.faq.id}'
 			}
+			POST("IsApproved", params, function(data){
+				if(data.status == "ERROR"){
+					faqApproveFn.remove();
+					saveUpdateFunction.remove();
+				}
+				toastMessage(data);
+			})
+		}
 		
-		POST("IsApproved", params, function(data){
-			if(data.status == "ERROR"){
-				faqApproveFn.remove();
-				saveUpdateFunction.remove();
-			}
-			toastMessage(data);
-		})
+		
 		
 		faqApproveFn.click(function(e){
 			console.log(e);			

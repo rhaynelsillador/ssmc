@@ -1,24 +1,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html lang="en">
-	<%@ include file="commons/Headers.jsp"%>
-	
-	<script>
-		
-      	function initMap() {
-      		console.log("MAP RUNNING....");
-        	var uluru = {lat: -25.363, lng: 131.044};
-        	var map = new google.maps.Map(document.getElementById('map'), {
-          		zoom: 4,
-          	center: uluru
-        	});
-        	var marker = new google.maps.Marker({
-	          	position: uluru,
-	          	map: map
-	        });
-      	}
-    </script> 
-	
+	<%@ include file="commons/Headers.jsp"%>	
     <body>
         <!-- Page Loader -->
         <div id="page-loader">
@@ -41,7 +24,7 @@
 				   <div class="content__header">
 				       <h2>${requestScope.title}</h2>
 				
-				       <div class="actions">
+				       <div class="actions hidden">
 	                        <a href="ClinicAndHospitalAdd"><i class="zmdi zmdi-plus"></i></a>
 	                        <a href="ServicesUpload?id=${requestScope.clinic.id}&name=${requestScope.clinic.name }&module=CLINIC"><i class="zmdi zmdi-upload"></i></a>
 	                    </div>
@@ -200,6 +183,29 @@
 		$("#clinic_menu").addClass("navigation__active");
 		
     	$("#businessType").val('${requestScope.clinic.type}');
+    	
+    	var isDelete = "hidden";
+		var isCreate = "hidden";
+		var isUpdate = "hidden";
+		for (var access of roleAccess) {
+			if(access.module=="CLINIC" && access.access=="UPDATE" || access.module=="CLINIC" && access.access=="DELETE" || isUserRoleAdmin){
+				$("th[data-column-id='commands']").removeAttr("data-visible");
+			}
+			if(access.module=="CLINIC" && access.access=="DELETE"  || isUserRoleAdmin){
+				isDelete = "";
+				console.log(access);
+			}
+			if(access.module=="CLINIC" && access.access=="CREATE"  || isUserRoleAdmin){
+				$(".actions").removeClass("hidden");
+				console.log(access);
+			}
+			if(access.module=="CLINIC" && access.access=="UPDATE"  || isUserRoleAdmin){
+				isUpdate = "";
+				console.log(access);
+			}
+		}
+    	
+    	
     	
     	var btnCust = '';
     	var params = {

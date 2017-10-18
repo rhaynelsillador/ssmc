@@ -23,7 +23,7 @@
                 <div class="content__header">
                     <h2>FAQ</h2>
 
-                    <div class="actions">
+                    <div class="actions hidden">
                         <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
 			                                        <th data-column-id="type">Application Type</th>
 			                                        <th data-column-id="dateUpdated"  data-formatter="dateUpdated">Date Updated</th>
 			                                        <th data-column-id="dateAdded"  data-formatter="dateAdded">Date Added</th>
-			                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
+			                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px" data-visible="false">Commands</th>
 			                                    </tr>
 			                                </thead>
 			                            </table>
@@ -94,6 +94,27 @@
             
         <script type="text/javascript">
 			var faqUnpublished = $("#data-table-faq-unpublished");
+			var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="FAQ" && access.access=="UPDATE" || access.module=="FAQ" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="FAQ" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="FAQ" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="FAQ" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+			}
+			
 			
 			tableConfig.url = "FaqTempList";
 			tableConfig.formatters = {
@@ -103,8 +124,8 @@
 						console.log("asdasdas");
 						viewOriginal = " <button href=\"#\" class=\"btn btn-sm btn-primary command-compare\" data-row-id=\"" + row.id + "\">Compare</button>";
 					}
-	            	return 	"<a href=\"FaqUpdate?id="+row.id+"&question="+row.title+"&faq=temp\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+viewOriginal+
-	            			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
+	            	return 	"<a href=\"FaqUpdate?id="+row.id+"&question="+row.title+"&faq=temp\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+viewOriginal+
+	            			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\">Delete</button>";
 	        	},
 	        	"dateUpdated" : function(column, row){
 	        		return datetimeformat(row.dateUpdated);
@@ -129,6 +150,8 @@
 		                });
 	            });
 	        });
+			
+			$("#data-table-faq-unpublished-header").remove();
         </script>
         
     </body>

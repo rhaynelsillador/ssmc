@@ -110,9 +110,11 @@
 		for (var access of roleAccess) {
 			if(access.module=="CONTACTINFORMATION" && access.access=="DELETE" || isUserRoleAdmin){
 				isDelete = "";
-			}else if(access.module=="CONTACTINFORMATION" && access.access=="UPDATE" || isUserRoleAdmin){
+			}
+			if(access.module=="CONTACTINFORMATION" && access.access=="UPDATE" || isUserRoleAdmin){
 				$("#contactInformationForm button").removeClass("hidden");
-			}else if(access.module=="CONTACTINFORMATION" && access.access=="CREATE" || isUserRoleAdmin){
+			}
+			if(access.module=="CONTACTINFORMATION" && access.access=="CREATE" || isUserRoleAdmin){
 				isUpdate = "";
 			}
 			console.log(access);

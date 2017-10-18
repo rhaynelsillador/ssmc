@@ -24,7 +24,7 @@
 				   <div class="content__header">
 				       <h2>Header</h2>
 				
-				       <div class="actions">
+				       <div class="actions hidden">
 				           <a href="HeaderAdd"><i class="zmdi zmdi-plus"></i></a>
 				           <a href="ServicesUpload?id=${sessionScope.header.id }&name=${sessionScope.header.name }&module=HEADER"><i class="zmdi zmdi-upload"></i></a>
 				       </div>
@@ -135,7 +135,27 @@
 	    
 	    var aboutUsType = $('#headerType');
 	    var headerPage = $('#headerPage');
-	    
+	    var isDelete = "hidden";
+		var isCreate = "hidden";
+		var isUpdate = "hidden";
+		for (var access of roleAccess) {
+			if(access.module=="HEADER" && access.access=="UPDATE" || access.module=="HEADER" && access.access=="DELETE" || isUserRoleAdmin){
+				$("th[data-column-id='commands']").removeAttr("data-visible");
+			}
+			if(access.module=="HEADER" && access.access=="DELETE"  || isUserRoleAdmin){
+				isDelete = "";
+				console.log(access);
+			}
+			if(access.module=="HEADER" && access.access=="CREATE"  || isUserRoleAdmin){
+				$(".actions").removeClass("hidden");
+				console.log(access);
+			}
+			if(access.module=="HEADER" && access.access=="UPDATE"  || isUserRoleAdmin){
+				isUpdate = "";
+				console.log(access);
+			}
+			
+		}
 	    
 	    
 	    $(document).ready(function(){
