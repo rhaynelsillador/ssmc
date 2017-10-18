@@ -152,6 +152,29 @@
 	    	$("#registered_accounts_menu").addClass("navigation__active");
 	    	var tableData = $('#registered-accounts-table');
 	    	var registeredAccountFilterFormBtnReset = $("#registeredAccountFilterFormBtnReset");
+	    	
+	    	var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="REGISTEREDACCOUNTS" && access.access=="UPDATE" || access.module=="REGISTEREDACCOUNTS" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="REGISTEREDACCOUNTS" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="REGISTEREDACCOUNTS" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="REGISTEREDACCOUNTS" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+				
+			}	    	
+	    	
 	        $(document).ready(function(){	        	
 	        	var currentDate = moment(new Date()).format("YYYY-MM-DD");
 	        	
@@ -205,10 +228,14 @@
 	        				}
 	        				return moment(data).format("YYYY-MM-DD HH:mm:ss");
 	        			}},
-	                    { "data": "status" , render : function(data, type, full, meta){
-	                    	return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
+	                    { "data": "status", render : function(data, type, full, meta){
+	                    	return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
 	                    }},
 	        	     ],
+	        	     "columnDefs": [ {
+	        	    	 "targets": 7,
+	        	    	 "orderable": false
+        	    	 } ]
 	            } );
 	        	
 	        	$('#showCountContainer').append($("select[name='registered-accounts-table_length']"));

@@ -22,7 +22,7 @@
             <section id="content">
                 <div class="content__header">
                     <h2>City</h2>
-                    <div class="actions">
+                    <div class="actions hidden">
                         <a href="CityAdd"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
@@ -57,6 +57,28 @@
         
         <script type="text/javascript">
         	
+	        var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="CITY" && access.access=="UPDATE" || access.module=="CITY" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="CITY" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="CITY" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="CITY" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+			}
+        
+        
 	        $(document).ready(function(){
 	        	$("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
 	        	$("#city_menu").addClass("navigation__active");
@@ -96,8 +118,8 @@
 	        	    },
 	        	    formatters: {
 	        	        "commands": function(column, row) {
-	        	        	return 	"<a href=\"CityUpdate?id="+row.id+"&key="+row.citykey+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	        	        			"<a href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</a>";
+	        	        	return 	"<a href=\"CityUpdate?id="+row.id+"&key="+row.citykey+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	        	        			"<a href=\"#\" class=\"btn btn-sm btn-danger command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\">Delete</a>";
 	        	    	}
 	        		}
 	        	});
@@ -135,7 +157,9 @@
 	        	        });
 	        	    });
 	        	});
-
+				
+	        	
+	        	$("#data-table-city-header").remove();
 	        })
 	       
 	        

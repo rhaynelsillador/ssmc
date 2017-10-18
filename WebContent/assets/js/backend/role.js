@@ -1,6 +1,28 @@
 $("#administration_menus").addClass("navigation__sub--active navigation__sub--toggled");
 $("#roles_menu").addClass("navigation__active");
 
+var isDelete = "hidden";
+var isCreate = "hidden";
+var isUpdate = "hidden";
+for (var access of roleAccess) {
+	if(access.module=="ROLE" && access.access=="UPDATE" || access.module=="ROLE" && access.access=="DELETE" || isUserRoleAdmin){
+		$("th[data-column-id='commands']").removeAttr("data-visible");
+	}
+	if(access.module=="ROLE" && access.access=="DELETE"  || isUserRoleAdmin){
+		isDelete = "";
+		console.log(access);
+	}
+	if(access.module=="ROLE" && access.access=="CREATE"  || isUserRoleAdmin){
+		$(".actions").removeClass("hidden");
+		console.log(access);
+	}
+	if(access.module=="ROLE" && access.access=="UPDATE"  || isUserRoleAdmin){
+		isUpdate = "";
+		console.log(access);
+	}
+}
+
+
 var tableClinic = $("#data-table-clinc").bootgrid({
 	ajax: true,
     post: function ()
@@ -36,7 +58,7 @@ var tableClinic = $("#data-table-clinc").bootgrid({
     },
     formatters: {
         "commands": function(column, row) {
-        	return 	"<a href=\"RoleUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
+        	return 	"<a href=\"RoleUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isDelete+"\" data-row-id=\"" + row.id + "\">Edit</a>";
     	}
 	}
 });
@@ -75,3 +97,5 @@ tableClinic.on("loaded.rs.jquery.bootgrid", function() {
         });
     });
 });
+
+$("#data-table-clinc-header").remove();

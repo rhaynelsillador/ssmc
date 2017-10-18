@@ -23,7 +23,7 @@
                 <div class="content__header">
                     <h2>Accounts</h2>
 
-                    <div class="actions">
+                    <div class="actions hidden">
                         <a href="AccountAdd"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
@@ -177,6 +177,29 @@
 			var accountFilterFormBtnReset = $("#accountFilterFormBtnReset");
 			var currentDate = moment(new Date()).format("YYYY-MM-DD");
 			
+			var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="USER" && access.access=="UPDATE" || access.module=="USER" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				if(access.module=="USER" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+					console.log(access);
+				}
+				if(access.module=="USER" && access.access=="CREATE"  || isUserRoleAdmin){
+					$(".actions").removeClass("hidden");
+					console.log(access);
+				}
+				if(access.module=="USER" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+					console.log(access);
+				}
+				
+			}
+			
+			
 			$('#accountLastLoginDateFrom').datetimepicker({
                 maxDate : currentDate + " 00:00:00",
                 format: 'YYYY-MM-DD HH:mm:ss'
@@ -251,7 +274,7 @@
 		            },
 		            formatters: {
 		                "commands": function(column, row) {
-		                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit\" data-row-id=\"" + row.id + "\">Edit</a>";
+		                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a>";
 		            	},
 		            	"dateLastLogin" : function(column, row){
 		            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
@@ -265,22 +288,24 @@
 		        	}
 			    }).on("loaded.rs.jquery.bootgrid", function() {
 			    	grid.find(".approver").on("click", function(e){
-			    		var form = {
-		                	id: $(this).data("row-id"),
-		                	approver: $(this).data("approver")
-		                }
-			    		var text = "Do you want to add this account as approver?"
-			    		if($(this).data("approver") == true){
-			    			text = "Do you want to remove this account as approver?"
-			    		}
-			    		confirmation({
-		                	text : text,
-		                	url : "AccountApprover",
-		                	form : form,
-		                	bootGrid : accountsTable
-		                
-		                });
-			    		        
+			    		if(isUpdate != "hidden"){
+			    		
+				    		var form = {
+			                	id: $(this).data("row-id"),
+			                	approver: $(this).data("approver")
+			                }
+				    		var text = "Do you want to add this account as approver?"
+				    		if($(this).data("approver") == true){
+				    			text = "Do you want to remove this account as approver?"
+				    		}
+				    		confirmation({
+			                	text : text,
+			                	url : "AccountApprover",
+			                	form : form,
+			                	bootGrid : accountsTable
+			                
+			                });
+			    		}      
 		  		    }).end().find(".command-delete").on("click", function(e){
 		  		    	console.log("You pressed delete on row: " + $(this).data("row-id"));
 		  		    });
