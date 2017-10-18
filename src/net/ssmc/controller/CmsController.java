@@ -152,7 +152,7 @@ public class CmsController {
 		return "backend/HeaderUpdate";
 	}
 	
-	@AppicationAudit(module = Module.HEADER, access = Access.RETRIEVE)
+	@AppicationAudit(module = Module.SERVICE, access = Access.RETRIEVE)
 	@RequestMapping(path="/Services", method = RequestMethod.GET)
 	public String services(ModelMap map){
 		return "backend/Service";

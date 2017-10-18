@@ -21,10 +21,12 @@
 
 <script>
 	var roleAccess = $.parseJSON('${roleAccessJson}');
+	var isUserRoleAdmin = ('${sessionScope.user.roleName}' == "ADMIN" ? true : false);
+	console.log("isUserRoleAdmin", isUserRoleAdmin);
 	var isAdministrationMenus = false;
 	var isCMSMenus = false;
 	for (var access of roleAccess) {
-		console.log(access);
+		
 		if(access.module=="DASHBOARD" && access.access=="RETRIEVE"){
 			$("#dashboard").removeClass("hidden");
 		}

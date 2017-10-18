@@ -31,23 +31,13 @@ public class AuditInterceptor implements HandlerInterceptor {
 				final Module module = method.getAnnotation(AppicationAudit.class).module();
 				final Access access = method.getAnnotation(AppicationAudit.class).access();
 				User user = (User) session.getAttribute("user");
-				
-				
 				if (user != null && module != Module.ALL) {
-					System.out.println(module+"::"+access);
-					
 					boolean isAllowed = false;
 					List<Role> roleAccess = (List<Role>) session.getAttribute("roleAccess");
-					System.out.println("INTERCEP : "+roleAccess);
-					
 					if(roleAccess != null){
 						for (Role role : roleAccess) {
 							if(role.getModule() == module && role.getAccess() == access || module == Module.ALL){
 								isAllowed = true;
-								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-								System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 							}
 						}
 					}
@@ -62,7 +52,6 @@ public class AuditInterceptor implements HandlerInterceptor {
 			}
 		}catch (Exception e) {
 		}
-		
 		return true; 
 	} 
 	

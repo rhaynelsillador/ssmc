@@ -28,7 +28,7 @@
 
                     <div class="card__body">
                     	<div class="row">
-			               <div class="col-sm-12">
+			               <div class="col-sm-12 hidden">
 			               		<form id="uploadImageForm">
 			                   		<div class="input-group">
 			                    	
@@ -52,7 +52,7 @@
 		                                    <tr>
 		                                        <th data-column-id="image" data-formatter="image" data-sortable="false" data-order="asc">Image</th>
 		                                        <th data-column-id="status" data-formatter="status" data-sortable="false">Status</th>
-		                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px">Commands</th>
+		                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" style="width: 120px" data-visible="false">Commands</th>
 		                                    </tr>
 		                                </thead>
 		                            </table>
@@ -80,10 +80,29 @@
         		mainModule = "administration_menus";
         	}
         	
-        	
 	        $("#"+mainModule).addClass("navigation__sub--active navigation__sub--toggled");
 	        $("#"+module.toLowerCase()+"_menu").addClass("navigation__active");
 			var serviceTable = $("#data-table-service");
+			var isDelete = "hidden";
+			var isCreate = "hidden";
+			var isUpdate = "hidden";
+			for (var access of roleAccess) {
+				if(access.module=="ADVERTISEMENT" && access.access=="UPDATE" || access.module=="ADVERTISEMENT" && access.access=="DELETE" || isUserRoleAdmin){
+					$("th[data-column-id='commands']").removeAttr("data-visible");
+				}
+				
+				if(access.module=="ADVERTISEMENT" && access.access=="DELETE"  || isUserRoleAdmin){
+					isDelete = "";
+				}else if(access.module=="ADVERTISEMENT" && access.access=="CREATE"  || isUserRoleAdmin){
+					$("#uploadImageForm").parent().removeClass("hidden");
+				}else if(access.module=="ADVERTISEMENT" && access.access=="UPDATE"  || isUserRoleAdmin){
+					isUpdate = "";
+				}
+				console.log(access);
+			}
+			
+			console.log(isUpdate, isCreate, isDelete);
+			
 	        var table = serviceTable.bootgrid({
 	        	ajax: true,
 	            post: function ()
@@ -119,8 +138,8 @@
 	            },
 	            formatters: {
 	                "commands": function(column, row) {
-	                	return 	"<button href=\"#\" class=\"btn btn-sm btn-primary command-update\" data-row-id=\"" + row.id + "\" data-row-status=\"" + row.status + "\">Update</button> "+
-	                			"<button href=\"#\" class=\"btn btn-sm btn-danger command-delete\" data-row-id=\"" + row.id + "\">Delete</button>";
+	                	return 	"<button href=\"#\" class=\"btn btn-sm btn-primary command-update "+isUpdate+"\" data-row-id=\"" + row.id + "\" data-row-status=\"" + row.status + "\">Update</button> "+
+	                			"<button href=\"#\" class=\"btn btn-sm btn-danger command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\">Delete</button>";
 	            	},
 	            	"image" : function(column, row){
 	            		return '<img src="'+fileServer+row.image+'" style="width:300px"></img>';
@@ -189,6 +208,7 @@
 		        })
 	        })
 	        
+	        $("#data-table-service-header").remove();
 	        
         </script>
         

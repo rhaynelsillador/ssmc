@@ -51,6 +51,7 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public User login(String username, String password) throws Exception{
+		System.out.println(password);
 		final String SQL = this.sql+" INNER JOIN role ON role.id=user.roleid WHERE username = ? and password = ? ";
 		return jdbcTemplate.queryForObject(SQL, new Object[]{username, password}, new UserMapper());
 	}
