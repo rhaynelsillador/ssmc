@@ -93,9 +93,11 @@
 				
 				if(access.module=="ADVERTISEMENT" && access.access=="DELETE"  || isUserRoleAdmin){
 					isDelete = "";
-				}else if(access.module=="ADVERTISEMENT" && access.access=="CREATE"  || isUserRoleAdmin){
+				}
+				if(access.module=="ADVERTISEMENT" && access.access=="CREATE"  || isUserRoleAdmin){
 					$("#uploadImageForm").parent().removeClass("hidden");
-				}else if(access.module=="ADVERTISEMENT" && access.access=="UPDATE"  || isUserRoleAdmin){
+				}
+				if(access.module=="ADVERTISEMENT" && access.access=="UPDATE"  || isUserRoleAdmin){
 					isUpdate = "";
 				}
 				console.log(access);
