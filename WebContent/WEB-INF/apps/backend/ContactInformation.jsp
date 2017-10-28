@@ -34,6 +34,14 @@
 				           		
 				               	<div class="row">
 					               <div class="col-sm-12">
+					               		<div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-youtube"></i></span>
+					                       <div class="form-group">
+					                           <input type="text" class="form-control" placeholder="Motto" value="" name="motto" id="motto">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
 					                       <div class="form-group">
@@ -74,6 +82,7 @@
 					                       </div>
 					                   </div>
 					                   <br/>
+					                   
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-youtube"></i></span>
 					                       <div class="form-group">
