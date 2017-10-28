@@ -2,6 +2,8 @@ package net.cms.ssmc.model;
 
 import java.sql.Timestamp;
 
+import net.ssmc.enums.Page;
+
 public class FeaturedBox {
 	
 	private long id;
@@ -9,6 +11,8 @@ public class FeaturedBox {
 	private String description;
 	private int box;
 	private Timestamp timestamp;
+	private Page page;
+	
 	public long getId() {
 		return id;
 	}
@@ -39,10 +43,16 @@ public class FeaturedBox {
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
+	}
 	@Override
 	public String toString() {
-		return "FeatureBox [id=" + id + ", name=" + name + ", description=" + description + ", box=" + box
-				+ ", timestamp=" + timestamp + "]";
+		return "FeaturedBox [id=" + id + ", name=" + name + ", description=" + description + ", box=" + box
+				+ ", timestamp=" + timestamp + ", page=" + page + "]";
 	}
 	
 }

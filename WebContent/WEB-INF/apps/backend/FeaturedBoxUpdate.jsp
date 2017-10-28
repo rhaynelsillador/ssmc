@@ -42,6 +42,14 @@
 					                       </div>
 					                   </div>
 					                   <br/>
+					                    <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                          	<input type="text" class="form-control" placeholder="Page" value="" name="page" disabled="disabled">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">

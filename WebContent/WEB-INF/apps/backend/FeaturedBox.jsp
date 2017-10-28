@@ -40,6 +40,7 @@
                                         <th data-column-id="id" data-type="numeric" data-identifier="true" data-width="40px">ID</th>
                                         <th data-column-id="name" data-order="asc">Name</th>
                                         <th data-column-id="description" data-order="asc">Description</th>
+                                        <th data-column-id="page" data-order="asc">Page</th>
                                         <th data-column-id="box" data-order="asc">Box #</th>
                                         <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="150px">Commands</th>
                                     </tr>
