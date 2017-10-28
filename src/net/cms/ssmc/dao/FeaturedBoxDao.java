@@ -8,6 +8,7 @@ public interface FeaturedBoxDao {
 
 	long count();
 	List<FeaturedBox> findAll();
-	FeaturedBox findOne(int id);
+	FeaturedBox findOne(long id);
+	void update(FeaturedBox featuredBox);
 	
 }

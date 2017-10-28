@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import net.cms.ssmc.model.AboutUs;
 import net.cms.ssmc.model.Control;
 import net.cms.ssmc.model.Faq;
 import net.cms.ssmc.model.FaqTemp;
+import net.cms.ssmc.model.FeaturedBox;
 import net.cms.ssmc.model.Header;
 import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
@@ -144,6 +148,18 @@ public class CmsRestController {
 		return featuredBoxServices.getFeaturedBoxes(request);
 	}
 	
+	@AppicationAudit(module = Module.FEATUREDBOX, access = Access.RETRIEVE)
+	@RequestMapping(path="/GetFeaturedBox/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody FeaturedBox getFeaturedBox(@PathVariable long id){
+		return featuredBoxServices.getFeaturedBox(id);
+	}
+	
+	@AppicationAudit(module = Module.FEATUREDBOX, access = Access.RETRIEVE)
+	@RequestMapping(path="/UpdateFeaturedBox", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody ObjectNode updateFeaturedBox(@RequestBody FeaturedBox featuredBox){
+		return featuredBoxServices.updateFeaturedBox(featuredBox);
+	}
+	
 	@AppicationAudit(module = Module.SERVICE, access = Access.RETRIEVE)
 	@RequestMapping(path="/ServicesList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> servicesList(@RequestParam Map<String, String> request){
@@ -212,4 +228,6 @@ public class CmsRestController {
 	public @ResponseBody Map<String, Object> getAllUnApproved() {
 		return controlServices.getAllUnApproved(httpServletRequest);
 	}
+	
+	
 }

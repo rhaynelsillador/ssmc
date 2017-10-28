@@ -202,4 +202,10 @@ public class CmsController {
 	public String featuredBox(ModelMap map) {
 		return "backend/FeaturedBox";
 	}
+	
+	@AppicationAudit(module = Module.FEATUREDBOX, access = Access.RETRIEVE)
+	@RequestMapping(path="/FeaturedBoxUpdate", method = {RequestMethod.GET})
+	public String featuredBoxUpdate(ModelMap map) {
+		return "backend/FeaturedBoxUpdate";
+	}
 }

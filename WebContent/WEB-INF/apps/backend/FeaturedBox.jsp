@@ -85,9 +85,7 @@
 			tableConfig.url = "FeaturedBoxList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"HeaderUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                			"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=HEADER\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Upload</a> "+
-	                			" <button href=\"#\" class=\"btn btn-sm btn-danger command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\">Delete</button>";
+	                	return 	"<a href=\"FeaturedBoxUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> ";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return datetimeformat(row.dateUpdated);

@@ -1,11 +1,16 @@
 package net.ssmc.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.ssmc.enums.Module;
 
-public class RoleAccess {
+public class RoleAccess implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Module module;
 	private List<Role> roles;
