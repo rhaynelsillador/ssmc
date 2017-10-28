@@ -195,4 +195,11 @@ public class CmsController {
 		session.setAttribute("moduleid", 0);
 		return "backend/Advertisement";
 	}
+	
+
+	@AppicationAudit(module = Module.FEATUREDBOX, access = Access.RETRIEVE)
+	@RequestMapping(path="/FeaturedBox", method = {RequestMethod.GET})
+	public String featuredBox(ModelMap map) {
+		return "backend/FeaturedBox";
+	}
 }

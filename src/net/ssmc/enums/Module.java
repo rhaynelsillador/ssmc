@@ -16,7 +16,8 @@ public enum Module {
 	REGISTEREDACCOUNTS(""), 
 	CONTACTINFORMATION(""), 
 	ADVERTISEMENT(""), 
-	EXAMINATIONRESULT("");
+	EXAMINATIONRESULT(""), 
+	FEATUREDBOX("");
 	
 	private String updateUrl;
 	

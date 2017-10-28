@@ -24,6 +24,7 @@ import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.ControlServices;
 import net.cms.ssmc.services.FaqServices;
 import net.cms.ssmc.services.FaqTempServices;
+import net.cms.ssmc.services.FeaturedBoxServices;
 import net.cms.ssmc.services.HeaderServices;
 import net.cms.ssmc.services.ImageServices;
 import net.cms.ssmc.services.ServiceServices;
@@ -51,6 +52,8 @@ public class CmsRestController {
 	private ImageServices imageServices;
 	@Autowired
 	private FaqTempServices faqTempServices;
+	@Autowired
+	private FeaturedBoxServices featuredBoxServices;
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/FaqList", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
@@ -133,6 +136,12 @@ public class CmsRestController {
 	public @ResponseBody Map<String, Object> headerDelete(@RequestBody Header header){
 		HttpSession session = httpServletRequest.getSession(true);
 		return headerServices.deleteHeader(session, header);
+	}
+	
+	@AppicationAudit(module = Module.FEATUREDBOX, access = Access.RETRIEVE)
+	@RequestMapping(path="/FeaturedBoxList", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody Map<String, Object> featuredBoxList(@RequestParam Map<String, String> request){
+		return featuredBoxServices.getFeaturedBoxes(request);
 	}
 	
 	@AppicationAudit(module = Module.SERVICE, access = Access.RETRIEVE)

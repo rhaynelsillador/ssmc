@@ -173,4 +173,5 @@ public class SsmcBackendController {
 	public String contactInformation(ModelMap map) {
 		return "backend/ContactInformation";
 	}
+	
 }

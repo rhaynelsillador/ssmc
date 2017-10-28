@@ -24,10 +24,11 @@
 	<bean id="serviceDao" 			class="net.cms.ssmc.dao.impl.ServiceDaoImpl" />
 	<bean id="imageDao" 			class="net.cms.ssmc.dao.impl.ImageDaoImpl" />
 	<bean id="contactInformationDao" class="net.cms.ssmc.dao.impl.ContactInformationDaoImpl" />	
+	<bean id="featuredBoxDao" 		class="net.cms.ssmc.dao.impl.FeaturedBoxDaoImpl" />	
 
 	
-	<bean id="registeredAccountDao" 			class="net.ssmc.dao.impl.RegisteredAccountDaoImpl" />
-	<bean id="dbUtils" 			class="net.ssmc.utils.DBUtils" init-method="init"/>
+	<bean id="registeredAccountDao" class="net.ssmc.dao.impl.RegisteredAccountDaoImpl" />
+	<bean id="dbUtils" 				class="net.ssmc.utils.DBUtils" init-method="init"/>
 	
 	
 	
