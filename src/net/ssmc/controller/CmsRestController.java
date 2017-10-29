@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -23,6 +24,7 @@ import net.cms.ssmc.model.Faq;
 import net.cms.ssmc.model.FaqTemp;
 import net.cms.ssmc.model.FeaturedBox;
 import net.cms.ssmc.model.Header;
+import net.cms.ssmc.model.Partner;
 import net.cms.ssmc.model.Service;
 import net.cms.ssmc.services.AboutUsServices;
 import net.cms.ssmc.services.ControlServices;
@@ -31,9 +33,11 @@ import net.cms.ssmc.services.FaqTempServices;
 import net.cms.ssmc.services.FeaturedBoxServices;
 import net.cms.ssmc.services.HeaderServices;
 import net.cms.ssmc.services.ImageServices;
+import net.cms.ssmc.services.PartnerServices;
 import net.cms.ssmc.services.ServiceServices;
 import net.ssmc.enums.Access;
 import net.ssmc.enums.Module;
+import net.ssmc.enums.TransactionType;
 import net.ssmc.interceptor.AppicationAudit;
 import net.ssmc.model.Image;
 
@@ -58,6 +62,8 @@ public class CmsRestController {
 	private FaqTempServices faqTempServices;
 	@Autowired
 	private FeaturedBoxServices featuredBoxServices;
+	@Autowired
+	private PartnerServices partnerServices;
 	
 	@AppicationAudit(module = Module.FAQ, access = Access.RETRIEVE)
 	@RequestMapping(path="/FaqList", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS}, produces="application/json")
@@ -229,5 +235,33 @@ public class CmsRestController {
 		return controlServices.getAllUnApproved(httpServletRequest);
 	}
 	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/PartnerList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> partnerList(@RequestParam Map<String, String> request) {
+		return partnerServices.getPartners(request);
+	}
 	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/AddNewPartner", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode partnerList(@RequestParam("name") String name, @RequestParam("url") String url,  @RequestParam("logo") MultipartFile logo) {
+		return partnerServices.createPartner(name, url, logo, 0, TransactionType.ADD);
+	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/PartnerDelete/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode partnerDelete(@PathVariable long id) {
+		return partnerServices.deletePartner(id);
+	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/PartnerDetails/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Partner partnerDetails(@PathVariable long id) {
+		return partnerServices.partnerDetails(id);
+	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.DELETE)
+	@RequestMapping(path="/PartnerSaveUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode partnerSaveUpdate(@RequestParam("name") String name, @RequestParam("url") String url,  @RequestParam("logo") MultipartFile logo, @RequestParam("id") long id) {
+		return partnerServices.createPartner(name, url, logo, id, TransactionType.UPDATE);
+	}
 }

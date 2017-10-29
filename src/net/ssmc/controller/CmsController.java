@@ -208,4 +208,24 @@ public class CmsController {
 	public String featuredBoxUpdate(ModelMap map) {
 		return "backend/FeaturedBoxUpdate";
 	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/Partners", method = {RequestMethod.GET})
+	public String partners(ModelMap map) {
+		return "backend/Partners";
+	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.CREATE)
+	@RequestMapping(path="/PartnerAdd", method = {RequestMethod.GET})
+	public String partnersAdd(ModelMap map) {
+		return "backend/PartnerAdd";
+	}
+	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.UPDATE)
+	@RequestMapping(path="/PartnerUpdate", method = {RequestMethod.GET})
+	public String partnerUpdate(ModelMap map) {
+		return "backend/PartnerAdd";
+	}
+	
+	
 }

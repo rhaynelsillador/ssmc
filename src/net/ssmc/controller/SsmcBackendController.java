@@ -168,7 +168,7 @@ public class SsmcBackendController {
 		return "backend/RegisteredAccountInfo";
 	}
 	
-	@AppicationAudit(module = Module.CONTACTINFORMATION, access = Access.RETRIEVE)
+	@AppicationAudit(module = Module.CONTACTINFORMATION, access = Access.DELETE)
 	@RequestMapping(path="/ContactInformation", method = {RequestMethod.GET})
 	public String contactInformation(ModelMap map) {
 		return "backend/ContactInformation";

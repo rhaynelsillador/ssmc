@@ -27,6 +27,7 @@
 	<bean id="imageServices" 					class="net.cms.ssmc.services.ImageServices" />
 	<bean id="contactInformationServices" 		class="net.cms.ssmc.services.ContactInformationServices" />
 	<bean id="featuredBoxService" 				class="net.cms.ssmc.services.FeaturedBoxServices" />
+	<bean id="partnerServices" 					class="net.cms.ssmc.services.PartnerServices" />
 	
 	<bean id="analyticsServices" 				class="net.ssmc.services.AnalyticsServices" />
 	<bean id="registeredAccountsServices" 		class="net.ssmc.services.RegisteredAccountsServices" />

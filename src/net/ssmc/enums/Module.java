@@ -17,7 +17,8 @@ public enum Module {
 	CONTACTINFORMATION(""), 
 	ADVERTISEMENT(""), 
 	EXAMINATIONRESULT(""), 
-	FEATUREDBOX("");
+	FEATUREDBOX(""),
+	PARTNERS("");
 	
 	private String updateUrl;
 	

@@ -24,7 +24,7 @@
 				       <h2>Faq</h2>
 				
 				       <div class="actions hidden">
-				           <a href="FaqCreate"><i class="zmdi zmdi-plus"></i></a>
+				           
 				       </div>
 				   </div>
 				

@@ -81,6 +81,21 @@ var POST = function POST(url, form, cb){
 	});
 }
 
+var POSTDATA = function POST(url, form, cb){
+	$.ajax({
+	        url: url,
+	        data: form,
+	        cache: false,
+	        processData: false,
+	        contentType: false,
+	        type: 'POST',
+	        success: function (data) {
+	        	cb(data);
+	        }
+	    });
+	  event.preventDefault();
+}
+
 
 var toastMessage = function toastMessage(data){
 	if(data.status=="SUCCESS"){

@@ -70,6 +70,12 @@
 		}else if(access.module=="SERVICE" && access.access=="RETRIEVE"){
 			$("#service_menu").removeClass("hidden");
 			isCMSMenus = true;
+		}else if(access.module=="FEATUREDBOX" && access.access=="RETRIEVE"){
+			$("#featured_box_menu").removeClass("hidden");
+			isCMSMenus = true;
+		}else if(access.module=="PARTNERS" && access.access=="RETRIEVE"){
+			$("#partners_menu").removeClass("hidden");
+			isCMSMenus = true;
 		}
 	}
 	
