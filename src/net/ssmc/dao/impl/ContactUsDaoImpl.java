@@ -53,6 +53,10 @@ public class ContactUsDaoImpl implements ContactUsDao{
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
 		String SQL = this.SQL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		
+		
+		System.out.println(SQL);
+		
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<ContactUs>(ContactUs.class));
 	}
 
