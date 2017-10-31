@@ -123,7 +123,7 @@
 	            });
 	        });
 
-	        $("#data-table-header-header").remove();
+	        $("#data-table-header-header").hide();
 	        
         </script>
         

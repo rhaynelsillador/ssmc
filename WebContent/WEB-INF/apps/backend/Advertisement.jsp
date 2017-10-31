@@ -210,7 +210,7 @@
 		        })
 	        })
 	        
-	        $("#data-table-service-header").remove();
+	        $("#data-table-service-header").hide();
 	        
         </script>
         

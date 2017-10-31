@@ -227,5 +227,22 @@ public class CmsController {
 		return "backend/PartnerAdd";
 	}
 	
+	@AppicationAudit(module = Module.NEWSANDUPDATES, access = Access.RETRIEVE)
+	@RequestMapping(path="/NewsAndUpdates", method = {RequestMethod.GET})
+	public String newsAndUpdates(ModelMap map) {
+		return "backend/NewsAndUpdates";
+	}
 	
+	@AppicationAudit(module = Module.NEWSANDUPDATES, access = Access.CREATE)
+	@RequestMapping(path="/NewsAndUpdateAdd", method = {RequestMethod.GET})
+	public String newsAndUpdateAdd(ModelMap map) {
+		return "backend/NewsAndUpdateAdd";
+	}
+
+
+	@AppicationAudit(module = Module.NEWSANDUPDATES, access = Access.UPDATE)
+	@RequestMapping(path="/NewsAndUpdateUpdate", method = {RequestMethod.GET})
+	public String newsAndUpdateUpdate(ModelMap map) {
+		return "backend/NewsAndUpdateAdd";
+	}
 }

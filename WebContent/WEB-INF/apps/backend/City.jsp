@@ -159,7 +159,7 @@
 	        	});
 				
 	        	
-	        	$("#data-table-city-header").remove();
+	        	$("#data-table-city-header").hide();
 	        })
 	       
 	        

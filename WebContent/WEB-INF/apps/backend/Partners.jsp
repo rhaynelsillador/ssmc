@@ -113,7 +113,7 @@
 	            });
 	        });
 	
-	        $("#data-table-featurebox-header").hide();
+	        $("#data-table-partner-header").hide();
 	       
 	        
         </script>

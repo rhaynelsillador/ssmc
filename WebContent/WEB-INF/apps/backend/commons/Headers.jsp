@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SSMC Imtegrated System</title>
+    <title>SSMC Integrated System - Administration</title>
     <link href="assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
     <link href="assets/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">

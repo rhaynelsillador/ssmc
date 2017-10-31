@@ -26,6 +26,7 @@
 	<bean id="contactInformationDao" class="net.cms.ssmc.dao.impl.ContactInformationDaoImpl" />	
 	<bean id="featuredBoxDao" 		class="net.cms.ssmc.dao.impl.FeaturedBoxDaoImpl" />	
 	<bean id="partnerDao" 		class="net.cms.ssmc.dao.impl.PartnerDaoImpl" />	
+	<bean id="newsAndUpdateDao" 		class="net.cms.ssmc.dao.impl.NewsAndUpdateDaoImpl" />	
 
 	
 	<bean id="registeredAccountDao" class="net.ssmc.dao.impl.RegisteredAccountDaoImpl" />

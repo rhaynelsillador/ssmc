@@ -3,7 +3,6 @@ package net.cms.ssmc.services;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class PartnerServices {
 						node.put(Helper.MESSAGE, "Partner logo saving encountered an error!");
 					}
 				}else{
-					partner.setName("upload/default.png");
+					partner.setLogo("upload/default.png");
 				}
 				
 				partnersDao.create(partner);

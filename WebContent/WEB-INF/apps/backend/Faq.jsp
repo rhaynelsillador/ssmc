@@ -151,7 +151,7 @@
 	            });
 	        });
 			
-			$("#data-table-faq-unpublished-header").remove();
+			$("#data-table-faq-unpublished-header").hide();
         </script>
         
     </body>

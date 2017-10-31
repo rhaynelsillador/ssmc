@@ -150,7 +150,7 @@
 	            });
 	        });
 	        
-	        $("#data-table-contact-us-header").remove();
+	        $("#data-table-contact-us-header").hide();
 
 	        
         </script>

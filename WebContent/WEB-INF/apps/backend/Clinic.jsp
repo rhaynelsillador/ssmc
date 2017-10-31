@@ -142,7 +142,7 @@
 	  		    });
 		    });
 	        
-	       $("#data-table-clinc-header").remove();
+	       $("#data-table-clinc-header").hide();
 	        
         </script>
         

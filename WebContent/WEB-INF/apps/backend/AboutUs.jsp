@@ -122,7 +122,7 @@
 	            });
 	        });
 			
-	        $("#data-table-about-us-header").remove();
+	        $("#data-table-about-us-header").hide();
 	        
         </script>
         
