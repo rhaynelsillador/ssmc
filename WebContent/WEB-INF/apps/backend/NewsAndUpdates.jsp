@@ -41,7 +41,7 @@
                                         <th data-column-id="title" data-order="asc" data-width="200px">Title</th>
                                         <th data-column-id="date" data-formatter="date" >Date</th>
                                         <th data-column-id="news">Content</th>
-                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="250px">Commands</th>
+                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="275px">Commands</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -89,9 +89,12 @@
 	            		if(row.status == 1){
 	            			published = "Published";
 	            		}
-	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-warning command-published\" data-id=\"" + row.id + "\"  data-title=\"" + row.title + "\" data-published=\"" + published + "\">"+published+"</a> "+
-	                	"<a href=\"NewsAndUpdateUpdate?id="+row.id+"&name="+row.title+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
-	                	"<button class=\"btn btn-sm btn-danger command-delete "+isUpdate+"\" data-id=\"" + row.id + "\"  data-title=\"" + row.title + "\">Delete</button> ";
+	            		var html = "";
+            			html += "<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-warning command-published "+isUpdate+"\" data-id=\"" + row.id + "\"  data-title=\"" + row.title + "\" data-published=\"" + published + "\">"+published+"</a> ";
+	            		html += "<a href=\"NewsAndUpdateUpload?id="+row.id+"&name="+row.title+"&module=NEWSANDUPDATES\" class=\"btn btn-sm btn-default "+isUpdate+"\" data-row-id=\"" + row.id + "\">Upload</a> ";	
+	            		html += "<a href=\"NewsAndUpdateUpdate?id="+row.id+"&name="+row.title+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> ";
+	            		html += "<button class=\"btn btn-sm btn-danger command-delete "+isUpdate+"\" data-id=\"" + row.id + "\"  data-title=\"" + row.title + "\">Delete</button> ";
+	                	return html;
 	            	},
 	            	"date" : function(column, row){
 	            		return datetimeformat(row.dateAdded);

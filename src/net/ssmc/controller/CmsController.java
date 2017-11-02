@@ -245,4 +245,15 @@ public class CmsController {
 	public String newsAndUpdateUpdate(ModelMap map) {
 		return "backend/NewsAndUpdateAdd";
 	}
+	
+	@AppicationAudit(module = Module.NEWSANDUPDATES, access = Access.UPDATE)
+	@RequestMapping(path="/NewsAndUpdateUpload", method = {RequestMethod.GET})
+	public String newsAndUpdateUpload(ModelMap map, @RequestParam int id, @RequestParam String name, @RequestParam String module){
+		HttpSession session = httpServletRequest.getSession(true);
+		session.setAttribute("moduleid", id);
+		session.setAttribute("moduleName", name);
+		session.setAttribute("module", Module.valueOf(module));
+		return "backend/ImageUpload";
+	}
+	
 }
