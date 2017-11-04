@@ -18,6 +18,10 @@
             <section id="content">
                 <div class="content__header">
                     <h2>Registered Accounts</h2>
+                    <div class="actions">
+                        <a href="#" id="addNewAccountAndPartner"><i class="zmdi zmdi-plus"></i></a>
+                        <a href="#" id="uploadExamResult"><i class="zmdi zmdi-upload"></i></a>
+                    </div>
                 </div>
                 
                 <div class="card">
@@ -125,9 +129,12 @@
 	                                <thead>
 	                                    <tr>
 	                                        <th>ID</th>
+	                                        <th>Partner</th>
+	                                        <th>Partner Account</th>
 	                                        <th>Email</th>
 	                                        <th>First Name</th>
 	                                        <th>Last Name</th>
+	                                        <th>Contact</th>
 	                                        <th>Status</th>
 	                                        <th>Date Created</th>
 	                                        <th>Date Last Login</th>
@@ -142,6 +149,124 @@
             </section>
 			
 			<%@ include file="commons/Footer.jsp"%>
+			
+			<div class="modal fade" id="addNewAccountAndPartnerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			 	<div class="modal-dialog modal-lg" role="document">
+			    	<div class="modal-content">
+		      			<form id="registeredNewAccountAndPartnerForm">
+				      		<div class="modal-header">
+				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        		<h4 class="modal-title" id="myModalLabel">Patient/Partner Registration</h4>
+				      		</div>
+				      		<div class="modal-body">
+				      			<div class="row">
+				      				<div class="col-md-6">
+				      					<div class="form-group">
+		                                    <label>Account Type</label>
+		                                    <select class="form-control" name="type">
+		                                    	<option value="PATIENT">Patient</option>
+		                                    	<option value="PARTNER">Partner</option>
+		                                    </select>
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-show hidden">
+		                                    <label>Partner</label>
+		                                    <select class="form-control" name="partnerId">
+		                                    </select>
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-show hidden">
+		                                    <label>Account</label>
+		                                    <input type="text" class="form-control" name="partnerAccount" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+					      				<div class="form-group">
+		                                    <label>Email</label>
+		                                    <input type="text" class="form-control" name="email" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-hide">
+		                                    <label>First Name</label>
+		                                    <input type="text" class="form-control" name="firstName" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-hide">
+		                                    <label>Middle Name</label>
+		                                    <input type="text" class="form-control" name="middleName" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-hide">
+		                                    <label>Last Name</label>
+		                                    <input type="text" class="form-control" name="lastName" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+				      				</div>
+	                                <div class="col-md-6 row">
+	                                	<div class="form-group partner-hide">
+		                                    <label>Gender</label>
+		                                    <select class="form-control" name="gender">
+		                                    	<option value="MALE">Male</option>
+		                                    	<option value="FEMALE">Female</option>
+		                                    </select>
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+					      				<div class="form-group">
+		                                    <label>Contact</label>
+		                                    <input type="number" class="form-control" name="number" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group partner-hide">
+		                                    <label>Birthday</label>
+		                                    <input type="text" class="form-control" name="birthday" placeholder="">
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+		                                <div class="form-group">
+		                                    <label>Address</label>
+		                                    <textarea rows="7" cols="2" class="form-control" name="address"></textarea>
+		                                    <i class="form-group__bar"></i>
+		                                </div>
+				      				</div>
+								</div>
+				      		</div>
+				      		<div class="modal-footer">
+				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        		<button type="submit" class="btn btn-primary">Save</button>
+				      		</div>
+                       	</form>
+			    	</div>
+			  	</div>
+			</div>
+            
+            <div class="modal fade" id="uploadExamResultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			 	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+		      			<form id="uploadExamResultForm">
+				      		<div class="modal-header">
+				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        		<h4 class="modal-title" id="myModalLabel">Upload Exam Result</h4>
+				      		</div>
+				      		<div class="modal-body">
+                                <div class="form-group partner-show hidden">
+                                    <label>Partner</label>
+                                    <select class="form-control" name="partnerId">
+                                    </select>
+                                    <i class="form-group__bar"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Account</label>
+                                    <input type="text" class="form-control" name="partnerAccount" placeholder="">
+                                    <i class="form-group__bar"></i>
+                                </div>
+			      				
+				      		</div>
+				      		<div class="modal-footer">
+				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        		<button type="submit" class="btn btn-primary">Save</button>
+				      		</div>
+                       	</form>
+			    	</div>
+			  	</div>
+			</div>
             
         </section>
 		<%@ include file="commons/JsFiles.jsp"%>
@@ -191,8 +316,6 @@
                 });
                	
 	        	$('#registerDateCreatedFrom, #registerDateLastLoginFrom, #registerDateCreatedTo, #registerDateLastLoginTo').val("")
-
-	
 	        	var dTable = tableData.DataTable( {
 	                "processing": true,
 	                "serverSide": true,
@@ -215,10 +338,33 @@
 	                	{ "data": "id" , render : function(data, type, full, meta){
 	                		return data;
 	                	}},
+	                	{ "data": "partner" , render : function(data, type, full, meta){
+	                		if(data == undefined){
+	                			return "------------------";
+	                		}
+	                		return data;
+	                	}},
+	                	{ "data": "partnerAccount" , render : function(data, type, full, meta){
+	                		if(data == undefined){
+	                			return "------------------";
+	                		}
+	                		return data;
+	                	}},
 	        			{ "data": "email"},
 	        			{ "data": "firstName"},
 	        			{ "data": "lastName"},
-	        			{ "data": "status"},
+	        			{ "data": "number"},
+	        			{ "data": "status" , render : function(data, type, full, meta){
+	                		if(data == "1"){
+	                			return "<span style='color:green'>Active</span>";
+	                		}else if(data == "0"){
+	                			return "<span style='color:red'>Pending</span>";
+	                		}else if(data == 2){
+	                			return "<span style='color:red'>Password Reset</span>";
+	                		}else if(data == 3){
+	                			return "Disabled";}
+	                		return "<span style='color:orange'>On Hold</span>";
+	                	}},
 	        			{ "data": "dateAdded" , render : function(data, type, full, meta){
 	        				return moment(data).format("YYYY-MM-DD HH:mm:ss");
 	        			}},
@@ -250,9 +396,58 @@
 	        	registeredAccountFilterFormBtnReset.click(function(e){
 	        		$("#registeredAccountFilterForm")[0].reset();
 	        	})
-
+	        	
+	        	$("#addNewAccountAndPartner").click(function(e){
+	        		$('#addNewAccountAndPartnerModal').modal({
+        			  	keyboard: false,
+        			  	backdrop : "static"
+        			})
+        			
+        			POST("RetrievePartnersData", {}, function(data){
+        				console.log(data);
+        				var html = "";
+        				$.each(data, function(index, value){
+        					html += '<option value="'+value.id+'">'+value.name+'</option>';
+        				})
+        				$("select[name='partnerId']").html(html);
+        			})
+	        	})
+	        	
+	        	$("#uploadExamResult").click(function(e){
+	        		$('#uploadExamResultModal').modal({
+        			  	keyboard: false,
+        			  	backdrop : "static"
+        			})
+	        	});
+				
+	        	$("#registeredNewAccountAndPartnerForm").submit(function(e){
+	        		e.preventDefault();
+	        		var form = objectifyForm($( this ).serializeArray());
+	        		var btn = $("#registeredNewAccountAndPartnerForm button")
+	        		btn.html("Saving...");
+		  			btn.attr("disabled", "disabled");
+	        		console.log(form);
+	        		POST("RegisteredAccountAndPartner", form, function(data){
+	        			toastMessage(data);
+	        			btn.html("Save");
+				  		btn.removeAttr("disabled");
+	        		})
+	        	});
+	        	
+	        	$("#registeredNewAccountAndPartnerForm").find("select[name='type']").change(function(){
+	  				console.log($(this).val());  
+	  				if($(this).val() == "PARTNER"){
+	  					$(".partner-hide").addClass("hidden")
+	  					$(".partner-show").removeClass("hidden")
+	  				}else{
+	  					$(".partner-hide").removeClass("hidden")
+	  					$(".partner-show").addClass("hidden")
+	  				}
+	  				
+	        	})
+	        	
 	        })
-	       
+	       	
 	        
         </script>
         

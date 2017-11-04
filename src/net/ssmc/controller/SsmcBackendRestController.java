@@ -37,7 +37,6 @@ import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
 import net.ssmc.services.ExamResultServices;
-import net.ssmc.services.RegisteredAccountsServices;
 import net.ssmc.services.RoleServices;
 import net.ssmc.services.UserServices;
 
@@ -55,8 +54,6 @@ public class SsmcBackendRestController {
 	private RoleServices roleServices;
 	@Autowired
 	private ContactUsServices contactUsServices;
-	@Autowired
-	private RegisteredAccountsServices registeredAccountsServices;
 	@Autowired
 	private CityServices cityServices;
 	@Autowired
@@ -150,11 +147,6 @@ public class SsmcBackendRestController {
 		return contactUsServices.deleteContactUsInquiry(httpServletRequest, contactUs);
 	}
 	
-//	@RequestMapping(path="/PendingApprovalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-//	public @ResponseBody List<PendingApproval> pendingApprovalList() {
-//		return dashboardServices.getAllPendingApproval(httpServletRequest);
-//	}
-	
 	@RequestMapping(path="/CityList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> city(@RequestParam Map<String, String> request){
 		HttpSession session = httpServletRequest.getSession(true);
@@ -171,17 +163,6 @@ public class SsmcBackendRestController {
 	public @ResponseBody Map<String, Object> cityDelete(@RequestBody City city){
 		return cityServices.deleteCity(httpServletRequest, city);
 	}
-	
-	@RequestMapping(path="/RegisteredAccountsList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody Map<String, Object> registeredAccountsList(@RequestParam Map<String, String> request){
-		return registeredAccountsServices.getAllRegisteredAccounts(request);
-	}
-	
-	@RequestMapping(path="/RegisteredAccountInfoData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody RegisteredAccount registeredAccountInfoData(@RequestBody RegisteredAccount registeredAccount){
-		return registeredAccountsServices.getAccountInformation(registeredAccount.getId());
-	}
-
 	
 	@RequestMapping(path="/ContactInformationUpdate", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody ObjectNode contactInformationUpdate(@RequestBody List<ContactInformation> contactInformations){
@@ -221,7 +202,7 @@ public class SsmcBackendRestController {
 				account.setFirstName("Sillador"+random);
 				account.setLastName("Silaldor"+random);
 				account.setMiddleName("M");
-				account.setStatus(true);
+				account.setStatus(1);
 				account.setPassword("PASSWORD"+random);
 				account.setNumber(1111);
 				

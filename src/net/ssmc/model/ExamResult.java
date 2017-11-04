@@ -15,7 +15,7 @@ public class ExamResult {
 	private long accountId;
 	private ExaminStatus status;
 	private String result;
-	private int resultCount;
+	private long partnerId;
 	
 	public long getId() {
 		return id;
@@ -72,17 +72,17 @@ public class ExamResult {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public int getResultCount() {
-		return resultCount;
+	public long getPartnerId() {
+		return partnerId;
 	}
-	public void setResultCount(int resultCount) {
-		this.resultCount = resultCount;
+	public void setPartnerId(long partnerId) {
+		this.partnerId = partnerId;
 	}
-	
 	@Override
 	public String toString() {
 		return "ExamResult [id=" + id + ", name=" + name + ", description=" + description + ", dateExamined="
 				+ dateExamined + ", dateEncoded=" + dateEncoded + ", encodedBy=" + encodedBy + ", accountId="
-				+ accountId + ", status=" + status + ", result=" + result + ", resultCount=" + resultCount + "]";
+				+ accountId + ", status=" + status + ", result=" + result + ", partnerId=" + partnerId + "]";
 	}
+	
 }

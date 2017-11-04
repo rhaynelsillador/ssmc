@@ -54,6 +54,11 @@ public class PartnerDaoImpl implements PartnerDao {
 		int end = Integer.parseInt(request.get("rowCount"));
 		return jdbcTemplate.query(SQL+ sortKey +" LIMIT "+((start-1)*end)+", "+(end), new BeanPropertyRowMapper<Partner>(Partner.class));
 	}
+	
+	@Override
+	public List<Partner> retrievePartners() {
+		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<Partner>(Partner.class));
+	}
 
 	@Override
 	public void delete(long id) {

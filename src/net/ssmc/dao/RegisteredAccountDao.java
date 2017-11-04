@@ -15,8 +15,6 @@ public interface RegisteredAccountDao {
 	List<RegisteredAccount> findAll(Map<String, String> request);
 	
 	List<Long> totalRegisterThisMonth();
-//	long totalRegisterPerdayThisMonth();
 	List<Long> totalLoginThisMonth();
-//	long totalLoginPerdayThisMonth();
 	
 }

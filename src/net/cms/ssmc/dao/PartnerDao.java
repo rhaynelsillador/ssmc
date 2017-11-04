@@ -11,6 +11,7 @@ public interface PartnerDao {
 	void create(Partner partners);
 	Partner findOne(long id);
 	List<Partner> retrievePartners(Map<String, String> request);
+	List<Partner> retrievePartners();
 	void update(Partner partner) throws Exception;
 	void delete(long id) throws Exception;
 	

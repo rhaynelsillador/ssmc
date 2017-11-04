@@ -2,8 +2,8 @@ package net.ssmc.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
+import net.ssmc.enums.AccountType;
 import net.ssmc.enums.Gender;
 
 public class RegisteredAccount implements Serializable{
@@ -20,12 +20,16 @@ public class RegisteredAccount implements Serializable{
 	private String lastName;
 	private String middleName;
 	private long number;
-	private boolean status;
+	private int status;
 	private Timestamp dateCreated;
 	private Timestamp dateLastLogin;
 	private String birthday;
 	private Gender gender;
-	private String address;
+	private String address;	
+	private AccountType type;
+	private long partnerId;
+	private String partnerAccount;
+	private String partner;
 	
 	public long getId() {
 		return id;
@@ -63,14 +67,12 @@ public class RegisteredAccount implements Serializable{
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-	
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
@@ -114,11 +116,38 @@ public class RegisteredAccount implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public AccountType getType() {
+		return type;
+	}
+	public void setType(AccountType type) {
+		this.type = type;
+	}
+	public long getPartnerId() {
+		return partnerId;
+	}
+	public void setPartnerId(long partnerId) {
+		this.partnerId = partnerId;
+	}
+	public String getPartner() {
+		return partner;
+	}
+	public void setPartner(String partner) {
+		this.partner = partner;
+	}
+	public String getPartnerAccount() {
+		return partnerAccount;
+	}
+	public void setPartnerAccount(String partnerAccount) {
+		this.partnerAccount = partnerAccount;
+	}
 	@Override
 	public String toString() {
 		return "RegisteredAccount [id=" + id + ", email=" + email + ", password=" + password + ", password1="
 				+ password1 + ", firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
 				+ ", number=" + number + ", status=" + status + ", dateCreated=" + dateCreated + ", dateLastLogin="
-				+ dateLastLogin + ", birthday=" + birthday + ", gender=" + gender + ", address=" + address + "]";
+				+ dateLastLogin + ", birthday=" + birthday + ", gender=" + gender + ", address=" + address + ", type="
+				+ type + ", partnerId=" + partnerId + ", partnerAccount=" + partnerAccount + ", partner=" + partner
+				+ "]";
 	}
+	
 }

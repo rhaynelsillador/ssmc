@@ -13,8 +13,8 @@
                 <ul>
                     <li id="contact_us_menu" class="admin-menu hidden"><a href="ContactUsMessages">Contact Us</a></li>
                     <li id="city_menu" class="admin-menu hidden"><a href="City">City</a></li>
-                    <li id="accounts_menu" class="admin-menu hidden"><a href="Accounts">Accounts</a></li>
-                    <li id="registered_accounts_menu" class="admin-menu hidden"><a href="RegisteredAccounts">Registered Accounts</a></li>
+                    <li id="accounts_menu" class="admin-menu hidden"><a href="Accounts">Users</a></li>
+                    <li id="registered_accounts_menu" class="admin-menu hidden"><a href="RegisteredAccounts">Accounts And Partners</a></li>
                     <li id="roles_menu" class="admin-menu hidden"><a href="Role">Roles</a></li>
                 </ul>
             </li>

@@ -1,11 +1,19 @@
 package net.cms.ssmc.model;
 
-public class Partner {
+import java.io.Serializable;
+
+public class Partner implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6194750255718999816L;
 	private long id;
 	private String name;
 	private String url;
 	private String logo;
+	private int status;
+	
 	public long getId() {
 		return id;
 	}
@@ -29,6 +37,12 @@ public class Partner {
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	@Override
 	public String toString() {

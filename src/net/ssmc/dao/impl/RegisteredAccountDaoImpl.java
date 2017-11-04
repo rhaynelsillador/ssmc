@@ -21,6 +21,8 @@ import net.ssmc.dao.RegisteredAccountDao;
 import net.ssmc.enums.dtable.DTableParam;
 import net.ssmc.enums.dtable.RegisterAccounts;
 import net.ssmc.model.RegisteredAccount;
+import net.ssmc.utils.AES;
+import net.ssmc.utils.Settings;
 
 public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 
@@ -36,21 +38,27 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 
 	@Override
 	public long create(RegisteredAccount account) {
-		final String INSERT = "INSERT INTO registered_account (email, password, number, firstname, lastname, datecreated, middlename, status, date) VALUES (?,?,?,?,?,?,?,?,?)";
+		final String INSERT = "INSERT INTO registered_account (email, password, number, firstname, lastname, datecreated, middlename, status, date, birthday, gender, address, type, partnerid, partneraccount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 		    @Override
 		    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 		        PreparedStatement statement = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 		        statement.setString(1, account.getEmail());
-		        statement.setString(2, account.getPassword());
+		        statement.setString(2, AES.encrypt(Settings.DEFAULTPASSWPRD));
 		        statement.setLong(3, account.getNumber());
 		        statement.setString(4, account.getFirstName());
 		        statement.setString(5, account.getLastName());
 		        statement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 		        statement.setString(7, account.getMiddleName());
-		        statement.setBoolean(8, account.isStatus());
+		        statement.setInt(8, 1);
 		        statement.setDate(9, new Date(System.currentTimeMillis()));
+		        statement.setString(10, account.getBirthday());
+		        statement.setString(11, account.getGender().toString());
+		        statement.setString(12, account.getAddress());
+		        statement.setString(13, account.getType().toString());
+		        statement.setLong(14, account.getPartnerId());
+		        statement.setString(15, account.getPartnerAccount());
 		        return statement;
 		    }
 		}, holder);
@@ -68,7 +76,7 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 	public List<RegisteredAccount> findAll(Map<String, String> request) {
 		String sortBy = request.get(DTableParam.SORTVAL.getName()).toUpperCase();
 		RegisterAccounts sortCol = RegisterAccounts.values()[Integer.parseInt(request.get(DTableParam.SORTKEY.getName()))];
-		final String FINDALL = "SELECT * FROM registered_account "+queryFilter(request)+" ORDER BY "+sortCol+" "+sortBy+" LIMIT "+request.get(DTableParam.START.getName())+", "+request.get(DTableParam.LENGTH.getName()); 
+		final String FINDALL = "SELECT RA.*, P.name as partner FROM registered_account as RA LEFT JOIN partner as P ON P.id=RA.partnerid "+queryFilter(request)+" ORDER BY "+sortCol+" "+sortBy+" LIMIT "+request.get(DTableParam.START.getName())+", "+request.get(DTableParam.LENGTH.getName()); 
 		System.out.println(FINDALL);
 		
 		return jdbcTemplate.query(FINDALL, new BeanPropertyRowMapper<RegisteredAccount>(RegisteredAccount.class));
@@ -138,7 +146,7 @@ public class RegisteredAccountDaoImpl implements RegisteredAccountDao {
 				 ps.setString(5, account.getLastName());
 				 ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 				 ps.setString(7, account.getMiddleName());
-				 ps.setBoolean(8, account.isStatus());
+				 ps.setInt(8, account.getStatus());
 			}
 			@Override
 			public int getBatchSize() {
