@@ -57,7 +57,7 @@ public class PartnerDaoImpl implements PartnerDao {
 	
 	@Override
 	public List<Partner> retrievePartners() {
-		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<Partner>(Partner.class));
+		return jdbcTemplate.query(SQL + " ORDER by NAME ASC", new BeanPropertyRowMapper<Partner>(Partner.class));
 	}
 
 	@Override

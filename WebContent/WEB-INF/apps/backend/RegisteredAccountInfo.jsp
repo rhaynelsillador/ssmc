@@ -61,6 +61,12 @@
                                 <form role="form" id="uploadResultForm">
 						           	<div class="row">
 						               <div class="col-sm-12">
+						                   <div class="form-group">
+			                                    <label>Partner</label>
+			                                    <select class="" name="partnerId" style="width: 100px!important">
+			                                    </select>
+			                                    <i class="form-group__bar"></i>
+			                                </div>
 						                   <div class="input-group">
 						                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 						                       <div class="form-group">
@@ -113,44 +119,9 @@
 		                                </tr>
 		                            </thead>
 		                            <tbody>
-		                                <tr>
-		                                    <td style="width: 50%">
-		                                        <h5>Curabitur lobortis</h5>
-		                                        <p>Nullam consectetur dolor nec ullamcorper finibus. Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi tristique</p>
-		                                    </td>
-		
-		                                    <td>$450.00</td>
-		                                    <td>05</td>
-		                                    <td>$2250.00</td>
-		                                </tr>
-		
-		                                <tr>
-		                                    <td>
-		                                        <h5>Phasellus idarcu suscipit nun</h5>
-		                                        <p>Pellentesque habitant morbi tristique senectus</p>
-		                                    </td>
-		                                    <td>$20.00</td>
-		                                    <td>02</td>
-		                                    <td>$40.00</td>
-		                                </tr>
-		
-		                                
-		
-		                                <tr>
-		                                    <td>
-		                                        <h5>Nullam consectetur dolor</h5>
-		                                        <p>Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi</p>
-		                                    </td>
-		                                    <td>$1290.00</td>
-		                                    <td>12</td>
-		                                    <td>$15,480.00</td>
-		                                </tr>
-		                                <tr>
-		                                    <td colspan="3"></td>
-		                                    <td>$20,092.00</td>
-		                                </tr>
 		                            </tbody>
 		                        </table>
+		                        <div id="noResultFound"></div>
                             </div>
                         </div>
                     </div>
@@ -205,6 +176,16 @@
       			getExaminationResults();
       		})
       		
+      		POST("RetrievePartnersData", {}, function(data){
+   				var html = "";
+   				$.each(data, function(index, value){
+   					html += '<option value="'+value.id+'">'+value.name+'</option>';
+   				})
+   				$("select[name='partnerId']").html(html);
+   				
+   				$("select[name='partnerId']").select2();
+   			})
+      		
       		
       		$("#uploadResultForm").submit(function( event ) {
       			
@@ -239,7 +220,7 @@
 	    var getExaminationResults = function(){
 	    	var examResultTable = $("#examResultTable tbody");
 	    	POST("ExaminationResults/"+id, {}, function(data){
-	    		var html = "";
+	    		var html = '';
 	    		$.each(data.data, function(index, value){
 	    			console.log(value);
 	    			html += '<tr><td>'+
@@ -252,6 +233,9 @@
 		                    	'<a href="'+fileServer+"upload/"+value.result+'" class="btn btn-primary" target="_blank"><i class="zmdi zmdi-download"></i> download</a></td>'+
 		                '</tr>';
 	    		})
+	    		if(html == ""){
+	    			$("#noResultFound").html("<label style='color:red;'> No results found.</label>");
+	    		}
 	    		examResultTable.html(html);
 	    	})
 	    } 

@@ -20,7 +20,6 @@
                     <h2>Registered Accounts</h2>
                     <div class="actions">
                         <a href="#" id="addNewAccountAndPartner"><i class="zmdi zmdi-plus"></i></a>
-                        <a href="#" id="uploadExamResult"><i class="zmdi zmdi-upload"></i></a>
                     </div>
                 </div>
                 
@@ -171,7 +170,7 @@
 		                                </div>
 		                                <div class="form-group partner-show hidden">
 		                                    <label>Partner</label>
-		                                    <select class="form-control" name="partnerId">
+		                                    <select class="" name="partnerId" style="width: 100px!important">
 		                                    </select>
 		                                    <i class="form-group__bar"></i>
 		                                </div>
@@ -236,38 +235,7 @@
 			    	</div>
 			  	</div>
 			</div>
-            
-            <div class="modal fade" id="uploadExamResultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			 	<div class="modal-dialog" role="document">
-			    	<div class="modal-content">
-		      			<form id="uploadExamResultForm">
-				      		<div class="modal-header">
-				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        		<h4 class="modal-title" id="myModalLabel">Upload Exam Result</h4>
-				      		</div>
-				      		<div class="modal-body">
-                                <div class="form-group partner-show hidden">
-                                    <label>Partner</label>
-                                    <select class="form-control" name="partnerId">
-                                    </select>
-                                    <i class="form-group__bar"></i>
-                                </div>
-                                <div class="form-group">
-                                    <label>Account</label>
-                                    <input type="text" class="form-control" name="partnerAccount" placeholder="">
-                                    <i class="form-group__bar"></i>
-                                </div>
-			      				
-				      		</div>
-				      		<div class="modal-footer">
-				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        		<button type="submit" class="btn btn-primary">Save</button>
-				      		</div>
-                       	</form>
-			    	</div>
-			  	</div>
-			</div>
-            
+              
         </section>
 		<%@ include file="commons/JsFiles.jsp"%>
         <!-- jQuery -->
@@ -375,6 +343,9 @@
 	        				return moment(data).format("YYYY-MM-DD HH:mm:ss");
 	        			}},
 	                    { "data": "status", render : function(data, type, full, meta){
+	                    	if(full.partnerAccount != undefined){
+	                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View Employees</a> ';
+	                    	}
 	                    	return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
 	                    }},
 	        	     ],
@@ -410,15 +381,10 @@
         					html += '<option value="'+value.id+'">'+value.name+'</option>';
         				})
         				$("select[name='partnerId']").html(html);
+        				
+        				$("select[name='partnerId']").select2();
         			})
 	        	})
-	        	
-	        	$("#uploadExamResult").click(function(e){
-	        		$('#uploadExamResultModal').modal({
-        			  	keyboard: false,
-        			  	backdrop : "static"
-        			})
-	        	});
 				
 	        	$("#registeredNewAccountAndPartnerForm").submit(function(e){
 	        		e.preventDefault();
