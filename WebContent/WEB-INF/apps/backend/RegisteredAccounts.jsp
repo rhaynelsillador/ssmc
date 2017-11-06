@@ -60,8 +60,10 @@
 	                                    <label>Status</label>
 	                                    <select class="form-control" id="registerStatus">
 	                                        	<option value="">Status</option>
-	                                        	<option value="true">Active</option>
-	                                        	<option value="false">Disabled</option>
+	                                        	<option value="0">Pending</option>
+	                                        	<option value="1">Active</option>
+	                                        	<option value="2">Password Reset</option>
+	                                        	<option value="3">On Hold</option>
 	                                        </select>
 	                                    <i class="form-group__bar"></i>
 	                                </div>
@@ -343,10 +345,11 @@
 	        				return moment(data).format("YYYY-MM-DD HH:mm:ss");
 	        			}},
 	                    { "data": "status", render : function(data, type, full, meta){
-	                    	if(full.partnerAccount != undefined){
-	                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View Employees</a> ';
+	                    	if(full.partnerAccount == undefined || full.partnerAccount == ""){
+	                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
 	                    	}
-	                    	return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
+                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View Employees</a> ';
+	                    	
 	                    }},
 	        	     ],
 	        	     "columnDefs": [ {
