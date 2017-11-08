@@ -15,7 +15,7 @@
         <!-- Header -->
         <%@ include file="commons/Navbar.jsp"%>
         <section id="main">
-            
+
 			<%@ include file="commons/MenuAside.jsp"%>
             <%@ include file="commons/Menu.jsp"%>
 
@@ -23,15 +23,15 @@
 				   <div class="content__header">
 				       <h2>News And Updates</h2>
 				   </div>
-				
+
 				   <div class="card">
 				       <div class="card__header">
 				           <h2>Add</h2>
 				       </div>
-				
+
 				       <div class="card__body">
 				     		<form role="form" id="newAndUpdatesddUpdateForm">
-				           		
+
 				               	<div class="row">
 					               <div class="col-sm-12">
 					                   <div class="input-group">
@@ -56,11 +56,11 @@
 					   		</form>
 				       </div>
 				   </div>
-				   
+
 			</section>
-			
+
 		<%@ include file="commons/Footer.jsp"%>
-            
+
         </section>
 		<%@ include file="commons/JsFiles.jsp"%>
         <!-- jQuery -->
@@ -81,11 +81,11 @@
 	    	$(".card__header > h2").html("ADD");
 	    	$("#imageContainer").remove();
 	    }
-		
-	    
+
+
 		$(document).ready(function(){
 			CKEDITOR.replace('news');
-			
+
 			$( "#newAndUpdatesddUpdateForm" ).submit(function( event ) {
 		  		event.preventDefault();
 		  		var form = objectifyForm($( this ).serializeArray());
@@ -94,7 +94,7 @@
 		  		var btn = $( "#newAndUpdatesddUpdateForm button");
 		  		btn.html("Updating...");
 		  		btn.attr("disabled", "disabled");
-		  		
+
 		  		POST(url, form, function(data){
 		  			if(data.status == "SUCCESS"){
 		  				location.href = "NewsAndUpdates";
@@ -103,11 +103,11 @@
 			  			btn.html("Save Update");
 				  		btn.removeAttr("disabled");
 		  			}
-		  			
+
 		  		})
 			});
 		})
 	</script>
-        
+
 </body>
 </html>

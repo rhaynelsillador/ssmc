@@ -160,3 +160,41 @@ body::before {
 .table>thead>tr>th {
     color: #333;
 }
+
+.login, .login:before{
+  background: transparent;
+}
+
+.login__block {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.login__block__header {
+    background: transparent;
+}
+
+.login__block__header img {
+    width: 200px;
+    height: auto;
+    border-radius: 0px;
+    margin: 10px auto;
+}
+
+#loginForm .form-group>label:not(.control-label) {
+    width: 100%;
+    color: #333;
+    z-index: -1;
+}
+
+#loginForm .m-t-15 {
+  background: #f58639;
+  border: 1px solid #f58639;
+  color: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+html:not(.ismobile) #page-loader {
+    background-color: #3465aa;
+}
