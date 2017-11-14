@@ -174,4 +174,10 @@ public class SsmcBackendController {
 		return "backend/ContactInformation";
 	}
 	
+	@AppicationAudit(module = Module.PARTNERS, access = Access.RETRIEVE)
+	@RequestMapping(path="/ViewPartnerEmployees", method = {RequestMethod.GET})
+	public String viewPartnerEmployees(ModelMap map) {
+		return "backend/ViewPartnerEmployees";
+	}
+	
 }

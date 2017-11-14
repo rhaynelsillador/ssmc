@@ -1,6 +1,9 @@
 package net.cms.ssmc.model;
 
 import java.io.Serializable;
+import java.util.List;
+
+import net.ssmc.model.RegisteredAccount;
 
 public class Partner implements Serializable{
 	
@@ -13,6 +16,7 @@ public class Partner implements Serializable{
 	private String url;
 	private String logo;
 	private int status;
+	private List<RegisteredAccount> registeredAccounts;
 	
 	public long getId() {
 		return id;
@@ -48,5 +52,10 @@ public class Partner implements Serializable{
 	public String toString() {
 		return "Partners [id=" + id + ", name=" + name + ", url=" + url + ", logo=" + logo + "]";
 	}
-	
+	public List<RegisteredAccount> getRegisteredAccounts() {
+		return registeredAccounts;
+	}
+	public void setRegisteredAccounts(List<RegisteredAccount> registeredAccounts) {
+		this.registeredAccounts = registeredAccounts;
+	}
 }

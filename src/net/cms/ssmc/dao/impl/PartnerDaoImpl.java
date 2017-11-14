@@ -23,6 +23,7 @@ public class PartnerDaoImpl implements PartnerDao {
 	private final String SQLDELETE = "DELETE FROM PARTNER WHERE ID = ?";
 	private final String SQLUPDATE = "UPDATE PARTNER SET NAME=?, URL=?, LOGO=? WHERE ID = ?";
 	
+	
 	@Override
 	public long count(Map<String, String> request) {
 		return jdbcTemplate.queryForObject(SQLCOUNT, Long.class);

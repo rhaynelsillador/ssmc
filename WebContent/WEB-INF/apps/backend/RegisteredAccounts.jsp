@@ -120,7 +120,7 @@
 
                 <div class="card">
                     <div class="card__header">
-                    	<h2>Registered Account Result<small>Click Email to display more information...</small></h2>
+                    	<h2>Registered Account Result</h2>
                     </div>
                     <div class="card__body">
                         <div class="table-responsive">
@@ -348,7 +348,7 @@
 	                    	if(full.partnerAccount == undefined || full.partnerAccount == ""){
 	                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View</a> ';
 	                    	}
-                    		return '<a href="RegisteredAccountInfo?id='+full.id+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View Employees</a> ';
+                    		return '<a href="ViewPartnerEmployees?id='+full.partnerId+'&email='+full.email+'&ts='+new Date().getTime()+'" class="btn btn-success btn-sm updateBrand '+isUpdate+'" data-suffix="'+full.suffix+'" data-outboundurl="'+full.outboundUrl+'"  data-description="'+full.description+'" data-provider="'+full.provider+'" data-currency="'+full.currency+'" data-company="'+full.company+'" data-envi="'+full.envi+'">View Employees</a> ';
 	                    	
 	                    }},
 	        	     ],

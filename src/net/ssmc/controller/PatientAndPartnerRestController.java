@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,11 +39,19 @@ public class PatientAndPartnerRestController {
 		return registeredAccountsServices.registerAccountAndPartner(registeredAccount);
 	}
 	
-	
 	@RequestMapping(path="/RetrievePartnersData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody List<Partner> retrievePartners(@RequestBody RegisteredAccount registeredAccount){
 		return registeredAccountsServices.retrievePartners();
 	}
 	
+	@RequestMapping(path="/PartnerInformation/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Partner partnerInformation(@PathVariable long id){
+		return registeredAccountsServices.partnerInformation(id);
+	}
+	
+	@RequestMapping(path="/PartnerEployeeList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody Map<String, Object> partnerEployeeList(@RequestParam Map<String, String> request){
+		return registeredAccountsServices.partnerEployeeList(request);
+	}
 	
 }

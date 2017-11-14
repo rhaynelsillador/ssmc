@@ -93,4 +93,19 @@ public class RegisteredAccountsServices {
 	public List<Partner> retrievePartners(){
 		return partnerDao.retrievePartners();
 	}
+	
+	public Map<String, Object> partnerEployeeList(Map<String, String> request){
+		Map<String, Object> dtable = new HashMap<>();
+		List<RegisteredAccount> registeredAccounts = registeredAccountDao.findAll(request);
+		long recordsTotal = registeredAccountDao.count(request);
+		dtable.put(DTableResponse.DATA.getName(), registeredAccounts);
+		dtable.put(DTableResponse.DRAW.getName(), request.get(DTableParam.DRAW));
+		dtable.put(DTableResponse.RECORDFILTERED.getName(), recordsTotal);
+		dtable.put(DTableResponse.RECORDSTOTAL.getName(), recordsTotal);
+		return dtable;
+	}
+	
+	public Partner partnerInformation(long id){
+		return partnerDao.findOne(id);
+	}
 }
