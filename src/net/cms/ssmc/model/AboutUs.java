@@ -12,6 +12,7 @@ public class AboutUs {
 	private Timestamp dateAdded;
 	private Timestamp dateUpdated;
 	private App type;
+	private int sorter;
 	
 	public int getId() {
 		return id;
@@ -52,10 +53,16 @@ public class AboutUs {
 	public Timestamp getDateUpdated() {
 		return dateUpdated;
 	}
+	public int getSorter() {
+		return sorter;
+	}
+	public void setSorter(int sorter) {
+		this.sorter = sorter;
+	}
 	@Override
 	public String toString() {
 		return "AboutUs [id=" + id + ", name=" + name + ", content=" + content + ", dateAdded=" + dateAdded
-				+ ", dateUpdated=" + dateUpdated + ", type=" + type + "]";
+				+ ", dateUpdated=" + dateUpdated + ", type=" + type + ", sorter=" + sorter + "]";
 	}
 	
 }

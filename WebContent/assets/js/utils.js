@@ -1,5 +1,5 @@
-var fileServer = 'http://ssmcgroup.ph/FileServer/'
-//var fileServer = 'http://localhost/FileServer/'
+//var fileServer = 'http://ssmcgroup.ph/FileServer/'
+var fileServer = 'http://localhost/FileServer/'
 
 function objectifyForm(formArray) {
   var returnArray = {};

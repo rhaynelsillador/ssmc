@@ -139,7 +139,7 @@
 	            });
 	        });
 			
-			$("#data-table-service-header").hide();
+			/* $("#data-table-service-header").hide(); */
         </script>
         
     </body>

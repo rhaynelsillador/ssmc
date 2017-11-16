@@ -72,17 +72,16 @@
         
         <script type="text/javascript">
         	
-        	
-        	
         	var module = '${sessionScope.module}';
 	        var mainModule = "cms_menus";
         	if(module == "CLINIC"){
         		mainModule = "administration_menus";
         	}
         	
+        	;
         	
-	        $("#"+mainModule).addClass("navigation__sub--active navigation__sub--toggled");
-	        $("#"+module.toLowerCase()+"_menu").addClass("navigation__active");
+	        $("#"+getUrlParameter("main")).addClass("navigation__sub--active navigation__sub--toggled");
+	        $("#"+getUrlParameter("menu")).addClass("navigation__active");
 			var serviceTable = $("#data-table-service");
 	        var table = serviceTable.bootgrid({
 	        	ajax: true,

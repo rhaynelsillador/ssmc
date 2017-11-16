@@ -65,18 +65,18 @@
 			var isCreate = "hidden";
 			var isUpdate = "hidden";
 			for (var access of roleAccess) {
-				if(access.module=="HEADER" && access.access=="UPDATE" || access.module=="HEADER" && access.access=="DELETE" || isUserRoleAdmin){
+				if(access.module=="FEATUREDBOX" && access.access=="UPDATE" || access.module=="FEATUREDBOX" && access.access=="DELETE" || isUserRoleAdmin){
 					$("th[data-column-id='commands']").removeAttr("data-visible");
 				}
-				if(access.module=="HEADER" && access.access=="DELETE"  || isUserRoleAdmin){
+				if(access.module=="FEATUREDBOX" && access.access=="DELETE"  || isUserRoleAdmin){
 					isDelete = "";
 					console.log(access);
 				}
-				if(access.module=="HEADER" && access.access=="CREATE"  || isUserRoleAdmin){
+				if(access.module=="FEATUREDBOX" && access.access=="CREATE"  || isUserRoleAdmin){
 					$(".actions").removeClass("hidden");
 					console.log(access);
 				}
-				if(access.module=="HEADER" && access.access=="UPDATE"  || isUserRoleAdmin){
+				if(access.module=="FEATUREDBOX" && access.access=="UPDATE"  || isUserRoleAdmin){
 					isUpdate = "";
 					console.log(access);
 				}
@@ -86,7 +86,8 @@
 			tableConfig.url = "FeaturedBoxList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"FeaturedBoxUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> ";
+	                	return 	"<a href=\"FeaturedBoxUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
+	                	"<a href=\"ServicesUpload?id="+row.id+"&name="+row.name+"&module=FEATUREDBOX&menu=featured_box_menu&main=cms_menus\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Upload</a> ";
 	            	},
 	            	"dateUpdated" : function(column, row){
 	            		return datetimeformat(row.dateUpdated);
