@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="col-md-6">
                     	<div class="card__header">
-	                        <h2>List</h2>
+	                        <h2><button type="button" id="createNewDirectory" class="btn btn-primary">Create New Directory</button></h2>
 	                    </div>
 	
 	                    <div class="card__body">
@@ -51,7 +51,7 @@
                     
                     <div class="col-md-6">
                     	<div class="card__header">
-	                        <h2>List</h2>
+	                        <h2><button type="button" id="createNewDoctor" class="btn btn-primary">Create New Doctor</button></h2>
 	                    </div>
 	
 	                    <div class="card__body">
@@ -106,6 +106,48 @@
 			    	</div>
 			  	</div>
 			</div>
+			
+			<div id="doctorModal" class="modal fade" role="dialog">
+			  	<div class="modal-dialog">
+			    	<div class="modal-content">
+		        		<form id="doctorForm">
+				      		<div class="modal-header">
+				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+				        		<h4 class="modal-title">Modal Header</h4>
+				      		</div>
+				      		<div class="modal-body">
+			        			<div class="form-group">
+			        				<label>Name</label>
+			        				<input type="hidden" class="form-control" name="id"/> 
+			        				<input type="text" class="form-control" name="name"/> 
+			        			</div>
+			        			<div class="form-group">
+			        				<label>Day</label>
+			        				<input type="text" class="form-control" name="day"/> 
+			        			</div>
+			        			<div class="form-group">
+			        				<label>Time</label>
+			        				<input type="text" class="form-control" name="time"/> 
+			        			</div>
+			        			<div class="form-group">
+			        				<label>Other</label>
+			        				<input type="text" class="form-control" name="other"/> 
+			        			</div>
+			        			<div class="form-group">
+			        				<label>Branch</label>
+			        				<input type="text" class="form-control" name="branch"/> 
+			        			</div>
+				      		</div>
+				      		<div class="modal-footer">
+				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        		<button type="submit" class="btn btn-primary">Save</button>
+				      		</div>
+		        		</form>
+			    	</div>
+			  	</div>
+			</div>
             
         </section>
 		<%@ include file="commons/JsFiles.jsp"%>
@@ -116,6 +158,8 @@
 	        $("#doctor_directory_menu").addClass("navigation__active");
 	        var directorytable = $("#data-table-directory");
 	        var doctortable = $("#data-table-doctor");
+	        var isDirectoryAdd = false;
+	        var isDoctorAdd = false;
 			var isDelete = "hidden";
 			var isCreate = "hidden";
 			var isUpdate = "hidden";
@@ -140,7 +184,7 @@
 			tableConfig.url = "DirectoryList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"#\" class=\"btn btn-sm btn-default directory-command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\" data-row-name=\"" + row.name+"\" data-row-status=\"" + row.status+"\">Edit</a> ";
+	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default directory-command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\" data-row-name=\"" + row.name+"\" data-row-status=\"" + row.status+"\">Edit</a> ";
 	            	},
 	            	"status" : function(column, row){
 	            		if(row.status){
@@ -156,7 +200,7 @@
 	        		$('#directoryModal').modal({
         			  	keyboard: false
         			})
-        			
+        			isDirectoryAdd = false;
         			$("#directoryForm").find("input[name='name']").val($(this).data("row-name"));
 	        		$("#directoryForm").find("input[name='id']").val($(this).data("row-id"));
 	        		
@@ -165,6 +209,7 @@
         			}else{
         				$("#directoryStatus").html('<input type="checkbox" name="status">')
         			}
+        			$("#directoryModal").find(".modal-title").html("Update Directory");
 	            });
 	        });
 	
@@ -177,8 +222,12 @@
 	        	var btn = $( "#directoryForm button");
 		  		btn.html("Saving...");
 		  		btn.attr("disabled", "disabled");
-	        	POST("UpdateDirectory", form, function(data){
-	        		if(data.status = "SUCCESS"){
+		  		var url = "UpdateDirectory";
+		  		if(isDirectoryAdd){
+		  			url = "AddDirectory";
+		  		}
+	        	POST(url, form, function(data){
+	        		if(data.status == "SUCCESS"){
 	        			table.bootgrid('reload');
 	        			$('#directoryModal').modal("hide");
 	        		}
@@ -190,6 +239,15 @@
 	        	e.preventDefault();
 	        })
 	        
+	        $("#createNewDirectory").click(function(e){
+	        	$('#directoryModal').modal({
+    			  	keyboard: false
+    			})
+    			$("#directoryForm")[0].reset();
+	        	$("#directoryStatus").html('<input type="checkbox" name="status">')
+	        	$("#directoryModal").find(".modal-title").html("Add New Directory");
+	        	isDirectoryAdd = true;
+	        })
 	        
 	        
 	        /* ======================================================================================================== */
@@ -198,7 +256,7 @@
 	        tableConfig.url = "DoctorList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"#\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> ";
+	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default doctor-command-edit "+isUpdate+"\" data-row-id=\""+row.id+"\" data-row-name=\""+row.name+"\"  data-row-day=\""+row.day+"\">Edit</a> ";
 	            	},
 	            	"status" : function(column, row){
 	            		if(row.status){
@@ -210,21 +268,52 @@
 			
 	        var table1 = doctortable.bootgrid(tableConfig);
 	        table1.on("loaded.rs.jquery.bootgrid", function() {
-	        	table1.find(".command-edit").on("click", function(e){        
-	        		var form = {
-		                	id: $(this).data("row-id")
-		                }
-		            	confirmDelete({
-		                	text : "Do you want to delete this header?",
-		                	url : "HeaderDelete",
-		                	form : form,
-		                	bootGrid : headerTable
-		                
-		                });
+	        	table1.find(".doctor-command-edit").on("click", function(e){        
+	        		$('#doctorModal').modal({
+        			  	keyboard: false
+        			})
+        			isDirectoryAdd = false;
+        			$("#doctorForm").find("input[name='name']").val($(this).data("row-name"));
+	        		$("#doctorForm").find("input[name='id']").val($(this).data("row-id"));
+	        		
+        			$("#doctorModal").find(".modal-title").html("Update Doctor");
 	            });
 	        });
 	
 	        $("#data-table-doctor-header").hide(); 
+	        
+	        $("#createNewDoctor").click(function(e){
+	        	$('#doctorModal').modal({
+    			  	keyboard: false
+    			})
+    			$("#doctorForm")[0].reset();
+	        	$("#doctorModal").find(".modal-title").html("Add New Doctor");
+	        	isDoctorAdd = true;
+	        })
+	        
+	        $("#doctorForm").submit(function(e){
+	        	e.preventDefault();
+	        	var form = objectifyForm($(this).serializeArray());
+	        	var btn = $( "#doctorForm button");
+		  		btn.html("Saving...");
+		  		btn.attr("disabled", "disabled");
+		  		var url = "UpdateDoctor";
+		  		if(isDoctorAdd){
+		  			url = "AddDoctor";
+		  		}
+	        	POST(url, form, function(data){
+	        		if(data.status == "SUCCESS"){
+	        			table1.bootgrid('reload');
+	        			$('#doctorModal').modal("hide");
+	        		}
+	        		toastMessage(data);
+		  			btn.html("Save");
+			  		btn.removeAttr("disabled");
+		  		})
+	        	
+	        	
+	        })
+	        
 	        
         </script>
         
