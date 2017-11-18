@@ -19,7 +19,8 @@ public enum Module {
 	EXAMINATIONRESULT(""), 
 	FEATUREDBOX(""),
 	PARTNERS(""),
-	NEWSANDUPDATES("");
+	NEWSANDUPDATES(""),
+	DOCTORDIRECTORY("");
 	
 	private String updateUrl;
 	

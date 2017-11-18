@@ -8,6 +8,8 @@ public class Doctor {
 	private String time;
 	private String other;
 	private String branch;
+	private long directoryId;
+	
 	public long getId() {
 		return id;
 	}
@@ -43,6 +45,13 @@ public class Doctor {
 	}
 	public void setBranch(String branch) {
 		this.branch = branch;
+	}
+	
+	public long getDirectoryId() {
+		return directoryId;
+	}
+	public void setDirectoryId(long directoryId) {
+		this.directoryId = directoryId;
 	}
 	@Override
 	public String toString() {

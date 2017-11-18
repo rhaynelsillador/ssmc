@@ -256,4 +256,10 @@ public class CmsController {
 		return "backend/ImageUpload";
 	}
 	
+	@AppicationAudit(module = Module.DOCTORDIRECTORY, access = Access.RETRIEVE)
+	@RequestMapping(path="/DoctorDirectory", method = {RequestMethod.GET})
+	public String doctorDirectory(ModelMap map){
+		return "backend/DoctorDirectory";
+	}
+	
 }

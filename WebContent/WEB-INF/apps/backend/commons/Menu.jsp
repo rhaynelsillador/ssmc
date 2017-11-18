@@ -31,6 +31,7 @@
                     <li id="about_us_menu" class="admin-menu hidden"><a href="AboutUs">About Us</a></li>
                     <li id="header_menu" class="admin-menu hidden"><a href="Header">Header</a></li>  
                     <li id="featured_box_menu" class="admin-menu hidden"><a href="FeaturedBox">Featured box</a></li>
+                    <li id="doctor_directory_menu" class="admin-menu hidden"><a href="DoctorDirectory">Doctor's Directory</a></li>
                     <li id="service_menu" class="admin-menu hidden"><a href="Services">Services</a></li>
                 </ul>
             </li>
