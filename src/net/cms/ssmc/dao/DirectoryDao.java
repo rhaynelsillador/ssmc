@@ -10,6 +10,7 @@ public interface DirectoryDao {
 	long count(Map<String, String> request);
 	long create(Directory directory);
 	void delete(long id);
+	List<Directory> findAll();
 	List<Directory> findAll(Map<String, String> request);
 	Directory findOne(long id);
 	void update(Directory directory);

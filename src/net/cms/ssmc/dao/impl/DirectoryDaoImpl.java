@@ -55,6 +55,11 @@ public class DirectoryDaoImpl implements DirectoryDao {
 	}
 
 	@Override
+	public List<Directory> findAll() {
+		return jdbcTemplate.query(FINDALL, new BeanPropertyRowMapper<Directory>(Directory.class));
+	}
+	
+	@Override
 	public List<Directory> findAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));

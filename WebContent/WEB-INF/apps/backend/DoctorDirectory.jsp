@@ -28,9 +28,9 @@
                 </div>
 
                 <div class="card">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                     	<div class="card__header">
-	                        <h2><button type="button" id="createNewDirectory" class="btn btn-primary">Create New Directory</button></h2>
+	                        <h2><button type="button" id="createNewDirectory" class="btn btn-primary hidden">Create New Directory</button></h2>
 	                    </div>
 	
 	                    <div class="card__body">
@@ -49,9 +49,9 @@
 	                    </div>
                     </div>
                     
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                     	<div class="card__header">
-	                        <h2><button type="button" id="createNewDoctor" class="btn btn-primary">Create New Doctor</button></h2>
+	                        <h2><button type="button" id="createNewDoctor" class="btn btn-primary hidden">Create New Doctor</button></h2>
 	                    </div>
 	
 	                    <div class="card__body">
@@ -60,8 +60,9 @@
 	                                <thead>
 	                                    <tr>
 	                                        <th data-column-id="id" data-type="numeric" data-identifier="true" data-width="40px">ID</th>
+	                                        <th data-column-id="directory">Directory</th>
 	                                        <th data-column-id="name" data-order="asc">Name</th>
-	                                        <th data-column-id="day">Day</th>
+	                                        <th data-column-id="day" data-formatter="dayOther">Day</th>
 	                                        <th data-column-id="time">Time</th>
 	                                        <th data-column-id="branch">Branch</th>
 	                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="150px">Commands</th>
@@ -73,9 +74,10 @@
                     </div>
                 </div>
             </section>
+			<div class="col-md-12">
+				<%@ include file="commons/Footer.jsp"%>
+            </div>
 			
-			<%@ include file="commons/Footer.jsp"%>
-            
             
             <div id="directoryModal" class="modal fade" role="dialog">
 			  	<div class="modal-dialog">
@@ -115,9 +117,13 @@
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
-				        		<h4 class="modal-title">Modal Header</h4>
+				        		<h4 class="modal-title"></h4>
 				      		</div>
 				      		<div class="modal-body">
+				      			<div class="form-group">
+			        				<label>Directory</label>
+			        				<select class="form-control" name="directoryId"></select> 
+			        			</div>
 			        			<div class="form-group">
 			        				<label>Name</label>
 			        				<input type="hidden" class="form-control" name="id"/> 
@@ -139,6 +145,7 @@
 			        				<label>Branch</label>
 			        				<input type="text" class="form-control" name="branch"/> 
 			        			</div>
+			        			
 				      		</div>
 				      		<div class="modal-footer">
 				        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -172,7 +179,7 @@
 					console.log(access);
 				}
 				if(access.module=="DOCTORDIRECTORY" && access.access=="CREATE"  || isUserRoleAdmin){
-					$(".actions").removeClass("hidden");
+					$("#createNewDoctor, #createNewDirectory").removeClass("hidden");
 					console.log(access);
 				}
 				if(access.module=="DOCTORDIRECTORY" && access.access=="UPDATE"  || isUserRoleAdmin){
@@ -184,7 +191,8 @@
 			tableConfig.url = "DirectoryList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default directory-command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\" data-row-name=\"" + row.name+"\" data-row-status=\"" + row.status+"\">Edit</a> ";
+	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default directory-command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\" data-row-name=\"" + row.name+"\" data-row-status=\"" + row.status+"\">Edit</a> "+
+	                	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-danger directory-command-delete "+isDelete+"\" data-row-id=\"" + row.id + "\" data-row-name=\"" + row.name+"\" data-row-status=\"" + row.status+"\">Delete</a> ";
 	            	},
 	            	"status" : function(column, row){
 	            		if(row.status){
@@ -210,7 +218,23 @@
         				$("#directoryStatus").html('<input type="checkbox" name="status">')
         			}
         			$("#directoryModal").find(".modal-title").html("Update Directory");
-	            });
+	            }).end().find(".directory-command-delete").on("click", function(e){
+	            	if(isDelete != "hidden"){
+			    		
+			    		var form = {
+		                	id: $(this).data("row-id")
+		                }
+			    		var text = "Do you want to delete " +$(this).data("row-name") + "?"; 
+			    		
+			    		confirmation({
+		                	text : text,
+		                	url : "DeleteDirectory",
+		                	form : form,
+		                	bootGrid : directorytable
+		                
+		                });
+		    		}    
+	  		    });
 	        });
 	
 	        $("#data-table-directory-header").hide(); 
@@ -256,13 +280,19 @@
 	        tableConfig.url = "DoctorList";
 			tableConfig.formatters = {
 					"commands": function(column, row) {
-	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default doctor-command-edit "+isUpdate+"\" data-row-id=\""+row.id+"\" data-row-name=\""+row.name+"\"  data-row-day=\""+row.day+"\">Edit</a> ";
+	                	return 	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-default doctor-command-edit "+isUpdate+"\" data-row-id=\""+row.id+"\" data-row-name=\""+row.name+"\"  data-row-day=\""+row.day+"\" data-row-time=\""+row.time+"\" data-row-other=\""+row.other+"\" data-row-branch=\""+row.branch+"\" data-row-directoryId=\""+row.directoryId+"\">Edit</a> "+
+	                	"<a href=\"javascript:void(0)\" class=\"btn btn-sm btn-danger doctor-command-delete "+isDelete+"\" data-row-id=\""+row.id+"\" data-row-name=\""+row.name+"\"  data-row-day=\""+row.day+"\" data-row-time=\""+row.time+"\" data-row-other=\""+row.other+"\" data-row-branch=\""+row.branch+"\">Delete</a> ";
 	            	},
 	            	"status" : function(column, row){
 	            		if(row.status){
 	            			return "Active";
 	            		}
 	            		return "Inactive"; 
+	            	},"dayOther" : function(column, row){
+	            		if(row.day == "" || row.day == undefined){
+	            			return row.other;
+	            		}
+	            		return row.day; 
 	            	}
 			}
 			
@@ -272,12 +302,33 @@
 	        		$('#doctorModal').modal({
         			  	keyboard: false
         			})
-        			isDirectoryAdd = false;
+        			isDoctorAdd = false;
         			$("#doctorForm").find("input[name='name']").val($(this).data("row-name"));
 	        		$("#doctorForm").find("input[name='id']").val($(this).data("row-id"));
+	        		$("#doctorForm").find("input[name='day']").val($(this).data("row-day"));
+	        		$("#doctorForm").find("input[name='time']").val($(this).data("row-time"));
+	        		$("#doctorForm").find("input[name='other']").val($(this).data("row-other"));
+	        		$("#doctorForm").find("input[name='branch']").val($(this).data("row-branch"));
 	        		
         			$("#doctorModal").find(".modal-title").html("Update Doctor");
-	            });
+        			generateDirectorySelect($(this).data("row-directoryid"));
+	            }).end().find(".doctor-command-delete").on("click", function(e){
+	            	if(isDelete != "hidden"){
+			    		
+			    		var form = {
+		                	id: $(this).data("row-id")
+		                }
+			    		var text = "Do you want to delete " +$(this).data("row-name") + "?"; 
+			    		
+			    		confirmation({
+		                	text : text,
+		                	url : "DeleteDoctor",
+		                	form : form,
+		                	bootGrid : doctortable
+		                
+		                });
+		    		}    
+	  		    });
 	        });
 	
 	        $("#data-table-doctor-header").hide(); 
@@ -289,7 +340,25 @@
     			$("#doctorForm")[0].reset();
 	        	$("#doctorModal").find(".modal-title").html("Add New Doctor");
 	        	isDoctorAdd = true;
+	        	
+	        	generateDirectorySelect(null);
+	        	
 	        })
+	        
+	        function generateDirectorySelect(def){
+	        	console.log("def", def)
+	        	POST("DirectoryList2", {}, function(data){
+	        		console.log(data);
+	        		var html = "";
+	        		$.each(data, function(index, value){
+	        			html += '<option value="'+value.id+'">'+value.name+'</option>';
+	        		})
+	        		$("#doctorForm").find("select[name='directoryId']").html(html);
+	        		if(def){
+	        			$("#doctorForm").find("select[name='directoryId']").val(def)
+	        		}
+	        	});
+	        }
 	        
 	        $("#doctorForm").submit(function(e){
 	        	e.preventDefault();
@@ -310,7 +379,6 @@
 		  			btn.html("Save");
 			  		btn.removeAttr("disabled");
 		  		})
-	        	
 	        	
 	        })
 	        

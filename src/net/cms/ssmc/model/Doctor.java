@@ -9,6 +9,7 @@ public class Doctor {
 	private String other;
 	private String branch;
 	private long directoryId;
+	private String directory;
 	
 	public long getId() {
 		return id;
@@ -53,9 +54,16 @@ public class Doctor {
 	public void setDirectoryId(long directoryId) {
 		this.directoryId = directoryId;
 	}
+	public String getDirectory() {
+		return directory;
+	}
+	public void setDirectory(String directory) {
+		this.directory = directory;
+	}
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", day=" + day + ", time=" + time + ", other=" + other
-				+ ", branch=" + branch + "]";
+				+ ", branch=" + branch + ", directoryId=" + directoryId + ", directory=" + directory + "]";
 	}
+	
 }

@@ -1,5 +1,6 @@
 package net.ssmc.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class DoctorsDirectoryRestController {
 	@RequestMapping(path="/DirectoryList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 	public @ResponseBody Map<String, Object> directoryList(@RequestParam Map<String, String> request){
 		return doctorsDirectoryServices.findAllDirectories(request);
+	}
+	
+	@RequestMapping(path="/DirectoryList2", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody List<Directory> directoryList(){
+		return doctorsDirectoryServices.findAllDirectories();
 	}
 	
 	@RequestMapping(path="/DoctorList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")

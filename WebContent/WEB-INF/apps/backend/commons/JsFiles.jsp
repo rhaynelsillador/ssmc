@@ -76,7 +76,12 @@
 		}else if(access.module=="PARTNERS" && access.access=="RETRIEVE"){
 			$("#partners_menu").removeClass("hidden");
 			isCMSMenus = true;
+		}else if(access.module=="DOCTORDIRECTORY" && access.access=="RETRIEVE"){
+			$("#doctor_directory_menu").removeClass("hidden");
+			isCMSMenus = true;
 		}
+		
+		
 	}
 	
 	if(isAdministrationMenus){

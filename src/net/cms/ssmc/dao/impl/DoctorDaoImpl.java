@@ -14,13 +14,14 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import net.cms.ssmc.dao.DoctorDao;
+import net.cms.ssmc.model.Directory;
 import net.cms.ssmc.model.Doctor;
 
 public class DoctorDaoImpl implements DoctorDao{
 
 	private final static String SQLCREATE 	= "INSERT INTO DOCTOR (NAME, DAY, TIME, OTHER, BRANCH, DIRECTORYID) VALUES (?,?,?,?,?,?)";
 	private final static String SQLDELETE 	= "DELETE FROM DOCTOR WHERE ID = ?";
-	private final static String FINDALL 	= "SELECT * FROM DOCTOR";
+	private final static String FINDALL 	= "SELECT DC.*, DIR.NAME AS directory FROM DOCTOR AS DC INNER JOIN DIRECTORY AS DIR ON DC.DIRECTORYID=DIR.ID";
 	private final static String SQLCOUNT 	= "SELECT COUNT(ID) FROM DOCTOR";
 	private final static String FINDONE 	= "SELECT * FROM DOCTOR WHERE ID = ?";
 	private final static String UPDATE	 	= "UPDATE DOCTOR SET NAME=?, DAY=?, TIME=?, OTHER=?, BRANCH=? ,DIRECTORYID=? WHERE ID=?";
@@ -60,7 +61,9 @@ public class DoctorDaoImpl implements DoctorDao{
 
 	@Override
 	public List<Doctor> findAll(Map<String, String> request) {
-		return jdbcTemplate.query(FINDALL, new Object[]{}, new BeanPropertyRowMapper<Doctor>(Doctor.class));
+		int start = Integer.parseInt(request.get("current"));
+		int end = Integer.parseInt(request.get("rowCount"));
+		return jdbcTemplate.query(FINDALL+" LIMIT "+((start-1)*end)+", "+(end), new BeanPropertyRowMapper<Doctor>(Doctor.class));
 	}
 
 	@Override

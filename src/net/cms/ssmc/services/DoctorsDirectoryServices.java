@@ -1,6 +1,7 @@
 package net.cms.ssmc.services;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,10 @@ public class DoctorsDirectoryServices {
 		data.put("rowCount", request.get("rowCount"));
 		data.put("total", doctorDao.count(request));
 		return data;
+	}
+	
+	public List<Directory> findAllDirectories(){
+		return directoryDao.findAll();
 	}
 	
 	public ObjectNode createUpdateDirectory(Directory directory, TransactionType transactionType){
