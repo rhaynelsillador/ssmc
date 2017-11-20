@@ -75,6 +75,7 @@
 					                          <select class="form-control" name="num" id="serviceNum">
 					                          	<option value="1">Service 1</option>
 					                          	<option value="2">Service 2</option>
+					                          	<option value="3">Service 3</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
