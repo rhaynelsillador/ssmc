@@ -21,7 +21,7 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>About Us</h2>
+                    <h2>Services</h2>
 
                     <div class="actions hidden">
                         <a href="ServicesAdd"><i class="zmdi zmdi-plus"></i></a>

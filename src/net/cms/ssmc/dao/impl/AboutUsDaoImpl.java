@@ -56,6 +56,11 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	}
 
 	@Override
+	public List<AboutUs> retrieveAll() {
+		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<AboutUs>(AboutUs.class));
+	}
+	
+	@Override
 	public List<AboutUs> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));

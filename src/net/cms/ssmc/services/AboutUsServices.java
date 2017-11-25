@@ -23,6 +23,10 @@ public class AboutUsServices {
 	@Autowired
 	private ControlServices controlServices;
 	
+	public List<AboutUs> getAllAboutUs(){
+		return aboutUsDao.retrieveAll();
+	}
+	
 	public Map<String, Object> getAllAboutUs(Map<String, String> request){
 		Map<String, Object> data = new HashMap<>();
 		List<AboutUs> aboutUs = aboutUsDao.retrieveAll(request);

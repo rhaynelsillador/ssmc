@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 	<%@ include file="commons/Headers.jsp"%>
+	<style>
+	  #sortable1, #sortable2 {
+	    border: 1px solid #eee;
+	    width: 142px;
+	    min-height: 20px;
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 5px 0 0 0;
+	    float: left;
+	    margin-right: 10px;
+	  }
+	  #sortable1 li, #sortable2 li {
+	    margin: 0 5px 5px 5px;
+	    padding: 5px;
+	    font-size: 1.2em;
+	    width: 120px;
+	  }
+  </style>
     <body>
         <!-- Page Loader -->
         <div id="page-loader">
@@ -25,6 +43,7 @@
 
                     <div class="actions hidden">
                         <a href="AboutUsAdd"><i class="zmdi zmdi-plus"></i></a>
+                        <a href="javascript:void(0)" id="change-sort" sort="1"><i class="zmdi zmdi-edit"></i></a>
                     </div>
                 </div>
 
@@ -33,7 +52,7 @@
                         <h2>Data List</h2>
                     </div>
 
-                    <div class="card__body">
+                    <div class="card__body" id="tableContainer">
                         <div class="table-responsive">
                             <table id="data-table-about-us" class="table table-striped">
                                 <thead>
@@ -50,6 +69,27 @@
                             </table>
                         </div>
                     </div>
+                    
+                    <div class="card__body hidden" id="sortContainer">
+                        <div class="table-responsive">
+                            <ul id="sortable1" class="connectedSortable">
+							  <li class="ui-state-default">Item 1</li>
+							  <li class="ui-state-default">Item 2</li>
+							  <li class="ui-state-default">Item 3</li>
+							  <li class="ui-state-default">Item 4</li>
+							  <li class="ui-state-default">Item 5</li>
+							</ul>
+							 
+							<ul id="sortable2" class="connectedSortable">
+							  <li class="ui-state-highlight">Item 1</li>
+							  <li class="ui-state-highlight">Item 2</li>
+							  <li class="ui-state-highlight">Item 3</li>
+							  <li class="ui-state-highlight">Item 4</li>
+							  <li class="ui-state-highlight">Item 5</li>
+							</ul>
+                        </div>
+                    </div>
+                    
                 </div>
             </section>
 			
@@ -74,15 +114,12 @@
 				}
 				if(access.module=="ABOUTUS" && access.access=="DELETE"  || isUserRoleAdmin){
 					isDelete = "";
-					console.log(access);
 				}
 				if(access.module=="ABOUTUS" && access.access=="CREATE"  || isUserRoleAdmin){
 					$(".actions").removeClass("hidden");
-					console.log(access);
 				}
 				if(access.module=="ABOUTUS" && access.access=="UPDATE"  || isUserRoleAdmin){
 					isUpdate = "";
-					console.log(access);
 				}
 			}
 			
@@ -123,6 +160,43 @@
 	        });
 			
 	        $("#data-table-about-us-header").hide();
+	        
+	        $("#change-sort").click(function(e){
+	        	var sort = $(this).attr("sort");
+	        	
+	        	if(sort == 1){
+	        		$("#sortContainer").removeClass("hidden");
+		        	$("#tableContainer").addClass("hidden");
+		        	$(this).attr("sort", 2);
+	        	}else{
+	        		$(this).attr("sort", 1);
+	        		$("#sortContainer").addClass("hidden");
+		        	$("#tableContainer").removeClass("hidden");
+	        	}
+	        	
+	        	console.log(sort);
+	        	
+	        	POST("AboutUs/List", {}, function(data){
+	        		console.log(data);
+	        		var sortable1 = "", sortable2 = "";
+	        		$.each(data, function(index, value){
+	        			if(value.type=="CLINIC"){
+	        				sortable2 += '<li class="ui-state-highlight">'+value.name+'</li>';
+	        			}else{
+	        				sortable1 += '<li class="ui-state-highlight">'+value.name+'</li>';
+	        			}
+	        		});
+	        		$( "#sortable1" ).html(sortable1);
+	        		$( "#sortable2" ).html(sortable2);
+	        	})
+	        	initSortable();
+	        })
+	        
+	        function initSortable(){
+	        	$( "#sortable1, #sortable2" ).sortable({
+	              connectWith: ".connectedSortable"
+	            }).disableSelection();
+	        }
 	        
         </script>
         

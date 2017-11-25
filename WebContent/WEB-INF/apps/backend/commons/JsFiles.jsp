@@ -1,5 +1,6 @@
 <script src="assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/vendors/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script src="assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="assets/js/utils.js"></script>
 <script src="assets/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>

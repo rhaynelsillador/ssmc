@@ -21,7 +21,7 @@
 
             <section id="content">
                 <div class="content__header">
-                    <h2>Featured Box</h2>
+                    <h2>Doctor Directory</h2>
                     <div class="actions hidden">
                     
                     </div>
