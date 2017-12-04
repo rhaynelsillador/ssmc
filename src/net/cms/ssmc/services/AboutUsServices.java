@@ -100,4 +100,17 @@ public class AboutUsServices {
 		}
 		return response;
 	} 
+	
+	public Map<String, Object> updateSorter(List<AboutUs> aboutUs) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			aboutUsDao.updateSorter(aboutUs);
+			response.put(Helper.MESSAGE, "About us sorter successfully updated!");
+			response.put(Helper.STATUS, Status.SUCCESS);
+		} catch (Exception e) {
+			response.put(Helper.MESSAGE, "About us sorter unsuccessfully updated!");
+			response.put(Helper.STATUS, Status.SUCCESS);
+		}
+		return response;
+	} 
 }

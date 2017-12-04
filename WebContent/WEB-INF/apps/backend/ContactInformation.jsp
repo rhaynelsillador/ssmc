@@ -45,7 +45,15 @@
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
 					                       <div class="form-group">
-					                           <input type="text" class="form-control" placeholder="Phone" value="" name="phone" id="phone">
+					                           <input type="text" class="form-control" placeholder="Clinic Contact" value="" name="clinic-contact" id="clinic-contact">
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/>
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+					                       <div class="form-group">
+					                           <input type="text" class="form-control" placeholder="Hospital Contact" value="" name="hospital-contact" id="hospital-contact">
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>

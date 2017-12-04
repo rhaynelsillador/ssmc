@@ -26,6 +26,7 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	private static final String INSERT 		= "INSERT INTO ABOUTUS (name, content, dateadded, dateupdated, type) VALUES (?, ?, ?, ?, ?)";
 	private static final String DELETEBYID 	= "DELETE FROM ABOUTUS WHERE id= ? ";
 	private static final String UPDATE	 	= "UPDATE ABOUTUS SET name= ?, content = ?, type=?, dateupdated = ? WHERE id= ? ";
+	private static final String UPDATESORTER = "UPDATE ABOUTUS SET sorter= ? WHERE id= ?";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -57,7 +58,7 @@ public class AboutUsDaoImpl implements AboutUsDao {
 
 	@Override
 	public List<AboutUs> retrieveAll() {
-		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<AboutUs>(AboutUs.class));
+		return jdbcTemplate.query(SQL + " ORDER BY SORTER ASC", new BeanPropertyRowMapper<AboutUs>(AboutUs.class));
 	}
 	
 	@Override
@@ -87,6 +88,16 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	@Override
 	public void delete(int id) {
 		jdbcTemplate.update(DELETEBYID, new Object[] {id});
+	}
+
+	@Override
+	public void updateSorter(List<AboutUs> aboutUs) {
+		int index = 0;
+		for (AboutUs aboutUs2 : aboutUs) {
+			index = index + 1;
+			jdbcTemplate.update(UPDATESORTER, new Object[] {index, aboutUs2.getId()});
+		}
+		
 	}
 
 }

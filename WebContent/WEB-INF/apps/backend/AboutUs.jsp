@@ -4,7 +4,7 @@
 	<style>
 	  #sortable1, #sortable2 {
 	    border: 1px solid #eee;
-	    width: 142px;
+	    width: 100%;
 	    min-height: 20px;
 	    list-style-type: none;
 	    margin: 0;
@@ -16,7 +16,7 @@
 	    margin: 0 5px 5px 5px;
 	    padding: 5px;
 	    font-size: 1.2em;
-	    width: 120px;
+	    width: 100;
 	  }
   </style>
     <body>
@@ -71,25 +71,22 @@
                     </div>
                     
                     <div class="card__body hidden" id="sortContainer">
-                        <div class="table-responsive">
-                            <ul id="sortable1" class="connectedSortable">
-							  <li class="ui-state-default">Item 1</li>
-							  <li class="ui-state-default">Item 2</li>
-							  <li class="ui-state-default">Item 3</li>
-							  <li class="ui-state-default">Item 4</li>
-							  <li class="ui-state-default">Item 5</li>
-							</ul>
-							 
-							<ul id="sortable2" class="connectedSortable">
-							  <li class="ui-state-highlight">Item 1</li>
-							  <li class="ui-state-highlight">Item 2</li>
-							  <li class="ui-state-highlight">Item 3</li>
-							  <li class="ui-state-highlight">Item 4</li>
-							  <li class="ui-state-highlight">Item 5</li>
-							</ul>
-                        </div>
+	                    <div class="table-responsive">
+	                    	<div class="col-md-6">
+	                            <ul id="sortable1" class="connectedSortable">
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul id="sortable2" class="connectedSortable">
+								</ul>
+	                        </div>
+	                        <div class="col-md-12">
+	                        	<br/>
+	                        	<br/>
+	                        	<button class="btn btn-primary" value="Submit" id="updateSorting">Save Update</button>
+	                        </div>
+	                    </div>
                     </div>
-                    
                 </div>
             </section>
 			
@@ -163,7 +160,6 @@
 	        
 	        $("#change-sort").click(function(e){
 	        	var sort = $(this).attr("sort");
-	        	
 	        	if(sort == 1){
 	        		$("#sortContainer").removeClass("hidden");
 		        	$("#tableContainer").addClass("hidden");
@@ -177,13 +173,12 @@
 	        	console.log(sort);
 	        	
 	        	POST("AboutUs/List", {}, function(data){
-	        		console.log(data);
 	        		var sortable1 = "", sortable2 = "";
 	        		$.each(data, function(index, value){
 	        			if(value.type=="CLINIC"){
-	        				sortable2 += '<li class="ui-state-highlight">'+value.name+'</li>';
+	        				sortable2 += '<li class="ui-state-highlight" data-id="'+value.id+'" data-type="'+value.type+'">'+value.name+'</li>';
 	        			}else{
-	        				sortable1 += '<li class="ui-state-highlight">'+value.name+'</li>';
+	        				sortable1 += '<li class="ui-state-highlight" data-id="'+value.id+'" data-type="'+value.type+'">'+value.name+'</li>';
 	        			}
 	        		});
 	        		$( "#sortable1" ).html(sortable1);
@@ -197,6 +192,30 @@
 	              connectWith: ".connectedSortable"
 	            }).disableSelection();
 	        }
+	        
+	        $("#updateSorting").click(function(){
+	        	var aboutUsData = [];
+	        	$("#sortable1 li").each(function(index){
+	        		var id = $(this).data("id");
+	        		var type = $(this).data("type");
+	        		aboutUsData.push({"id" : id, "type" : type});
+	        	})
+	        	
+	        	$("#sortable2 li").each(function(index){
+	        		var id = $(this).data("id");
+	        		var type = $(this).data("type");
+	        		aboutUsData.push({"id" : id, "type" : type});
+	        	})
+	        	var btn = $( this );
+		  		btn.html("Updating...");
+		  		btn.attr("disabled", "disabled");
+				POST("AboutUs/UpdateSort", aboutUsData, function(data){
+					toastMessage(data);
+		  			btn.html("Save Update");
+			  		btn.removeAttr("disabled");
+				})
+        		
+	        })
 	        
         </script>
         

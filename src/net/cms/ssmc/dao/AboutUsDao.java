@@ -14,6 +14,7 @@ public interface AboutUsDao {
 	void update(AboutUs aboutUs, int id);
 	long count();
 	void delete(int id);
+	void updateSorter(List<AboutUs> aboutUs);
 	
 }
 
