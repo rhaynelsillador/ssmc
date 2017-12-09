@@ -20,4 +20,5 @@ public interface UserDao {
 	void update(User user);
 	int countApprover();
 	void updateApprover(User user);
+	void updateUserPassword(int id, String password);
 }

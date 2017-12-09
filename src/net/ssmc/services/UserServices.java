@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 
 import net.ssmc.dao.UserDao;
@@ -21,6 +23,7 @@ import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
 import net.ssmc.model.Role;
 import net.ssmc.model.User;
+import net.ssmc.model.form.UserChangePasswordForm;
 import net.ssmc.utils.AES;
 
 public class UserServices {
@@ -33,6 +36,8 @@ public class UserServices {
 	private HttpServletRequest httpServletRequest;
 	@Autowired
 	private Gson gson;
+	@Autowired
+	private ObjectMapper objectMapper;
 	
 	public Map<String, Object> login(HttpSession session, Map<String, String> request){
 		Map<String, Object> response = new HashMap<>();
@@ -161,6 +166,31 @@ public class UserServices {
 			response.put(Helper.MESSAGE, "Update has an error.");
 		}
 		return response;
+	}
+
+	public ObjectNode updateUserPassword(UserChangePasswordForm form) {
+		ObjectNode node = objectMapper.createObjectNode();
+		node.put(Helper.STATUS, Status.ERROR.toString());
+		if(form.getCurrenctPassword().length() <= 5){
+			node.put(Helper.MESSAGE, "Current password is invalid. Please enter more than 5 characters.");
+		}else if(form.getNewPassword1().length() <= 5){
+			node.put(Helper.MESSAGE, "New password is invalid. Please enter more than 5 characters.");
+  		}else if(!form.getNewPassword1().equals(form.getNewPassword2())){
+  			node.put(Helper.MESSAGE, "New password is not the same.");
+  		}else{
+  			User user = userDao.retrieve(form.getUserId());
+  			if(user == null){
+  				node.put(Helper.MESSAGE, "User found. Please enter correct user id!");
+  			}else if(!user.getPassword().equals(AES.encrypt(form.getCurrenctPassword()))){
+  				node.put(Helper.MESSAGE, "Current password is invalid. Please enter correct current password!");
+  			}else{
+  				System.err.println(form.getUserId() + " : " + AES.encrypt(form.getNewPassword1()));
+  				userDao.updateUserPassword(form.getUserId(), AES.encrypt(form.getNewPassword1()));
+  				node.put(Helper.STATUS, Status.SUCCESS.toString());
+  				node.put(Helper.MESSAGE, "User success change password!");
+  			}  			
+  		}
+		return node;
 	}
 	
 }

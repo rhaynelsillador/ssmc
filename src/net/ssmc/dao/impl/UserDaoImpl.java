@@ -27,6 +27,8 @@ public class UserDaoImpl implements UserDao{
 	private static final String UPDATE = "UPDATE USER SET firstname =?, lastname = ?, mobile = ?, phone=?, email=?, birthday=? WHERE id=?";
 	private static final String CREATE = "INSERT INTO USER (username, password, firstname, lastname, mobile, phone, email, birthday, datelastlogin, roleid,datecreated) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATEAPPROVER = "UPDATE USER SET approver =? WHERE id=?";
+	private static final String UPDATEPASSWORD = "UPDATE USER SET password =? WHERE id=?";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -148,6 +150,11 @@ public class UserDaoImpl implements UserDao{
 		}
 		
 		return filter;
+	}
+
+	@Override
+	public void updateUserPassword(int id, String password) {
+		jdbcTemplate.update(UPDATEPASSWORD, new Object[] {password, id});
 	}
 	
 }

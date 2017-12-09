@@ -33,6 +33,7 @@ import net.ssmc.model.RegisteredAccount;
 import net.ssmc.model.Role;
 import net.ssmc.model.RoleAccess;
 import net.ssmc.model.User;
+import net.ssmc.model.form.UserChangePasswordForm;
 import net.ssmc.services.CityServices;
 import net.ssmc.services.ClinicServices;
 import net.ssmc.services.ContactUsServices;
@@ -187,36 +188,9 @@ public class SsmcBackendRestController {
 		return examResultServices.deleteTestResult(examResult.getId());
 	}
 	
-	
-	@RequestMapping(path="/LoadUserData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-	public @ResponseBody String loadUserData(){
-		new Thread(new Runnable() {
-		
-		@Override
-		public void run() {
-			List<RegisteredAccount> registeredAccounts = new ArrayList<>();
-			for (int i = 0; i < 100000; i++) {
-				random++;
-				RegisteredAccount account = new RegisteredAccount();
-				account.setEmail("Rhaynel-"+random);
-				account.setFirstName("Sillador"+random);
-				account.setLastName("Silaldor"+random);
-				account.setMiddleName("M");
-				account.setStatus(1);
-				account.setPassword("PASSWORD"+random);
-				account.setNumber(1111);
-				
-				System.out.println(i + " :: " + random);
-				registeredAccounts.add(account);
-			}
-			System.out.println("INSERTING...");
-			registeredAccountDao.create(registeredAccounts);
-			System.out.println("DONE...");
-		}
-		
-			
-		}).start();
-		return "LOADING...";
+	@RequestMapping(path="/UpdateUserPassword", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+	public @ResponseBody ObjectNode updateUserPassword(@RequestBody UserChangePasswordForm form){
+		return userServices.updateUserPassword(form);
 	}
 	
 	

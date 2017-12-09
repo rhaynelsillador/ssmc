@@ -168,6 +168,9 @@
 	        	$("#uploadImageForm").submit(function( event ) {
 		      		var myform = document.getElementById("uploadImageForm");
 		      	    var fd = new FormData(myform );
+		      	  	var btn = $( "#uploadImageForm button");
+			  		btn.html("Uploading...");
+			  		btn.attr("disabled", "disabled");
 		      	    $.ajax({
 		      	        url: "FormUploadFile",
 		      	        data: fd,
@@ -182,6 +185,8 @@
 		      	        		"message" : "Upload success!"
 		      	        	})
 		      	        	$("#uploadImageForm")[0].reset();
+		      	        	btn.html("Upload Image");
+					  		btn.removeAttr("disabled");
 		      	        }
 		      	    });
 		      	  event.preventDefault();

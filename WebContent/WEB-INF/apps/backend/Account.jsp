@@ -162,6 +162,41 @@
                 </ul>
             </footer>
         </section>
+        
+        <div id="change_password_modal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <form id="newPasswordForm">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">x</button>
+			        <h4 class="modal-title">Change Password</h4>
+			      </div>
+			      <div class="modal-body">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">Currenct Password</label>
+					    <input type="password" class="form-control" id="currenctPassword" name="currenctPassword">
+					    <input type="hidden" class="form-control" id="userId" name="userId">
+					  </div>
+					  <div class="form-group">
+					    <label for="exampleInputPassword1">New Password</label>
+					    <input type="password" class="form-control" id="newPassword1" name="newPassword1">
+					  </div>	
+					  <div class="form-group">
+					    <label for="exampleInputPassword1">Repeat New Password</label>
+					    <input type="password" class="form-control" id="newPassword2" name="newPassword2">
+					  </div>					
+			      </div>
+			      <div class="modal-footer">
+			        <button type="submit" class="btn btn-danger">Submit</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+		        </form>
+		    </div>
+		
+		  </div>
+		</div>
 
       
         <!-- Javascript Libraries -->
@@ -274,7 +309,8 @@
 		            },
 		            formatters: {
 		                "commands": function(column, row) {
-		                	return "<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a>";
+		                	return "<a href=\"#\" class=\"btn btn-sm btn-danger command-change-password "+isUpdate+"\" data-row-id=\"" + row.id + "\">Change Password</a> "+
+		                	"<a href=\"AccountUpdate?id="+row.id+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a>";
 		            	},
 		            	"dateLastLogin" : function(column, row){
 		            		return moment(row.dateLastLogin).format("YYYY-MM-DD HH:mm:ss");
@@ -306,11 +342,43 @@
 			                
 			                });
 			    		}      
-		  		    }).end().find(".command-delete").on("click", function(e){
-		  		    	console.log("You pressed delete on row: " + $(this).data("row-id"));
+		  		    }).end().find(".command-change-password").on("click", function(e){
+		  		    	$("#change_password_modal").modal({
+		  		    		backdrop : 'static',
+		  		    		keyboard : false
+		  		    	})
+		  		    	$("#userId").val($(this).data("row-id"));
 		  		    });
 			    });
 			}
+			
+			$("#newPasswordForm").submit(function(e){
+				e.preventDefault();
+				var form = objectifyForm($( this ).serializeArray());
+		  		if(form.currenctPassword.length <= 5){
+		  			toastMessage({status : "ERROR", message: "Current password is invalid. Please enter more than 5 characters."});
+		  		}else if(form.newPassword1.length <= 5){
+		  			toastMessage({status : "ERROR", message: "New password is invalid. Please enter more than 5 characters."});
+		  		}else if(form.newPassword1 != form.newPassword2){
+		  			toastMessage({status : "ERROR", message: "New password is not the same."});
+		  		}else{
+		  			
+					var btn = $( "#newPasswordForm[type='submit']");
+			  		btn.html("Updating...");
+			  		btn.attr("disabled", "disabled");
+			  		
+		  			POST("UpdateUserPassword", form, function(data){
+		  				if(data.status == "SUCCESS"){
+		  					$("#newPasswordForm")[0].reset();
+		  					$("#change_password_modal").modal("hide");
+		  				}
+			  			toastMessage(data);
+			  			btn.html("Save Update");
+				  		btn.removeAttr("disabled");
+			  		})	
+		  		}
+				
+			})
 			
         </script>
     </body>
