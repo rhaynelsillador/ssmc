@@ -34,7 +34,51 @@
                     </div>
 
                     <div class="card__body">
+                    	
                         <div class="table-responsive">
+                        	<form id="headerFilterForm">
+	                    		<div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Type</label>
+								    <select class="form-control" name="type" id="headerType">
+								    	<option value="ALL">All</option>
+			                          	<option value="CLINIC">Clinic</option>
+			                          	<option value="HOSPITALS">Hospital</option>
+			                          </select>
+								  </div>
+							  	</div>
+								<div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Page</label>
+								    <select class="form-control" name="page" id="headerPage">
+			                          	<option value="All">All</option>
+			                          	<option value="Main">Main</option>
+			                          	<option value="Hospital">Hospital</option>
+			                          	<option value="Medical">Medical</option>
+			                          	<option value="About">About</option>
+			                          	<option value="Service">Service</option>
+			                          	<option value="HospitalAndClinic">Hospital And Clinic</option>
+			                          	<option value="Faq">Faq</option>
+			                          	<option value="ContactUs">ContactUs</option>
+			                          	<option value="Industrial">Industrial</option>
+			                          </select>
+								  </div>
+							  </div>
+							  <div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Name</label>
+								    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+								  </div>
+							  </div>
+							  <div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Filter</label>
+								    <input type="text" class="form-control" id="filter" name="filter" placeholder="Filter">
+								  </div>
+							  </div>
+							  <button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+							<hr/>
                             <table id="data-table-header" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -93,6 +137,12 @@
 			
 			
 			tableConfig.url = "HeaderList";
+			tableConfig.post = function (){
+		                return {
+		                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed",
+		                    form: JSON.stringify(objectifyForm($( "#headerFilterForm" ).serializeArray()))
+		                };
+		            }
 			tableConfig.formatters = {
 					"commands": function(column, row) {
 	                	return 	"<a href=\"HeaderUpdate?id="+row.id+"&name="+row.name+"\" class=\"btn btn-sm btn-default command-edit "+isUpdate+"\" data-row-id=\"" + row.id + "\">Edit</a> "+
@@ -124,6 +174,11 @@
 	        });
 
 	        $("#data-table-header-header").hide();
+	        
+	        $("#headerFilterForm").submit(function(e){
+	        	e.preventDefault();
+	        	table.bootgrid('reload');
+	        })
 	        
         </script>
         
