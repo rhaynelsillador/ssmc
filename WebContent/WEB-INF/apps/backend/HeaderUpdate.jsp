@@ -81,6 +81,7 @@
 					                          	<option value="HospitalAndClinic">Hospital And Clinic</option>
 					                          	<option value="Faq">Faq</option>
 					                          	<option value="ContactUs">ContactUs</option>
+					                          	<option value="Industrial">Industrial</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
