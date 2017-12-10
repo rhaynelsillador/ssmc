@@ -17,7 +17,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import net.cms.ssmc.dao.HeaderDao;
 import net.cms.ssmc.model.Header;
 import net.ssmc.enums.App;
-import net.ssmc.model.form.FilterForm;
 import net.ssmc.utils.DataTableHelper;
 
 public class HeaderDaoImpl implements HeaderDao {
@@ -32,6 +31,8 @@ public class HeaderDaoImpl implements HeaderDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	@Override
 	public long count() {
@@ -74,13 +75,10 @@ public class HeaderDaoImpl implements HeaderDao {
 	}
 
 	@Override
-	public List<Header> retrieveAll(Map<String, String> request, FilterForm form) {
-		String filter = formFilter(form);
-		System.out.println(filter);
-		
+	public List<Header> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = this.SQL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = this.SQL + " " +dataTableHelper.formFilter(request) + " " + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<Header>(Header.class));
 	}
 
@@ -99,15 +97,6 @@ public class HeaderDaoImpl implements HeaderDao {
 		jdbcTemplate.update(DELETEBYID, new Object[] {id});
 	}
 
-	private String formFilter(FilterForm form){
-		StringBuilder builder = new StringBuilder();
-		if(!form.getType().equals(App.ALL)){
-			builder.append(" type ");
-		}
-		System.out.println(form);
-		
-		
-		return builder.toString();
-	}
+	
 
 }

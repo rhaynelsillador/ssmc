@@ -22,6 +22,8 @@ public class NewsAndUpdateDaoImpl implements NewsAndUpdateDao{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	private static final String SQLCOUNT = "SELECT COUNT(ID) FROM news_and_update";
 	private static final String SQLFINDONE = "SELECT * FROM news_and_update WHERE ID=?";
@@ -69,7 +71,7 @@ public class NewsAndUpdateDaoImpl implements NewsAndUpdateDao{
 	public List<NewsAndUpdate> findAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = this.SQLFINDALL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = this.SQLFINDALL + " " + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<NewsAndUpdate>(NewsAndUpdate.class));
 	}
 

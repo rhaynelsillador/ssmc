@@ -9,9 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
 import net.cms.ssmc.dao.HeaderDao;
 import net.cms.ssmc.model.Header;
 import net.ssmc.enums.App;
@@ -19,7 +16,6 @@ import net.ssmc.enums.Module;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.model.Helper;
-import net.ssmc.model.form.FilterForm;
 
 public class HeaderServices {
 
@@ -27,19 +23,11 @@ public class HeaderServices {
 	private HeaderDao headerDao;
 	@Autowired
 	private ControlServices controlServices;
-	@Autowired
-	private Gson gson;
 	
 	public Map<String, Object> getAllHeaders(Map<String, String> request){
 		Map<String, Object> data = new HashMap<>();
 		
-		
-		
-		FilterForm form = gson.fromJson(request.get("form"), FilterForm.class);
-		
-		System.out.println(request + " :: "+form);
-		
-		List<Header> headers = headerDao.retrieveAll(request, form);
+		List<Header> headers = headerDao.retrieveAll(request);
 		data.put("rows", headers);
 		data.put("current", request.get("current"));
 		data.put("rowCount", request.get("rowCount"));

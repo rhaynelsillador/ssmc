@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import net.ssmc.dao.ClinicDao;
 import net.ssmc.dao.mapper.ClinicMapper;
 import net.ssmc.model.Clinic;
+import net.ssmc.utils.DataTableHelper;
 
 public class ClinicDaoImpl implements ClinicDao{
 
@@ -19,6 +20,8 @@ public class ClinicDaoImpl implements ClinicDao{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	@Override
 	public long count() {
@@ -47,15 +50,7 @@ public class ClinicDaoImpl implements ClinicDao{
 	public List<Clinic> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = "";
-		if(!request.get("searchPhrase").toString().isEmpty()){
-			SQL = this.SQL +" WHERE name LIKE '%"+ request.get("searchPhrase").toString() +"%' LIMIT "+((start-1)*end)+", "+(end);
-		}else{
-			SQL = this.SQL + " LIMIT "+((start-1)*end)+", "+(end);
-		}
-		System.out.println(SQL);
-		
-		return jdbcTemplate.query(SQL, new ClinicMapper());
+		return jdbcTemplate.query(this.SQL + dataTableHelper.formFilter(request) + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end), new ClinicMapper());
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public class FilterForm {
 	private Page page;
 	private String name;
 	private String filter;
+	private String num;
 	
 	public App getType() {
 		return type;
@@ -34,9 +35,15 @@ public class FilterForm {
 	public void setFilter(String filter) {
 		this.filter = filter;
 	}
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
 	@Override
 	public String toString() {
-		return "FilterForm [type=" + type + ", page=" + page + ", name=" + name + ", filter=" + filter + "]";
+		return "FilterForm [type=" + type + ", page=" + page + ", name=" + name + ", filter=" + filter + ", num=" + num
+				+ "]";
 	}
-	
 }

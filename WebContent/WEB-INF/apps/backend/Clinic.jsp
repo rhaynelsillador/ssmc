@@ -35,6 +35,20 @@
 
                     <div class="card__body">
                         <div class="table-responsive">
+                        	<form id="headerFilterForm">
+	                    		<div class="col-md-12">
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Type</label>
+								    <select class="form-control" name="type" id="headerType">
+								    	<option value="ALL">All</option>
+			                          	<option value="CLINIC">Clinic</option>
+			                          	<option value="HOSPITALS">Hospital</option>
+			                          </select>
+								  </div>
+							  	</div>
+							  <button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+							<hr/>
                             <table id="data-table-clinc" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -93,7 +107,7 @@
 	            {
 	                return {
 	                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed",
-	                    test: "test"
+	                    form: JSON.stringify(objectifyForm($( "#headerFilterForm" ).serializeArray()))
 	                };
 	            },
 	            url: "ClinicList",
@@ -142,8 +156,11 @@
 	  		    });
 		    });
 	        
-	       $("#data-table-clinc-header").hide();
-	        
+	        $("#data-table-clinc-header").hide();
+	        $("#headerFilterForm").submit(function(e){
+	        	e.preventDefault();
+	        	grid.bootgrid('reload');
+	        })
         </script>
         
     </body>

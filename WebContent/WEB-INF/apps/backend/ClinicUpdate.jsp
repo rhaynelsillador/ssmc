@@ -54,7 +54,7 @@
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="businessType">
 					                          	<option value="CLINIC" selected="selected">Clinic</option>
-					                          	<option value="HOSPITAL">Hospital</option>
+					                          	<option value="HOSPITALS">Hospital</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
@@ -213,9 +213,6 @@
    			"moduleId" : ${requestScope.clinic.id}
    		}
     	
-    	POST("IsApproved", params, function(data){
-    		console.log(">>>>>>>>>>> :: ", data);
-    	})
     	
     	
     </script>

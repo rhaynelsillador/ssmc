@@ -38,6 +38,8 @@ public class ServiceDaoImpl implements ServiceDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	@Override
 	public long count() {
@@ -85,7 +87,7 @@ public class ServiceDaoImpl implements ServiceDao {
 	public List<Service> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = this.SQL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = this.SQL + " " + dataTableHelper.formFilter(request) + " " + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<Service>(Service.class));
 	}
 

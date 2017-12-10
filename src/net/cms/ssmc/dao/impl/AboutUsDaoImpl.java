@@ -30,7 +30,8 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	@Override
 	public long count() {
 		return jdbcTemplate.queryForObject(SQLCOUNT, Long.class);
@@ -65,7 +66,7 @@ public class AboutUsDaoImpl implements AboutUsDao {
 	public List<AboutUs> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = this.SQL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = this.SQL + " " + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<AboutUs>(AboutUs.class));
 	}
 

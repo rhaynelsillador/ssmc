@@ -21,6 +21,8 @@ public class CityDaoImpl implements CityDao{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	
 	@Override
@@ -50,7 +52,7 @@ public class CityDaoImpl implements CityDao{
 	public List<City> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = "SELECT * FROM city "+ DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = "SELECT * FROM city "+ dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<City>(City.class));
 	}
 

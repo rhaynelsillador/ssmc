@@ -35,6 +35,43 @@
 
                     <div class="card__body">
                         <div class="table-responsive">
+                        	<form id="headerFilterForm">
+	                    		<div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Type</label>
+								    <select class="form-control" name="type" id="headerType">
+								    	<option value="ALL">All</option>
+			                          	<option value="CLINIC">Clinic</option>
+			                          	<option value="HOSPITALS">Hospital</option>
+			                          </select>
+								  </div>
+							  	</div>
+								<div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Service Num</label>
+								    <select class="form-control" name="num" id="num">
+								    	<option value="">All</option>
+			                          	<option value="1">Service 1</option>
+			                          	<option value="2">Service 2</option>
+			                          	<option value="3">Service 3</option>
+			                          </select>
+								  </div>
+							  </div>
+							  <div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Name</label>
+								    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+								  </div>
+							  </div>
+							  <div class="col-md-3">
+								  <div class="form-group">
+								    <label for="exampleInputPassword1">Filter</label>
+								    <input type="text" class="form-control" id="filter" name="filter" placeholder="Filter">
+								  </div>
+							  </div>
+							  <button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+							<hr/>
                             <table id="data-table-service" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -92,7 +129,12 @@
 			
 			
 			
-			
+			tableConfig.post = function (){
+                return {
+                    id: "b0df282a-0d67-40e5-8558-c9e93b7befed",
+                    form: JSON.stringify(objectifyForm($( "#headerFilterForm" ).serializeArray()))
+                };
+            }
 			tableConfig.url = "ServicesList";
 			tableConfig.formatters = {
 				"commands": function(column, row) {
@@ -139,7 +181,12 @@
 	            });
 	        });
 			
-			/* $("#data-table-service-header").hide(); */
+			$("#data-table-service-header").hide();
+	        
+	        $("#headerFilterForm").submit(function(e){
+	        	e.preventDefault();
+	        	table.bootgrid('reload');
+	        })
         </script>
         
     </body>

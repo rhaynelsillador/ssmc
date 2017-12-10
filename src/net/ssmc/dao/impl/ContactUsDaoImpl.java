@@ -32,6 +32,8 @@ public class ContactUsDaoImpl implements ContactUsDao{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataTableHelper dataTableHelper;
 	
 	@Override
 	public long count() {
@@ -52,7 +54,7 @@ public class ContactUsDaoImpl implements ContactUsDao{
 	public List<ContactUs> retrieveAll(Map<String, String> request) {
 		int start = Integer.parseInt(request.get("current"));
 		int end = Integer.parseInt(request.get("rowCount"));
-		String SQL = this.SQL + " " + DataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
+		String SQL = this.SQL + " " + dataTableHelper.sort(request) + " LIMIT "+((start-1)*end)+", "+(end);
 		
 		
 		System.out.println(SQL);
@@ -66,6 +68,7 @@ public class ContactUsDaoImpl implements ContactUsDao{
 	}
 
 	@Override
+	
 	public void update(InquiryStatus status, long id, long userId) {
 		jdbcTemplate.update(UPDATESTATUS, new Object[] {status.toString(), userId, id});
 		
