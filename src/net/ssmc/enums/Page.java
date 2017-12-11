@@ -15,6 +15,7 @@ public enum Page {
 	Faq,
 	ContactUs,
 	HospitalAndClinic,
-	Industrial
-	
+	Industrial,
+	Careers,
+	HMO
 }

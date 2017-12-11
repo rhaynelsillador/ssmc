@@ -82,6 +82,7 @@
 					                          	<option value="Faq">Faq</option>
 					                          	<option value="ContactUs">ContactUs</option>
 					                          	<option value="Industrial">Industrial</option>
+					                          	<option value="Careers">Careers</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
@@ -132,7 +133,6 @@
 	    	$(".content__header .zmdi-upload").parent().remove()
 	    }
 	    
-	    //CKEDITOR.replace('headerContent');
 	    
 	    var aboutUsType = $('#headerType');
 	    var headerPage = $('#headerPage');
