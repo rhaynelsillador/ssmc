@@ -36,14 +36,20 @@
                     <div class="card__body">
                         <div class="table-responsive">
                         	<form id="headerFilterForm">
-	                    		<div class="col-md-12">
+	                    		<div class="col-md-6">
 								  <div class="form-group">
 								    <label for="exampleInputEmail1">Type</label>
-								    <select class="form-control" name="type" id="headerType">
+								    <select class="form-control" name="page" id="headerPage">
 								    	<option value="ALL">All</option>
-			                          	<option value="CLINIC">Clinic</option>
-			                          	<option value="HOSPITALS">Hospital</option>
+			                          	<option value="HospitalAndClinic">Hospital And Clinic</option>
+			                          	<option value="HMO">HMO</option>
 			                          </select>
+								  </div>
+							  	</div>
+							  	<div class="col-md-6">
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Name</label>
+								    <input type="text" name="name" class="form-control">
 								  </div>
 							  	</div>
 							  <button type="submit" class="btn btn-primary">Submit</button>
@@ -54,7 +60,7 @@
                                     <tr>
                                         <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
                                         <th data-column-id="name" data-order="asc">Clinic Name</th>
-                                        <th data-column-id="type">Type</th>
+                                        <th data-column-id="page">Page</th>
                                         <th data-column-id="email">Email</th>
                                         <th data-column-id="phone">Phone</th>
                                         <th data-column-id="mobile">Mobile</th>

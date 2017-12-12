@@ -1,6 +1,6 @@
 CKEDITOR.replace( 'description' );
 
-$("#input-id").fileinput({'showUpload':true, 'previewFileType':'any'});
+//$("#input-id").fileinput({'showUpload':true, 'previewFileType':'any'});
 
 $(document).ready(function(){
 	

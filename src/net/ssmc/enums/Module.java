@@ -20,7 +20,8 @@ public enum Module {
 	FEATUREDBOX(""),
 	PARTNERS(""),
 	NEWSANDUPDATES(""),
-	DOCTORDIRECTORY("");
+	DOCTORDIRECTORY(""),
+	HMO("");
 	
 	private String updateUrl;
 	

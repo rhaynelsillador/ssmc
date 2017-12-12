@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import net.ssmc.enums.Page;
 import net.ssmc.exception.EmptyStringException;
 import net.ssmc.model.City;
 import net.ssmc.model.Clinic;
@@ -40,6 +41,7 @@ public class ClinicMapper implements RowMapper<Clinic>{
 		clinic.setPhone(rs.getString("phone"));
 		clinic.setMobile(rs.getString("mobile"));
 		clinic.setMap(rs.getString("map"));
+		clinic.setPage(Page.valueOf(rs.getString("page")));
 		
 		return clinic;
 	}

@@ -49,12 +49,23 @@
 					                   <br/>
 					           	    </div>
 					               <div class="col-sm-5">
-					                   <div class="input-group">
+					                   <!-- <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
 					                       <div class="form-group">
 					                          <select class="form-control" name="type" id="businessType">
 					                          	<option value="CLINIC" selected="selected">Clinic</option>
 					                          	<option value="HOSPITALS">Hospital</option>
+					                          </select>
+					                           <i class="form-group__bar"></i>
+					                       </div>
+					                   </div>
+					                   <br/> -->
+					                   <div class="input-group">
+					                       <span class="input-group-addon"><i class="zmdi zmdi-battery-unknown"></i></span>
+					                       <div class="form-group">
+					                          <select class="form-control" name="page" id="businessPage">
+					                          	<option value="HospitalAndClinic" selected="selected">Hospital And Clinic</option>
+					                          	<option value="HMO">HMO</option>
 					                          </select>
 					                           <i class="form-group__bar"></i>
 					                       </div>
@@ -76,7 +87,6 @@
 					                       </div>
 					                   </div>
 					                   <br/>
-					                   
 					                   <div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
 					                       <div class="form-group">
@@ -89,6 +99,7 @@
 					               </div>
 					
 					               <div class="col-sm-5">
+					               		
 					               		<div class="input-group">
 					                       <span class="input-group-addon"><i class="zmdi zmdi-pin"></i></span>
 					                       <div class="form-group">
@@ -104,21 +115,7 @@
 					                           <i class="form-group__bar"></i>
 					                       </div>
 					                   </div>
-					                   <br/>
-					                   <div class="input-group">
-					                       <span class="input-group-addon"><i class="zmdi zmdi-pin"></i></span>
-					                       <div class="form-group">
-					                       		<div class="form-group">
-								               		<select class="form-control select2" style="width: 100%" name="city">
-								               			<option value="">Select City</option>
-					                       				<c:forEach items="${requestScope.cities}" var="city">
-								                           	<option value="${city.id}" <c:if test="${requestScope.clinic.city.id == city.id}">selected</c:if>>${city.name}</option>
-								                       	</c:forEach>
-								                 	</select>
-								             	</div>
-					                           	<i class="form-group__bar"></i>
-					                       </div>
-					                   </div>
+					                   
 					               </div>					               
 					           </div>
 					           <br/>
@@ -183,37 +180,28 @@
 		$("#clinic_menu").addClass("navigation__active");
 		
     	$("#businessType").val('${requestScope.clinic.type}');
+    	$("#businessPage").val('${requestScope.clinic.page}');
     	
     	var isDelete = "hidden";
 		var isCreate = "hidden";
 		var isUpdate = "hidden";
 		for (var access of roleAccess) {
-			if(access.module=="CLINIC" && access.access=="UPDATE" || access.module=="CLINIC" && access.access=="DELETE" || isUserRoleAdmin){
+			if((access.module=="CLINIC" && access.access=="UPDATE") || (access.module=="CLINIC" && access.access=="DELETE") || isUserRoleAdmin){
 				$("th[data-column-id='commands']").removeAttr("data-visible");
 			}
-			if(access.module=="CLINIC" && access.access=="DELETE"  || isUserRoleAdmin){
+			if((access.module=="CLINIC" && access.access=="DELETE")  || isUserRoleAdmin){
 				isDelete = "";
 				console.log(access);
 			}
-			if(access.module=="CLINIC" && access.access=="CREATE"  || isUserRoleAdmin){
+			if((access.module=="CLINIC" && access.access=="CREATE")  || isUserRoleAdmin){
 				$(".actions").removeClass("hidden");
 				console.log(access);
 			}
-			if(access.module=="CLINIC" && access.access=="UPDATE"  || isUserRoleAdmin){
+			if((access.module=="CLINIC" && access.access=="UPDATE")  || isUserRoleAdmin){
 				isUpdate = "";
 				console.log(access);
 			}
-		}
-    	
-    	
-    	
-    	var btnCust = '';
-    	var params = {
-   			"module":"FAQ",
-   			"moduleId" : ${requestScope.clinic.id}
-   		}
-    	
-    	
+		}	
     	
     </script>
     

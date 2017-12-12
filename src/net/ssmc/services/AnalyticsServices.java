@@ -36,17 +36,17 @@ public class AnalyticsServices {
 	
 	public Map<String, Object> countCurrentOnline(){
 		Map<String, Object> data = new HashMap<>();
-		List<BrowseCount> browseCounts = analyticsDao.countCurrentOnlineHistory();
-		Collections.reverse(browseCounts);
+
 		try {
+			List<BrowseCount> browseCounts = analyticsDao.countCurrentOnlineHistory();
+			Collections.reverse(browseCounts);
 			data.put("count", analyticsDao.countCurrentOnline());
+			data.put("history", browseCounts);
 		} catch (Exception e) {
 			data.put("count", 0);
 		}
-		
 		data.put("totalRegistered", registeredAccountDao.totalRegisterThisMonth());
 		data.put("totalLogin", registeredAccountDao.totalLoginThisMonth());
-		data.put("history", browseCounts);
 		analyticsDao.countLastMonth();
 		return data;
 	}

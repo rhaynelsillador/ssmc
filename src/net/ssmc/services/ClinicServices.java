@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.ssmc.dao.ClinicContactDao;
 import net.ssmc.dao.ClinicDao;
+import net.ssmc.enums.Page;
 import net.ssmc.enums.Status;
 import net.ssmc.enums.TransactionType;
 import net.ssmc.exception.EmptyStringException;
@@ -21,8 +21,6 @@ public class ClinicServices {
 	
 	@Autowired
 	private ClinicDao clinicDao;
-	@Autowired
-	private ClinicContactDao clinicContactDao;
 	
 	public Map<String, Object> retrieveClinics(HttpSession session, Map<String, String> request){
 		Map<String, Object> data = new HashMap<>();
@@ -55,11 +53,12 @@ public class ClinicServices {
 		clinic.setLogo(request.get("logo"));
 		clinic.setAddress1(request.get("address1"));
 		clinic.setAddress2(request.get("address2"));
-		clinic.setType(request.get("type"));
+		clinic.setType("CLINIC");
 		
 		clinic.setEmail(request.get("email"));
 		clinic.setPhone(request.get("phone"));
 		clinic.setMobile(request.get("mobile"));
+		clinic.setPage(Page.valueOf(request.get("page")));
 		
 		try {
 			clinic.setCity(new net.ssmc.model.City(Long.parseLong(request.get("city"))));
